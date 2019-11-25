@@ -1,0 +1,42 @@
+curl -O -L https://github.com/PATRIC3/PATRIC-distribution/releases/download/1.024/patric-cli-1.024.deb
+sudo dpkg -i patric-cli-1.024.deb
+sudo sudo apt-get -f install
+
+
+
+sudo apt-get install gdebi-core
+sudo gdebi patric-cli-1.024.deb
+
+#if error
+sudo add-apt-repository universe
+sudo apt-get update
+
+
+#see all of the fields you can retrieve info about a genome
+p3-get-genome-data --fields
+
+#make a generic search for all genomes in a given genera
+p3-all-genomes --eq species,"Vibrio vulnificus"
+
+p3-all-genomes --eq genome_id,100174.3 | p3-get-genome-data --attr genome_name --attr contigs --attr genome_length --attr patric_cds --attr kingdom --attr phylum --attr class --attr order --attr family --attr genus --attr species --attr genome_status --attr reference_genome --attr taxon_id --attr body_sample_site --attr body_sample_subsite
+
+
+p3-all-genomes --eq species,"Vibrio vulnificus" | p3-get-genome-data --attr genome_name --attr contigs --attr genome_length --attr patric_cds --attr kingdom --attr phylum --attr class --attr order --attr family --attr genus --attr species --attr genome_status --attr reference_genome --attr taxon_id --attr body_sample_site --attr body_sample_subsite > vib_test.tsv
+
+
+
+
+# task
+
+1.get all fields available for the Streptococcus genomes
+
+2. Select genomes that are not plasmids or very low quality
+
+3. Check for out lyiers in size, number of contigs, quality, completeness
+
+4. Making some plots with all the available data (country, isolation source, etc) [seaborn, matplotlib]
+
+5. Obtain all the selected genomes (ftp with wget) / bash filename:
+
+$ bash get_patric_genomes.sh
+
