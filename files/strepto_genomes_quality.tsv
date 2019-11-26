@@ -64,7 +64,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1307.1871	Streptococcus suis strain 1215	Good	WGS	2499	2286614	100	3.1	380	48468	16	99.6	97.8
 1313.9425	Streptococcus pneumoniae strain 3298	Good	WGS	2193	1997306	100	3.5	76	78042	8	100	99.1
 1074071.4	Streptococcus sobrinus TCI-345	Good	WGS	2083	2217583	95.7	2.4	456	10645	64	98.3	97.4
-1074083.3	Streptococcus sobrinus TCI-376	Good	WGS	1935	2073661	94.4	2	511	7046	93	97.2	96.7
 1080071.3	Streptococcus orisasini strain SH06 = JCM 17305	Good	WGS	2253	2299160	98.6	3.2	67	64259	12	99.4	98.1
 2173853.3	Streptococcus sp. Z15	Good	WGS	2541	2385174	97	2.9	102	84020	9	99	98
 1074069.3	Streptococcus sobrinus TCI-124	Good	WGS	1979	2076686	95.1	2.4	255	17052	40	98.2	97.4
@@ -1128,7 +1127,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1313.13747	Streptococcus pneumoniae strain 12985-6A	Good	WGS	2311	2063946	99.7	1.2	160	29762	25	99.7	99
 1313.13753	Streptococcus pneumoniae strain 18858	Good	WGS	2369	2087887	99.8	1.4	204	18137	36	99.2	98.4
 1313.13755	Streptococcus pneumoniae strain 10598-19F	Good	WGS	2453	2192162	100	0.5	116	35844	20	99.3	98.7
-1313.13760	Streptococcus pneumoniae strain 515-6A	Good	WGS	2765	2171168	99.8	9.2	853	9070	75	99.3	96.3
 1313.13761	Streptococcus pneumoniae strain 20893-14	Good	WGS	2313	2128771	100	0.5	75	48717	13	99.5	99.2
 1313.13765	Streptococcus pneumoniae strain 22874-6B	Good	WGS	2491	2203270	100	0.7	220	21473	34	99.6	98.6
 1313.13767	Streptococcus pneumoniae strain 29170-6A	Good	WGS	2251	1964071	98	4.3	339	9299	63	99.4	98
@@ -1928,7 +1926,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 391296.8	Streptococcus suis 98HAH33	Good	Complete	2151	2095698	100	8.3	1	2095698	1	99.7	98.7
 1123317.3	Streptococcus sobrinus DSM 20742	Good	WGS	2146	2096203	97.2	9.7	283	12493	47	98.4	95.6
 342614.4	Streptococcus agalactiae 515	Good	WGS	2167	2088229	99.1	6.9	255	25064	28	99	96.1
-1333577.3	Streptococcus agalactiae MC633	Good	WGS	2141	2042591	94.7	3.6	644	5878	106	98.3	95.9
 1333576.3	Streptococcus agalactiae MC632	Good	WGS	2060	2028396	98.7	0.9	403	10148	60	98.3	97.1
 1311.1493	Streptococcus agalactiae strain LYJ2015101	Good	WGS	1920	1790578	100	0	22	181090	4	99.9	98.8
 1311.1752	Streptococcus agalactiae strain NCTC8185	Good	WGS	2387	2407314	100	0	4	2252629	1	100	99.3
@@ -3258,7 +3255,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1313.12522	Streptococcus pneumoniae strain SMRU84	Good	WGS	2158	2028012	100	0.2	56	58700	11	99.4	98.9
 1313.12521	Streptococcus pneumoniae strain SMRU85	Good	WGS	2232	2141373	99.8	0.5	50	71171	10	99.5	98.9
 1313.10747	Streptococcus pneumoniae strain SMRU87	Good	WGS	2149	2022082	100	0.5	86	44122	15	99.4	98.5
-1313.12523	Streptococcus pneumoniae strain SMRU92	Good	WGS	2305	2071430	100	3.6	645	6412	96	99.6	98.5
 1313.12524	Streptococcus pneumoniae strain SMRU93	Good	WGS	2191	2048516	100	0.8	129	32754	21	99.6	99
 1313.10207	Streptococcus pneumoniae strain SMRU97	Good	WGS	2258	2104469	100	0.1	58	96795	9	99.5	98.8
 1313.10686	Streptococcus pneumoniae strain SMRU98	Good	WGS	2214	2073879	100	0	51	72876	10	99.6	99
@@ -4179,9 +4175,7 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1313.10290	Streptococcus pneumoniae strain SMRU3153	Good	WGS	2107	2026706	99.8	0.2	76	48556	10	99.3	98.7
 1313.10807	Streptococcus pneumoniae strain SMRU3155	Good	WGS	2149	2071301	100	0	67	66292	10	99.3	98.8
 1313.10647	Streptococcus pneumoniae strain SMRU3161	Good	WGS	2445	2243965	100	0.3	93	43872	17	99.6	98.8
-1169673.3	Streptococcus sp. GMD4S	Good	WGS	2124	2301983	91	9.7	578	15814	27	96	92.7
 2304043.3	Streptococcus sp. Z1(2018) strain Z1(2018) strain Z1(2018) strain Z1(2018)	Good	WGS	2539	2385174	97.9	4	102	84020	9	99	97.8
-1074055.3	Streptococcus sobrinus TCI-28	Good	WGS	1928	2128913	91.5	2.4	683	10634	56	96.7	95.9
 2304042.3	Streptococcus sp. Z2	Good	WGS	2542	2384407	97.9	4.1	107	59523	11	99	97.7
 342617.4	Streptococcus agalactiae CJB111	Good	WGS	2131	2105032	100	5	155	37613	18	99.8	98.9
 1335.9	Streptococcus equinus strain AG46	Good	Complete	1876	1930741	99	4.7	1	1930741	1	99.4	97.8
@@ -4194,7 +4188,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1307.1950	Streptococcus suis strain 1194	Good	WGS	2548	2395348	100	7.9	312	56211	15	99.5	97.8
 1304.208	Streptococcus salivarius strain 39-09 S16	Good	WGS	2399	2264513	99	7.9	469	7382	85	99.5	97.2
 1346.31	Streptococcus iniae strain CAIM 527	Good	WGS	2224	2103840	98.8	8.6	148	47013	14	99.5	97.3
-1307.1988	Streptococcus suis strain 378	Good	WGS	3030	2633408	100	8.7	596	39112	18	99.5	96
 1304.203	Streptococcus salivarius strain 34-19 S9	Good	WGS	2331	2251354	98.9	9.6	388	9776	66	99.1	96.6
 1169675.3	Streptococcus sp. GMD6S	Good	WGS	2133	2264360	94.9	8.8	393	28256	22	98	95.6
 1000562.3	Streptococcus phocae C-4	Good	WGS	1762	1659203	96.4	9.9	105	35632	15	98.7	95.9
@@ -4248,7 +4241,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1839799.3	Streptococcus sp. FDAARGOS_192 strain FDAARGOS_192	Good	Complete	2268	2435466	99.8	3	3	2208027	1	99.9	99.1
 1338.30	Streptococcus intermedius strain FDAARGOS_233	Good	Complete	1985	1913894	97.4	2.5	1	1913894	1	99.9	98.6
 1303.78	Streptococcus oralis strain DD15	Good	WGS	2003	2001295	99.3	3	29	1322860	1	99.7	98.8
-1074065.3	Streptococcus sobrinus TCI-98	Good	WGS	1981	2170496	96.5	2.3	595	12527	49	98.4	97.9
 1335.23	Streptococcus equinus strain SI	Good	WGS	1837	1912510	99	3	11	1010172	1	99.5	98.7
 1074088.3	Streptococcus sobrinus TCI-392	Good	WGS	1892	2036293	93.5	1.3	435	8079	77	96.6	95.9
 195041.8	Streptococcus oligofermentans strain 771_SOLI	Good	WGS	2235	2190411	95.6	2.2	149	38275	19	98.5	97.8
@@ -4268,7 +4260,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 655813.4	Streptococcus oralis ATCC 35037 (Prj:53033)	Good	WGS	1875	1884712	100	4.2	25	186258	4	99.7	98.9
 1074152.3	Streptococcus sobrinus TCI-200	Good	WGS	1973	2081045	96.2	3.1	213	18291	32	98.1	97.3
 1811193.3	Streptococcus sp. TA 26	Good	Complete	2295	2241302	97.4	3.5	1	2241302	1	99	97.8
-1074070.3	Streptococcus sobrinus TCI-342	Good	WGS	2050	2196447	92.7	2.7	510	7942	84	97.8	97
 862967.3	Streptococcus intermedius B196	Good	Complete	1927	1996214	96.9	0.5	1	1996214	1	99.5	99
 888813.3	Streptococcus sanguinis SK330	Good	WGS	2345	2413897	99.8	1.1	21	259938	3	99.3	99
 1739265.3	Streptococcus sp. HMSC057E02	Good	WGS	1986	1958630	98.3	0.8	71	88921	7	99.5	98.9
@@ -4814,7 +4805,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1307.101	Streptococcus suis strain S6N	Good	WGS	2143	2043540	100	4.9	415	10592	59	99.6	98.5
 1307.102	Streptococcus suis strain B18E	Good	WGS	2078	2101261	100	0.8	56	170154	4	99.6	99.3
 1307.107	Streptococcus suis strain LS4F	Good	WGS	2048	2049742	100	2.7	70	91107	7	99.6	99.2
-1307.108	Streptococcus suis strain LS3W	Good	WGS	2519	2313982	100	3.8	530	17250	43	99.6	98.9
 1307.113	Streptococcus suis strain LL-Y	Good	WGS	2044	2052904	100	0	71	80413	9	99.6	99.2
 1307.115	Streptococcus suis strain B48N	Good	WGS	2085	2107619	100	0	54	170360	4	99.6	99.6
 1307.1317	Streptococcus suis strain 90-1330	Good	Complete	2152	2146151	100	0	1	2146151	1	99.6	99.3
@@ -4881,7 +4871,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1307.1998	Streptococcus suis strain 180	Good	WGS	2339	2253424	100	5.9	216	106963	8	99.6	97.9
 1307.2004	Streptococcus suis strain 83	Good	WGS	2163	2151786	100	0	118	47586	14	99.6	99.1
 1307.2009	Streptococcus suis strain 324	Good	WGS	2560	2326830	100	5.9	431	55861	12	99.4	96.3
-1307.2013	Streptococcus suis strain 207	Good	WGS	2890	2408589	100	8.7	654	60923	13	99.6	94.5
 1307.2014	Streptococcus suis strain 166	Good	WGS	2547	2497850	100	0	157	56854	14	99.4	99
 1307.2016	Streptococcus suis strain 73	Good	WGS	2186	2187171	100	0	102	47282	16	99.6	99.1
 1307.2019	Streptococcus suis strain 111	Good	WGS	2142	2146201	100	0	102	49529	15	99.6	99.2
@@ -8411,7 +8400,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1074059.3	Streptococcus sobrinus TCI-56	Good	WGS	1935	2075737	92.9	2	372	10976	62	97.2	96.7
 197614.8	Streptococcus pasteurianus strain NCTC13784	Good	Complete	2245	2178089	99.3	3.7	1	2178089	1	99.1	98.3
 764290.3	Streptococcus downei MFe28 strain NCTC 11391	Good	WGS	2218	2232110	98.7	3.6	3	2218955	1	98.8	97.9
-1074073.3	Streptococcus sobrinus TCI-349	Good	WGS	1896	2033167	90.7	1.6	501	7206	90	96.5	96
 1123300.3	Streptococcus devriesei DSM 19639	Good	WGS	2082	2118276	98.6	3.6	21	158772	4	99	97.8
 1069533.5	Streptococcus infantarius subsp. infantarius CJ18	Good	Complete	2045	2008249	99.5	3.9	2	1988420	1	99	97.9
 1051981.3	Streptococcus equi subsp. ruminatorum CECT 5772	Good	WGS	2203	2138288	97.6	3.9	117	48101	14	99.6	99.2
@@ -9053,7 +9041,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1307.1924	Streptococcus suis strain 712	Good	WGS	2585	2409070	100	4.5	310	48004	16	99.6	97.8
 1307.1929	Streptococcus suis strain 2041	Good	WGS	2218	2166272	100	0	149	82611	9	99.6	99.3
 1307.1938	Streptococcus suis strain 1381	Good	WGS	2095	2117081	99.2	0	63	102681	7	99.7	99.3
-1307.1940	Streptococcus suis strain 1360	Good	WGS	2922	2642758	100	8.2	518	55329	17	99.5	97
 1307.1943	Streptococcus suis strain 1317	Good	WGS	2247	2229116	100	0	84	70962	9	99.6	99.4
 1307.1947	Streptococcus suis strain 1262	Good	WGS	2244	2230513	100	0	85	67766	12	99.6	99.3
 1307.1948	Streptococcus suis strain 1259	Good	WGS	2355	2263446	100	1.6	189	70962	11	99.6	98.3
@@ -11570,7 +11557,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1313.14168	Streptococcus pneumoniae strain PMEN-18	Good	WGS	2342	2113628	100	0.9	346	24648	24	99.6	98.5
 1313.14169	Streptococcus pneumoniae strain Hermans-1640	Good	WGS	2390	2118498	100	0.2	327	26899	24	99.7	99.3
 1313.14172	Streptococcus pneumoniae strain PMEN-15	Good	WGS	2289	2097417	99.7	0	342	23588	26	99.4	98.7
-1313.14174	Streptococcus pneumoniae strain Hermans-70	Good	WGS	2578	2152477	99.8	8.9	570	9695	68	99.8	97.2
 1313.14175	Streptococcus pneumoniae strain PMEN-11	Good	WGS	2518	2209775	100	0.2	372	31546	23	99.7	99.5
 1313.14177	Streptococcus pneumoniae strain Hermans-471	Good	WGS	2219	2031965	100	0.1	230	32579	19	99.6	99.1
 1313.14182	Streptococcus pneumoniae strain PMEN-26	Good	WGS	2297	2089994	100	0.3	287	27996	25	99.5	98.7
@@ -11605,7 +11591,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1313.14276	Streptococcus pneumoniae strain Hermans-445	Good	WGS	2245	2033381	100	0	284	31887	21	99.7	99.3
 1313.14278	Streptococcus pneumoniae strain Hermans-198	Good	WGS	2444	2162540	100	1.7	372	27515	26	99.6	98.4
 1313.14279	Streptococcus pneumoniae strain Hermans-60	Good	WGS	2332	2112258	100	0	321	27847	24	99.6	98.7
-1313.14283	Streptococcus pneumoniae strain Hermans-1180	Good	WGS	2498	2141293	100	0.5	506	23223	27	99.3	98.6
 1313.14293	Streptococcus pneumoniae strain Hermans-458	Good	WGS	2240	2064458	100	0.2	263	31644	21	99.4	99
 1313.14296	Streptococcus pneumoniae strain Hermans-265	Good	WGS	2410	2148086	100	0.2	333	24547	25	99.6	98.7
 1313.14297	Streptococcus pneumoniae strain PMEN-1	Good	WGS	2403	2171930	100	0.3	346	24815	26	99.1	98.4
@@ -11650,7 +11635,6 @@ genome.genome_id	genome.genome_name	genome.genome_quality	genome.genome_status	g
 1313.10155	Streptococcus pneumoniae strain SMRU41	Good	WGS	2267	2122239	100	0.2	66	72329	9	99.4	98.9
 1313.11526	Streptococcus pneumoniae strain SMRU42	Good	WGS	2262	2125236	100	0	73	61131	12	99.9	99.2
 1313.12530	Streptococcus pneumoniae strain SMRU43	Good	WGS	2253	2078388	100	0.7	132	32812	23	99.4	98.8
-1313.11213	Streptococcus pneumoniae strain SMRU45	Good	WGS	2302	2015690	100	1.8	590	6198	102	99.6	97.9
 1313.11756	Streptococcus pneumoniae strain SMRU47	Good	WGS	2283	2073844	100	0.3	324	12886	48	99.6	98.7
 1313.10488	Streptococcus pneumoniae strain SMRU48	Good	WGS	2324	2147692	100	0.2	64	79290	10	99.6	99
 1313.11333	Streptococcus pneumoniae strain SMRU50	Good	WGS	2303	2159148	100	0.4	64	57089	10	99.5	98.7
