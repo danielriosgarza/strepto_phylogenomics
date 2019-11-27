@@ -40,3 +40,27 @@ p3-all-genomes --eq species,"Vibrio vulnificus" | p3-get-genome-data --attr geno
 
 $ bash get_patric_genomes.sh
 
+####################
+
+Some comments to the function:
+def get_patric_genomes(patric_ids_file, save_directory):
+    '''Needs a file with patric_ids of interest and a saving directory. Downloads the genomes (fna files)
+    of the ids.'''
+
+Avoid making this a python function to download the genomes. Instead make it a function that writes a bash script to download the genomes.
+The reason is that likely it will take python forever to download 12000 genomes with os.system.
+
+
+##########################
+
+Tasks for week 2:
+1) Obtain genomes for an "outgroup". This is similar to what we did with Streptococcus, but now we take the genomes from the Streptococcaceae family
+that belog to diferent genera. The genera in the Streptoccocaceae family are: 
+Floricoccus
+Lactococcus
+Lactovum
+Okadaella
+
+2) Annotate genomes with Prokka
+
+3) Indentify orthologous genes (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5674930/, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3531125/, https://www.ncbi.nlm.nih.gov/pubmed/30395283)
