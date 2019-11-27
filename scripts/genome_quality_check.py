@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 27 14:48:37 2019
+
+@author: meike
+"""
+
+
+import csv
+#import matplotlib.pyplot as plt
+
+def thresholds (parameter_l):
+    '''Uses a list of numbers to determine thresholds for outliers. 
+    Gives lower bound with q1*1.5 and upper bound q3*1.5'''
+    q1 = sorted(parameter_l)[int(len(parameter_l) * .25)]
+    q3 = sorted(parameter_l)[int(len(parameter_l) * .75)]
+    iqr = q3 - q1
+    lower_bound = q1 -(1.5 * iqr) 
+    upper_bound = q3 +(1.5 * iqr)
+    parameter_thresholds = [lower_bound, upper_bound]
+    return parameter_thresholds
+
+'''Find appropiate thresholds for genome quality check'''
+lengths = []
+contigs =[]
+contaminations = []
+with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') as f:
+    f_reader = csv.reader(f, delimiter="\t")
+    for line in f_reader:
+        if line[0].startswith('genome.genome_id'):  #find indexes to use columns as filters
+            quality_index = line.index('genome.genome_quality')
+            status_index = line.index('genome.genome_status')
+            cds_index = line.index('genome.patric_cds')
+            length_index = line.index('genome.genome_length')
+            completeness_index = line.index('genome.checkm_completeness')
+            contamination_index = line.index('genome.checkm_contamination')
+            contigs_index= line.index('genome.contigs')
+            coarse_con_index = line.index('genome.coarse_consistency')
+            fine_con_index = line.index('genome.fine_consistency')
+        else:
+            if line[length_index] != '':
+                lengths.append(int(line[length_index]))
+            contigs.append(int(line[contigs_index]))
+            if line[contamination_index] != '':
+                contaminations.append(float(line[contamination_index]))
+print(thresholds(lengths), thresholds(contigs),thresholds(contaminations))
+#plt.boxplot(lengths)                
+'''Parameters for genome quality: 
+    1. genome quality = good
+    2. Completness of more than or equal to 90%
+    3. Status not plasmid
+    /4. If status is nothing ('') than cds of at least 700
+    /5. It should have less or equal to 150 contigs
+    6. Consistencies above or equal to 95%'''
+original_count=[]
+genomes =[]
+with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') as f:
+    f_reader = csv.reader(f, delimiter="\t")
+    for line in f_reader:
+        if line[0].startswith('genome.genome_id'):  #find indexes to use columns as filters
+            quality_index = line.index('genome.genome_quality')
+            status_index = line.index('genome.genome_status')
+            cds_index = line.index('genome.patric_cds')
+            length_index = line.index('genome.genome_length')
+            completeness_index = line.index('genome.checkm_completeness')
+            contamination_index = line.index('genome.checkm_contamination')
+            contigs_index= line.index('genome.contigs')
+            coarse_con_index = line.index('genome.coarse_consistency')
+            fine_con_index = line.index('genome.fine_consistency')
+            genomes.append(line)
+        else:
+            original_count.append(line)
+            if line[quality_index] == 'Good' and line[status_index] != 'Plasmid':     #filter out all genomes with poor genome quality and plasmids
+                if line[completeness_index]!= '' and float(line[completeness_index]) >= 90:  #filter on completness
+                    if line[contamination_index] != "" and float(line[contamination_index]) <= 2: #filter on contamination
+                        if float(line[coarse_con_index]) >= 95 and float(line[fine_con_index]) >= 95: # filter on consistencies
+                                genomes.append(line)
+print(len(original_count), len(genomes))
+with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv', 'w') as f:
+    for row in genomes:
+        f.write('\t'.join(row) + '\n')
+
+    
+
+
+
