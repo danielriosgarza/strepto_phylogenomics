@@ -12,7 +12,7 @@ import csv
 
 def thresholds (parameter_l):
     '''Uses a list of numbers to determine thresholds for outliers. 
-    Gives lower bound with q1*1.5 and upper bound q3*1.5'''
+    Gives lower bound with q1-1.5*iqr and upper bound q3+1.5*iqr'''
     q1 = sorted(parameter_l)[int(len(parameter_l) * .25)]
     q3 = sorted(parameter_l)[int(len(parameter_l) * .75)]
     iqr = q3 - q1
