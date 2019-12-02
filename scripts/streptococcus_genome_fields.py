@@ -34,7 +34,8 @@ def patric_genome_fields(genus, fields_file, save_directory):
     os.system(info)
     return save_directory
 
-patric_genome_fields("Streptococcus", '/home/meike/strepto_phylogenomics/files/interesting_fields', '/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') 
+patric_genome_fields("Streptococcus", '/home/meike/strepto_phylogenomics/files/patric_fields', '/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') 
+
 
 def thresholds (parameter_l):
     '''Uses a list to make a boxplot and returns the whisker ends that can be used threshold. Default settings'''
