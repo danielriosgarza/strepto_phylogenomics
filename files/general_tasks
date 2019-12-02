@@ -40,3 +40,93 @@ p3-all-genomes --eq species,"Vibrio vulnificus" | p3-get-genome-data --attr geno
 
 $ bash get_patric_genomes.sh
 
+
+
+# How to access the server
+
+be careful not to run computations on the octarine
+
+To access:
+
+ssh meiker@octarine.umcn.nl
+psw
+#pushing to the server
+scp general_tasks.txt meiker@octarine.umcn.nl:/home/meiker/git/strepto_phylogenomics/files
+
+#push from the server
+scp meiker@octarine.umcn.nl:/home/meiker/git/strepto_phylogenomics/files/general_tasks.txt folder
+
+#if you want to scp the whole folder 
+scp -r
+
+#run computations in the server
+qsub script
+
+
+
+# Tasks 02/12/2019
+1) Remake the list with all fields
+
+2) Compare the species names to check if we missed a species and if the missed species has a reasonably good genome.
+
+3) Get lists for the other genera as outgroups: Floricoccus
+Lactococcus
+Lactovum
+Okadaella
+Streptococcus 
+
+4) Create the species database: fields that are mispelled and fields that can be merged (dictionary of synonyms).
+from fuzzywuzzy import process
+strOptions = ['Organs','organs', 'organisms']
+highest = process.extractBests('Organs',strOptions)
+
+#highest = process.extractOne('Organs',strOptions)
+print highest
+
+Careful with assuming order in dictionaries
+
+top_10_sources = dict(Counter(sources).most_common(10))
+k = top_10_sources.keys()
+v = [top_10_sources[i] for i in k]
+
+plt.bar(range(len(top_10_sources)), v)
+plt.xticks(range(len(top_10_sources)), k)
+plt.show()
+
+
+
+with open(filename) as f:
+	headers = f.readline().strip()split('\t')
+	data_dict = {i:[] for i in headers}
+	for line in f:
+		a = line.strip().split('\t')
+		for inde, name in enumerate(headers):
+			data_dict[name] = a[inde]
+
+
+
+[(host, environment, requirement), ...]
+
+
+l=[['a','b','c']]*20
+l+=[['d','e','c']]*20
+
+d={}
+for i in l:
+    if set(i) not in d:
+        d[set(i)]=0
+    d[set(i)]+=1
+
+
+
+# make our database identifier
+streptococcus_000001
+
+lactococcus_000001
+
+wget ftp://ftp.patricbrc.org/genomes/1074061.3/1074061.3.fna -O /home/meiker/git/genomes/streptocuccus_000001.fna
+
+# Annotate the genomes
+
+
+prokka 226186.12.fna --outdir prokka_annotation --prefix 226186.12 --genus Streptococcus
