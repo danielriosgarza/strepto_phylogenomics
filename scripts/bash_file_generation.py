@@ -6,8 +6,8 @@ Created on Thu Nov 28 09:41:25 2019
 @author: meike
 """
 
-'''Makes bash file to retrieve genomes from Patric'''
-#wget ftp://ftp.patricbrc.org/genomes/1002691.3/1002691.3.fna
+'''Makes bash file to retrieve genomes from Patric. Saving directory is octarine server'''
+#wget ftp://ftp.patricbrc.org/genomes/1074061.3/1074061.3.fna -O /home/meiker/git/genomes/streptocuccus_000001.fna
 import csv
 def identifier2bash (patric_ids_file):
     '''Needs file with identifiers and returns list with wget for all identifiers'''
@@ -29,6 +29,11 @@ with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_ids.txt', 'w
 
 bash_lines=identifier2bash('/home/meike/strepto_phylogenomics/files/strepto_genomes_ids.txt')
 
-with open ('/home/meike/strepto_phylogenomics/scripts/get_strepto_genomes_patric.sh', 'w') as f:
-    for line in bash_lines:
-        f.write(line+'\n')
+db_id = [] #generate ids for own database later. Containing in total 6 digits
+for i in range(1, len(bash_lines)+1):
+    db_id.append(' -O /home/meiker/git/genomes/streptocuccus_' + "%05d" % i + '.fna')
+
+with open ('/home/meike/strepto_phylogenomics/scripts/get_strepto_genomes_patric.sh', 'w') as f: 
+    for i in range(len(db_id)):
+        line = bash_lines[i]
+        f.writelines(line + db_id[i] + '\n') #combines bash lines to retrieve information from patric and the saving directory in a file

@@ -6,7 +6,7 @@ Created on Wed Nov 27 14:48:37 2019
 @author: meike
 """
 
-
+'''Making a File with all genomes that are of good quality'''
 import csv
 #import matplotlib.pyplot as plt
 

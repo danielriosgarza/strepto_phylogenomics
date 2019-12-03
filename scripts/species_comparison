@@ -6,65 +6,60 @@ Created on Mon Dec  2 13:43:32 2019
 @author: meike
 """
 
-'''Species comparison to check if one misses and check if it is reasonably left out'''
+'''Species comparison to check if one misses and check if it is reasonably left out.'''
+                
+'''Comparison of species of all genomes to filtered genomes'''
 
-from fuzzywuzzy import process
+import csv
 
-def compare(str2Match, strOptions):
-    '''Give query string that is compared to other strings in a list. Returns list with tuples of string 
-    and similarity score between 0 and 100. Example: [('Streptococcus sobrinus', 100), (...)]'''
-    score_l = []
-    scores = process.extract(str2Match, strOptions, limit = len(strOptions))
-    for score in scores:
-        if score[1] >= 95:
-            score_l.append(score[0])
-    return score_l
-            
-species_l =[]
+species_counter = {'sorts_afterwards' : 0, 'sorts_before' : 0}
 with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv') as f:
+    species_after_l =[]
     for line in f:
         line = line.strip().split('\t')
         if line[0].startswith('genome.genome_id'):
-            species_i = line.index('genome.species')
+            field_i = line.index('genome.species')
         else:
-            species_l.append(line[species_i])
+            if line[field_i] not in species_after_l:
+                species_after_l.append(line[field_i])
+                species_counter['sorts_afterwards'] += 1
+with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') as file:
+    species_before_l =[]
+    for line in file:
+        line = line.strip().split('\t')
+        if line[0].startswith('genome.genome_id'):
+            field_i = line.index('genome.species')
+        else:
+            if line[field_i] not in species_before_l:
+                species_before_l.append(line[field_i])
+                species_counter['sorts_before'] += 1
+print(len(species_before_l) - len(species_after_l))
+missing_specs =[]
+for species in species_before_l:
+    if species not in species_after_l:
+        missing_specs.append(species)
 
-species_all_scores ={}
-for name in species_l:      #make dict with species name as key and all scores higher than 95 as values
-    if name not in species_all_scores:
-        species_all_scores[name] = compare(name, species_l)
-        
-species={}
-for k,v in species_all_scores.items(): #use all scores to make dict that contains all possible writing styles of a species 
-    for synonym in v:
-        if synonym not in species:
-            species[synonym] = k  #gives all same value/writing style
-print(species)
-
-#similar_species ={}
-#for item in species_l:
-#    if item not in similar_species:
-#        similar_species[item]= item
-#    else:
-#        str2Match = item
-#        sim = process.extract(str2Match, species_l, limit = len(species_l))
-#        for scores in sim:
-#            if scores[1] >= 95 and item != scores[0]:
-#                similar_species[item] = similar_species[item] + scores[0]
-#print(similar_species)
-#
-#
-#sim = process.extract(species_l[0], species_l[:100], limit = len(species_l))
-#temp={}
-#for scores in sim:
-#    if scores[1] >= 80:
-#        temp.append(scores)
-#print(temp)
-#
-#print(sim[:10])  
-    
-
-strOptions = ['Organs','organs', 'organisms']
-highest = process.extractBests('Organs',strOptions)
-#highest = process.extractOne('Organs',strOptions)
-print (highest)
+with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') as f:
+    with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_missing_species_check.tsv', 'w') as file:
+        for line in f:
+            row=[]
+            line = line.strip().split('\t')
+            if line[0].startswith('genome.genome_id'):  #find indexes to use columns as filters
+                quality_index = line.index('genome.genome_quality')
+                status_index = line.index('genome.genome_status')
+                cds_index = line.index('genome.patric_cds')
+                length_index = line.index('genome.genome_length')
+                completeness_index = line.index('genome.checkm_completeness')
+                contamination_index = line.index('genome.checkm_contamination')
+                contigs_index= line.index('genome.contigs')
+                coarse_con_index = line.index('genome.coarse_consistency')
+                fine_con_index = line.index('genome.fine_consistency')
+                species_i = line.index('genome.species')
+                row.extend((line[0], line[species_i], line[quality_index], line[status_index] , line[cds_index] , line[completeness_index] , line[contamination_index] , line[coarse_con_index] , line[fine_con_index]))
+                file.writelines('\t'.join(row) + '\n')
+            else:
+                for species in missing_specs:
+                    if line[species_i] == species:
+                        row.extend((line[0], line[species_i], line[quality_index], line[status_index] , line[cds_index] , line[completeness_index] , line[contamination_index] , line[coarse_con_index] , line[fine_con_index]))
+                        file.write('\t'.join(row) + '\n')
+         

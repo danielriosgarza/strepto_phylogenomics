@@ -1,0 +1,149 @@
+genome.genome_id	genome.species	genome.genome_quality	genome.genome_status	genome.patric_cds	genome.checkm_completeness	genome.checkm_contamination	genome.coarse_consistency	genome.fine_consistency
+1169670.3	Streptococcus sp. GMD1S	Good	WGS	1987	89.7	6.8	95.5	93.6
+764299.3	Streptococcus ictaluri	Good	WGS	2475	98.6	4.2	99.3	97.2
+1777881.3	Streptococcus sp. DD13	Good	WGS	1751	94.8	3.8	98.4	97
+1768777.3	Streptococcus sp. CCH8-C6	Good	WGS	1813	80.2	2.2	93.9	93.8
+1739391.3	Streptococcus sp. HMSC071H03	Good	WGS	2137	97.9	6.7	99.8	97.5
+1715134.3	Streptococcus sp. HMSC066F01	Good	WGS	1997	99.8	2.4	99.6	99
+1739371.3	Streptococcus sp. HMSC064H09	Good	WGS	2205	99.8	3	99.7	99.3
+883168.3	Streptococcus urinalis	Good	WGS	2213	97.6	2.4	99.2	98.4
+1975706.3	Streptococcus sp. FDAARGOS_256	Good	WGS	1961	100	3.3	99.7	99.5
+1123305.3	Streptococcus hyovaginalis	Good	WGS	2069	97.9	2.6	98.9	98.2
+1080071.3	Streptococcus orisasini	Good	WGS	2253	98.6	3.2	99.4	98.1
+2173853.3	Streptococcus sp. Z15	Good	WGS	2541	97	2.9	99	98
+1739299.3	Streptococcus sp. HMSC056C01	Good	WGS	2080	99.8	3.8	99.7	99.1
+197614.10	Streptococcus pasteurianus	Good	WGS	2405	99.5	3.7	99	98.1
+904294.3	Streptococcus sp. oral taxon 056	Good	WGS	1972	98.5	3.5	98.9	98
+1123318.3	Streptococcus thoraltensis	Good	WGS	2256	97	3.4	98.8	97.6
+1814128.3	Streptococcus halotolerans	Good	Complete	2071	96.8	3.6	99	98.2
+1768771.3	Streptococcus sp. CCH8-G7	Good	WGS	2025	88	1.6	97	96.5
+1739284.3	Streptococcus sp. HMSC062B01			2309	99.5	0.8	99.9	99.7
+1319.3	Streptococcus sp. 'group B'	Good	Complete	2284	100	3	99.9	98.8
+1316412.3	Streptococcus sp. HSISS3	Good	Complete	2273	98.6	7.3	99	97
+2382163.3	Streptococcus sp. JS71	Good	Complete	1994			99	98.5
+82348.4	Streptococcus pluranimalium	Good	Complete	2297	96.9	3.1	99	98.3
+197614.7	Streptococcus pasteurianus	Good	WGS	2028	99	3	99.2	98.5
+2021971.3	Streptococcus respiraculi	Good	Complete	1979			99.3	98.3
+1917441.3	Streptococcus ruminantium	Good	Complete	2015			99.6	99.1
+1947564.3	Streptococcus sp. UBA4344	Good	WGS	1931	99.3	2.9	99.5	98.3
+1947565.3	Streptococcus sp. UBA6071	Good	WGS	2078	87.8	9	94.4	91.9
+2487316.3	Streptococcus sp. Marseille-P644	Good	WGS	2087			99.7	99.5
+2583586.3	Streptococcus sp. NCTC 10233	Good	WGS	2129			99.4	98.4
+2583585.3	Streptococcus sp. NCTC 10228	Good	Complete	2109			99.5	98.8
+197614.15	Streptococcus pasteurianus	Good	WGS	2278			99.1	98.3
+2589786.3	Streptococcus sp. D19	Good	WGS	2003			99.9	99.3
+2589788.3	Streptococcus sp. B4	Good	WGS	1996			99.2	98.8
+2293247.3	Streptococcus sp. AM43-2AT	Good	WGS	2086			99	98.9
+1839799.5	Streptococcus sp. FDAARGOS_192		Plasmid	28				
+1263110.4	Streptococcus thermophilus CAG	Good	WGS	1887	97.6	4.6	99.6	98.8
+83427.7	uncultured Streptococcus sp.	Good	WGS	1704			95.8	93.3
+439219.4	Streptococcus henryi	Good	WGS	2419			99.6	98.4
+2558276.3	Streptococcus sp. LYSM12	Good	WGS	2456				
+2545465.3	Streptococcus sp. KCJ4932	Good	WGS	1871				
+2478956.3	Streptococcus sp. bf_0095	Good	WGS	1983				
+1337.4	Streptococcus hyointestinalis	Good	WGS	2609	99	2.1	99.2	98.3
+83427.13	uncultured Streptococcus sp.	Good	WGS	1796			93.9	91.3
+83427.14	uncultured Streptococcus sp.	Good	WGS	1619			92.2	90.8
+1169673.3	Streptococcus sp. GMD4S	Good	WGS	2124	91	9.7	96	92.7
+1169671.3	Streptococcus sp. GMD2S	Good	WGS	1886	81.3	8	95.8	93.7
+1676616.3	Streptococcus sp. X13SY08	Good	WGS	1936	94.4	16.8	99.1	94.1
+2304043.3	Streptococcus sp. Z1(2018)	Good	WGS	2539	97.9	4	99	97.8
+2304042.3	Streptococcus sp. Z2	Good	WGS	2542	97.9	4.1	99	97.7
+1777878.3	Streptococcus sp. DD10	Good	WGS	2301	97.6	4.5	99	97.1
+1169675.3	Streptococcus sp. GMD6S	Good	WGS	2133	94.9	8.8	98	95.6
+1000562.3	Streptococcus phocae subsp. salmonis	Good	WGS	1762	96.4	9.9	98.7	95.9
+1715086.3	Streptococcus sp. HMSC078H03	Good	WGS	2022	99.8	2.3	99.8	99
+197614.4	Streptococcus pasteurianus	Good	WGS	2201	99	2.3	99	98.3
+197614.3	Streptococcus pasteurianus	Good	WGS	2128	99	2.6	99	98.4
+1839799.3	Streptococcus sp. FDAARGOS_192	Good	Complete	2268	99.8	3	99.9	99.1
+197614.9	Streptococcus pasteurianus	Good	WGS	2347	99.5	3.5	99	98.1
+1333.3	Streptococcus criceti	Good	WGS	2338	99	3.8	99.4	98.7
+1811193.3	Streptococcus pantholopis	Good	Complete	2295	97.4	3.5	99	97.8
+1403937.3	Streptococcus sp. DORA_10	Good	WGS	1760	86.5	3.3	93.9	93
+910939.5	Streptococcus hongkongensis	Good	WGS	2114	99	10.4	99	95.6
+1316411.3	Streptococcus sp. HSISS2	Good	Complete	2294	94.7	14.3	97.2	92.2
+1604598.3	Streptococcus sp. DBCMS	Good	WGS	2144	99.5	12.3	99.6	95.7
+2172545.3	Streptococcus halitosis	Poor	WGS	3110	100	11.9	95.3	91.1
+2069309.3	Streptococcus sp. UMB1385			1928	82.8	2.4	98.9	98.7
+2420308.3	Streptococcus sp. FDAARGOS_520	Good	Complete	2150			100	99.8
+2420309.3	Streptococcus sp. FDAARGOS_521	Good	Complete	2260			100	99.6
+82348.3	Streptococcus pluranimalium	Good	Complete	2093	97	2.2	99	98.7
+1765960.3	Streptococcus penaeicida	Good	WGS	2208	98.3	11.6	99.5	94.8
+1947562.3	Streptococcus sp. UBA3373	Good	WGS	1494	94.5	3.2	98.3	97.3
+1947566.3	Streptococcus sp. UBA632	Good	WGS	1476	94.7	3.9	97.9	97
+2293246.3	Streptococcus sp. AM28-20	Good	WGS	2054			98.9	98.4
+2491052.3	Streptococcus sp. OH4692_COT-348	Good	WGS	2245			99.8	99.2
+83427.4	uncultured Streptococcus sp.	Good	WGS	1796			99.6	98.8
+83427.5	uncultured Streptococcus sp.	Good	WGS	1779			98.4	97.4
+83427.9	uncultured Streptococcus sp.	Good	WGS	1152			89.7	88.8
+83427.8	uncultured Streptococcus sp.	Good	WGS	1754			93.3	91.1
+2558284.3	Streptococcus sp. WM07	Good	WGS	2060				
+197614.16	Streptococcus pasteurianus	Poor	WGS	2855			99.1	89.5
+2583583.3	Streptococcus sp. NCTC 5968	Good	WGS	2180			99.5	98.6
+2600147.3	Streptococcus sp. sy018	Good	WGS	1081			94.2	94
+1562651.3	Streptococcus pharyngis	Good	WGS	1538			99.4	99.1
+83427.16	uncultured Streptococcus sp.	Good	WGS	1997			98.1	95.3
+2487315.3	Streptococcus sp. Marseille-P6264	Good	WGS	2052			99.9	99.4
+2592044.3	Streptococcus sp. Marseille-P7376	Good	WGS	2320			99.6	99.1
+83427.15	uncultured Streptococcus sp.	Good	WGS	2180			95	94.1
+2545467.3	Streptococcus sp. KCJ4950	Good	WGS	1883				
+1581080.4	Streptococcus sp. HMSC10E12	Good	WGS	2254			99.5	99.1
+1968889.3	Streptococcus sp. CECT 9732	Good	WGS	1909				
+2576376.3	Streptococcus sp. 1643	Good	Complete	1913				
+197614.14	Streptococcus pasteurianus	Good	Complete	2216			99.1	98.4
+149016.3	Streptococcus urinalis	Good	Complete	2237			99.1	98
+1579343.3	Streptococcus sp. 263_SSPC	Good	WGS	1822	86.7	3	99.5	99
+1739381.3	Streptococcus sp. HMSC072D03	Good	WGS	2166	99.8	2.2	99.7	99.3
+1123304.3	Streptococcus henryi	Good	WGS	2319	99	2.1	99.2	98.2
+1776578.3	Streptococcus sp. DD04	Good	WGS	2282	98.3	2.4	99.6	98.8
+197614.5	Streptococcus pasteurianus	Good	WGS	2364	99.3	2.9	99.2	98
+1825069.3	Streptococcus marmotae	Good	Complete	2367	97.9	2.7	99.1	98
+1768767.3	Streptococcus sp. CCH8-H5	Good	WGS	2049	94.7	2.2	98.7	98.3
+471872.6	Streptococcus infantarius subsp. infantarius	Good	WGS	1774	98.8	3	98.7	98
+764291.3	Streptococcus urinalis	Good	WGS	2228	97.1	2.6	98.7	97.7
+981540.3	Streptococcus pasteurianus	Good	Complete	2042	99	3.1	99.2	98.2
+1768764.3	Streptococcus sp. CCH5-D3	Good	WGS	2091	94.7	2.4	98.9	98.7
+873449.3	Streptococcus criceti	Good	WGS	2228	97.9	3.2	98.7	98
+197614.8	Streptococcus pasteurianus	Good	Complete	2245	99.3	3.7	99.1	98.3
+764290.3	Streptococcus downei	Good	WGS	2218	98.7	3.6	98.8	97.9
+1123300.3	Streptococcus devriesei	Good	WGS	2082	98.6	3.6	99	97.8
+1069533.5	Streptococcus infantarius subsp. infantarius	Good	Complete	2045	99.5	3.9	99	97.9
+1051981.3	Streptococcus equi subsp. ruminatorum	Good	WGS	2203	97.6	3.9	99.6	99.2
+1739472.3	Streptococcus sp. HMSC065G04	Good	WGS	2120	100	2.1	99.7	99.1
+904293.3	Streptococcus downei	Good	WGS	2183	97.5	3.1	98.2	97.3
+83427.3	uncultured Streptococcus sp.	Good	WGS	1783	94.3	9.4	97.8	94.8
+1111760.3	Streptococcus troglodytae	Good	Complete	2234	98.5	7	99.3	96.5
+1316408.3	Streptococcus sp. HSISM1	Good	Complete	2261	97.3	7.4	98.8	96.9
+1316409.3	Streptococcus sp. HSISB1	Good	Complete	2173	98.1	18.6	99.2	92.2
+1316410.3	Streptococcus sp. HSISS1	Good	Complete	1961	99.3	4	99.3	97.9
+2069308.3	Streptococcus sp. UMB0029			2334	99.3	0.3	99.8	99.2
+1433513.3	Streptococcus sp. ChDC B345	Good	Complete	1937			99.9	99.5
+2490633.3	Streptococcus sp. KCOM 2412	Good	Complete	1893			99.6	99.3
+2420310.3	Streptococcus sp. FDAARGOS_522	Good	Complete	2148			100	99.8
+1433516.3	Streptococcus sp. ChDC B353	Good	WGS	1841			99.9	99.6
+1947563.3	Streptococcus sp. UBA4235	Good	WGS	1168	68.6	3.7	90.4	89.4
+2282136.3	Streptococcus sp. BCA20	Poor	WGS	3758			99.2	80.9
+2282420.3	Streptococcus sp. 28462	Good	WGS	2145			99	98.5
+1825069.4	Streptococcus marmotae		Plasmid	11				
+1825069.5	Streptococcus marmotae		Plasmid	15				
+1069533.48	Streptococcus infantarius subsp. infantarius		Plasmid	35				
+1839799.4	Streptococcus sp. FDAARGOS_192		Plasmid	224				
+1263109.4	Streptococcus salivarius CAG	Good	WGS	1958	98.1	7.8	99.6	97.6
+1777879.4	Streptococcus sp. DD11	Good	WGS	3216			99	96.1
+83427.6	uncultured Streptococcus sp.	Good	WGS	1704			99.3	98.4
+83427.10	uncultured Streptococcus sp.	Good	WGS	925			89.4	89.1
+83427.11	uncultured Streptococcus sp.	Good	WGS	1431			90.8	90.6
+83427.12	uncultured Streptococcus sp.	Good	WGS	1936			98.1	97.8
+1969535.3	Streptococcus sp. LMAG	Good	WGS	2237			99.1	98.4
+197614.17	Streptococcus pasteurianus	Good	WGS	2238			99	98.2
+2487317.3	Streptococcus sp. Marseille-P5794	Good	WGS	2038			99.8	99.4
+2487318.3	Streptococcus sp. Marseille-P7375	Good	WGS	2299			99.9	99.4
+2588991.3	Streptococcus sp. C17	Good	WGS	2122			99.7	95.7
+2589787.3	Streptococcus sp. D2	Good	WGS	2007			99.9	99.3
+2600148.3	Streptococcus sp. sy010	Good	WGS	1145			97.6	97.3
+2600149.3	Streptococcus sp. sy004	Good	WGS	1238			98.8	98.5
+2583584.3	Streptococcus sp. NCTC 11567	Good	Complete	2159			99.1	98.4
+2558279.3	Streptococcus sp. AN2	Good	WGS	2303				
+2316646.3	Streptococcus sp. X16XC17	Good	WGS	1785				
+1501662.3	Streptococcus parasuis	Good	WGS	2068			99.3	99
+1234680.3	Streptococcus rubneri	Good	WGS	2088			99	98.7
