@@ -77,6 +77,21 @@ with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.ts
                         if float(line[coarse_con_index]) >= 95 and float(line[fine_con_index]) >= 95: # filter on consistencies
                             if int(line[cds_index]) >= 700:    #filter out probably wrong anntoated plasmids
                                 genomes.append(line)
+with open ("/home/meike/strepto_phylogenomics/files/strepto_genomes_missing_species_check.tsv") as file:
+    f_reader = csv.reader(file, delimiter="\t")
+    for line in f_reader:
+        if line[0].startswith('genome.genome_id'):
+            cds_index = line.index('genome.patric_cds')
+            status_index = line.index('genome.genome_status')
+            quality_index = line.index('genome.genome_quality')
+            completeness_index = line.index('genome.checkm_completeness')
+        else:
+            if int(line[cds_index]) >= 700 and line[status_index] != 'Plasmid':
+                if line[quality_index] == 'Good' or line[quality_index] == '':
+                    if line[completeness_index] != "" and float(line[completeness_index]) >= 90:
+                        genomes.append(line)
+                    elif line[completeness_index] == "":
+                        genomes.append(line)
 print(len(original_count), len(genomes))
 with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv', 'w') as f:
     for row in genomes:
