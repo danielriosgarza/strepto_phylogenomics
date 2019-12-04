@@ -77,6 +77,8 @@ with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.ts
                         if float(line[coarse_con_index]) >= 95 and float(line[fine_con_index]) >= 95: # filter on consistencies
                             if int(line[cds_index]) >= 700:    #filter out probably wrong anntoated plasmids
                                 genomes.append(line)
+
+additional_ids = []
 with open ("/home/meike/strepto_phylogenomics/files/strepto_genomes_missing_species_check.tsv") as file:
     f_reader = csv.reader(file, delimiter="\t")
     for line in f_reader:
@@ -89,15 +91,20 @@ with open ("/home/meike/strepto_phylogenomics/files/strepto_genomes_missing_spec
             if int(line[cds_index]) >= 700 and line[status_index] != 'Plasmid':
                 if line[quality_index] == 'Good' or line[quality_index] == '':
                     if line[completeness_index] != "" and float(line[completeness_index]) >= 90:
-                        genomes.append(line)
+                        additional_ids.append(line[0])
                     elif line[completeness_index] == "":
-                        genomes.append(line)
+                        additional_ids.append(line[0])
 print(len(original_count), len(genomes))
+
+#Browse through all_genomes_file to get all information of the missing species                
+with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') as f:
+    for line in f:
+          line = line.strip().split('\t')
+          for identifier in additional_ids:
+              if line[0] == identifier:
+                  genomes.append(line)
+
+
 with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv', 'w') as f:
     for row in genomes:
         f.write('\t'.join(row) + '\n')
-
-    
-
-
-

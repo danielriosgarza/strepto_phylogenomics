@@ -11,23 +11,23 @@ from fuzzywuzzy import process
 
 def compare(str2Match, strOptions):
     '''Give query string that is compared to other strings in a list. Returns list with all strings that had
-    a score of at least 95. No identical hits are in the list included.'''
+    a score of at least 90% (Levenshtein Distance). No identical hits are in the list included.'''
     score_l = []
     names=[]
     scores = process.extract(str2Match, strOptions, limit = len(strOptions))
     for score in scores:
-        if score[1] >= 95:
+        if score[1] >= 90:
             score_l.append(score[0])
-    for species in score_l:
-        if species not in names:
-            names.append(species)
+    for item in score_l:
+        if item not in names:
+            names.append(item)
     return names
 
 def score_dict(comparison_list):
    '''Needs a list of strings that should be compared and uses compare function. Returns a dict with
-   all different strings as keys and all different strings with score higher than 95 as values'''
+   all strings as keys and all different strings with a high score as values'''
    all_scores ={} 
-   for name in comparison_list: #make dict with species name as key and all scores higher than 95 as values
+   for name in comparison_list: #make dict with field name as key and all scores higher than 95 as values
             if name not in all_scores:
                 all_scores[name] = compare(name, comparison_list)
    return all_scores
@@ -59,31 +59,24 @@ with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv'
     for line in f:
         line = line.strip().split('\t')
         if line[0].startswith('genome.genome_id'):
-            field_i = line.index('genome.isolation_source')
+            field_i = line.index('genome.isolation_country')
         else:
-            field_l.append(line[field_i])
+            if line[field_i] != '':
+                field_l.append(line[field_i])
 
 test = synonym_dict(field_l)
 print(test)
-#species = {}
-#for name in species_l:
-#    temp ={}
-#    scores = compare(name, species_l)
-#    unique_scores = unique_list(scores)
-            
-#print(unique_scores)
-#    
-#    temp = synonym_dict(scores)
-#species.update(temp)
-#print(species)
 
-
-#with open('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv') as f:
-#    with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_species_check.tsv', 'w') as file:
-#        for line in f:
-#            info = line.strip().split('\t')
-#            if info[field_i] in species:      #Look at species name and replace it with the asigned value
-#                info[field_i] = species[info[field_i]]
-#                file.writelines('\t'.join(info) + '\n')
-#            else:
-#                file.write('\t'.join(info) + '\n')
+#fields that can be merged --> token_sort_ratio?
+#Str1 = "united states v. nixon"
+#Str2 = "Nixon v. United States"
+#Ratio = fuzz.ratio(Str1.lower(),Str2.lower())
+#Partial_Ratio = fuzz.partial_ratio(Str1.lower(),Str2.lower())
+#Token_Sort_Ratio = fuzz.token_sort_ratio(Str1,Str2)
+#print(Ratio)
+#print(Partial_Ratio)
+#print(Token_Sort_Ratio)
+#OUT:
+#59
+#74
+#100

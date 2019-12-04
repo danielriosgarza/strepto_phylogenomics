@@ -1,0 +1,10 @@
+genome.genome_id	genome.species	genome.genome_quality	genome.genome_status	genome.patric_cds	genome.checkm_completeness	genome.checkm_contamination	genome.coarse_consistency	genome.fine_consistency
+1291764.3	Lactococcus fujiensis	Poor	WGS	3387	99.2	44.3	98.3	86
+2603290.3	Lactococcus sp. dk322	Good	WGS	2403			98.7	98.3
+1890280.3	Lactococcus garvieae subsp. garvieae	Good	WGS	2110			98.8	98.4
+2419773.3	Lactococcus sp. 1JSPR-7	Good	Complete	2796			98.4	96.8
+2592653.3	Lactococcus sp. KACC 19320	Good	Complete	2896			98.2	93.8
+2603289.3	Lactococcus sp. dk310	Good	WGS	2364			98.7	98.3
+2507158.3	Lactococcus sp. S-13	Good	WGS	2362				
+1291764.5	Lactococcus fujiensis	Good	WGS	2130	100	3	98.7	98.2
+1494462.5	Lactococcus hircilactis	Good	WGS	2720			98.4	97.2

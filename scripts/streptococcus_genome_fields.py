@@ -8,8 +8,6 @@ Created on Wed Nov 27 09:24:02 2019
 '''Makes tsv file of all patric genome fields of interest'''
 import os
 import csv
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 
 def patric_fields_str(fields_file):
