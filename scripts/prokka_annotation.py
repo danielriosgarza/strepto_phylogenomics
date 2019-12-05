@@ -21,7 +21,7 @@ def identifier2bash (database_ids, genus):
     '''Needs list with identifiers and returns list with prokka line for all ids'''
     bash_lines = []
     for identifier in database_ids:
-            bash_lines.append(''.join('prokka '+identifier+' --/home/meiker/git/prokka_annotation/' +identifier+' --prefix ' +identifier+' --genus ' +genus))
+            bash_lines.append(''.join('prokka '+identifier+'.fna --/home/meiker/git/prokka_annotation/' +identifier+' --prefix ' +identifier+' --genus ' +genus))
     return bash_lines
 #retrieve selfmade database identifier
 def get_db_ids(file):
@@ -29,7 +29,8 @@ def get_db_ids(file):
     with open(file) as f:
         for line in f:
             line= line.strip().split('/')
-            db_ids.append(line[-1])
+            identifier = line[-1]
+            db_ids.append(identifier[0:-4])
     return db_ids
 
 ########## Floricoccus link to directory and running prokka ##########
