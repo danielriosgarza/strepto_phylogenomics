@@ -53,16 +53,20 @@ def synonym_dict(comparison_list):
 #            if synonym not in species:
 #                species[synonym] = k  #gives all same value/writing style
 #    return species
-          
+fields_ids = {}          
 field_l =[]
-with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv') as f:
-    for line in f:
-        line = line.strip().split('\t')
-        if line[0].startswith('genome.genome_id'):
-            field_i = line.index('genome.isolation_country')
-        else:
-            if line[field_i] != '':
-                field_l.append(line[field_i])
+temp =[]
+with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as inputfile:
+    with open ('/home/meike/strepto_phylogenomics/files/lactococcus_database.tsv', 'w') as outfile:
+        for line in inputfile:
+            line = line.strip().split('\t')
+            if line[0].startswith('genome.genome_id'):
+                for i, header in enumerate(line):
+                    fields_ids[header] = i
+                    if "antimicrobial" in fields_ids:
+                        temp.append(line[i])
+            outfile.writelines('\t'.join(line) + '\n')
+            
 
 test = synonym_dict(field_l)
 print(test)
