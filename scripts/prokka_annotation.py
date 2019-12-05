@@ -9,7 +9,7 @@ Created on Thu Dec  5 11:16:48 2019
 '''Gene annotation using prokka'''
 #prokka db_id.fna --/home/meiker/git/prokka_annotation  --prefix db_id.fna --genus Streptococcus
 
-#function to Link the metagenome assembly file into desired directory
+#function to Link the genome assembly file into desired directory
 def link2genome(database_ids):
     bash_lines = []
     for identifier in database_ids:
