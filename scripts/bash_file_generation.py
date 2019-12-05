@@ -8,7 +8,7 @@ Created on Thu Nov 28 09:41:25 2019
 
 '''Makes bash file to retrieve genomes from Patric. Saving directory is octarine server'''
 #wget ftp://ftp.patricbrc.org/genomes/1074061.3/1074061.3.fna -O /home/meiker/git/genomes/streptocuccus_000001.fna
-import csv
+
 def identifier2bash (patric_ids_file):
     '''Needs file with identifiers and returns list with wget for all identifiers'''
     bash_lines = []
@@ -17,6 +17,7 @@ def identifier2bash (patric_ids_file):
             identifier = identifier.strip()
             bash_lines.append(''.join('wget ftp://ftp.patricbrc.org/genomes/'+identifier+'/' +identifier+'.fna'))
     return bash_lines
+
 ids =[]
 with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv') as f:
     f_reader = csv.reader(f, delimiter="\t")
