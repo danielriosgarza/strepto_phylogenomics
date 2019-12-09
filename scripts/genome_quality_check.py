@@ -77,6 +77,8 @@ with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.ts
                         if float(line[coarse_con_index]) >= 95 and float(line[fine_con_index]) >= 95: # filter on consistencies
                             if int(line[cds_index]) >= 700:    #filter out probably wrong anntoated plasmids
                                 genomes.append(line)
+                                
+print(len(original_count), len(genomes))
 
 additional_ids = []
 with open ("/home/meike/strepto_phylogenomics/files/strepto_genomes_missing_species_check.tsv") as file:
