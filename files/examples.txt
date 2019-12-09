@@ -1,0 +1,12 @@
+
+
+#function for generating prokka annotation and other things that you would like to run on all the genomes
+
+def make_prokka_annotation(genus):
+	with open('/home/meiker/git/strepto_phylogenomics/files/' + genus+ '_genomes_db.tsv') as f:
+		f.readline()
+
+		with open('/home/meiker/git/strepto_phylogenomics/scripts/bash_scripts/' + genus + 'prokka_annotate.sh','w') as f2:
+			for line in f:
+				a=line.strip().split('\t')
+				f2.write('prokka /home/meiker/git/genomes/'+a[0]+'.fna --outdir /home/meiker/git/prokka_annotation/' + a[0] + ' --prefix ' +a[0]+' --genus ' +genus +' \n')

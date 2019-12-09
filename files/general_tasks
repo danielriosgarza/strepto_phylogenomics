@@ -130,3 +130,30 @@ wget ftp://ftp.patricbrc.org/genomes/1074061.3/1074061.3.fna -O /home/meiker/git
 
 
 prokka 226186.12.fna --outdir prokka_annotation --prefix 226186.12 --genus Streptococcus
+
+
+
+
+
+
+
+
+09/12/2019
+
+1) Make a summary table with the number of genomes per genus.
+
+2) Write our given ids as the first field in the database file.
+
+3) Run Prokka
+install miniconda (dowload:https://docs.conda.io/en/latest/miniconda.html)
+conda install -c conda-forge -c bioconda -c defaults prokka
+
+4) Run all your Prokka annotations in PLINC
+ssh meiker@plinc.umcn.nl
+
+5) Make 5 different bash scripts for the Streptococcus and add the database id for the output.
+
+6) Summarizing and visualizing the metadata
+
+
+
