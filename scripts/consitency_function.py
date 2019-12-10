@@ -16,7 +16,7 @@ def compare(str2Match, strOptions):
     names=[]
     scores = process.extract(str2Match, strOptions, limit = len(strOptions))
     for score in scores:
-        if score[1] >= 90:
+        if score[1] >= 95:
             score_l.append(score[0])
     for item in score_l:
         if item not in names:
@@ -34,7 +34,7 @@ def score_dict(comparison_list):
 
 def synonym_dict(comparison_list):
     '''Needs a list of strings that should be compared and uses the function score_dict. Returns a dict with
-    all different writing styles of a string (95 score) and all the same value (first item of list)'''
+    all different writing styles of a string  and all the same value (first item of list)'''
     all_styles = score_dict(comparison_list)
     synonyms={}
     for k,v in all_styles.items(): #use all scores to make dict that contains all possible writing styles of a species 
@@ -43,33 +43,109 @@ def synonym_dict(comparison_list):
                 synonyms[synonym] = k  #gives all same value/writing style
     return synonyms
 
-#def synonym_dict(comparison_score_dict):
-#    '''Needs a list with strings that are similar according to their similarity score.
-#    Returns a dictionary with all similar strings as keys and all with the same value
-#    (first string of the list)'''
-#    species={}
-#    for k,v in species_all_scores.items(): #use all scores to make dict that contains all possible writing styles of a species 
-#        for synonym in v:
-#            if synonym not in species:
-#                species[synonym] = k  #gives all same value/writing style
-#    return species
-fields_ids = {}          
-field_l =[]
-temp =[]
-with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as inputfile:
-    with open ('/home/meike/strepto_phylogenomics/files/lactococcus_database.tsv', 'w') as outfile:
-        for line in inputfile:
+def get_synonyms(file):
+    '''Give file with different columns. Goes through each coloum and stores all values in a dict with as key the
+    column name (empty lines not included)'''
+    with open (file) as f:
+        headers =  f.readline().strip().split('\t')
+        synomyms = {i:[] for i in headers} #make dict to store all lists with synonyms
+        for line in f:
             line = line.strip().split('\t')
-            if line[0].startswith('genome.genome_id'):
-                for i, header in enumerate(line):
-                    fields_ids[header] = i
-                    if "antimicrobial" in fields_ids:
-                        temp.append(line[i])
-            outfile.writelines('\t'.join(line) + '\n')
-            
+            if len(line) != len(headers):
+                difference = len(headers)-len(line)
+                for i in range(difference):
+                    line.append('')
+            for i, name in enumerate(headers): #go through headers and store lines in different lists to check for typos
+                if line[i].isspace() == False and line[i] != '':
+                        synomyms[name].append(line[i])
+    return synomyms
+#get typos out of the fields
+    
+lacto_synonyms = get_synonyms('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv')
+columns = ['genome.biovar', 'genome.cell_shape', 'genome.geographic_location', 'genome.habitat', 'genome.host_name',
+           'genome.isolation_country']
 
-test = synonym_dict(field_l)
-print(test)
+for col in columns:
+    col = synonym_dict(lacto_synonyms[col])
+print(col)
+lines =[]
+with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as f:
+    for line in f:
+        line = line.strip().split('\t')
+        lines.append(line)
+
+with open('/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv', 'w') as f:
+    for line in f:
+        for i, column in enumerate(lines):
+            if 'biovar' in column:
+                if line[i] in lacto_synonyms:
+                    line[i] = lacto_synonyms[column]
+        f.write('\t'.join(line) + '\n')
+            
+#def compare_sets(sets_list):
+#    #fields that can be merged --> token_sort_ratio?
+#    for name in sets_list:
+    
+# set seperated by : and from other sets by ::
+#
+#with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as f:
+#    headers = f.readline().strip().split('\t')
+#    additional_metadata = []
+#    for line in f:
+#        line = line.strip().split('\t')
+#        if len(line) != len(headers):
+#            difference = len(headers)-len(line)
+#            for i in range(difference):
+#                line.append('')
+#        for i, name in enumerate(headers):
+#            if 'additional_metadata' in name:
+#                additional_metadata.append(line[i])
+#
+#for i, item in enumerate(additional_metadata):
+#    items = item.split('::')
+#    additional_metadata[i] = items
+#    #list with containg list with sets; compare sets of first list to rest of sets in other lists
+#for item in additional_metadata:
+#    for i in item:
+#        
+     
+with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as f:
+    headers = f.readline().strip().split('\t')
+    data_dict = {i:[] for i in headers}
+    #make comparison lists to remove typos
+    additional_meta =[]
+#    anti_resistance = []
+#    assembly_method = []
+#    body_sample_site = []
+#    collection_date = []
+#    collection_year
+    for line in f:
+        info = line.strip().split('\t')
+        if len(info) != len(headers):
+            difference = len(headers)-len(info)
+            for i in range(difference):
+                info.append('')
+        for inde, name in enumerate(headers):
+            data_dict[name] = info[inde]
+            
+    
+#fields_ids = {}          
+#field_l =[]
+#temp =[]
+#with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as inputfile:
+#    with open ('/home/meike/strepto_phylogenomics/files/lactococcus_database.tsv', 'w') as outfile:
+#        for line in inputfile:
+#            line = line.strip().split('\t')
+#            if line[0].startswith('genome.genome_id'):
+#                for i, header in enumerate(line):
+#                    fields_ids[header] = i
+#                    if "antimicrobial" in fields_ids:
+#                        temp.append(line[i])
+#            outfile.writelines('\t'.join(line) + '\n')
+#            
+#
+#test = synonym_dict(field_l)
+#print(test)
 
 #fields that can be merged --> token_sort_ratio?
 #Str1 = "united states v. nixon"
