@@ -118,7 +118,8 @@ with open ('/home/meike/strepto_phylogenomics/files/lactococcus_all_genome_field
                                 genomes.append(line)
                                 
 print(len(original_count), len(genomes))
-
+original_genomes = len(original_count)
+first_selection_count = len(genomes)
 with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv', 'w') as f:
     for row in genomes:
         f.write('\t'.join(row) + '\n')
@@ -196,7 +197,25 @@ with open ('/home/meike/strepto_phylogenomics/files/lactococcus_all_genome_field
               if line[0] == identifier:
                   genomes.append(line)
 
+final_genome_count =len(genomes)
+
 #Make final file with all good (enough) quality species
 with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv', 'w') as f:
     for row in genomes:
-        f.write('\t'.join(row) + '\n')                    
+        f.write('\t'.join(row) + '\n')    
+
+#summarize table of genome counts
+lines = []       
+with open('/home/meike/strepto_phylogenomics/files/summary_table.tsv') as f:
+    for line in f:
+        line = line.strip().split('\t')
+        lines.append(line)        
+        
+cols = ['species','original_genomes', 'first_selection', 'final_genomes']
+genome_numbers = ["lactococcus", str(original_genomes), str(first_selection_count), str(final_genome_count)]
+flori = ['floricoccus', str(2), str(2), str(2)]
+with open ('/home/meike/strepto_phylogenomics/files/summary_table.tsv' , 'w') as f:
+    for line in lines:
+        f.write('\t'.join(line) + '\n')
+    f.write('\t'.join(genome_numbers) + '\n')
+    f.write('\t'.join(flori) + '\n')                

@@ -59,28 +59,58 @@ def get_synonyms(file):
                 if line[i].isspace() == False and line[i] != '':
                         synomyms[name].append(line[i])
     return synomyms
-#get typos out of the fields
-    
+
+def spelling(inputfile, outputfile, syn_dict):
+    '''Replaces typos with consistent spelling. Changes columns ['genome.biovar',  'genome.geographic_location', 'genome.habitat', 'genome.host_name',
+    'genome.isolation_country']. Removes second genome.genome_id column'''
+    #make dictionaries for typos
+    biovar_dict = synonym_dict(syn_dict['genome.biovar'])
+    geographic_location_dict = synonym_dict(syn_dict['genome.geographic_location'])
+    habitat_dict = synonym_dict(syn_dict['genome.habitat'])
+    host_name_dict = synonym_dict(syn_dict['genome.host_name'])
+    isolation_country_dict = synonym_dict(syn_dict['genome.isolation_country'])
+    lines =[]
+    with open (inputfile) as f:
+        for line in f:
+            line = line.strip().split('\t')
+            if "genome.genome_id" not in lines:
+                lines.append(line)
+    print(lines)
+    with open(outputfile, 'w') as f:
+        for line in lines:
+            for i, column in enumerate(lines): #go through different columns and replace it with consistent spelling
+                if 'biovar' in column:
+                    if line[i] in biovar_dict:
+                        line[i] = biovar_dict[column]
+                for i, column in enumerate(lines):
+                    if 'geographic_location' in column:
+                        if line[i] in geographic_location_dict:
+                            line[i] = geographic_location_dict[column]
+                for i, column in enumerate(lines):
+                    if 'genome.habitat' in column:
+                        if line[i] in habitat_dict:
+                            line[i] = habitat_dict[column]
+                for i, column in enumerate(lines):
+                    if 'host_name' in column:
+                        if line[i] in host_name_dict:
+                            line[i] = host_name_dict[column]
+                for i, column in enumerate(lines):
+                    if 'isolation_country' in column:
+                        if line[i] in isolation_country_dict:
+                            line[i] = isolation_country_dict[column]
+            f.write('\t'.join(line) + '\n')
+    return outputfile
+
+#get typos out of the fields   
 lacto_synonyms = get_synonyms('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv')
-columns = ['genome.biovar', 'genome.cell_shape', 'genome.geographic_location', 'genome.habitat', 'genome.host_name',
+lacto_input = '/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv'
+lacto_output = '/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv'
+
+spelling(lacto_input,lacto_output, lacto_synonyms)
+columns = ['genome.biovar',  'genome.geographic_location', 'genome.habitat', 'genome.host_name',
            'genome.isolation_country']
+#write new document with consistent spelling
 
-for col in columns:
-    col = synonym_dict(lacto_synonyms[col])
-print(col)
-lines =[]
-with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as f:
-    for line in f:
-        line = line.strip().split('\t')
-        lines.append(line)
-
-with open('/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv', 'w') as f:
-    for line in f:
-        for i, column in enumerate(lines):
-            if 'biovar' in column:
-                if line[i] in lacto_synonyms:
-                    line[i] = lacto_synonyms[column]
-        f.write('\t'.join(line) + '\n')
             
 #def compare_sets(sets_list):
 #    #fields that can be merged --> token_sort_ratio?
@@ -109,25 +139,6 @@ with open('/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.t
 #    for i in item:
 #        
      
-with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv') as f:
-    headers = f.readline().strip().split('\t')
-    data_dict = {i:[] for i in headers}
-    #make comparison lists to remove typos
-    additional_meta =[]
-#    anti_resistance = []
-#    assembly_method = []
-#    body_sample_site = []
-#    collection_date = []
-#    collection_year
-    for line in f:
-        info = line.strip().split('\t')
-        if len(info) != len(headers):
-            difference = len(headers)-len(info)
-            for i in range(difference):
-                info.append('')
-        for inde, name in enumerate(headers):
-            data_dict[name] = info[inde]
-            
     
 #fields_ids = {}          
 #field_l =[]
