@@ -15,7 +15,7 @@ all the selected genomes for the project. The parameters for selection:
     2. Completness of more than or equal to 90%
     3. Status not plasmid
     4. If status is nothing ('') than cds of at least 700
-    6. Consistencies above or equal to 95%'''
+    5. Consistencies above or equal to 95%'''
 selection is done by the script: genome_quality_check.py. Further, some genomes were included to assure we had at least one per species (in the same script).
 
 
