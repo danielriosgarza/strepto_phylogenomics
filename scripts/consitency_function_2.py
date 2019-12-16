@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec  3 15:02:56 2019
+Created on Wed Dec 11 13:24:53 2019
 
 @author: meike
 """
-'''Getting out typos etc.'''
-'''Makes dicitonary with all possible writing styles as keys asigning to same value to make it consistent.'''
+import pandas as pd
 from fuzzywuzzy import process
 
 def compare(str2Match, strOptions, score_t):
@@ -32,7 +31,6 @@ def score_dict(comparison_list, score_t):
                 all_scores[name] = compare(name, comparison_list, score_t)
    return all_scores
 
-
 def synonym_dict(comparison_list, score_t):
     '''Needs a list of strings that should be compared and uses the function score_dict. Returns a dict with
     all different writing styles of a string  and all the same value (first item of list)'''
@@ -45,36 +43,20 @@ def synonym_dict(comparison_list, score_t):
     return synonyms
 
 def get_synonyms(file):
-    '''Give file with different columns. Goes through each coloum and stores all values in a dict with as key the
-    column name (empty lines not included)'''
-    with open (file) as f:
-        headers =  f.readline().strip().split('\t')
-        synomyms = {i:[] for i in headers} #make dict to store all lists with synonyms
-        for line in f:
-            line = line.strip().split('\t')
-            if len(line) != len(headers):
-                difference = len(headers)-len(line)
-                for i in range(difference):
-                    line.append('')
-            for i, name in enumerate(headers): #go through headers and store lines in different lists to check for typos
-                if line[i].isspace() == False and line[i] != '':
-                        synomyms[name].append(line[i])
-    return synomyms
-
-def parse_geographic_location(gl_list):
-    '''Parses column geographic location to seperate country from specific location.'''
-    new_location_l = []
-    for ele in gl_list:
-        a = ele.split(':')
-        
-        if len(a)==2:
-            
-            while a[1][0]==' ':
-                a[1] = a[1][1::]
-            new_location_l.append(a[0]+ '('+a[1] + ')')
-        else:
-            new_location_l.append(a[0]+ '(unkownLocation)')
-    return new_location_l
+    '''Give file with different columns and scores that you wish for each column. Goes through each 
+    column and stores all values in a dict with as key the column name (empty lines not included)'''
+    table= pd.read_csv(file, sep = '\t')
+    table = table.astype(str)
+    headers =list(table.columns)
+    synonyms = {i:[] for i in headers}
+    for k in synonyms:
+        values = table[k].tolist()
+        temp =[]
+        for item in values:
+            if item != 'nan':
+                temp.append(item)
+        synonyms[k] = temp             
+    return synonyms
 
 def parse_sets(set_l):
     ''' makes sets, seperated by '::', returns list with lists of sets'''    
@@ -88,9 +70,10 @@ def parse_sets(set_l):
 
     return name_sets
 
+#in list per item: string mit jedem string in eigener liste vergleichen, dann mit jedem str von der nachsten etc.
 def compare_sets(sets_l, score_t):
     '''Loops through list of sets and looks at each set and compares it to the other sets. Needs a list with in lists 
-    all sets. Returns dicts with synonyms'''
+    all sets'''
     all_scores ={}
     sets =[]
     for name_l in sets_l: 
@@ -100,15 +83,19 @@ def compare_sets(sets_l, score_t):
     for name in sets: #make dict with set name as key and all scores higher than 95 as values
         if name not in all_scores:
             all_scores[name] = compare(name, sets, score_t)
-    #Go through the score dict and make a synonym dict        
-    synonyms={}
-    for k,v in all_scores.items(): #use all scores to make dict that contains all possible writing styles of a species 
-        for synonym in v:
-            if synonym not in synonyms:
-                synonyms[synonym] = k  #gives all same value/writing style
-    return synonyms
+    return all_scores
+    
+
+lacto_synonyms = get_synonyms('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv')
+lacto_input = '/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv'
+lacto_output = '/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv'
+
+names_sets = parse_sets(lacto_synonyms["genome.additional_metadata"])
 
 
+      
+                            
+                            
 def spelling(inputfile, outputfile, syn_dict):
     '''Replaces typos with consistent spelling. Changes columns ['genome.biovar',  'genome.geographic_location', 'genome.habitat', 'genome.host_name',
     'genome.isolation_country']. Removes 'genome.' from columns'''
@@ -145,7 +132,7 @@ def spelling(inputfile, outputfile, syn_dict):
                 f2.write('\t')
             f2.write('\n')
             
-            #go through lines and make consistent spelling in desired columns
+            #go through lines and make consistent spelling in desireed columns
             for line in f:
                 a = line.strip().split('\t')
                 for i,name in enumerate(a):
@@ -155,21 +142,27 @@ def spelling(inputfile, outputfile, syn_dict):
                         field = fields_to_change[indexes.index(i)] 
                         
                         #if the name of the field is in the dictionary of synonym dictionaries
-                        if name in fc[field]:
-                            f2.write(fc[field][name]) #write what in the dicts of fields in the synonym dict is
+                        if name in fields_to_change:
+                            #if column contains sets, change sets
+                            if field == 'genome.additional_metadata':
+                                b = a[i].split('::')
+                                print(b)
+                                for word_combi in b:
+                                    f2.write(fc[field][word_combi] + '::')
+                                
+                            #if not sets: write what in synonym_dict is
+                            else:
+                                f2.write(fc[field][name]) #write what in the dicts of fields in the synonym dict is
+                        #if name not in dict, write whats there
                         else:
                             f2.write(name) #if not just write whats there
+                    #if not a field to change, just write the line        
                     else:
                         f2.write(name)
                     f2.write('\t') #seperate each column with tab
                 f2.write('\n') #after each line
                     
-
-#get typos out of the fields   
 lacto_synonyms = get_synonyms('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv')
 lacto_input = '/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv'
 lacto_output = '/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv'
 spelling(lacto_input,lacto_output, lacto_synonyms)
-
-meta_sets = parse_sets(lacto_synonyms['genome.additional_metadata'])
-meta_dict = compare_sets(meta_sets, 95)

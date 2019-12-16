@@ -97,6 +97,8 @@ with open ("/home/meike/strepto_phylogenomics/files/strepto_genomes_missing_spec
                     elif line[completeness_index] == "":
                         additional_ids.append(line[0])
 print(len(original_count), len(genomes))
+original_genomes = len(original_count)
+first_selection_count = len(genomes)
 
 #Browse through all_genomes_file to get all information of the missing species                
 with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.tsv') as f:
@@ -105,8 +107,14 @@ with open ('/home/meike/strepto_phylogenomics/files/strepto_all_genome_fields.ts
           for identifier in additional_ids:
               if line[0] == identifier:
                   genomes.append(line)
-
+final_genome_count =len(genomes)
 
 with open ('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv', 'w') as f:
     for row in genomes:
         f.write('\t'.join(row) + '\n')
+
+#summarize table of genome counts
+cols = ['species','original_genomes', 'first_selection', 'final_genomes']
+genome_numbers = ["streptococcus", str(original_genomes), str(first_selection_count), str(final_genome_count)]
+with open ('/home/meike/strepto_phylogenomics/files/summary_table.tsv' , 'w') as f:
+        f.write('\t'.join(cols) + '\n' + '\t'.join(genome_numbers) + '\n')

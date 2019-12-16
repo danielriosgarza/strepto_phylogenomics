@@ -140,7 +140,7 @@ prokka 226186.12.fna --outdir prokka_annotation --prefix 226186.12 --genus Strep
 
 09/12/2019
 
-1) Make a summary table with the number of genomes per genus.
+1) Make a summary table with the number of genomes per genus.ok
 
 2) Write our given ids as the first field in the database file.
 
@@ -155,5 +155,12 @@ ssh meiker@plinc.umcn.nl
 
 6) Summarizing and visualizing the metadata
 
+
+
+16/12/2019
+
+1) Make a file with your results: Tables, Figures, etc. (Give as much information as possible and don't worry about the structure)
+2) Edit google doc with methods, results, and discussion (try to make the results question-oriented: question, answer, and Figure/Tables to support your answer)
+3) Summarizing and visualing metadata 
 
 

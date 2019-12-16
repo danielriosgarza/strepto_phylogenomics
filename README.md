@@ -1,5 +1,6 @@
 # strepto_phylogenomics
 
+Meike Report: https://docs.google.com/document/d/1oAlTzNKZa6KR_BxNZg9qsh-vp9L4EgcCgheUhfUHTdA/edit?usp=sharing
 
 #Files:
 
