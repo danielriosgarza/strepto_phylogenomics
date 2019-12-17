@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 17 10:22:53 2019
+
+@author: meike
+"""
+
+import dateparser
+
+def get_synonyms(file):
+    '''Give file with different columns. Goes through each coloum and stores all values in a dict with as key the
+    column name (empty lines not included)'''
+    with open (file) as f:
+        headers =  f.readline().strip().split('\t')
+        synomyms = {i:[] for i in headers} #make dict to store all lists with synonyms
+        for line in f:
+            line = line.strip().split('\t')
+            if len(line) != len(headers):
+                difference = len(headers)-len(line)
+                for i in range(difference):
+                    line.append('')
+            for i, name in enumerate(headers): #go through headers and store lines in different lists to check for typos
+                if line[i].isspace() == False and line[i] != '':
+                        synomyms[name].append(line[i])
+    return synomyms
+
+def organize_dates(field):
+    dates = {}
+    for number in field:
+        if any(i.isdigit() for i in number) == True and len(number) > 4:
+            if len(number) <= 8 and not'/' in number:
+                org_date = str(dateparser.parse(number, date_formats= '%Y/%m'))[:-12]
+                dates[number] = org_date
+            else:
+                org_date = str(dateparser.parse(number, date_formats= '%Y/%m/%d'))[:-9]
+                dates[number] = org_date
+    return dates
+
+
+
+
+lacto_input = '/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv'
+lacto_synonyms = get_synonyms(lacto_input)
+dates = organize_dates(lacto_synonyms['genome.collection_date'])
+print(dates)
+
+

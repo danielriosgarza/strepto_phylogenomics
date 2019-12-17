@@ -8,6 +8,7 @@ Created on Tue Dec  3 15:02:56 2019
 '''Getting out typos etc.'''
 '''Makes dicitonary with all possible writing styles as keys asigning to same value to make it consistent.'''
 from fuzzywuzzy import process
+import dateparser
 
 def compare(str2Match, strOptions, score_t):
     '''Give query string that is compared to other strings in a list. Returns list with all strings that had
@@ -76,58 +77,93 @@ def parse_geographic_location(gl_list):
             new_location_l.append(a[0]+ '(unkownLocation)')
     return new_location_l
 
-def parse_sets(set_l):
+
+def get_bag_of_terms(field):
     ''' makes sets, seperated by '::', returns list with lists of sets'''    
     name_sets = []
-    for name in set_l:
-        if len(name) >= 2:
-            word_l = name.split('::')
-            name_sets.append(word_l)
+    for line in field:
+        if line=='':
+            pass
         else:
-            name_sets.append(name)
+            name_sets += line.split('::')
+    return list(set(name_sets)) #trick to keep only one element of a list (sets are unordered)
 
-    return name_sets
-
-def compare_sets(sets_l, score_t):
-    '''Loops through list of sets and looks at each set and compares it to the other sets. Needs a list with in lists 
-    all sets. Returns dicts with synonyms'''
-    all_scores ={}
-    sets =[]
-    for name_l in sets_l: 
-        for name in name_l:
-            if name not in sets and name != '':
-                sets.append(name)
-    for name in sets: #make dict with set name as key and all scores higher than 95 as values
-        if name not in all_scores:
-            all_scores[name] = compare(name, sets, score_t)
-    #Go through the score dict and make a synonym dict        
-    synonyms={}
-    for k,v in all_scores.items(): #use all scores to make dict that contains all possible writing styles of a species 
-        for synonym in v:
-            if synonym not in synonyms:
-                synonyms[synonym] = k  #gives all same value/writing style
-    return synonyms
+def organize_dates(field):
+    '''Makes list of strings with different formats of dates and returns a dict of all (complete) dates as strings'''
+    dates = {}
+    for number in field:
+        if any(i.isdigit() for i in number) == True and len(number) > 4:
+            if len(number) <= 8 and not'/' in number:
+                org_date = str(dateparser.parse(number, date_formats= '%Y/%m'))[:-12]
+                dates[number] = org_date
+            else:
+                org_date = str(dateparser.parse(number, date_formats= '%Y/%m/%d'))[:-9]
+                dates[number] = org_date
+    return dates
 
 
-def spelling(inputfile, outputfile, syn_dict):
-    '''Replaces typos with consistent spelling. Changes columns ['genome.biovar',  'genome.geographic_location', 'genome.habitat', 'genome.host_name',
-    'genome.isolation_country']. Removes 'genome.' from columns'''
-    
+def get_typo_dicts(syn_dict):
+    '''Uses synonym dict of all fields to make nested dictionary for spelling check. First key is field to change, second key
+    synonyms of that field.'''
     #list of fields that should be looked through for spelling
-    fields_to_change = ['genome.additional_metadata', 'genome.biovar',  'genome.geographic_location', 'genome.habitat', 'genome.host_name',
-    'genome.isolation_country']
+    fields_to_change = ['genome.additional_metadata', 'genome.biovar',  'genome.collection_date', 
+                        'genome.geographic_location', 'genome.habitat', 'genome.host_name', 'genome.isolation_country',
+                        'genome.gram_stain', 'genome.isolation_source', 'genome.optimal_temperature', 
+                        'genome.publication', 'genome.refseq_accessions']
+    
+    rv_min = {'-' : ''}
     
     #make dictionary with all the synonym dictionaries inside. Keys = column name
     fc={}
     for name in fields_to_change:
-        if name == 'genome.additional_metadata':
-            name_sets = parse_sets(syn_dict[name])
-            fc[name] = compare_sets(name_sets, 95)
-        if name =='genome.biovar':
+        if name == 'genome.additional_metadata': #if metadata than first get bag of terms
+            name_sets = get_bag_of_terms(syn_dict[name])
+            
+            fc[name] = synonym_dict(name_sets, 95)
+            
+        elif name =='genome.biovar':
             fc[name] = synonym_dict(syn_dict[name],90)
+        
+        #make date format consistent with dateparser
+        elif name == 'genome.collection_date': 
+            fc[name] = organize_dates(syn_dict[name])
+        
+        #replace positive by '+'
+        elif name == 'genome.gram_stain':
+            dic = {}
+            for item in syn_dict[name]:
+                if item != '':
+                    dic[item] = '+'
+            fc[name] = dic
+            
+        #all different formats to just numbers
+        elif name == 'genome.optimal_temperature':
+            temperature = {}
+            for item in syn_dict[name]:
+                if item != '':
+                    if any(i.isdigit() for i in item) == True:
+                        tem = ''.join(filter(lambda i: i.isdigit(), item))
+                        temperature [item] = str(tem)
+                    else:
+                        temperature[item] = ''
+            fc[name] = temperature
+            
+        #remove '-' from these fields    
+        elif name == 'genome.publication' or 'genome.refseq_accessions':
+            fc[name] = rv_min
+        
         else:
             fc[name] = synonym_dict(syn_dict[name],95)
+    return fc
     
+def spelling(inputfile, outputfile, fc):
+    '''Replaces typos with consistent spelling. Removes 'genome.' from columns'''
+    
+    fields_to_change = ['genome.additional_metadata', 'genome.biovar', 'genome.collection_date', 
+                        'genome.geographic_location', 'genome.gram_stain','genome.habitat', 'genome.host_name',
+                        'genome.isolation_country', 'genome.isolation_source', 'genome.optimal_temperature',
+                        'genome.publication', 'genome.refseq_accessions']
+    fields_to_change.sort()
     
     with open (inputfile) as f:
         with open(outputfile, 'w') as f2:
@@ -135,7 +171,7 @@ def spelling(inputfile, outputfile, syn_dict):
             
             #look for indexes of the fields that need speeling check and add them to a list
             indexes = [i for i,name in enumerate(headers) if name in fields_to_change]
-            
+            print(indexes)
             #remove the 'genome.' from the headers
             for field in headers:
                 if 'genome.' in field:
@@ -153,9 +189,28 @@ def spelling(inputfile, outputfile, syn_dict):
                     if i in indexes:
                         #look for the name of the field
                         field = fields_to_change[indexes.index(i)] 
+                    
                         
+                        if "additional_metadata" in field:
+                            
+                            if a[i] == '':
+                                pass
+                            else:
+                                items = []
+                                items += a[i].split('::')
+                                terms=[]
+                                for item in items:
+                                    if item in fc[field]:
+                                        c = fc[field][item]
+                                        terms.append(c)
+                                    else:
+                                        terms.append(item)
+                                terms.sort()
+                                f2.write("::".join(terms))
+                                    
+                                    
                         #if the name of the field is in the dictionary of synonym dictionaries
-                        if name in fc[field]:
+                        elif name in fc[field]:
                             f2.write(fc[field][name]) #write what in the dicts of fields in the synonym dict is
                         else:
                             f2.write(name) #if not just write whats there
@@ -167,9 +222,13 @@ def spelling(inputfile, outputfile, syn_dict):
 
 #get typos out of the fields   
 lacto_synonyms = get_synonyms('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv')
+fields2change = get_typo_dicts(lacto_synonyms)
 lacto_input = '/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv'
 lacto_output = '/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv'
-spelling(lacto_input,lacto_output, lacto_synonyms)
 
-meta_sets = parse_sets(lacto_synonyms['genome.additional_metadata'])
-meta_dict = compare_sets(meta_sets, 95)
+
+spelling(lacto_input,lacto_output, fields2change)
+
+meta_sets = get_bag_of_terms(lacto_synonyms['genome.additional_metadata'])
+meta_dict = synonym_dict(meta_sets, 95)
+
