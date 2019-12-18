@@ -36,7 +36,7 @@ bash_lines=identifier2bash('/home/meike/strepto_phylogenomics/files/strepto_geno
 db_id = [] 
 strepto_db_id =[]
 for i in range(1, len(bash_lines)+1):
-    db_id.append(' -O /home/meiker/git/genomes/streptocuccus_' + "%05d" % i + '.fna') #id for bash file
+    db_id.append(' -O /home/meiker/git/genomes/streptococcus_' + "%05d" % i + '.fna') #id for bash file
     strepto_db_id.append("streptococcus_"+"%05d" % i) #id for databse table
 #make bash file to get partic genomes
 with open ('/home/meike/strepto_phylogenomics/scripts/get_strepto_genomes_patric.sh', 'w') as f: 
@@ -50,7 +50,7 @@ with open('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv')
     for line in f:
         line = line.strip().split('\t')
         lines.append(line)
-with open('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv', 'w') as f:
+with open('/home/meike/strepto_phylogenomics/files/streptococcus_genomes_quality.tsv', 'w') as f:
     for i, line in enumerate(lines):
         if i==0:
             f.writelines('\t'.join(["database_id"] + line) + '\n')

@@ -222,13 +222,17 @@ def spelling(inputfile, outputfile, fc):
 
 #get typos out of the fields   
 lacto_synonyms = get_synonyms('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv')
-fields2change = get_typo_dicts(lacto_synonyms)
+lacto_fields2change = get_typo_dicts(lacto_synonyms)
 lacto_input = '/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv'
 lacto_output = '/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv'
+spelling(lacto_input,lacto_output, lacto_fields2change)
 
 
-spelling(lacto_input,lacto_output, fields2change)
+flori_syn = get_synonyms('/home/meike/strepto_phylogenomics/files/floricoccus_genomes_quality.tsv')
+flori_fields2change = get_typo_dicts(flori_syn)
+flori_input = '/home/meike/strepto_phylogenomics/files/floricoccus_genomes_quality.tsv'
+flori_output = '/home/meike/strepto_phylogenomics/files/floricoccus_genome_database.tsv'
+spelling(flori_input, flori_output, flori_fields2change)
 
-meta_sets = get_bag_of_terms(lacto_synonyms['genome.additional_metadata'])
-meta_dict = synonym_dict(meta_sets, 95)
+
 

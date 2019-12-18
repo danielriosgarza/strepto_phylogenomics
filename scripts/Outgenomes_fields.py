@@ -118,8 +118,8 @@ with open ('/home/meike/strepto_phylogenomics/files/lactococcus_all_genome_field
                                 genomes.append(line)
                                 
 print(len(original_count), len(genomes))
-original_genomes = len(original_count)
-first_selection_count = len(genomes)
+original_genomes = len(original_count)-1
+first_selection_count = len(genomes)-1
 with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv', 'w') as f:
     for row in genomes:
         f.write('\t'.join(row) + '\n')
@@ -197,7 +197,7 @@ with open ('/home/meike/strepto_phylogenomics/files/lactococcus_all_genome_field
               if line[0] == identifier:
                   genomes.append(line)
 
-final_genome_count =len(genomes)
+final_genome_count =len(genomes)-1
 
 #Make final file with all good (enough) quality species
 with open ('/home/meike/strepto_phylogenomics/files/lactococcus_genomes_quality.tsv', 'w') as f:

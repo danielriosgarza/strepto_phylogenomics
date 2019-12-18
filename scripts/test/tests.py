@@ -11,7 +11,7 @@ Created on Wed Dec 18 09:16:34 2019
 # 'lactococcus_00188'
 #wget ftp://ftp.patricbrc.org/genomes/1739284.3/1739284.3.fna -O /home/meiker/git/genomes/streptocuccus_11846.fna
 
-missing_genomes= ['streptocuccus_11895.fna', 'streptocuccus_11939.fna', 'lactococcus_00188.fna']
+missing_genomes= ['streptococcus_11895.fna', 'streptococcus_11939.fna', 'lactococcus_00188.fna']
 
 with open ('/home/meike/strepto_phylogenomics/scripts/get_strepto_genomes_patric.sh') as f1:
     with open ('/home/meike/strepto_phylogenomics/scripts/get_lactococcus_genomes_patric.sh') as f2:
