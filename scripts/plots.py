@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from collections import Counter
 
-data = pd.read_csv('/home/meike/strepto_phylogenomics/files/strepto_genomes_quality.tsv', delimiter="\t") 
+data = pd.read_csv('/home/meike/strepto_phylogenomics/files/lactococcus_genome_database.tsv', delimiter="\t") 
 print(data.head(2))
 test = data.head(20)
 

@@ -9,6 +9,7 @@ Created on Tue Dec  3 15:02:56 2019
 '''Makes dicitonary with all possible writing styles as keys asigning to same value to make it consistent.'''
 from fuzzywuzzy import process
 import dateparser
+import re
 
 def compare(str2Match, strOptions, score_t):
     '''Give query string that is compared to other strings in a list. Returns list with all strings that had
@@ -78,28 +79,66 @@ def parse_geographic_location(gl_list):
     return new_location_l
 
 
-def get_bag_of_terms(field):
-    ''' makes sets, seperated by '::', returns list with lists of sets'''    
+def get_bag_of_terms(field, splitparameter):
+    ''' makes sets, seperated by splitparamter, returns list with lists of sets'''    
     name_sets = []
     for line in field:
         if line=='':
             pass
         else:
-            name_sets += line.split('::')
+            name_sets += line.split(splitparameter)
     return list(set(name_sets)) #trick to keep only one element of a list (sets are unordered)
 
 def organize_dates(field):
-    '''Makes list of strings with different formats of dates and returns a dict of all (complete) dates as strings'''
+    '''Needs list of strings with different formats of dates and returns a dict of all (complete) dates as strings
+    (order: yyyy-mm-dd or yyyy/yyyy)'''
     dates = {}
     for number in field:
+        
+        #if row contains digits and contains at least the year
         if any(i.isdigit() for i in number) == True and len(number) > 4:
+            
+            #check if number contains also the day
             if len(number) <= 8 and not'/' in number:
                 org_date = str(dateparser.parse(number, date_formats= '%Y/%m'))[:-12]
                 dates[number] = org_date
+            
+            #if two different years are present than leave it as it is
+            elif len(number) == 9 and '/' in number:
+                pass
+            
+            #change order of given date
             else:
                 org_date = str(dateparser.parse(number, date_formats= '%Y/%m/%d'))[:-9]
                 dates[number] = org_date
     return dates
+
+def organize_ages(field):
+    '''Needs list of strings with different formats of ages and returns dict with all ages given in number +
+    Y for Years or M for months'''
+    ages = {}
+    for item in field:
+        item = item.lower()
+        if any(i.isdigit() for i in item) == True:
+            
+            #distinguish btwn numbers and given unit and amount of ages given
+            number = ''.join(re.findall(r'\d+', item))
+            unit = ''.join(re.findall(r'[a-z]', item))
+            number_count = sum(c.isdigit() for c in item)
+            
+            if 'm' in unit:
+                time = 'M'
+            else:
+                time = 'Y'
+            #if range of age is given just add unit to it, otherwise short/add the unit to M or Y
+            if item not in ages:
+                if number_count >= 4:
+                    ages[item] = item+time
+                elif item.startswith('>') or item.startswith('<'):
+                    ages[item] = item+time
+                else:
+                    ages[item] = number+time
+    return ages
 
 
 def get_typo_dicts(syn_dict):
@@ -109,19 +148,23 @@ def get_typo_dicts(syn_dict):
     fields_to_change = ['genome.additional_metadata', 'genome.biovar',  'genome.collection_date', 
                         'genome.geographic_location', 'genome.habitat', 'genome.host_name', 'genome.isolation_country',
                         'genome.gram_stain', 'genome.isolation_source', 'genome.optimal_temperature', 
-                        'genome.publication', 'genome.refseq_accessions']
+                        'genome.publication', 'genome.refseq_accessions', 'genome.antimicrobial_resistance', 
+                        'genome.body_sample_site', 'genome.cell_shape', 'genome.disease', 'genome.host_age',
+                        'genome.host_health']
     
     rv_min = {'-' : ''}
     
     #make dictionary with all the synonym dictionaries inside. Keys = column name
     fc={}
     for name in fields_to_change:
-        if name == 'genome.additional_metadata': #if metadata than first get bag of terms
-            name_sets = get_bag_of_terms(syn_dict[name])
+        
+        #first get bag of terms
+        if name == 'genome.additional_metadata' or 'genome.antimicrobial_resistance' or 'genome.disease': 
+            name_sets = get_bag_of_terms(syn_dict[name], '::')
             
             fc[name] = synonym_dict(name_sets, 95)
             
-        elif name =='genome.biovar':
+        elif name =='genome.biovar' or name == 'genome.cell_shape':
             fc[name] = synonym_dict(syn_dict[name],90)
         
         #make date format consistent with dateparser
@@ -151,6 +194,19 @@ def get_typo_dicts(syn_dict):
         #remove '-' from these fields    
         elif name == 'genome.publication' or 'genome.refseq_accessions':
             fc[name] = rv_min
+            
+            
+        elif name == 'genome.body_sample_site':
+            name_sets = get_bag_of_terms(syn_dict[name], ';')
+            fc[name] = synonym_dict(name_sets, 95)
+        
+        elif name == 'genome.host_age':
+            fc[name] = organize_ages(syn_dict[name])
+        
+        elif name == 'genome.host_health':
+        
+            name_sets = get_bag_of_terms(strepto_syn[name], '; ')
+            fc[name] = synonym_dict(name_sets, 98)
         
         else:
             fc[name] = synonym_dict(syn_dict[name],95)
@@ -159,10 +215,12 @@ def get_typo_dicts(syn_dict):
 def spelling(inputfile, outputfile, fc):
     '''Replaces typos with consistent spelling. Removes 'genome.' from columns'''
     
-    fields_to_change = ['genome.additional_metadata', 'genome.biovar', 'genome.collection_date', 
-                        'genome.geographic_location', 'genome.gram_stain','genome.habitat', 'genome.host_name',
-                        'genome.isolation_country', 'genome.isolation_source', 'genome.optimal_temperature',
-                        'genome.publication', 'genome.refseq_accessions']
+    fields_to_change = ['genome.additional_metadata', 'genome.biovar',  'genome.collection_date', 
+                        'genome.geographic_location', 'genome.habitat', 'genome.host_name', 'genome.isolation_country',
+                        'genome.gram_stain', 'genome.isolation_source', 'genome.optimal_temperature', 
+                        'genome.publication', 'genome.refseq_accessions', 'genome.antimicrobial_resistance', 
+                        'genome.body_sample_site', 'genome.cell_shape', 'genome.disease', 'genome.host_age',
+                        'genome.host_health']
     fields_to_change.sort()
     
     with open (inputfile) as f:
@@ -234,5 +292,9 @@ flori_input = '/home/meike/strepto_phylogenomics/files/floricoccus_genomes_quali
 flori_output = '/home/meike/strepto_phylogenomics/files/floricoccus_genome_database.tsv'
 spelling(flori_input, flori_output, flori_fields2change)
 
-
+strepto_syn = get_synonyms('/home/meike/strepto_phylogenomics/files/streptococcus_genomes_quality.tsv')
+strepto_fields2change = get_typo_dicts(strepto_syn)
+strepto_input = '/home/meike/strepto_phylogenomics/files/streptococcus_genomes_quality.tsv'
+strepto_output = '/home/meike/strepto_phylogenomics/files/streptococcus_genome_database.tsv'
+spelling(strepto_input, strepto_output, strepto_fields2change)
 
