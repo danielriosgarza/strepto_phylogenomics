@@ -15,7 +15,7 @@ p = Path(path)
 def append_database_ids(downloads_file, database_file, new_database_file):
 
     names_db ={}
-    c=0
+
     with open(downloads_file) as f:
         
         for line in f:
@@ -44,5 +44,3 @@ def append_database_ids(downloads_file, database_file, new_database_file):
 append_database_ids(os.path.join(p,'bash_scripts',  'get_lactococcus_genomes_patric.sh'), os.path.join(p.parents[0], 'files', 'lactococcus_genomes_quality.tsv'),os.path.join(p.parents[0], 'files', '06012020_lactococcus_genomes_quality.tsv'))
 append_database_ids(os.path.join(p,'bash_scripts',  'get_floricoccus_genomes_patric.sh'), os.path.join(p.parents[0], 'files', 'floricoccus_genomes_quality.tsv'),os.path.join(p.parents[0], 'files', '06012020_floricoccus_genomes_quality.tsv'))
 append_database_ids(os.path.join(p, 'bash_scripts', 'get_streptococcus_genomes_patric.sh'), os.path.join(p.parents[0], 'files', 'streptococcus_genomes_quality.tsv'),os.path.join(p.parents[0], 'files', '06012020_streptococcus_genomes_quality.tsv'))
-
-
