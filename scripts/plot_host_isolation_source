@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jan  7 15:48:18 2020
+
+@author: meike
+"""
+
+
+import matplotlib.pyplot as plt
+import os
+from pathlib import Path
+
+path = os.getcwd()
+p = Path(path)
+
+
+lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
+
+with open(lactofile) as f:
+    headers = f.readline().strip().split('\t')
+    inds = {k: i for i, k in enumerate(headers)}
+    hostname_i = inds['host_name']
+    isolation_source_i = inds['isolation_source']
+    
+    hosts = []
+    source=[]
+    for line in f:
+        a = line.strip().split('\t')
+        hosts.append(a[hostname_i])
+        source.append(a[isolation_source_i])
+
+combi = []
+for i in range(len(hosts)):
+    combi.append([hosts[i],  source[i]])
+count ={set(k) :0 for k in combi}
