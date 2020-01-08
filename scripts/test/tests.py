@@ -6,16 +6,20 @@ Created on Wed Dec 18 09:16:34 2019
 @author: meike
 """
 
-#--outdir /home/meiker/git/prokka_annotation/streptococcus_02451
-# 'streptococcus_11895', 'streptococcus_11939']
-# 'lactococcus_00188'
-#wget ftp://ftp.patricbrc.org/genomes/1739284.3/1739284.3.fna -O /home/meiker/git/genomes/streptocuccus_11846.fna
 
- x_min = min(x_in)
-    x_max = max(x_in)
-    x = [[] for _ in range(n_bins)]
-    for a in x_in:
-        # compute the bin number for value a
-        n = int(float(a - x_min) / (x_max - x_min + 1.0) * n_bins)
-        x[n].append(a)
-    return x  # x is a binned list of elements from x_in
+import matplotlib.pyplot as plt
+
+# Pie chart, where the slices will be ordered and plotted counter-clockwise:
+labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+sizes = [15, 30, 45, 10]
+explode = (0, 0.05, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+
+theme = plt.get_cmap('Blues')
+colors = [theme(1. * i / len(sizes)) for i in range(len(sizes))]
+
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90, colors=colors)
+ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.show()
