@@ -18,8 +18,8 @@ p = Path(path)
 
 
 lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
-
-with open(lactofile) as f:
+florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
+with open(florifile) as f:
     headers = f.readline().strip().split('\t')
     inds = {k: i for i, k in enumerate(headers)}
     hostname_i = inds['host_name']
@@ -104,4 +104,4 @@ ax1.pie(numbers, labels=labels, autopct='%1.1f%%', colors=colors, startangle=90,
 ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 plt.title('Amount of isolation sources found in different hosts\n(Lactococcus)')
 #plt.tight_layout()
-plt.savefig(os.path.join(p.parents[0], 'figures', '20200108_lactococcus_isolation_sources_per_host.tiff'), bbox_inches='tight')
+#plt.savefig(os.path.join(p.parents[0], 'figures', '20200108_lactococcus_isolation_sources_per_host.tiff'), bbox_inches='tight')

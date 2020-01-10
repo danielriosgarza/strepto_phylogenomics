@@ -5,24 +5,46 @@ Created on Wed Jan  8 16:10:12 2020
 
 @author: meike
 """
+'''
+Making Pieplots of sources associated with certain hosts. 
+'''
+
 
 import matplotlib.pyplot as plt
 import os
 from pathlib import Path
+from collections import Counter 
 import pandas as pd
 import numpy as np
-from collections import Counter 
 
-path = os.getcwd()
-p = Path(path)
+def make_plot(data, labels, title, savedir):
+    '''
+    Makes a pie plot with legend at right sight a legend. Colors=Blues
+    '''
+    #Get color theme for pie
+    theme = plt.get_cmap('Blues')
+    colors = [theme(1. * i / len(data)) for i in range(len(data))]
+    
+    fig, ax = plt.subplots()
+    #autopct='%1.1f%%' gives percentages to pie, pctdistance changes postition of percentages
+    ax.pie(data, autopct='%1.1f%%', colors=colors, startangle=0, radius = 1, pctdistance=1.15) 
+    
+    #loc in combi w/ bbocx --> loc tells matplotlib which part of bounding box should be placed at the arguments of bbox_to_anchor
+    ax.legend(labels, loc= "center left", bbox_to_anchor=(1, 0.5))
 
-
-lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
-
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    #pad defines location of title to plot
+    plt.title(title, pad=20)
+    
+    plt.savefig(os.path.join(savedir), bbox_inches='tight')
+    
+    
 def find_iso_sources_hosts(infile, genus):
     '''
+    Looks at hosts and the isolation sources that were used. Saves a pie chart of the 
+    top 5 hosts (those with most divers sources) and indicates the rest as "others"
     '''
-    with open(infile) as f:
+    with open(lactofile) as f:
         headers = f.readline().strip().split('\t')
         inds = {k: i for i, k in enumerate(headers)}
         hostname_i = inds['host_name']
@@ -46,37 +68,46 @@ def find_iso_sources_hosts(infile, genus):
     host_count = {}       
     for k,v in isolations.items():
         host_count[k] = len(set(v))
-    
+
     top5 = Counter(host_count).most_common(5)
     top5.sort()
+     
     
-########Look at it again!!!!!!!!!!!!!!!! not sure f it works ...confused ....AHHHHHH!!!! ####################
-    #ohh and check and write rest of the function
-    others = [i for i in host_count if set(i) not in top5]
-    rest = {}
-    for i in range(len(others)):
-        if others[i][1] not in rest:
-            rest[others[i][1]] = 1
-        else:
-            rest[others[i][1]] += 1
+    if len(host_count) > 5: 
+        #check the other species and add the isolation sources to a temp list  
+        others =[]
+        for item in host_count:
+            for i in range(len(top5)):
+                if item != top5[i][0]:
+                    others.append(isolations[item])
+        #only select unique isolation sources          
+        rest =[]
+        for ls in others:
+            for it in ls:
+                if it not in rest and it != "":
+                    rest.append(it)
+        top5.append(('Others', len(rest)))
     
-    top5.append(('other', len(rest)))   
-        
-    top5.sort()    
-        
+    #Defines data and labels    
     numbers = []
     labels =[]
     for item in top5:
         numbers.append(item[1])
         labels.append(item[0])
     
-    theme = plt.get_cmap('Blues')
-    colors = [theme(1. * i / len(numbers)) for i in range(len(numbers))]
+    make_plot(numbers, labels, 'Amount of isolation sources found in different hosts\n('+genus+ ')', os.path.join(p.parents[0], 'figures', '20200109_'+genus+'_isolation_sources_per_host.tiff'))
     
     
-    fig1, ax1 = plt.subplots()
-    ax1.pie(numbers, labels=labels, autopct='%1.1f%%', colors=colors, startangle=90, radius = 1)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    plt.title('Amount of isolation sources found in different hosts\n(Lactococcus)')
+    
 
-    #plt.savefig(os.path.join(p.parents[0], 'figures', '20200108_lactococcus_isolation_sources_per_host.tiff'), bbox_inches='tight')
+path = os.getcwd()
+p = Path(path)
+
+lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
+find_iso_sources_hosts(lactofile, "Lactococcus")
+#
+#florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
+#find_iso_sources_hosts(florifile, "Floricoccus")
+#
+#streptofile = os.path.join(p.parents[0], 'files', '06012020_streptococcus_database.tsv')
+#find_iso_sources_hosts(streptofile, "Streptococcus")
