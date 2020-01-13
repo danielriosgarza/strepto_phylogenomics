@@ -1,0 +1,16 @@
+PorthoMCL:
+
+orthomclAdjustFasta --> Output in same folder as it runs
+
+input argument:
+orthomclAdjustFasta NC_000913 sample/0.input_faa/NC_000913.faa 4
+
+orthomclAdjustFasta label/input_fasta/number_identifiying_field_containing_fasta_header
+
+orthomclAdjustFasta database_id/db_id.faa/last_column.tsv ?
+
+
+Making taxon list:
+
+cd sample
+ls -1 1.compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
