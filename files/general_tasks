@@ -167,3 +167,16 @@ ssh meiker@plinc.umcn.nl
 1) Summarizing and visualing metadata 
 
 
+
+13/01/2020
+1) comment: always ask a question and try to answer with your data. 
+
+2) How is our genome database distributed between isolation source, isolation host, isolation coutry, genome size, sequencing platform, ...???
+
+3) Answer 1) by visualizing the distribution; 2) by making tables;
+
+a) Isolation source: 1) visualize with pie charts (already great, maybe change the colors: spectral, coolwarm) 2) 
+
+
+4) Try to use porthomcl (https://bdataanalytics.biomedcentral.com/articles/10.1186/s41044-016-0019-8) for orthology search. Do the whole thing in Plinc. First do everything with the Floricoccus; Then take a random selection of 50 and try parrallelizing in 7 processes.
+
