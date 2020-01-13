@@ -22,9 +22,9 @@ def make_plot(data, labels, title, savedir):
     Makes a pie plot with legend at right sight a legend. Colors=Blues
     '''
     #Get color theme for pie
-    theme = plt.get_cmap('Blues')
+    theme = plt.get_cmap('Spectral')
     colors = [theme(1. * i / len(data)) for i in range(len(data))]
-    
+    colors[-1]='#0a5142'
     fig, ax = plt.subplots()
     #autopct='%1.1f%%' gives percentages to pie, pctdistance changes postition of percentages
     ax.pie(data, autopct='%1.1f%%', colors=colors, startangle=0, radius = 1, pctdistance=1.15) 
@@ -36,7 +36,7 @@ def make_plot(data, labels, title, savedir):
     #pad defines location of title to plot
     plt.title(title, pad=20)
     
-    plt.savefig(os.path.join(savedir), bbox_inches='tight')
+    #plt.savefig(os.path.join(savedir), bbox_inches='tight')
     
     
 def find_iso_sources_hosts(infile, genus):
@@ -92,6 +92,7 @@ def find_iso_sources_hosts(infile, genus):
     numbers = []
     labels =[]
     for item in top5:
+        print(item)
         numbers.append(item[1])
         labels.append(item[0])
     

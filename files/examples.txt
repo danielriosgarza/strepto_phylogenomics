@@ -10,3 +10,18 @@ def make_prokka_annotation(genus):
 			for line in f:
 				a=line.strip().split('\t')
 				f2.write('prokka /home/meiker/git/genomes/'+a[0]+'.fna --outdir /home/meiker/git/prokka_annotation/' + a[0] + ' --prefix ' +a[0]+' --genus ' +genus +' \n')
+
+
+from pylab import *
+import seaborn as sns
+
+#random genome sizes
+gs = np.round(np.random.normal(size=20000)*2000000)
+
+#histogram
+
+hist(gs,100, density=1, alpha=0.5, color='b')
+
+sns.distplot(gs, kde=1, rug=1)
+
+#for colorscheme check http://colorbrewer2.org/#type=diverging&scheme=PRGn&n=6
