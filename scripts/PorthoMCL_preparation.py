@@ -37,9 +37,8 @@ def porthoMCL_prep(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/'+id_+'.faa 1\n')
+            f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/'+id_+'/'+id_+'.faa 1\n')
         f.write('mv *.fasta /home/meiker/orthomcl/compliantFasta')
- 
 
            
 def taxon_list(db_ids, savedir):
