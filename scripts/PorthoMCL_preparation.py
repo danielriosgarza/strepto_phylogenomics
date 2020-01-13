@@ -31,29 +31,31 @@ def get_ids(file):
         db_ids.sort()
     return db_ids
 
-def porthoMCL_prep(labels, savedir):
+def porthoMCL_prep(db_ids, savedir):
     '''
-    Writes bash lines for PorthoMCL preparation.
-    '''
-    with open (savedir, 'w') as f:
-        for id_ in labels:
-            f.write('orthomclAdjustFasta '+id_+'/'+id_+'.faa/'+id_+'.tsv -1 \n')
-            
-def taxon_list(labels, savedir):
-    '''
-    cd sample
-    ls -1 1.compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
+    Writes bash lines for PorthoMCL preparation. 
     '''
     with open (savedir, 'w') as f:
-        for id_ in labels:
-            f.write('cd ' + id_+ "\nls -1 1.compliantFasta/ | sed -e 's/\..*$//'  > taxon_list\n")
+        for id_ in db_ids:
+            f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/'+id_+'.faa 1\n')
+        f.write('mv *.fasta /home/meiker/orthomcl/compliantFasta')
+ 
+
+           
+def taxon_list(db_ids, savedir):
+    '''
+    Makes taxon_list for 
+    '''
+    with open (savedir, 'w') as f:        
+        for id_ in db_ids:
+            f.write(id_+"\n")
 
 
 path = os.getcwd()
 p = Path(path)
 
-flori_labels = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
+flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
 sav_test = os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200113_floricoccus_PorthoMCL_prep.sh')
 
-porthoMCL_prep(flori_labels, sav_test)
-taxon_list(flori_labels, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200113_floricoccus_taxon_list.sh'))
+porthoMCL_prep(flori_ids, sav_test)
+taxon_list(flori_ids, os.path.join(p.parents[0], 'files', 'taxon_lists', '20200113_floricoccus_taxon_list'))
