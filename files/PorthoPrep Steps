@@ -27,7 +27,7 @@ mkdir blastquery
 porthomclSplitFasta.py -i filteredFasta/goodProteins.fasta  -o blastquery
 
 
-#3.3 Run Blast
+#3.3 Run Blast: Split!
 mkdir blastres 
 
 #Single input
@@ -47,5 +47,5 @@ porthomclBlastParser blastres/id_.tab compliantFasta >> splitSimSeq/id_.ss.tsv
 #5. Finding best hits:
 mkdir paralogTemp
 mkdir besthit
-
-porthomclPairsBestHit.py -t sample/taxon_list -s sample/4.splitSimSeq -b sample/5.besthit -q sample/5.paralogTemp -x 1
+#pyhton to bash: Splitting?
+porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 1
