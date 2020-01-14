@@ -1,0 +1,51 @@
+#Get orthomcl: https://orthomcl.org/common/downloads/software/v2.0/UserGuide.txt
+#Get porthoMCL git clone and place it in orthomcSoftware/bin folder
+cp -a ~/PorthoMCL/. ~/orthomclSoftware-v2.0.9/bin/ --> to run porthomcl py scripts
+
+#After adjustment of fasta files make taxon list and place it in git dir
+
+ls -1 compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
+cp -a ~/orthomcl/taxon_list ~/git/strepto_phylogenomics/files/
+
+
+#Run following lines in terminal orthomcl dir:
+
+#2. Filter the Input
+orthomclFilterFasta compliantFasta/ 10 20
+
+mkdir filteredFasta
+mv goodProteins.fasta filteredFasta/
+mv poorProteins.fasta filteredFasta/
+
+#3.1 Create Blast DB:
+makeblastdb -in filteredFasta/goodProteins.fasta  -dbtype prot
+mkdir blastdb
+mv filteredFasta/goodProteins.fasta.* blastdb/
+
+#3.2 Split the input file
+mkdir blastquery
+porthomclSplitFasta.py -i filteredFasta/goodProteins.fasta  -o blastquery
+
+
+#3.3 Run Blast
+mkdir blastres 
+
+#Single input
+#python to bash:
+blastp -query blastquery/id_.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/id_.tab
+
+#PBS Cluster blast:
+#porthomclRunPBS.sh
+
+
+#4. Parse Blast results
+mkdir splitSimSeq
+
+#python to bash:
+porthomclBlastParser blastres/id_.tab compliantFasta >> splitSimSeq/id_.ss.tsv
+
+#5. Finding best hits:
+mkdir paralogTemp
+mkdir besthit
+
+porthomclPairsBestHit.py -t sample/taxon_list -s sample/4.splitSimSeq -b sample/5.besthit -q sample/5.paralogTemp -x 1

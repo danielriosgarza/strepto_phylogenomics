@@ -7,11 +7,8 @@ Created on Mon Jan 13 12:10:37 2020
 """
 
 '''
-Run first the porthoMCL-prep for all species and follow than the steps in the PorthoPrep document in the terminal.
-
-PorthoMCL preparation, when prep runned: 
-$ls -1 ~/orthomcl/compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
-(in orthomcl dir to create taxon_list)
+Run first the porthoMCL_prep for all species and follow than the steps in the PorthoPrep document in the terminal,
+before running the rest.
 '''
 
 import os
@@ -69,7 +66,16 @@ def blast_Parser_bash(db_ids, savedir):
         for id_ in db_ids:
             f.write("porthomclBlastParser blastres/"+id_+".tab compliantFasta >> splitSimSeq/"+id_+".ss.tsv\n")
             
-
+def finding_best_hits(db_ids, savedir):
+    '''
+     paralogs are found, and an unnormalized score is assigned to them. Step 5.3 will normalize 
+     this score so that it be comparable among different genomes.
+    '''
+    with open(savedir, 'w') as f:
+        for i, id_ in enumerate(db_ids):
+            fasta_number = str(i + 1)
+            f.write("porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x "+fasta_number+"\n")
+    
 
 path = os.getcwd()
 p = Path(path)
@@ -83,3 +89,4 @@ db_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_
 
 blast_run_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastrun.sh'))
 blast_Parser_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastparser.sh'))
+finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_find_best_hits.sh'))
