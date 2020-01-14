@@ -16,3 +16,11 @@ cd sample
 ls -1 1.compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
 
 https://orthomcl.org/common/downloads/software/v2.0/UserGuide.txt
+
+
+orthomclAdjustFasta floricoccus_00001 /home/meiker/git/data/prokka_annotation/floricoccus_00001/floricoccus_00001.faa 1 
+
+orthomclAdjustFasta floricoccus_00002 /home/meiker/git/data/prokka_annotation/floricoccus_00002/floricoccus_00002.faa 1
+
+mv *.fasta /home/meiker/orthmcl_example/compliantFasta
+

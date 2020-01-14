@@ -1,0 +1,8 @@
+mkdir floricoccus_00001/filteredFasta
+orthomclFilterFasta floricoccus_00001/compliantFasta 10 20
+mv goodProteins.fasta floricoccus_00001/filteredFasta/
+mv poorProteins.fasta floricoccus_00001/filteredFasta/
+mkdir floricoccus_00002/filteredFasta
+orthomclFilterFasta floricoccus_00002/compliantFasta 10 20
+mv goodProteins.fasta floricoccus_00002/filteredFasta/
+mv poorProteins.fasta floricoccus_00002/filteredFasta/

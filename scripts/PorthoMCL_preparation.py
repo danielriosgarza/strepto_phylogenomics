@@ -7,13 +7,10 @@ Created on Mon Jan 13 12:10:37 2020
 """
 
 '''
-PorthoMCL preparation
+PorthoMCL preparation, when bash script runned: 
+$ls -1 ~/orthomcl/compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
+(in orthomcl dir to create taxon_list)
 '''
-#orthomclAdjustFasta NC_000913 sample/0.input_faa/NC_000913.faa 4
-#
-#orthomclAdjustFasta label/input_fasta/number_identifiying_field_containing_fasta_header
-
-#orthomclAdjustFasta database_id/db_id.faa/last_column.tsv ?
 
 import os
 from pathlib import Path
@@ -40,14 +37,19 @@ def porthoMCL_prep(db_ids, savedir):
             f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/'+id_+'/'+id_+'.faa 1\n')
         f.write('mv *.fasta /home/meiker/orthomcl/compliantFasta')
 
-           
-def taxon_list(db_ids, savedir):
+def filter_fasta_bash(savedir, db_ids):
     '''
-    Makes taxon_list for 
+    orthomclFilterFasta sample/1.compliantFasta 10 20 --> 10: min_length: minimum allowed length of proteins, 
+    20: max_percent_stop: maximum percent stop codons. 
     '''
-    with open (savedir, 'w') as f:        
+    with open(savedir, 'w') as f:
+        
         for id_ in db_ids:
-            f.write(id_+"\n")
+            f.write("mkdir "+id_+'/filteredFasta\n')
+            f.write("orthomclFilterFasta "+id_+"/compliantFasta 10 20\n")
+            f.write("mv goodProteins.fasta "+id_+"/filteredFasta/\n")
+            f.write("mv poorProteins.fasta "+id_+"/filteredFasta/\n")
+    
 
 
 path = os.getcwd()
@@ -57,4 +59,4 @@ flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_w
 sav_test = os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200113_floricoccus_PorthoMCL_prep.sh')
 
 porthoMCL_prep(flori_ids, sav_test)
-taxon_list(flori_ids, os.path.join(p.parents[0], 'files', 'taxon_lists', '20200113_floricoccus_taxon_list'))
+filter_fasta_bash(os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_fasta_filter.sh'), flori_ids)
