@@ -5,21 +5,24 @@ Created on Wed Dec 18 09:16:34 2019
 
 @author: meike
 """
+import random
+
+def split_files(db_ids):
+    '''
+    Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
+    Tuples w/ (db_id, original_index)
+    '''    
+    groupsize = int(len(db_ids)/6)
+    dbwithi = [(id_, i) for i, id_ in enumerate(db_ids)]
+    
+    id_i = [dbwithi[i :i +groupsize] for i in range(0, len(dbwithi), groupsize)]
+           
+    for i in range(0, len(db_ids), groupsize):
+        id_i.append([db_ids(db_ids[i],db_ids.index(db_ids[i])))   
+    
+    [lst[i:i + n] for i in range(0, len(lst), n)]
+    
+    return id_i
 
 
-import matplotlib.pyplot as plt
-
-# Pie chart, where the slices will be ordered and plotted counter-clockwise:
-labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-sizes = [15, 30, 45, 10]
-explode = (0, 0.05, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
-
-theme = plt.get_cmap('Blues')
-colors = [theme(1. * i / len(sizes)) for i in range(len(sizes))]
-
-
-fig1, ax1 = plt.subplots()
-ax1.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90, colors=colors)
-ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-plt.show()
+test = 

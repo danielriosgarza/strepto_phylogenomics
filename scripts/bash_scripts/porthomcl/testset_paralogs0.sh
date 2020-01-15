@@ -1,0 +1,10 @@
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 0
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 1
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 2
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 3
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 4
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 5
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 6
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 7
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 8
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 9

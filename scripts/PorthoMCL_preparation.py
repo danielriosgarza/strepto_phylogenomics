@@ -58,7 +58,7 @@ def blast_run_bash(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write("blastp -query blastquery/"+id_+".fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/"+id_+".tab\n")
+            f.write("blastp -query blastquery/"+id_[0]+".fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/"+id_[0]+".tab\n")
     
 def blast_Parser_bash(db_ids, savedir):
     '''
@@ -67,7 +67,7 @@ def blast_Parser_bash(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write("porthomclBlastParser blastres/"+id_+".tab compliantFasta >> splitSimSeq/"+id_+".ss.tsv\n")
+            f.write("porthomclBlastParser blastres/"+id_[0]+".tab compliantFasta >> splitSimSeq/"+id_[0]+".ss.tsv\n")
             
 def finding_best_hits(db_ids, savedir):
     '''
@@ -75,9 +75,8 @@ def finding_best_hits(db_ids, savedir):
      this score so that it be comparable among different genomes.
     '''
     with open(savedir, 'w') as f:
-        for i, id_ in enumerate(db_ids):
-            fasta_number = str(i + 1)
-            f.write("porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x "+fasta_number+"\n")
+        for id_ in db_ids:
+            f.write("porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x "+str(id_[1])+"\n")
   
 def split_files(db_ids):
     '''
@@ -85,9 +84,9 @@ def split_files(db_ids):
     Tuples w/ (db_id, original_index)
     '''    
     groupsize = int(len(db_ids)/6)
-    id_i = []
-    for x in range(0, len(db_ids), groupsize):
-        id_i.append((db_ids[x],db_ids.index(db_ids[x])))   
+
+    db_index = [(id_, i) for i, id_ in enumerate(db_ids)]
+    id_i = [db_index[i :i +groupsize] for i in range(0, len(db_index), groupsize)]
     
     return id_i
 
@@ -97,7 +96,15 @@ def find_orthologs(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write("porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x "+ id_[1]+"\n")
+            f.write("porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x "+ str(id_[1])+"\n")
+
+def find_paralogs(db_ids, savedir):
+    '''
+    Bash lines for finding paralogs. Uses split lists (db_id, index).
+    '''
+    with open (savedir, 'w') as f:
+        for id_ in db_ids:
+            f.write ("porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x "+str(id_[1])+"\n")
 
     
 path = os.getcwd()
@@ -123,3 +130,12 @@ strepto_ids = get_ids(os.path.join(p.parents[0], 'files', 'streptococcus_patric_
 testset = random.sample(strepto_ids, 60)
 
 porthoMCL_prep(testset, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'test_set_porthomcl_prep.sh'))
+test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
+ids_split = split_files(test_ids)
+
+for i, l_ids in enumerate(ids_split):
+    blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'testset_blastrun'+str(i)+'.sh'))
+    blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_blastparser'+str(i)+'.sh'))
+    finding_best_hits(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_besthits'+str(i)+'.sh'))
+    find_orthologs(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_orthologs'+str(i)+'.sh'))
+    find_paralogs(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_paralogs'+str(i)+'.sh'))

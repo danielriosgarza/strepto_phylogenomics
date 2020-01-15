@@ -3,7 +3,8 @@
 cp -a ~/PorthoMCL/. ~/orthomclSoftware-v2.0.9/bin/ --> to run porthomcl py scripts
 
 #After adjustment of fasta files make taxon list and place it in git dir
-
+#First step python script than:
+mkdir compliantFasta/
 ls -1 compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
 cp -a ~/orthomcl/taxon_list ~/git/strepto_phylogenomics/files/
 
@@ -49,3 +50,15 @@ mkdir paralogTemp
 mkdir besthit
 #pyhton to bash: Splitting?
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 1
+
+
+
+#6. Find orthologs
+mkdir orthologs
+
+#python to bash:
+porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 1
+
+#7. Find Paralogs
+mkdir ogenes
+

@@ -1,0 +1,10 @@
+porthomclBlastParser blastres/streptococcus_00050.tab compliantFasta >> splitSimSeq/streptococcus_00050.ss.tsv
+porthomclBlastParser blastres/streptococcus_00091.tab compliantFasta >> splitSimSeq/streptococcus_00091.ss.tsv
+porthomclBlastParser blastres/streptococcus_00131.tab compliantFasta >> splitSimSeq/streptococcus_00131.ss.tsv
+porthomclBlastParser blastres/streptococcus_00145.tab compliantFasta >> splitSimSeq/streptococcus_00145.ss.tsv
+porthomclBlastParser blastres/streptococcus_00253.tab compliantFasta >> splitSimSeq/streptococcus_00253.ss.tsv
+porthomclBlastParser blastres/streptococcus_00500.tab compliantFasta >> splitSimSeq/streptococcus_00500.ss.tsv
+porthomclBlastParser blastres/streptococcus_00516.tab compliantFasta >> splitSimSeq/streptococcus_00516.ss.tsv
+porthomclBlastParser blastres/streptococcus_00774.tab compliantFasta >> splitSimSeq/streptococcus_00774.ss.tsv
+porthomclBlastParser blastres/streptococcus_01144.tab compliantFasta >> splitSimSeq/streptococcus_01144.ss.tsv
+porthomclBlastParser blastres/streptococcus_01183.tab compliantFasta >> splitSimSeq/streptococcus_01183.ss.tsv
