@@ -13,7 +13,7 @@ before running the rest.
 
 Split funciton not ready!
 '''
-
+import random
 import os
 from pathlib import Path
 
@@ -81,26 +81,45 @@ def finding_best_hits(db_ids, savedir):
   
 def split_files(db_ids):
     '''
-    Splits db_list depending on length and makes lists with savdir that can be used for bash file generation
+    Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
+    Tuples w/ (db_id, original_index)
     '''    
     groupsize = int(len(db_ids)/6)
-    id_groups = [db_ids[x:x+groupsize] for x in range(0, len(db_ids), groupsize)]
-    return id_groups
+    id_i = []
+    for x in range(0, len(db_ids), groupsize):
+        id_i.append((db_ids[x],db_ids.index(db_ids[x])))   
+    
+    return id_i
+
+def find_orthologs(db_ids, savedir):
+    '''
+    Output of bash line is all the ortholog genes.
+    '''
+    with open (savedir, 'w') as f:
+        for id_ in db_ids:
+            f.write("porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x "+ id_[1]+"\n")
+
     
 path = os.getcwd()
 p = Path(path)
 
-flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
-sav_test = os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200113_floricoccus_PorthoMCL_prep.sh')
-
-porthoMCL_prep(flori_ids, sav_test)
-
-db_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
+#flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
+#sav_test = os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200113_floricoccus_PorthoMCL_prep.sh')
+#
+#porthoMCL_prep(flori_ids, sav_test)
+#
+#db_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
 
 
 #list with lists of db_ids to seperate blast run files and best hits files into 6 bash scripts
-id_groups = split_files(db_ids)
+#id_groups = split_files(db_ids)
+#
+#blast_run_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastrun.sh'))
+#blast_Parser_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastparser.sh'))
+#finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_find_best_hits.sh'))
 
-blast_run_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastrun.sh'))
-blast_Parser_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastparser.sh'))
-finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_find_best_hits.sh'))
+
+strepto_ids = get_ids(os.path.join(p.parents[0], 'files', 'streptococcus_patric_id_with_database_id.tsv'))
+testset = random.sample(strepto_ids, 60)
+
+porthoMCL_prep(testset, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'test_set_porthomcl_prep.sh'))
