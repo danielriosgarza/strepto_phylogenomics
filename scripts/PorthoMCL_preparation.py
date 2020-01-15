@@ -85,7 +85,7 @@ def split_files(db_ids):
     '''    
     groupsize = int(len(db_ids)/6)
 
-    db_index = [(id_, i) for i, id_ in enumerate(db_ids)]
+    db_index = [(id_, i + 1) for i, id_ in enumerate(db_ids)]
     id_i = [db_index[i :i +groupsize] for i in range(0, len(db_index), groupsize)]
     
     return id_i

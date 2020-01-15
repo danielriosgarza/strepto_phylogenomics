@@ -1,4 +1,3 @@
-porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 20
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 21
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 22
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 23
@@ -8,3 +7,4 @@ porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp 
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 27
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 28
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 29
+porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x 30

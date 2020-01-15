@@ -62,3 +62,19 @@ porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 1
 #7. Find Paralogs
 mkdir ogenes
 
+awk -F'[|\t]' '{print $4 >> ("ogenes/"$3".og.tsv")}' orthologs/*.ort.tsv
+awk -F'[|\t]' '{print $2 >> ("ogenes/"$1".og.tsv")}' orthologs/*.ort.tsv
+
+mkdir paralogs
+
+#python to bash
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x 1
+
+#8. Runnning MCL
+
+cat orthologs/*.tsv >> all.ort.tsv
+mcl all.ort.tsv  --abc -I 1.5 -t 4 -o .all.ort.group
+
+cat paralogs/*.tsv >> all.par.tsv
+mcl all.par.tsv  --abc -I 1.5 -t 4 -o all.par.group
+

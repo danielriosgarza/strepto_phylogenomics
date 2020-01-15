@@ -1,4 +1,3 @@
-porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 50
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 51
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 52
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 53
@@ -8,3 +7,4 @@ porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 56
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 57
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 58
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 59
+porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x 60
