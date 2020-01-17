@@ -58,7 +58,7 @@ def blast_run_bash(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write("blastp -query blastquery/"+id_[0]+".fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/"+id_[0]+".tab\n")
+            f.write("blastp -query blastquery/"+id_[0]+".fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/"+id_[0]+".tab &\n")
     
 def blast_Parser_bash(db_ids, savedir):
     '''

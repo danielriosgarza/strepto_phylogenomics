@@ -1,10 +1,10 @@
-blastp -query blastquery/streptococcus_02187.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02187.tab
-blastp -query blastquery/streptococcus_02194.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02194.tab
-blastp -query blastquery/streptococcus_02247.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02247.tab
-blastp -query blastquery/streptococcus_02251.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02251.tab
-blastp -query blastquery/streptococcus_03403.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_03403.tab
-blastp -query blastquery/streptococcus_03754.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_03754.tab
-blastp -query blastquery/streptococcus_03784.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_03784.tab
-blastp -query blastquery/streptococcus_04093.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_04093.tab
-blastp -query blastquery/streptococcus_04389.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_04389.tab
-blastp -query blastquery/streptococcus_04450.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_04450.tab
+blastp -query blastquery/streptococcus_02187.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02187.tab &
+blastp -query blastquery/streptococcus_02194.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02194.tab &
+blastp -query blastquery/streptococcus_02247.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02247.tab &
+blastp -query blastquery/streptococcus_02251.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_02251.tab &
+blastp -query blastquery/streptococcus_03403.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_03403.tab &
+blastp -query blastquery/streptococcus_03754.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_03754.tab &
+blastp -query blastquery/streptococcus_03784.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_03784.tab &
+blastp -query blastquery/streptococcus_04093.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_04093.tab &
+blastp -query blastquery/streptococcus_04389.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_04389.tab &
+blastp -query blastquery/streptococcus_04450.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/streptococcus_04450.tab &
