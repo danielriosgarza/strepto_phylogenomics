@@ -89,7 +89,7 @@ def split_files(db_ids):
 
     db_index = [(id_, i + 1) for i, id_ in enumerate(db_ids)]
     
-    id_i = [db_index[i :i + 8] for i in range(0, len(db_index), 8)]
+    id_i = [db_index[i :i + 6] for i in range(0, len(db_index), 6)]
     
     return id_i
 
