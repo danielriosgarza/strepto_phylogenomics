@@ -85,10 +85,11 @@ def split_files(db_ids):
     Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
     Tuples w/ (db_id, original_index)
     '''    
-    groupsize = int(len(db_ids)/6)
+   
 
     db_index = [(id_, i + 1) for i, id_ in enumerate(db_ids)]
-    id_i = [db_index[i :i +groupsize] for i in range(0, len(db_index), groupsize)]
+    
+    id_i = [db_index[i :i + 8] for i in range(0, len(db_index), 8)]
     
     return id_i
 
@@ -135,9 +136,12 @@ porthoMCL_prep(testset, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 't
 test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
 ids_split = split_files(test_ids)
 
+
+
 for i, l_ids in enumerate(ids_split):
     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'testset_blastrun'+str(i)+'.sh'))
-    blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_blastparser'+str(i)+'.sh'))
-    finding_best_hits(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_besthits'+str(i)+'.sh'))
-    find_orthologs(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_orthologs'+str(i)+'.sh'))
-    find_paralogs(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_paralogs'+str(i)+'.sh'))
+
+blast_Parser_bash(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_blastparser.sh'))
+finding_best_hits(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_besthits.sh'))
+find_orthologs(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_orthologs.sh'))
+find_paralogs(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_paralogs.sh'))    
