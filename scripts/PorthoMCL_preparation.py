@@ -50,16 +50,17 @@ def get_taxon_list(taxon_list):
             db_ids.append(line)
     return db_ids
 
-path = '/home/meiker/orthomcl/'
+
 def blast_run_bash(db_ids, savedir):
     '''
     writes bash line to run blast for all ids in taxon_list:
     blastp -query blastquery/DB_ID.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  
     -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/DB_ID.tab
     '''
+    homepath = '/home/meiker/orthomcl/'
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write("blastp -query " + path + "blastquery/"+id_[0]+".fasta  -db " + path + "blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out " + path + "blastres/"+id_[0]+".tab &\n")
+            f.write("blastp -query " + homepath + "blastquery/"+id_[0]+".fasta  -db " + homepath + "blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out " + homepath + "blastres/"+id_[0]+".tab &\n")
     
 def blast_Parser_bash(db_ids, savedir):
     '''
