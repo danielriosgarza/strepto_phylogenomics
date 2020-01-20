@@ -178,5 +178,28 @@ ssh meiker@plinc.umcn.nl
 a) Isolation source: 1) visualize with pie charts (already great, maybe change the colors: spectral, coolwarm) 2) 
 
 
-4) Try to use porthomcl (https://bdataanalytics.biomedcentral.com/articles/10.1186/s41044-016-0019-8) for orthology search. Do the whole thing in Plinc. First do everything with the Floricoccus; Then take a random selection of 50 and try parrallelizing in 7 processes.
+4) Try to use porthomcl (https://bdataanalytics.biomedcentral.com/articles/10.1186/s41044-016-0019-8) for orthology search. Do the whole thing in Plinc. First do everything with the Floricoccus; Then take a random selection of 50 and try parrallelizing in 7 processes. ok
+
+
+
+20/01/2020
+
+1) Adjust the reported numbers of sequences (remove the non-annotated genomes from the database table)
+
+1) Split your datasets to run on the different machines: 
+total 12173
+
+- for plinc (run 6 processes at a time and should be using about 48 cores) (divide 4565 over 6 running scripts. about 761 per script)
+- for narrativum (run 3 processes at a time and should be using about 24 cores - Do not exceed this please) (divide 4565 over 3 running scripts. about 1522 per script)
+- for fm (run 4 processes at a time and should be using about 32 cores - Do not exceed this please) (divide 3043 over 4 running scripts. about 761 per script)
+
+
+- Divide the strains into 16 groups of 761
+- run on the clusters (write 3 kinds of scripts: one for 6 parallel processes (plinc), two for 3(narrativum), and one for 4(fm))
+
+
+
+
+
+
 
