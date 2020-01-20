@@ -23,7 +23,7 @@ meta_table = os.path.join(p.parents[0], 'files', '17012020_streptococcus_databas
 with open (db_table) as f:
     with open(os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_with_database_id.tsv'), 'w') as f2:
         headers = f.readline()
-        f2.write(headers+'\n')
+        f2.write(headers)
         for line in f:
             a = line.strip().split('\t')
             if a[0] != "streptococcus_11895" and a[0] != 'streptococcus_11939':
@@ -32,7 +32,7 @@ with open (db_table) as f:
 with open(meta_table) as f:
     with open(os.path.join(p.parents[0], 'files', '20012020_streptococcus_database.tsv'), 'w') as f2:
         headers = f.readline()
-        f2.write(headers+'\n')
+        f2.write(headers)
         for line in f:
             a = line.strip().split('\t')
             if a[0] != "streptococcus_11895" and a[0] != 'streptococcus_11939':

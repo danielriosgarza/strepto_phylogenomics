@@ -85,7 +85,7 @@ def split_files(db_ids):
     Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
     Tuples w/ (db_id, original_index)
     '''    
-    groupsize = int(len(db_ids)/6)
+    groupsize = int(len(db_ids)/16)
 
     db_index = [(id_, i + 1) for i, id_ in enumerate(db_ids)]
     
@@ -129,10 +129,16 @@ p = Path(path)
 #finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_find_best_hits.sh'))
 
 
-strepto_ids = get_ids(os.path.join(p.parents[0], 'files', 'streptococcus_patric_id_with_database_id.tsv'))
-testset = random.sample(strepto_ids, 60)
+strepto_ids = get_ids(os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_with_database_id.tsv'))
+flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
+lacto_ids = get_ids(os.path.join(p.parents[0], 'files', 'lactococcus_patric_id_with_database_id.tsv'))
 
-porthoMCL_prep(testset, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'test_set_porthomcl_prep.sh'))
+porthoMCL_prep(strepto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_streptococcus_porthomcl_prep.sh'))
+porthoMCL_prep(flori_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_floricoccus_porthomcl_prep.sh'))
+porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_lactococcus_porthomcl_prep.sh'))
+
+
+
 test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
 ids_split = split_files(test_ids)
 

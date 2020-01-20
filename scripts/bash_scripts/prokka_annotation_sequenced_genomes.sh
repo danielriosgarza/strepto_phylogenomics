@@ -1,4 +1,4 @@
-prokka /home/meiker/genomes/RB-01-S-bovis-NTB2-39468.fasta --outdir /home/meiker/git/prokka_annotation/streptococcus_11962 --prefix streptococcus_11962 --genus streptococcus
+prokka /home/meiker/genomes/RB-01-S-bovis-NTB2-39468.fasta --outdir /home/meiker/git/data/prokka_annotation/streptococcus_11962 --prefix streptococcus_11962 --genus streptococcus
 prokka /home/meiker/genomes/RB-02-S-gallolyticus-NTB12.fasta --outdir /home/meiker/git/prokka_annotation/streptococcus_11963 --prefix streptococcus_11963 --genus streptococcus
 prokka /home/meiker/genomes/RB-03-S-bovis-1293.fasta --outdir /home/meiker/git/prokka_annotation/streptococcus_11964 --prefix streptococcus_11964 --genus streptococcus
 prokka /home/meiker/genomes/RB-04-S-macedonicus-CIP105685T.fasta --outdir /home/meiker/git/prokka_annotation/streptococcus_11965 --prefix streptococcus_11965 --genus streptococcus
