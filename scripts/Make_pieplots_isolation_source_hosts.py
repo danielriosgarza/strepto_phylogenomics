@@ -96,7 +96,7 @@ def find_iso_sources_hosts(infile, genus):
         numbers.append(item[1])
         labels.append(item[0])
     
-    make_plot(numbers, labels, 'Amount of isolation sources found in different hosts\n('+genus+ ')', os.path.join(p.parents[0], 'figures', '20200109_'+genus+'_isolation_sources_per_host.tiff'))
+    make_plot(numbers, labels, 'Amount of isolation sources found in different hosts\n('+genus+ ')', os.path.join(p.parents[0], 'figures', '20200109_'+genus+'_isolation_sources_per_host.png'))
     
     
     

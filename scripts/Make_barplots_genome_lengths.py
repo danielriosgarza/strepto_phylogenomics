@@ -81,17 +81,17 @@ def genome_size_plot(inputfile, saving_dir, genus):
         plt.savefig(saving_dir)
 
 lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
-lacto_save = os.path.join(p.parents[0], 'figures', '20200107_lactococcus_genome_lengths.tiff')
+lacto_save = os.path.join(p.parents[0], 'figures', '20200107_lactococcus_genome_lengths.png')
 
 genome_size_plot(lactofile, lacto_save, 'lactococcus')
 
 florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
-flori_save = os.path.join(p.parents[0], 'figures', '20200107_floricoccus_genome_lengths.tiff')
+flori_save = os.path.join(p.parents[0], 'figures', '20200107_floricoccus_genome_lengths.png')
 genome_size_plot(florifile, flori_save, 'floricoccus')
 
 
 streptofile = os.path.join(p.parents[0], 'files', '06012020_streptococcus_database.tsv')
-strepto_save = os.path.join(p.parents[0], 'figures', '20200107_streptococcus_genome_lengths.tiff')
+strepto_save = os.path.join(p.parents[0], 'figures', '20200107_streptococcus_genome_lengths.png')
 genome_size_plot(streptofile, strepto_save, 'streptococcus')
 
 

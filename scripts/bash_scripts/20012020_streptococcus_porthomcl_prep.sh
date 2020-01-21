@@ -1,4 +1,3 @@
-orthomclAdjustFasta  /home/meiker/git/data/prokka_annotation//.faa 1
 orthomclAdjustFasta streptococcus_00001 /home/meiker/git/data/prokka_annotation/streptococcus_00001/streptococcus_00001.faa 1
 orthomclAdjustFasta streptococcus_00002 /home/meiker/git/data/prokka_annotation/streptococcus_00002/streptococcus_00002.faa 1
 orthomclAdjustFasta streptococcus_00003 /home/meiker/git/data/prokka_annotation/streptococcus_00003/streptococcus_00003.faa 1
