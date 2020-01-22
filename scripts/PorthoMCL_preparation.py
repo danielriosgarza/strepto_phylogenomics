@@ -13,7 +13,8 @@ before running the rest.
 
 Split funciton not ready!
 '''
-import random
+#import random
+from random import shuffle
 import os
 from pathlib import Path
 
@@ -69,7 +70,7 @@ def blast_Parser_bash(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in db_ids:
-            f.write("porthomclBlastParser blastres/"+id_+".tab compliantFasta >> splitSimSeq/"+id_+".ss.tsv\n")
+            f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_+".ss.tsv\n")
             
 def finding_best_hits(db_ids, savedir):
     '''
@@ -78,7 +79,7 @@ def finding_best_hits(db_ids, savedir):
     '''
     with open(savedir, 'w') as f:
         for i, id_ in enumerate(db_ids):
-            f.write("porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x "+str(i + 1)+"\n")
+            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i + 1)+"\n")
   
 def split_files(db_ids):
     '''
@@ -99,7 +100,7 @@ def find_orthologs(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for i, id_ in enumerate(db_ids):
-            f.write("porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x "+ str(i + 1)+"\n")
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x "+ str(i + 1)+"\n")
 
 def find_paralogs(db_ids, savedir):
     '''
@@ -107,8 +108,22 @@ def find_paralogs(db_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for i, id_ in enumerate(db_ids):
-            f.write ("porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x "+str(i + 1)+"\n")
+            f.write ("porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x "+str(i + 1)+"\n")
 
+def randomizer(infile, outfile):
+    '''
+    Randomizes order of bash lines
+    '''
+    lines = []
+    with open(infile) as f:
+        for line in f:
+            lines.append(line.strip())
+    shuffle(lines)
+    with open(outfile, 'w') as f2:
+        for line in lines:
+            f2.write(line + '\n')
+    
+    
     
 path = os.getcwd()
 p = Path(path)
@@ -132,14 +147,20 @@ porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 
 db_ids = get_taxon_list(os.path.join(p.parents[0], 'files', 'taxon_list'))
 splitted_ids = split_files(db_ids)
 
+
+
 for i, l_ids in enumerate(splitted_ids):
     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'))
 
+for i in range(1, 16):
+    randomizer(os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'), os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '210120_blastrun'+str(i)+'.sh'))
 
-blast_Parser_bash(db_ids,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '210120_blastparser.sh'))
-finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '210120_find_best_hits.sh'))
-find_orthologs(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '210120_orthologs.sh'))
-find_paralogs(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '210120_paralogs.sh'))
+
+
+blast_Parser_bash(db_ids,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_blastparser.sh'))
+finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_find_best_hits.sh'))
+find_orthologs(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_orthologs.sh'))
+find_paralogs(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_paralogs.sh'))
 
 
 # test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
