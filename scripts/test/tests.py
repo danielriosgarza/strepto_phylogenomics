@@ -25,4 +25,17 @@ def split_files(db_ids):
     return id_i
 
 
+def histogram(item_l, title=None, xlabel=None, label=None, bins=10, color='#2166ac', rotation=0):
+    '''
+    Makes density histogram from given list.
+    '''
+    plt.hist(item_l, bins, density=1, alpha=0.75, color = color, label =label)
+    plt.title(title, fontsize= 14)
+    plt.xlabel(xlabel, fontsize= 12)
+    plt.xticks(rotation=rotation)
+    plt.ylabel("Density", fontsize= 12)
+    plt.tight_layout() 
+    
+    #plt.savefig(os.path.join(p.parents[0], 'figures', )
+
 test = 

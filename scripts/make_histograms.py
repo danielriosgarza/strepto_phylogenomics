@@ -5,15 +5,15 @@ Created on Tue Jan 21 10:53:23 2020
 
 @author: meike
 """
-# colours: spectral, coolwarm
+
+'''
+Density histograms of genome sizes. Makes one figure with 4 subplots: One all three merged and one per genus
+'''
 
 import os
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
-from collections import Counter 
-from scipy import stats
-
 
 def get_info(file, field):
     '''
@@ -34,108 +34,64 @@ def get_info(file, field):
                         item_l.append(item)
     return item_l
 
-def histogram(item_l, title=None, xlabel=None, label=None, bins=10, color='#2166ac', rotation=0):
-    '''
-    Makes density histogram from given list.
-    '''
-    plt.hist(item_l, bins, density=1, alpha=0.75, color = color, label =label)
-    plt.title(title, fontsize= 14)
-    plt.xlabel(xlabel, fontsize= 12)
-    plt.xticks(rotation=rotation)
-    plt.ylabel("Density", fontsize= 12)
-    plt.tight_layout() 
-    
-    #plt.savefig(os.path.join(p.parents[0], 'figures', )
-    
+
     
     
 path = os.getcwd()
 p = Path(path)
-
-#make histogram of genome sizes
+#Get the gs sizes in Mb from all species
 lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
 lac_gs = get_info(lactofile, 'genome_length')
 lac_gs = [round(elem/1000000, 2) for elem in lac_gs]
-lac_hist = histogram(lac_gs,"Genome sizes of Lactococcus", "Genome sizes\n(in Mb)", bins=20, label = "Lactococcus")
-
-lac_seqplatforms = get_info(lactofile, 'sequencing_platform')
-
 
 streptofile = os.path.join(p.parents[0], 'files', '20012020_streptococcus_database.tsv')
 strepto_gs = get_info(streptofile, 'genome_length')
 strepto_gs = [round(elem/1000000, 2) for elem in strepto_gs]
-strepto_hist = histogram(strepto_gs,"Genome sizes of Streptococcus", "Genome sizes\n(in Mb)", bins=20, color='#fee090', label = "Streptococcus")
 
 
 florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
 flori_gs = get_info(florifile, 'genome_length')
 flori_gs = [round(elem/1000000, 2) for elem in flori_gs]
 
-flori_hist = histogram(flori_gs,"Genome sizes of Floricoccus", "Genome sizes\n(in Mb)", bins=20, color='#b2182b', label= "Floricoccus")
 
-plt.legend(loc='upper left', frameon=0)
-
-############try to make breaks on y-axis
-# f, (ax, ax2) = plt.subplots(2, 1, sharex=True)
-
-# ax.plot(flori_hist)
-# ax2.plot(flori_hist)
-
-# # zoom-in / limit the view to different portions of the data
-# ax.set_ylim(80, 100)  # outliers only
-# ax2.set_ylim(0, 6)  # most of the data
-
-# # hide the spines between ax and ax2
-# ax.spines['bottom'].set_visible(False)
-# ax2.spines['top'].set_visible(False)
-# ax.xaxis.tick_top()
-# ax.tick_params(labeltop=False)  # don't put tick labels at the top
-# ax2.xaxis.tick_bottom()
-#plt.ylim(0,10)
- 
 
 all_gs = {"Lactococcus" : lac_gs,
           "Streptococcus": strepto_gs,
           "Floricoccus" : flori_gs}
-labels = []
-data = []
-for k,v in all_gs.items():
-    data.append(k)
-    labels.append(v)
-    
-histogram(all_gs, 'Genome sizes', 'Genomesizes\n(in Mb)', label = all_gs.keys())
 
+#Make grid of plots (4 total) that can be filled
+fig, axs = plt.subplots(2,2, figsize= (10,8)) #2x2 grid with determined figure size
 
-plt.hist(all_gs)
-   
-    # platform_count ={}
-    # for platform in seq_platforms:
-    #     if platform not in platform_count:
-    #         platform_count[platform] = 1
-    #     else:
-    #         platform_count[platform] += 1
-        
-    # top10 = Counter(platform_count).most_common(10)
-    # top10.sort()
-    
-    # data = []
-    # labels =[]
-    # for item in top10:
-    #     data.append(item[1])
-    #     labels.append(item[0])
+#fill subplots with histograms
+ax1 = sns.distplot(all_gs['Lactococcus'], color = '#91cf60', label = 'Lactococcus', ax=axs[0,0])
+ax1 = sns.distplot(all_gs['Streptococcus'], color = '#3288bd', label = 'Streptococcus', ax=axs[0,0])
+ax1 = sns.distplot(all_gs['Floricoccus'], color = '#b2182b', label = 'Floricoccus', ax=axs[0,0])
+ax2 = sns.distplot(all_gs['Lactococcus'], color = '#91cf60', label = 'Lactococcus', ax=axs[0,1], rug=1)
+ax3 = sns.distplot(all_gs['Streptococcus'], color = '#3288bd', label = 'Streptococcus', ax=axs[1,0], rug=1)
+ax4 = sns.distplot(all_gs['Floricoccus'], color = '#b2182b', label = 'Floricoccus', ax=axs[1,1], rug=1)
+ax1.legend(loc='upper right')
 
+#Titles
+fig.suptitle('Genome sizes', fontsize=16, y=0.95)
+ax1.set_title('Merged')
+ax2.set_title('Lactococcus')
+ax3.set_title('Streptococcus')
+ax4.set_title('Floricoccus')
 
+#Set x and y labels for all plots
+for ax in axs.flat:
+    ax.set(xlabel='Genome size (in Mb)', ylabel='Density')
 
+#Sublabels for the plot
+ax1.text(-0.05, 1.10, "A", ha = "left", va="top", transform=ax1.transAxes, size=12, weight = 'bold')
+ax2.text(-0.05, 1.10, "B", ha = "left", va="top", transform=ax2.transAxes, weight = 'bold')
+ax3.text(-0.05, 1.10, "C", ha = "left", va="top", transform=ax3.transAxes, weight = 'bold')
+ax4.text(-0.05, 1.10, "D", ha = "left", va="top", transform=ax4.transAxes, weight = 'bold')
 
-fig, ax = plt.subplots(figsize=(8,6))
-ax.hist(lac_gs, 10, density=1, alpha=0.5, color = '#2166ac')
-plt.title("Genome sizes of Lactococcus", fontsize= 14)
-plt.xlabel("Genome sizes\n(in Mb)", fontsize= 12)
-plt.ylabel("Density", fontsize= 12)
+#Adjust layout to preserve title
 plt.tight_layout()
-#plt.savefig(os.path.join(p.parents[0], 'figures', )
+plt.subplots_adjust(top=0.88)
+fig.savefig(os.path.join(p.parents[0], 'figures', '230120_histogram_gs.png'), dpi=300)
 
-sns.distplot(lac_gs, kde=1, rug=1)
-plt.xlabel("Genome size\n(in Mb)")
-plt.xticks(rotation=45)
+
 
