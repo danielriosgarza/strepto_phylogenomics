@@ -53,7 +53,7 @@ def seq_platform_plot(file, genus):
     plt.xlabel("Sequencing Platform", fontsize = 11)
     plt.ylabel("Times mentioned", fontsize = 11)
     plt.tight_layout()
-    plt.savefig(saving_dir)
+    # plt.savefig(saving_dir)
 
 path = os.getcwd()
 p = Path(path)

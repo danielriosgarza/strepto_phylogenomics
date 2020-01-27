@@ -55,20 +55,17 @@ flori_gs = [round(elem/1000000, 2) for elem in flori_gs]
 
 
 
-all_gs = {"Lactococcus" : lac_gs,
-          "Streptococcus": strepto_gs,
-          "Floricoccus" : flori_gs}
-
 #Make grid of plots (4 total) that can be filled
 fig, axs = plt.subplots(2,2, figsize= (10,8)) #2x2 grid with determined figure size
 
 #fill subplots with histograms
-ax1 = sns.distplot(all_gs['Lactococcus'], color = '#91cf60', label = 'Lactococcus', ax=axs[0,0])
-ax1 = sns.distplot(all_gs['Streptococcus'], color = '#3288bd', label = 'Streptococcus', ax=axs[0,0])
-ax1 = sns.distplot(all_gs['Floricoccus'], color = '#b2182b', label = 'Floricoccus', ax=axs[0,0])
-ax2 = sns.distplot(all_gs['Lactococcus'], color = '#91cf60', label = 'Lactococcus', ax=axs[0,1], rug=1)
-ax3 = sns.distplot(all_gs['Streptococcus'], color = '#3288bd', label = 'Streptococcus', ax=axs[1,0], rug=1)
-ax4 = sns.distplot(all_gs['Floricoccus'], color = '#b2182b', label = 'Floricoccus', ax=axs[1,1], rug=1)
+ax1 = sns.distplot(lac_gs, color = '#91cf60', label = 'Lactococcus', ax=axs[0,0], hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+ax1 = sns.distplot(strepto_gs, color = '#3288bd', label = 'Streptococcus', ax=axs[0,0], hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+ax1 = sns.distplot(flori_gs, color = '#b2182b', label = 'Floricoccus', ax=axs[0,0], hist=0, kde=0, rug =1, rug_kws={'linewidth' :2})
+ax2 = sns.distplot(lac_gs, color = '#91cf60', label = 'Lactococcus', ax=axs[0,1], rug=1)
+ax3 = sns.distplot(strepto_gs, color = '#3288bd', label = 'Streptococcus', ax=axs[1,0], rug=1)
+ax4 = sns.countplot(flori_gs, color = '#b2182b', alpha= 0.5, label = 'Floricoccus', ax=axs[1,1])
+#ax4 = sns.distplot(flori_gs,bins=20, color = '#b2182b', label = 'Floricoccus', ax=axs[1,1], kde=0, norm_hist=0, rug=1)
 ax1.legend(loc='upper right')
 
 #Titles
@@ -79,8 +76,13 @@ ax3.set_title('Streptococcus')
 ax4.set_title('Floricoccus')
 
 #Set x and y labels for all plots
-for ax in axs.flat:
-    ax.set(xlabel='Genome size (in Mb)', ylabel='Density')
+# for ax in axs.flat:
+    # ax.set(xlabel='Genome size (in Mb)', ylabel='Density')
+
+ax1.set(xlabel='Genome size (in Mb)', ylabel='Density')
+ax2.set(xlabel='Genome size (in Mb)', ylabel='Density')
+ax3.set(xlabel='Genome size (in Mb)', ylabel='Density')
+ax4.set(xlabel='Genome size (in Mb)', ylabel='Frequency')
 
 #Sublabels for the plot
 ax1.text(-0.05, 1.10, "A", ha = "left", va="top", transform=ax1.transAxes, size=12, weight = 'bold')
