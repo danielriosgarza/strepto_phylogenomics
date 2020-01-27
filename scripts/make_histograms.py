@@ -55,6 +55,26 @@ flori_gs = [round(elem/1000000, 2) for elem in flori_gs]
 
 
 
+#Figure with all genome sizes combined (Floricoccus only rug plot)
+fig = plt.figure(figsize=(8,6))
+fig = sns.distplot(lac_gs, color = '#91cf60', label = 'Lactococcus', hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+fig = sns.distplot(strepto_gs, color = '#3288bd', label = 'Streptococcus', hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+fig = sns.distplot(flori_gs, color = '#b2182b', label = 'Floricoccus', hist=0, kde=0, rug =1, rug_kws={'linewidth' :2})
+
+fig.legend(loc='upper right')
+fig.set_title('Genome size distribution of the three analyzed genera', fontsize=16)
+fig.set(xlabel='Genome size (in Mb)', ylabel='Density')
+
+#remove dark grid from plot
+# sns.set(style="whitegrid")
+# fig.grid(False)
+plt.tight_layout()
+fig.figure.savefig(os.path.join(p.parents[0], 'figures', '270120_histogram_gs.png'), dpi=300, bbox_inches='tight')
+
+
+
+######Make several subplots#######
+
 #Make grid of plots (4 total) that can be filled
 fig, axs = plt.subplots(2,2, figsize= (10,8)) #2x2 grid with determined figure size
 
