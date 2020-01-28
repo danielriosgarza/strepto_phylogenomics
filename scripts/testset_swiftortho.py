@@ -25,8 +25,8 @@ with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
 db_ids
 
 #Get testset with random ids
-test_swiftortho = random.sample(db_ids, 10)
+test = random.sample(db_ids, 10)
 
-with open(os.path.join(p.parents[0],'scripts', 'bash_scripts', 'swiftortho', 'homologous_search_test.sh'), 'w') as f:
-    for id_ in test_swiftortho:
-        f.write('python /home/meiker/software/SwiftOrtho/bin/find_hit.py -p blastp -i /home/meiker/git/data/prokka_annotation/'+id_+'/'+id_+'.faa -d /home/meiker/orthomcl/filteredFasta/goodProteins.fasta -o /home/meiker/swiftortho/'+id_+'.faa -e 1e-5 -s 111111 -a 8\n\n')
+with open(os.path.join(p.parents[0],'scripts', 'bash_scripts', 'blat', '280120_blat_run.sh'), 'w') as f:
+    for id_ in test:
+        f.write('/home/meiker/software/blat -prot /home/meiker/orthomcl/filteredFasta/goodProteins.fasta /home/meiker/git/data/prokka_annotation/' +id_+'/'+id_+'.faa /home/meiker/blat/'+id_+'.blast -out=blast -threads=8\n\n')
