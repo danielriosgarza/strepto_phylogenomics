@@ -104,11 +104,13 @@ def find_iso_sources_hosts(infile, genus):
 path = os.getcwd()
 p = Path(path)
 
+
+
 lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
 find_iso_sources_hosts(lactofile, "Lactococcus")
-#
-#florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
-#find_iso_sources_hosts(florifile, "Floricoccus")
-#
-#streptofile = os.path.join(p.parents[0], 'files', '06012020_streptococcus_database.tsv')
-#find_iso_sources_hosts(streptofile, "Streptococcus")
+
+florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
+find_iso_sources_hosts(florifile, "Floricoccus")
+
+streptofile = os.path.join(p.parents[0], 'files', '06012020_streptococcus_database.tsv')
+find_iso_sources_hosts(streptofile, "Streptococcus")

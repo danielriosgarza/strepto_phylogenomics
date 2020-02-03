@@ -27,6 +27,6 @@ db_ids
 #Get testset with random ids
 test = random.sample(db_ids, 10)
 
-with open(os.path.join(p.parents[0],'scripts', 'bash_scripts', 'blat', '280120_blat_run.sh'), 'w') as f:
+with open(os.path.join(p.parents[0],'scripts', 'bash_scripts', 'blat', '280120_pblat_run.sh'), 'w') as f:
     for id_ in test:
-        f.write('/home/meiker/software/blat -prot /home/meiker/orthomcl/filteredFasta/goodProteins.fasta /home/meiker/git/data/prokka_annotation/' +id_+'/'+id_+'.faa /home/meiker/blat/'+id_+'.blast -out=blast -threads=8\n\n')
+        f.write('/home/meiker/software/icebert-pblat-652d3b3/pblat -prot -threads=8 -out=blast /home/meiker/orthomcl/filteredFasta/goodProteins.fasta /home/meiker/git/data/prokka_annotation/'+id_+'/'+id_+'.faa /home/meiker/pblat/'+id_+'.blast\n\n')
