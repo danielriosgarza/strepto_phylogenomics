@@ -165,9 +165,9 @@ Run "run_msa.sh"
 #     os.mkdir(output_path+'msa')
     
 
-with open (os.path.join(p,'bash_scripts', 'run_msa.sh'), 'w') as f:
+with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'run_msa.sh'), 'w') as f:
     for gene in genes:
-        command = './clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa/' + gene + ' --dealign --threads $(nproc)\n'
+        command = '/home/meiker/software/clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa/' + gene + ' --dealign --threads $(nproc)\n'
         f.write(command)
 
 # msa_lens = {}
