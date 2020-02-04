@@ -39,6 +39,10 @@ def find_best_hits(hmm_file_location):
 def insert_newlines(string, every=60):
     return '\n'.join(string[i:i+every] for i in range(0, len(string), every))
 
+profiles = '/home/meiker/phylo_tree/genes.hmm'
+output_path = '/home/meiker/phylo_tree/'
+files_dir = '/home/meiker/git/data/prokka_annotation/'
+
 #%% runcell 1
 
 '''
@@ -46,10 +50,6 @@ Homology search for each proteome using 71 HMM profiles.
 Use --tblout to save a parseble table which is used to determine the best hit. (output in hmm/)
 Use -o to output a file from which the alignment from the protein sequence to the profile can be parsed.(output in hmmalign/)
 '''
-
-profiles = '/home/meiker/phylo_tree/genes.hmm'
-output_path = '/home/meiker/phylo_tree/'
-files_dir = '/home/meiker/git/data/prokka_annotation/'
 
 db_ids = []
 with open (os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
