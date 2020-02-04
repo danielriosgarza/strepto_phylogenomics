@@ -88,7 +88,7 @@ Parse both output files to get a dict that maps gene name to protein sequence fo
 hits = {}
 e_values = {}
 for id_ in db_ids:
-    hits[id_], e_values[id_] = find_best_hits(output_path+ 'hmm/' + id_ + '.txt')
+    hits[id_], e_values[id_] = find_best_hits(output_path+ 'output_hmm/hmm/' + id_ + '.txt')
 
 
 profile_seqs = {id_:{} for id_ in hits}
@@ -96,7 +96,7 @@ for id_ in profile_seqs:
     prot_seq = ''
     protein_name = 'tempname'
     gene_map = {v:k for k,v in hits[id_].items()}
-    with open (output_path +'/hmmalign/'+id_) as f:
+    with open (output_path +'output_hmm/hmmalign/'+id_) as f:
         for line in f:
             if line[0] != '#':
                 if line[0] == '>':
