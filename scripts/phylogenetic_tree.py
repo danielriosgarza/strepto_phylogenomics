@@ -164,10 +164,16 @@ Run "run_msa.sh"
 # if not os.path.isdir(output_path+'msa'):
 #     os.mkdir(output_path+'msa')
     
+#To large dataset
+# with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'run_msa.sh'), 'w') as f:
+#     for gene in genes:
+#         command = '/home/meiker/software/clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa/' + gene + ' --dealign --threads 8\n'
+#         f.write(command)
 
-with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'run_msa.sh'), 'w') as f:
+#Muscle as MSA –clwstrict: writes output in ClustalW format
+with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'), 'w') as f:
     for gene in genes:
-        command = '/home/meiker/software/clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa/' + gene + ' --dealign --threads 8\n'
+        command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + output_path + 'mfa/' + gene + ' -out ' + output_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv –clwstrict\n'
         f.write(command)
 
 # msa_lens = {}
