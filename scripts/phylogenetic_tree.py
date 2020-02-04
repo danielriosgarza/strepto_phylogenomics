@@ -7,7 +7,7 @@ Created on Mon Feb  3 09:56:44 2020
 """
 
 '''
-Building phylogenetic tree based on HMM profiles. 
+Building phylogenetic tree based on HMM profiles. (Python 3)
 '''
 
 import os
@@ -65,6 +65,7 @@ with open (os.path.join(p.parents[0],'scripts', 'bash_scripts', 'pyhlogenetic_tr
 #%% runcell 2
 
 '''
+Copy files to local drive ti check the hits. (change paths)
 Find best hit for each gene, save target name.
 Parse both output files to get a dict that maps gene name to protein sequence for every strain.
 '''
@@ -73,7 +74,7 @@ Parse both output files to get a dict that maps gene name to protein sequence fo
 hits = {}
 e_values = {}
 for id_ in db_ids:
-    hits[id_], e_values[id_] = find_best_hits(output_path + 'output_hmm/hmm/' + id_ + '.txt')
+    hits[id_], e_values[id_] = find_best_hits(output_path+ 'hmm/' + id_ + '.txt')
 
 
 profile_seqs = {id_:{} for id_ in hits}
@@ -81,7 +82,7 @@ for id_ in profile_seqs:
     prot_seq = ''
     protein_name = 'tempname'
     gene_map = {v:k for k,v in hits[id_].items()}
-    with open (output_path + 'output_hmm/hmmalign/'+id_) as f:
+    with open (output_path +'/hmmalign/'+id_) as f:
         for line in f:
             if line[0] != '#':
                 if line[0] == '>':
@@ -95,13 +96,15 @@ for id_ in profile_seqs:
                 
 #Throw out bad hits
 bad_hits = []
-for id_ in profile_seqs.keys():
-    for gene in profile_seqs[id_].keys():
+for id_ in list(profile_seqs):
+    for gene in list(profile_seqs[id_]):
         if len(profile_seqs[id_][gene]) < 10:
             del profile_seqs[id_][gene]
             bad_hits.append((id_, gene))
 #all_genes_found = [strain for strain in hits.keys() if len(hits[strain]) == nr_of_genes]
 nr_genes_found = {id_:len(hits[id_]) for id_ in hits.keys()}
+
+nr_genes_found_vals = [i for i in nr_genes_found.values()]
 
 genes = {}
 for id_ in hits:
@@ -113,11 +116,15 @@ for id_ in hits:
 
 nr_times_found = {gene:len(genes[gene]) for gene in genes.keys()}
 
+nr_times_found_vals = [i for i in nr_times_found.values()]
+
 #Check the hits
-nr_genome = np.asarray(nr_genes_found.values())
+nr_genome = np.asarray(nr_genes_found_vals)
 plt.hist(nr_genome)
-nr_gene = np.asarray(nr_times_found.values())
+plt.savefig(output_path+'nr_genomes.png', bbox_inches='tight')
+nr_gene = np.asarray(nr_times_found_vals)
 plt.hist(nr_gene)
+plt.savefig(output_path+'nr_genes.png', bbox_inches='tight')
 
 #%% runcell 3
 
