@@ -56,7 +56,7 @@ def check_alignment_len(path_to_file):
 profiles = '/home/meiker/phylo_tree/genes.hmm'
 output_path = '/home/meiker/phylo_tree/'
 files_dir = '/home/meiker/git/data/prokka_annotation/'
-bashscript_path = '/home/meiker/git/strepto_phylogenomics/scripts/bash_scripts'
+bashscript_path = '/home/meiker/git/strepto_phylogenomics/scripts/bash_scripts/'
 
 #%% runcell 1
 
@@ -161,18 +161,18 @@ Run a multiple sequence aligner over each mfa file.
 Run "run_msa.sh"
 '''
 
-if not os.path.isdir(output_path+'msa'):
-    os.mkdir(output_path+'msa')
+# if not os.path.isdir(output_path+'msa'):
+#     os.mkdir(output_path+'msa')
     
 
-with open (bashscript_path+'run_msa.sh', 'w') as f:
+with open (os.path.join(p,'bash_scripts', 'run_msa.sh'), 'w') as f:
     for gene in genes:
-        command = './clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa_08-06/' + gene + ' --dealign --threads $(nproc)\n'
+        command = './clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa/' + gene + ' --dealign --threads $(nproc)\n'
         f.write(command)
 
-msa_lens = {}
-for gene in genes:
-    msa_lens[gene] = set(check_alignment_len(output_path+'msa_trimmed/'+gene))
+# msa_lens = {}
+# for gene in genes:
+#     msa_lens[gene] = set(check_alignment_len(output_path+'msa_trimmed/'+gene))
     
 # #%% runcell 5
 
