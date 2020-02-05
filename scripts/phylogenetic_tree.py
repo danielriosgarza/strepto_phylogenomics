@@ -128,31 +128,31 @@ for id_ in hits:
         else:
             genes[gene].add(id_)
 
-nr_times_found = {gene:len(genes[gene]) for gene in genes.keys()}
+# nr_times_found = {gene:len(genes[gene]) for gene in genes.keys()}
 
-nr_times_found_vals = [i for i in nr_times_found.values()]
+# nr_times_found_vals = [i for i in nr_times_found.values()]
 
-#Check the hits
-nr_genome = np.asarray(nr_genes_found_vals)
-plt.hist(nr_genome)
-plt.savefig(output_path+'nr_genomes.png', bbox_inches='tight')
-nr_gene = np.asarray(nr_times_found_vals)
-plt.hist(nr_gene)
-plt.savefig(output_path+'nr_genes.png', bbox_inches='tight')
+# #Check the hits
+# nr_genome = np.asarray(nr_genes_found_vals)
+# plt.hist(nr_genome)
+# plt.savefig(output_path+'nr_genomes.png', bbox_inches='tight')
+# nr_gene = np.asarray(nr_times_found_vals)
+# plt.hist(nr_gene)
+# plt.savefig(output_path+'nr_genes.png', bbox_inches='tight')
 
 #%% runcell 3
 
-'''
-Make multifasta file for each gene
-'''
+# '''
+# Make multifasta file for each gene
+# '''
 
-for gene in genes:
-    with open (output_path+'mfa/'+gene, 'w') as f:
-        for id_ in profile_seqs:
-            if gene in profile_seqs[id_]:
-                f.write('>'+id_ + '\n')
-                sequence_w_newlines = insert_newlines(profile_seqs[id_][gene])
-                f.write(sequence_w_newlines.strip()+'\n') #.strip() to aviod double \n\n.
+# for gene in genes:
+#     with open (output_path+'mfa/'+gene, 'w') as f:
+#         for id_ in profile_seqs:
+#             if gene in profile_seqs[id_]:
+#                 f.write('>'+id_ + '\n')
+#                 sequence_w_newlines = insert_newlines(profile_seqs[id_][gene])
+#                 f.write(sequence_w_newlines.strip()+'\n') #.strip() to aviod double \n\n.
                 
 #%% runcell 4
 
@@ -171,39 +171,41 @@ Run "run_msa.sh"
 #         f.write(command)
 
 #Muscle as MSA –clwstrict: writes output in ClustalW format
-with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'), 'w') as f:
-    for gene in genes:
-        command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + output_path + 'mfa/' + gene + ' -out ' + output_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv –clwstrict\n'
-        f.write(command)
-
-# msa_lens = {}
-# for gene in genes:
-#     msa_lens[gene] = set(check_alignment_len(output_path+'msa_trimmed/'+gene))
-    
-# #%% runcell 5
-
-# '''
-# Write a bash script that trims every gene msa file.
-# '''
-
-# with open (output_path + 'msa_08-06/run_trimal.sh', 'w') as f:
+# with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'), 'w') as f:
 #     for gene in genes:
-#         f.write('trimal -in '+gene+' -out '+output_path+'msa_trimmed/'+gene+' -automated1\n')
+#         command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + output_path + 'mfa/' + gene + ' -out ' + output_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv -clwstrict\n'
+#         f.write(command)
+
+msa_lens = {}
+for gene in genes:
+    msa_lens[gene] = set(check_alignment_len(output_path+'msa_trimmed/'+gene))
+    
+#%% runcell 5
+
+'''
+Write a bash script that trims every gene msa file.
+'''
+
+with open (bashscript_path + 'phylogenetic_tree' + 'run_trimal.sh', 'w') as f:
+    for gene in genes:
+        f.write('trimal -in '+gene+' -out '+output_path+'msa_trimmed/'+gene+' -automated1\n')
 
 
 
-# #%% runcell 6
+#%% runcell 6
 # '''
 # Write one msa file where the seqs of all genes are concatenated per strain.
 # '''
 # #Test if each strain has a sequence for enough genes to be considered.
-# usable_strains = [strain for strain in hits if len(hits[strain].values()) > 10]
+# usable_ids = [id_ for id_ in hits if len(hits[id_].values()) > 10]
 
-# for strain in hits:
-#     if len(hits[strain].values()) < 10:
-#         print strain
+
+# for id_ in hits:
+#     len_hits = [i for i in hits[id_].values()]
+#     if len(hits[id_].values()) < 10:
+#         print(id_)
         
-# strains_found_per_gene = {gene:[] for gene in genes}
+# ids_found_per_gene = {gene:[] for gene in genes}
 # for gene in genes:
 #     f = file(output_path+'msa_trimmed/'+gene, 'r')
 #     for line in f:
