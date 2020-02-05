@@ -53,6 +53,17 @@ def check_alignment_len(path_to_file):
                 counter += len(line.strip())
     return lens
 
+def get_alignment_len(path_to_file):               
+    with open(path_to_file) as f:
+        f.readline() #Skip first >line
+        alignment_len = 0
+        for line in f:
+            if '>' not in line:
+                alignment_len += len(line.strip())
+            else:
+                break
+    return alignment_len
+
 profiles = '/home/meiker/phylo_tree/genes.hmm'
 phylo_path = '/home/meiker/phylo_tree/'
 files_dir = '/home/meiker/git/data/prokka_annotation/'
@@ -176,29 +187,28 @@ Run "run_msa.sh"
 #         command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + phylo_path + 'mfa/' + gene + ' -out ' + phylo_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv -clwstrict\n'
 #         f.write(command)
 
-msa_lens = {}
-for gene in genes:
-    msa_lens[gene] = set(check_alignment_len(phylo_path+'msa_trimmed/'+gene))
+# msa_lens = {}
+# for gene in genes:
+#     msa_lens[gene] = set(check_alignment_len(phylo_path+'msa_trimmed/'+gene))
     
 #%% runcell 5
 
-'''
-Write a bash script that trims every gene msa file.
-'''
+# '''
+# Write a bash script that trims every gene msa file.
+# '''
 
-with open ('/home/meike/strepto_phylogenomics/scripts/bash_scripts/phylogenetic_tree/run_trimal.sh', 'w') as f:
-    for gene in genes:
-        f.write('trimal -in '+ phylo_path+ 'msa/' + gene+' -out '+phylo_path+'msa_trimmed/'+gene+' -automated1\n')
+# with open ('/home/meike/strepto_phylogenomics/scripts/bash_scripts/phylogenetic_tree/run_trimal.sh', 'w') as f:
+#     for gene in genes:
+#         f.write('trimal -in '+ phylo_path+ 'msa/' + gene+' -out '+phylo_path+'msa_trimmed/'+gene+' -automated1\n')
 
 
 
 #%% runcell 6
 '''
-Write one msa file where the seqs of all genes are concatenated per strain.
+Write one msa file where the seqs of all genes are concatenated per genome (id).
 '''
-#Test if each strain has a sequence for enough genes to be considered.
+#Test if each genome has a sequence for enough genes to be considered.
 usable_ids = [id_ for id_ in hits if len(hits[id_].values()) > 10]
-
 
 for id_ in hits:
     len_hits = [i for i in hits[id_].values()]
@@ -207,60 +217,46 @@ for id_ in hits:
         
 ids_found_per_gene = {gene:[] for gene in genes}
 for gene in genes:
-    f = file(phylo_path+'msa_trimmed/'+gene, 'r')
-    for line in f:
-        if '>' in line:
-            strains_found_per_gene[gene].append(line.strip().split()[0][1:])
+    with open (phylo_path+'msa_trimmed/'+gene) as f:
+        for line in f:
+            if '>' in line:
+                ids_found_per_gene[gene].append(line.strip().split()[0][1:])
 
-# #%% runcell 7
-# '''
-# Add gaps for genes that were not found.
-# '''
+'''
+Add gaps for genes that were not found.
+'''
 
-# def get_alignment_len(path_to_file):               
-#     f = file(path_to_file, 'r')
-#     f.readline() #Skip first >line
-#     alignment_len = 0
-#     for line in f:
-#         if '>' not in line:
-#             alignment_len += len(line.strip())
-#         else:
-#             break
-#     f.close()
-#     return alignment_len
-
-# for gene in genes:
-#     gene_len = get_alignment_len(phylo_path+'msa_trimmed/'+gene)
-#     gap = insert_newlines('-'*gene_len)
-#     for strain in usable_strains:
-#         if strain not in strains_found_per_gene[gene]:
-#             with open(phylo_path+'msa_trimmed/'+gene, 'a') as f:
-#                 f.write('>'+strain+'\n')
-#                 f.write(gap+'\n')
-#                 f.close()
+for gene in genes:
+    gene_len = get_alignment_len(phylo_path+'msa_trimmed/'+gene)
+    gap = insert_newlines('-'*gene_len)
+    for id_ in usable_ids:
+        if id_ not in ids_found_per_gene[gene]:
+            with open(phylo_path+'msa_trimmed/'+gene, 'a') as f:
+                f.write('>'+id_+'\n')
+                f.write(gap+'\n')
                 
-# concatenated_seqs = {strain:'' for strain in usable_strains}
-# concatenation_len = {strain:0 for strain in usable_strains}
-# for gene in genes:
-#     f = file(phylo_path+'msa_trimmed/'+gene, 'r')
-#     for line in f:
-#         if '>' in line:
-#             strain = line.strip().split()[0][1:]
-#         else:
-#             if strain in concatenated_seqs:
-#                 concatenated_seqs[strain] += line.strip()
-#                 concatenation_len[strain] += len(line.strip())
+                
+concatenated_seqs = {id_:'' for id_ in usable_ids}
+concatenation_len = {id_:0 for id_ in usable_ids}
+for gene in genes:
+    with open(phylo_path+'msa_trimmed/'+gene) as f:
+        for line in f:
+            if '>' in line:
+                id_ = line.strip().split()[0][1:]
+            else:
+                if id_ in concatenated_seqs:
+                    concatenated_seqs[id_] += line.strip()
+                    concatenation_len[id_] += len(line.strip())
 
-# museal = file(phylo_path+'msa_trimmed/concatenated_msa_trimmed', 'w')
-# for strain in concatenated_seqs:
-#     museal.write('>'+strain+'\n')
-#     seq = insert_newlines(concatenated_seqs[strain]).strip()
-#     museal.write(seq+'\n')
-# museal.close()
+with open(phylo_path+'msa_trimmed/concatenated_msa_trimmed', 'w') as f:
+    for id_ in concatenated_seqs:
+        f.write('>'+id_+'\n')
+        seq = insert_newlines(concatenated_seqs[id_]).strip()
+        f.write(seq+'\n')
 
-# '''
-# Run iqtree on concatenated_msa_trimmed.
-# With iqtree -s concatenated_msa_trimmed -bb 1000 -alrt 1000 -nt AUTO
-# '''
+'''
+Run iqtree on concatenated_msa_trimmed.
+With iqtree -s concatenated_msa_trimmed -bb 1000 -alrt 1000 -nt AUTO
+'''
     
     
