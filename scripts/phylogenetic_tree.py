@@ -188,7 +188,7 @@ Write a bash script that trims every gene msa file.
 
 with open ('/home/meike/strepto_phylogenomics/scripts/bash_scripts/phylogenetic_tree/run_trimal.sh', 'w') as f:
     for gene in genes:
-        f.write('/home/meiker/software/trimal -in '+ phylo_path+ 'msa/' + gene+' -out '+phylo_path+'msa_trimmed/'+gene+' -automated1\n')
+        f.write('trimal -in '+ phylo_path+ 'msa/' + gene+' -out '+phylo_path+'msa_trimmed/'+gene+' -automated1\n')
 
 
 
