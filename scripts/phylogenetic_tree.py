@@ -186,31 +186,31 @@ for gene in genes:
 Write a bash script that trims every gene msa file.
 '''
 
-with open (bashscript_path + 'phylogenetic_tree' + 'run_trimal.sh', 'w') as f:
+with open ('/home/meike/strepto_phylogenomics/scripts/bash_scripts/phylogenetic_tree/run_trimal.sh', 'w') as f:
     for gene in genes:
-        f.write('trimal -in '+gene+' -out '+output_path+'msa_trimmed/'+gene+' -automated1\n')
+        f.write('/home/meiker/software/trimal -in '+gene+' -out '+output_path+'msa_trimmed/'+gene+' -automated1\n')
 
 
 
 #%% runcell 6
-# '''
-# Write one msa file where the seqs of all genes are concatenated per strain.
-# '''
-# #Test if each strain has a sequence for enough genes to be considered.
-# usable_ids = [id_ for id_ in hits if len(hits[id_].values()) > 10]
+'''
+Write one msa file where the seqs of all genes are concatenated per strain.
+'''
+#Test if each strain has a sequence for enough genes to be considered.
+usable_ids = [id_ for id_ in hits if len(hits[id_].values()) > 10]
 
 
-# for id_ in hits:
-#     len_hits = [i for i in hits[id_].values()]
-#     if len(hits[id_].values()) < 10:
-#         print(id_)
+for id_ in hits:
+    len_hits = [i for i in hits[id_].values()]
+    if len(hits[id_].values()) < 10:
+        print(id_)
         
-# ids_found_per_gene = {gene:[] for gene in genes}
-# for gene in genes:
-#     f = file(output_path+'msa_trimmed/'+gene, 'r')
-#     for line in f:
-#         if '>' in line:
-#             strains_found_per_gene[gene].append(line.strip().split()[0][1:])
+ids_found_per_gene = {gene:[] for gene in genes}
+for gene in genes:
+    f = file(output_path+'msa_trimmed/'+gene, 'r')
+    for line in f:
+        if '>' in line:
+            strains_found_per_gene[gene].append(line.strip().split()[0][1:])
 
 # #%% runcell 7
 # '''
