@@ -54,7 +54,7 @@ def check_alignment_len(path_to_file):
     return lens
 
 profiles = '/home/meiker/phylo_tree/genes.hmm'
-output_path = '/home/meiker/phylo_tree/'
+phylo_path = '/home/meiker/phylo_tree/'
 files_dir = '/home/meiker/git/data/prokka_annotation/'
 bashscript_path = '/home/meiker/git/strepto_phylogenomics/scripts/bash_scripts/'
 
@@ -75,7 +75,7 @@ with open (os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
 # #first path give outdir
 # with open (os.path.join(p.parents[0],'scripts', 'bash_scripts', 'pyhlogenetic_tree', 'get_hmm_search.sh'), 'w') as f:
 #     for id_ in db_ids:
-#         f.write('hmmsearch --tblout '+ output_path + 'output_hmm/hmm/'+id_+'.txt -o '+ output_path+'output_hmm/hmmalign/'+id_+' --cut_tc --cpu 8 ' + profiles + ' ' + files_dir + id_ + '/'+ id_ +'.faa\n\n')
+#         f.write('hmmsearch --tblout '+ phylo_path + 'output_hmm/hmm/'+id_+'.txt -o '+ phylo_path+'output_hmm/hmmalign/'+id_+' --cut_tc --cpu 8 ' + profiles + ' ' + files_dir + id_ + '/'+ id_ +'.faa\n\n')
                 
 #%% runcell 2
 
@@ -88,7 +88,7 @@ Parse both output files to get a dict that maps gene name to protein sequence fo
 hits = {}
 e_values = {}
 for id_ in db_ids:
-    hits[id_], e_values[id_] = find_best_hits(output_path+ 'output_hmm/hmm/' + id_ + '.txt')
+    hits[id_], e_values[id_] = find_best_hits(phylo_path+ 'output_hmm/hmm/' + id_ + '.txt')
 
 
 profile_seqs = {id_:{} for id_ in hits}
@@ -96,7 +96,7 @@ for id_ in profile_seqs:
     prot_seq = ''
     protein_name = 'tempname'
     gene_map = {v:k for k,v in hits[id_].items()}
-    with open (output_path +'output_hmm/hmmalign/'+id_) as f:
+    with open (phylo_path +'output_hmm/hmmalign/'+id_) as f:
         for line in f:
             if line[0] != '#':
                 if line[0] == '>':
@@ -135,10 +135,10 @@ for id_ in hits:
 # #Check the hits
 # nr_genome = np.asarray(nr_genes_found_vals)
 # plt.hist(nr_genome)
-# plt.savefig(output_path+'nr_genomes.png', bbox_inches='tight')
+# plt.savefig(phylo_path+'nr_genomes.png', bbox_inches='tight')
 # nr_gene = np.asarray(nr_times_found_vals)
 # plt.hist(nr_gene)
-# plt.savefig(output_path+'nr_genes.png', bbox_inches='tight')
+# plt.savefig(phylo_path+'nr_genes.png', bbox_inches='tight')
 
 #%% runcell 3
 
@@ -147,7 +147,7 @@ for id_ in hits:
 # '''
 
 # for gene in genes:
-#     with open (output_path+'mfa/'+gene, 'w') as f:
+#     with open (phylo_path+'mfa/'+gene, 'w') as f:
 #         for id_ in profile_seqs:
 #             if gene in profile_seqs[id_]:
 #                 f.write('>'+id_ + '\n')
@@ -161,24 +161,24 @@ Run a multiple sequence aligner over each mfa file.
 Run "run_msa.sh"
 '''
 
-# if not os.path.isdir(output_path+'msa'):
-#     os.mkdir(output_path+'msa')
+# if not os.path.isdir(phylo_path+'msa'):
+#     os.mkdir(phylo_path+'msa')
     
 #To large dataset
 # with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'run_msa.sh'), 'w') as f:
 #     for gene in genes:
-#         command = '/home/meiker/software/clustalo-1.2.4-Ubuntu-x86_64 -i ' + output_path + 'mfa/' + gene + ' -o ' + output_path + 'msa/' + gene + ' --dealign --threads 8\n'
+#         command = '/home/meiker/software/clustalo-1.2.4-Ubuntu-x86_64 -i ' + phylo_path + 'mfa/' + gene + ' -o ' + phylo_path + 'msa/' + gene + ' --dealign --threads 8\n'
 #         f.write(command)
 
 #Muscle as MSA –clwstrict: writes output in ClustalW format
 # with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'), 'w') as f:
 #     for gene in genes:
-#         command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + output_path + 'mfa/' + gene + ' -out ' + output_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv -clwstrict\n'
+#         command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + phylo_path + 'mfa/' + gene + ' -out ' + phylo_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv -clwstrict\n'
 #         f.write(command)
 
 msa_lens = {}
 for gene in genes:
-    msa_lens[gene] = set(check_alignment_len(output_path+'msa_trimmed/'+gene))
+    msa_lens[gene] = set(check_alignment_len(phylo_path+'msa_trimmed/'+gene))
     
 #%% runcell 5
 
@@ -188,7 +188,7 @@ Write a bash script that trims every gene msa file.
 
 with open ('/home/meike/strepto_phylogenomics/scripts/bash_scripts/phylogenetic_tree/run_trimal.sh', 'w') as f:
     for gene in genes:
-        f.write('/home/meiker/software/trimal -in '+gene+' -out '+output_path+'msa_trimmed/'+gene+' -automated1\n')
+        f.write('/home/meiker/software/trimal -in '+ phylo_path+ 'msa/' + gene+' -out '+phylo_path+'msa_trimmed/'+gene+' -automated1\n')
 
 
 
@@ -207,7 +207,7 @@ for id_ in hits:
         
 ids_found_per_gene = {gene:[] for gene in genes}
 for gene in genes:
-    f = file(output_path+'msa_trimmed/'+gene, 'r')
+    f = file(phylo_path+'msa_trimmed/'+gene, 'r')
     for line in f:
         if '>' in line:
             strains_found_per_gene[gene].append(line.strip().split()[0][1:])
@@ -230,11 +230,11 @@ for gene in genes:
 #     return alignment_len
 
 # for gene in genes:
-#     gene_len = get_alignment_len(output_path+'msa_trimmed/'+gene)
+#     gene_len = get_alignment_len(phylo_path+'msa_trimmed/'+gene)
 #     gap = insert_newlines('-'*gene_len)
 #     for strain in usable_strains:
 #         if strain not in strains_found_per_gene[gene]:
-#             with open(output_path+'msa_trimmed/'+gene, 'a') as f:
+#             with open(phylo_path+'msa_trimmed/'+gene, 'a') as f:
 #                 f.write('>'+strain+'\n')
 #                 f.write(gap+'\n')
 #                 f.close()
@@ -242,7 +242,7 @@ for gene in genes:
 # concatenated_seqs = {strain:'' for strain in usable_strains}
 # concatenation_len = {strain:0 for strain in usable_strains}
 # for gene in genes:
-#     f = file(output_path+'msa_trimmed/'+gene, 'r')
+#     f = file(phylo_path+'msa_trimmed/'+gene, 'r')
 #     for line in f:
 #         if '>' in line:
 #             strain = line.strip().split()[0][1:]
@@ -251,7 +251,7 @@ for gene in genes:
 #                 concatenated_seqs[strain] += line.strip()
 #                 concatenation_len[strain] += len(line.strip())
 
-# museal = file(output_path+'msa_trimmed/concatenated_msa_trimmed', 'w')
+# museal = file(phylo_path+'msa_trimmed/concatenated_msa_trimmed', 'w')
 # for strain in concatenated_seqs:
 #     museal.write('>'+strain+'\n')
 #     seq = insert_newlines(concatenated_seqs[strain]).strip()
