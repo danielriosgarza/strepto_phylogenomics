@@ -202,7 +202,7 @@ if not os.path.isdir(phylo_path+'msa'):
 
 with open (bashscript_path + 'phylogenetic_tree/muscle_msa.sh', 'w') as f:
     for gene in genes:
-        command = '/home/meiker/software/muscle3.8.31_i86linux64 -in /home/meiker/phylo_tree/mfa/' + gene + ' -out /home/meiker/phylo_tree/msa_test/' + gene + ' -maxiters 1 -diags1 -sv\n'
+        command = '/home/meiker/software/muscle3.8.31_i86linux64 -in /home/meiker/phylo_tree/mfa/' + gene + ' -out /home/meiker/phylo_tree/msa/' + gene + ' -maxiters 1 -diags1 -sv\n'
         f.write(command)
 
 # msa_lens = {}
