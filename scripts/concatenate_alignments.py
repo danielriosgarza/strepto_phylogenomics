@@ -30,7 +30,7 @@ def write_phylip(seqD, filePath):
 
 sequences={}
 
-path='/home/meiker/phylo_tree/msa_trimmed'
+path='/home/meiker/phylo_tree/msa_trimmed/'
 
 files = os.listdir(path)
 
