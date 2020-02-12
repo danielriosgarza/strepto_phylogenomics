@@ -39,3 +39,22 @@ def histogram(item_l, title=None, xlabel=None, label=None, bins=10, color='#2166
     #plt.savefig(os.path.join(p.parents[0], 'figures', )
 
 test = 
+
+#%%
+
+#run in terminal: pyhton and run following code (to check if alignments are of different length)
+import os
+def count_line_len(file):
+    with open(file) as f:
+        f.readline()
+        f.readline()
+        l1 = f.readline().split('       ')[1]
+        for line in f:
+            try:
+                if len(line.split('       ')[1])!=len(l1):
+                    print('different')
+            except(IndexError):
+              #  print (line)
+
+for file in os.listdir('/home/meiker/phylo_tree/msa_trimmed'):
+    count_line_len(file)

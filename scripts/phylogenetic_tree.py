@@ -9,6 +9,19 @@ Created on Mon Feb  3 09:56:44 2020
 '''
 Building phylogenetic tree based on HMM profiles. (Python 3)
 '''
+#run in terminal: pyhton and run following code (to check if alignments are of different length)
+def count_line_len(file):
+    with open(file) as f:
+        f.readline()
+        f.readline()
+        l1 = f.readline().split('       ')[1]
+        for line in f:
+            try:
+                if len(line.split('       ')[1])!=len(l1):
+                    print ('different')
+            except(IndexError):
+                print (line)
+#%%
 
 import os
 import numpy as np
@@ -63,6 +76,19 @@ def get_alignment_len(path_to_file):
             else:
                 break
     return alignment_len
+
+
+def get_alignment_len(path_to_file):               
+    with open(path_to_file) as f:
+        f.readline() #Skip first >line
+        alignment_len = 0
+        for line in f:
+            if '>' not in line:
+                alignment_len += len(line.strip())
+            else:
+                break
+    return alignment_len
+
 
 profiles = '/home/meiker/phylo_tree/genes.hmm'
 phylo_path = '/home/meiker/phylo_tree/'
@@ -222,18 +248,18 @@ for gene in genes:
             if '>' in line:
                 ids_found_per_gene[gene].append(line.strip().split()[0][1:])
 
-'''
-Add gaps for genes that were not found.
-'''
+# '''
+# Add gaps for genes that were not found.
+# '''
 
-for gene in genes:
-    gene_len = get_alignment_len(phylo_path+'msa_trimmed/'+gene)
-    gap = insert_newlines('-'*gene_len)
-    for id_ in usable_ids:
-        if id_ not in ids_found_per_gene[gene]:
-            with open(phylo_path+'msa_trimmed/'+gene, 'a') as f:
-                f.write('>'+id_+'\n')
-                f.write(gap+'\n')
+# for gene in genes:
+#     gene_len = get_alignment_len(phylo_path+'msa_trimmed/'+gene)
+#     gap = insert_newlines('-'*gene_len)
+#     for id_ in usable_ids:
+#         if id_ not in ids_found_per_gene[gene]:
+#             with open(phylo_path+'msa_trimmed/'+gene, 'a') as f:
+#                 f.write('>'+id_+'\n')
+#                 f.write(gap+'\n')
                 
                 
 concatenated_seqs = {id_:'' for id_ in usable_ids}

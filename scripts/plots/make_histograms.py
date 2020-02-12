@@ -33,23 +33,21 @@ def get_info(file, field):
                     else:
                         item_l.append(item)
     return item_l
-
-
     
     
 path = os.getcwd()
 p = Path(path)
 #Get the gs sizes in Mb from all species
-lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
+lactofile = os.path.join(p.parents[1], 'files', '06012020_lactococcus_database.tsv')
 lac_gs = get_info(lactofile, 'genome_length')
 lac_gs = [round(elem/1000000, 2) for elem in lac_gs]
 
-streptofile = os.path.join(p.parents[0], 'files', '20012020_streptococcus_database.tsv')
+streptofile = os.path.join(p.parents[1], 'files', '20012020_streptococcus_database.tsv')
 strepto_gs = get_info(streptofile, 'genome_length')
 strepto_gs = [round(elem/1000000, 2) for elem in strepto_gs]
 
 
-florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
+florifile = os.path.join(p.parents[1], 'files', '06012020_floricoccus_database.tsv')
 flori_gs = get_info(florifile, 'genome_length')
 flori_gs = [round(elem/1000000, 2) for elem in flori_gs]
 
@@ -69,7 +67,7 @@ sns.set_style('whitegrid')
 # sns.set(style="whitegrid")
 # fig.grid(False)
 plt.tight_layout()
-fig.figure.savefig(os.path.join(p.parents[0], 'figures', '270120_histogram_gs.png'), dpi=300, bbox_inches='tight')
+#fig.figure.savefig(os.path.join(p.parents[0], 'figures', '270120_histogram_gs.png'), dpi=300, bbox_inches='tight')
 
 
 #%%
