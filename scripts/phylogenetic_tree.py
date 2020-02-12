@@ -198,14 +198,14 @@ Run a multiple sequence aligner over each mfa file.
 Run "run_msa.sh"
 '''
 
-# if not os.path.isdir(phylo_path+'msa'):
-#     os.mkdir(phylo_path+'msa')
+if not os.path.isdir(phylo_path+'msa'):
+    os.mkdir(phylo_path+'msa')
     
 #To large dataset
 # with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'run_msa.sh'), 'w') as f:
 #     for gene in genes:
 #         command = '/home/meiker/software/clustalo-1.2.4-Ubuntu-x86_64 -i ' + phylo_path + 'mfa/' + gene + ' -o ' + phylo_path + 'msa/' + gene + ' --dealign --threads 8\n'
-#         f.write(command)
+#         # f.write(command)
 
 #Muscle as MSA –clwstrict: writes output in ClustalW format
 # with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'), 'w') as f:
@@ -215,7 +215,7 @@ Run "run_msa.sh"
 
 # msa_lens = {}
 # for gene in genes:
-#     msa_lens[gene] = set(check_alignment_len(phylo_path+'msa_trimmed/'+gene))
+#     msa_lens[gene] = let(check_alignment_len(phylo_path+'msa_trimmed/'+gene))
     
 #%% runcell 5
 

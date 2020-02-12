@@ -39,14 +39,15 @@ for fl in files[0:2]:
         f.readline()
         f.readline()
         for line in f:
-            a= line.strip()
-            seq = a[24::]
-            id_ = a[0:24].split('_')
-            id_ = id_[0][0:5] + id_[1][0:5]
-            
-            if id_ not in sequences:
-                sequences[id_]=''
-            sequences[id_]+=seq
+            if line!='\n':
+                a= line.strip()
+                seq = a[24::]
+                id_ = a[0:24].split('_')
+                id_ = id_[0][0:5] + id_[1][0:5]
+                
+                if id_ not in sequences:
+                    sequences[id_]=''
+                sequences[id_]+=seq
 
 write_phylip(sequences, '/home/meiker/phylo_tree/concat_alignment.phy')
 
