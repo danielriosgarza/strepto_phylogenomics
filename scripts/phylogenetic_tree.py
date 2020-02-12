@@ -9,19 +9,6 @@ Created on Mon Feb  3 09:56:44 2020
 '''
 Building phylogenetic tree based on HMM profiles. (Python 3)
 '''
-#run in terminal: pyhton and run following code (to check if alignments are of different length)
-def count_line_len(file):
-    with open(file) as f:
-        f.readline()
-        f.readline()
-        l1 = f.readline().split('       ')[1]
-        for line in f:
-            try:
-                if len(line.split('       ')[1])!=len(l1):
-                    print ('different')
-            except(IndexError):
-                print (line)
-#%%
 
 import os
 import numpy as np
@@ -213,7 +200,7 @@ if not os.path.isdir(phylo_path+'msa'):
 #         command = '/home/meiker/software/muscle3.8.31_i86linux64 -in ' + phylo_path + 'mfa/' + gene + ' -out ' + phylo_path + 'msa/' + gene + ' -maxiters 1 -diags1 -sv -clwstrict\n'
 #         f.write(command)
 
-with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'), 'w') as f:
+with open (bashscript_path + 'phylogenetic_tree/muscle_msa.sh', 'w') as f:
     for gene in genes:
         command = '/home/meiker/software/muscle3.8.31_i86linux64 -in /home/meiker/phylo_tree/mfa/' + gene + ' -out /home/meiker/phylo_tree/msa_test/' + gene + ' -maxiters 1 -diags1 -sv\n'
         f.write(command)
@@ -228,7 +215,7 @@ with open (os.path.join(p,'bash_scripts', 'phylogenetic_tree', 'muscle_msa.sh'),
 Write a bash script that trims every gene msa file.
 '''
 
-with open ('/home/meike/strepto_phylogenomics/scripts/bash_scripts/phylogenetic_tree/run_trimal.sh', 'w') as f:
+with open (bashscript_path + 'phylogenetic_tree/run_trimal.sh', 'w') as f:
     for gene in genes:
         f.write('trimal -in '+ phylo_path+ 'msa/' + gene+' -out '+phylo_path+'msa_trimmed/'+gene+' -automated1\n')
 
