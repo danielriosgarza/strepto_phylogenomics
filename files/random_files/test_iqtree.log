@@ -1,0 +1,19 @@
+IQ-TREE multicore version 1.6.12 for Linux 64-bit built Aug 15 2019
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    meike-OptiPlex-780 (SSE4.1, 7 GB RAM)
+Command: iqtree -s /home/meike/strepto_phylogenomics/files/random_files/test_iqtree -bb 1000 -alrt 1000 -nt AUTO
+Seed:    45353 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Thu Feb 13 12:18:25 2020
+Kernel:  SSE2 - auto-detect threads (4 CPU cores detected)
+
+Reading alignment file /home/meike/strepto_phylogenomics/files/random_files/test_iqtree ... Fasta format detected
+Alignment most likely contains protein sequences
+WARNING: 1 sites contain only gaps or ambiguous characters.
+Alignment has 7 sequences with 418 columns, 58 distinct patterns
+0 parsimony-informative, 2 singleton sites, 416 constant sites
+ERROR: Duplicated sequence name streptococcus_00001
+ERROR: Duplicated sequence name streptococcus_00002
+ERROR: Duplicated sequence name streptococcus_00003
+ERROR: Please rename sequences listed above!
