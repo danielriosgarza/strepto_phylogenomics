@@ -218,7 +218,8 @@ for file in list(os.listdir('/home/meiker/orthomcl/blastres')):
     id_ = file.strip().split('.')[0]
     dbs_done.append(id_)
 
-blast_Parser_bash(dbs_done,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
+print(len(dbs_done))
+blast_Parser_bash(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
 
 #%% runcell 4
 '''
