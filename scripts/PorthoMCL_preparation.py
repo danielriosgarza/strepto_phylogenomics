@@ -30,12 +30,12 @@ def get_ids(file):
         db_ids.sort()
     return db_ids
 
-def porthoMCL_prep(db_ids, savedir):
+def porthoMCL_prep(ids, savedir):
     '''
     Writes bash lines for PorthoMCL preparation. 
     '''
     with open (savedir, 'w') as f:
-        for id_ in db_ids:
+        for id_ in ids:
             f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/'+id_+'/'+id_+'.faa 1\n')
         f.write('mv *.fasta /home/meiker/orthomcl/compliantFasta')
 
@@ -51,7 +51,7 @@ def get_taxon_list(taxon_list):
     return db_ids
 
 
-def blast_run_bash(db_ids, savedir):
+def blast_run_bash(ids, savedir):
     '''
     writes bash line to run blast for all ids in taxon_list:
     blastp -query blastquery/DB_ID.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  
@@ -59,54 +59,54 @@ def blast_run_bash(db_ids, savedir):
     '''
     homepath = '/home/meiker/orthomcl/'
     with open (savedir, 'w') as f:
-        for id_ in db_ids:
+        for id_ in ids:
             f.write("blastp -query " + homepath + "blastquery/"+id_[0]+".fasta  -db " + homepath + "blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out " + homepath + "blastres/"+id_[0]+".tab\n")
     
-def blast_Parser_bash(db_ids, savedir):
+def blast_Parser_bash(ids, savedir):
     '''
     Writes bash for BlastParser for all ids in taxon_list
     porthomclBlastParser blastres/id_.tab compliantFasta >> splitSimSeq/id_.ss.tsv
     '''
     with open (savedir, 'w') as f:
-        for id_ in db_ids:
+        for id_ in ids:
             f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_+".ss.tsv\n")
             
-def finding_best_hits(db_ids, savedir):
+def finding_best_hits(ids, savedir):
     '''
      paralogs are found, and an unnormalized score is assigned to them. Step 5.3 will normalize 
      this score so that it be comparable among different genomes.
     '''
     with open(savedir, 'w') as f:
-        for i, id_ in enumerate(db_ids):
+        for i, id_ in enumerate(ids):
             f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i + 1)+"\n")
   
-def split_files(db_ids):
+def split_files(ids):
     '''
     Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
     Tuples w/ (db_id, original_index)
     '''    
     #groupsize = int(len(db_ids)/16)
     groupsize = 761
-    db_index = [(id_, i + 1) for i, id_ in enumerate(db_ids)]
+    db_index = [(id_, i + 1) for i, id_ in enumerate(ids)]
     
     id_i = [db_index[i :i + groupsize] for i in range(0, len(db_index), groupsize)]
     
     return id_i
 
-def find_orthologs(db_ids, savedir):
+def find_orthologs(ids, savedir):
     '''
     Output of bash line is all the ortholog genes.
     '''
     with open (savedir, 'w') as f:
-        for i, id_ in enumerate(db_ids):
+        for i, id_ in enumerate(ids):
             f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x "+ str(i + 1)+"\n")
 
-def find_paralogs(db_ids, savedir):
+def find_paralogs(ids, savedir):
     '''
     Bash lines for finding paralogs. Uses split lists (db_id, index).
     '''
     with open (savedir, 'w') as f:
-        for i, id_ in enumerate(db_ids):
+        for i, id_ in enumerate(ids):
             f.write ("porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x "+str(i + 1)+"\n")
 
 def randomizer(infile, outfile):
