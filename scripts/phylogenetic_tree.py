@@ -205,7 +205,7 @@ Concetenate all files together that can be used for distance analysis with iqtre
 a) Check each alignment file (per gene) if all genomes (ids) are present. 
 b) If not add the database_id with a gap sequence ('-') with same length as the other alignments.
 2. Write concatenated file: '>db_id' and next line all alignments "glued" to each other
-(example: gene1gene2---3gen-4g--e5...)
+(example: gene1gene2---3gen-4----5gene6...)
 '''
 path= phylo_path+'msa_trimmed/'
 files = os.listdir(path)
@@ -241,9 +241,9 @@ for fl in files:
             difference = longest-len(v)
             gap = '-'*difference
             sequences[k] = v+gap
-    all_alignments[fl] = sequences #add to all alignments to store the alignments per gene     
+    all_alignments[fl] = sequences #add to all_alignments to store the alignments per gene     
 
-#make dict with each id (genome) as key and all alignments of each gene glued together as values
+#make dict with each id (genome) as key and all_alignments of each gene glued together as values
 alignments_per_id = {}    
 for gene in all_alignments:
         seqD = all_alignments[gene] #get dict with alignments per gene

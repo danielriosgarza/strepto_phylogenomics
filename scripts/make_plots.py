@@ -41,7 +41,7 @@ def get_info(file, field):
                         item_l.append(str(item))
     return item_l
 
-def count(item_l):
+def get_count(item_l):
     '''
     Counts items in a list, returns lists containg data and labels.
     '''    
@@ -64,6 +64,56 @@ def keys_and_values(dict_):
         values.append(v)
     return keys, values
 
+def determine_topN(countD, Nitems=10):
+    '''
+    Needs a count dict with keys labels and values the according count.
+    Uses the function keys_and_values!
+    Returns to lists (labels and counts) of the top N counted items of the dict.
+    Default of N is 10.
+    '''
+    #get data (counts) and labels in same order from dict count
+    labels, data = keys_and_values(countD)
+    
+    #determine top N sources
+    topN = []
+    indexes = []
+    for i, count in enumerate(data):
+        #fill topN with N source counts
+        if len(topN) < Nitems:
+            topN.append(count)
+            indexes.append(i)
+        #replace the minimum with the new count if its bigger
+        else:
+            min_count = min(topN)
+            ind_min = topN.index(min_count)
+            if count > min_count:
+                topN[ind_min] = count
+                indexes[ind_min] = i
+                
+    #Get labels
+    fig_labels=[]
+    for i in indexes:
+        if labels[i] == '':
+            fig_labels.append("Unknown")
+        else:
+            fig_labels.append(labels[i].capitalize())
+    
+    return fig_labels, topN
+
+def simple_barplot(data, labels, color='coolwarm'):
+    
+    theme = plt.get_cmap(color)
+    plabels, pdata = determine_topN(pig_sources, 5)
+    colors = [theme(1. * i / len(data)) for i in range(len(data))]
+
+    fig, ax = plt.subplots()
+    
+    ax.bar(range(len(data)), data, align='center', color= colors)
+    ax.set_xticks(range(len(data)))
+    ax.set_xticklabels(labels, rotation=90)
+    return fig, ax
+
+    
 #%% runcell 1
     
 #host and associated sources in streptococcus 
@@ -72,7 +122,7 @@ def keys_and_values(dict_):
 path = os.getcwd()
 p = Path(path)
 
-with open(os.path.join(p.parents[1], 'files', '20012020_streptococcus_database.tsv')) as f:
+with open(os.path.join(p.parents[0], 'files', '20012020_streptococcus_database.tsv')) as f:
           headers = f.readline().strip().split('\t')
           inds = {k: i for i, k in enumerate(headers)}
           hostname_i = inds['host_name']
@@ -82,7 +132,7 @@ with open(os.path.join(p.parents[1], 'files', '20012020_streptococcus_database.t
           source=[]
           for line in f:
               a = line.strip().split('\t')
-              hosts.append(a[hostname_i])
+              hosts.append(a[hostname_i]) 
               source.append(a[isolation_source_i]) 
 
 host_isolations = {k :[] for k in hosts if k!=''}
@@ -93,16 +143,17 @@ for i, item in enumerate(hosts):
 
 #Make nested dict with hosts as keys and count dict of the sources       
 for host in host_isolations:
-    host_isolations[host] = count(host_isolations[host])
+    host_isolations[host] = get_count(host_isolations[host])
 
 #determine the top 5 most occuring hosts
 count_hosts = [i for i in hosts if i != '']
 counter_hosts = Counter(count_hosts)
 top5_hosts = counter_hosts.most_common(5)    
 
+
 #%% runcell 2 
 
-#Plot the most occuring hosts and how often they appear in the dataset
+#Plot the most occuring hosts and how often they appear in the dataset (barplot)
 
 h_labels= []
 h_count = []
@@ -114,31 +165,31 @@ theme = plt.get_cmap('coolwarm')
 colors = [theme(1. * i / len(h_labels)) for i in range(len(h_labels))]
  
 
-#Make barplot    with broken y-axis    
-fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
+#Make barplot with broken y-axis    
+fig1, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
 
-# plot the same data on both axes
+#plot the same data on both axes
 ax1.bar(range(len(h_count)), h_count, align='center', color= colors)
 ax2.bar(range(len(h_count)), h_count, align='center', color= colors)
 
-# zoom-in / limit the view to different portions of the data
+#zoom-in / limit the view to different portions of the data
 ax1.set_ylim(7000, 7500)  # outliers only
 ax2.set_ylim(0, 1000)  # most of the data
 
-# hide the spines between ax1 and ax2
+#hide the spines between ax1 and ax2
 ax1.spines['bottom'].set_visible(False)
 ax2.spines['top'].set_visible(False)
 
 #ax1.xaxis.tick_top()
-ax1.tick_params(labeltop=False)  # don't put tick labels at the top
-ax2.xaxis.tick_bottom()
+ax1.tick_params(labeltop=False)  #don't put tick labels at the top
+ax2.xaxis.tick_bottom() #make ticks at the bottom of x-axis
 
 #cut-out diagonal lines
 d = .015  #how big to make the diagonal lines in axes coordinates
 kwargs = dict(transform=ax1.transAxes, color='lightgray', clip_on=False)
-ax1.plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
-kwargs.update(transform=ax2.transAxes)  # switch to the bottom axes
-ax2.plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
+ax1.plot((-d, +d), (-d, +d), **kwargs)        #top-left diagonal
+kwargs.update(transform=ax2.transAxes)  #switch to the bottom axes
+ax2.plot((-d, +d), (1 - d, 1 + d), **kwargs)  #bottom-left diagonal
 
 #make labels
 ax2.set_xticks(range(len(h_count)))
@@ -148,46 +199,39 @@ ax2.set_ylabel("Frequency", y= 1.05)
 
 ax1.set_title('The most common hosts of $Streptococcus$', fontsize=14, y=1.05) #$ around part that should be italics
 
-
 #%% runcell 3 
+
+#Pieplot: Plot the most occuring hosts and how often they appear in the dataset
+
+
+fig2, ax = plt.subplots()
+#autopct='%1.1f%%' gives percentages to pie, pctdistance changes postition of percentages
+ax.pie(h_count, autopct='%1.1f%%', colors=colors, startangle=0, radius = 1, pctdistance=1.15) 
+
+#loc in combi w/ bbocx --> loc tells matplotlib which part of bounding box should be placed at the arguments of bbox_to_anchor
+ax.legend(h_labels, loc= "center left", bbox_to_anchor=(0.9, 0.5))
+
+ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+#pad defines location of title to plot
+plt.title('The most common hosts of $Streptococcus$', pad=1)
+
+#plt.savefig(os.path.join(savedir), bbox_inches='tight')
+    
+
+
+#%% runcell 4
    
 #Plot top 10 sources of number one host
 
 #get data (counts) and labels (isolation sources) in same order from dict count
-human = host_isolations['Human, Homo sapiens']
-for i in human:
-    labels, data = keys_and_values(human)
+fig_labels, most_common_10 = determine_topN(host_isolations['Human, Homo sapiens'])
 
-#determine top 10 sources
-most_common_10 = []
-indexes = []
-for i, count in enumerate(data):
-    #fill top 10 with 10 source counts
-    if len(most_common_10) < 10:
-        most_common_10.append(count)
-        indexes.append(i)
-    #replace the minimum with the new count if its bigger
-    else:
-        min_count = min(most_common_10)
-        ind_min = most_common_10.index(min_count)
-        if count > min_count:
-            most_common_10[ind_min] = count
-            indexes[ind_min] = i
-
-#Get labels
-fig_labels=[]
-for i in indexes:
-    if labels[i] == '':
-        fig_labels.append("Unknown")
-    else:
-        fig_labels.append(labels[i].capitalize())
-
-theme = plt.get_cmap('Blues_r')
+theme = plt.get_cmap('coolwarm')
 colors = [theme(1. * i / len(most_common_10)) for i in range(len(most_common_10))]
  
 
 #Make barplot    with broken y-axis    
-fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
+fig3, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
 
 # plot the same data on both axes
 ax1.bar(range(len(most_common_10)), most_common_10, align='center', color= colors)
@@ -220,34 +264,62 @@ ax2.set_ylabel("Frequency", y= 1.05)
 
 ax1.set_title('The most common isolation sources of $Streptococcus$ in Human', fontsize=14, y=1.05) #$ around part that should be italics
 
-fig.savefig(os.path.join(p.parents[1], 'figures', '110220_isolation_sources_human.png'), dpi=300,bbox_inches='tight')
+#fig.savefig(os.path.join(p.parents[1], 'figures', '110220_isolation_sources_human.png'), dpi=300,bbox_inches='tight')
 
-#%% runcell 4
+#%% runcell 5
 
-'''
-Try to use brokenaxes package, but problems with xticklabels....
-'''
+#Look at other hosts
+#pig
+#combine all Tonsil sources
+pig_sources ={}
+for k,v in host_isolations['Pig, Sus scrofa'].items():
+    if "onsil" in k:
+        if "Tonsil" not in pig_sources:
+            pig_sources['Tonsil'] = v
+        else:
+            pig_sources['Tonsil']+=v
+    else:
+        pig_sources[k] = v
+    
+plabels, pdata = determine_topN(pig_sources, 5)
+colors = [theme(1. * i / len(pdata)) for i in range(len(pdata))]
 
-#make plot with broken y-axis
-fig= plt.figure(figsize=(8,6))
+fig4, ax = plt.subplots()
 
-bax= brokenaxes(ylims=((0,1100), (4000, 4600)), hspace=.15)
+ax.bar(range(len(pdata)), pdata, align='center', color= colors)
+ax.set_xticks(range(len(pdata)))
+ax.set_xticklabels(plabels, rotation=90)
+ax.set_xlabel("Isolation sources")
+ax.set_ylabel("Frequency")
+ax.set_title('The most common isolation sources of $Streptococcus$ in Pig', fontsize=14, y=1.05)
+
+#Cow
+cow_sources ={}
+for k,v in host_isolations['Cow, Bos taurus'].items():
+    if "ilk" in k:
+        if "Milk" not in cow_sources:
+            cow_sources['Milk'] = v
+        else:
+            cow_sources['Milk']+=v
+    if "available" in k:
+        k=''
+        if '' not in cow_sources:
+            cow_sources[''] = v
+        else:
+            cow_sources[''] += v
+    else:
+        cow_sources[k] = v
+
+clabels, cdata = determine_topN(cow_sources, 5)
+fig4, ax = simple_barplot(cdata, clabels)
+
+ax.set_xlabel("Isolation sources")
+ax.set_ylabel("Frequency")
+ax.set_title('The most common isolation sources of $Streptococcus$ in Cow', fontsize=14, y=1.05)
 
 
-bax.bar(range(len(most_common_10)), most_common_10, align='center', color= colors)
+#%% runcell 6
 
-bax.set_xticks(range(len(most_common_10)))
-bax.set_xticklabels(fig_labels, rotation=90)
-
-bax.set_xlabel('Isolation source')
-bax.set_ylabel('Frequency')
-fig.set_title('The most common isolation sources of $Streptococcus$ in Human', fontsize=16) #$ around part that should be italics
-
-#remove dark grid from plot
-# sns.set(style="whitegrid")
-# fig.grid(False)
-plt.tight_layout()
-#fig.figure.savefig(os.path.join(p.parents[0], 'figures', '270120_histogram_gs.png'), dpi=300, bbox_inches='tight')   
    
   
 
