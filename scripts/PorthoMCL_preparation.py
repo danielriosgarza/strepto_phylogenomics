@@ -10,8 +10,6 @@ Created on Mon Jan 13 12:10:37 2020
 Run first the porthoMCL_prep for all species and follow than the steps in the PorthoPrep Steps document in the terminal,
 before running the rest.
 
-
-Split funciton not ready!
 '''
 #import random
 from random import shuffle
@@ -129,10 +127,22 @@ def randomizer(infile, outfile):
 path = os.getcwd()
 p = Path(path)
 
+#%% runcell 1
+'''
+First get orthomcl: https://orthomcl.org/common/downloads/software/v2.0/UserGuide.txt
+Get porthoMCL git clone and place it in orthomcSoftware/bin folder
+$cp -a ~/PorthoMCL/. ~/orthomclSoftware-v2.0.9/bin/ --> to run porthomcl py scripts
 
-#blast_run_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastrun.sh'))
-#blast_Parser_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastparser.sh'))
-#finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_find_best_hits.sh'))
+in the following lines '$' terminal commands were running in the output dir of porthomcl analysis
+
+Before adjusting fasta run:
+$mkdir compliantFasta/   
+    
+1. Adjust fasta files:
+    Get all db_ids and make bash scripts to adjust the fasta files
+    Example bash line:
+    orthomclAdjustFasta <id> /home/meiker/git/data/prokka_annotation/<id>/<id>.faa 1
+'''
 
 # #get ids
 # strepto_ids = get_ids(os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_with_database_id.tsv'))
@@ -144,40 +154,114 @@ p = Path(path)
 # porthoMCL_prep(flori_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_floricoccus_porthomcl_prep.sh'))
 # porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_lactococcus_porthomcl_prep.sh'))
 
+'''
+Get taxon list run following lines in the terminal (putput dir): 
+$ls -1 compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
+
+#place taxon list in git dir to get all ids in a single list
+$cp -a ~/orthomcl/taxon_list ~/git/strepto_phylogenomics/files/
+'''
+
+#%% runcell 2
+'''
+2. Filter the input:
+$orthomclFilterFasta compliantFasta/ 10 20
+$mkdir filteredFasta
+$mv goodProteins.fasta filteredFasta/
+$mv poorProteins.fasta filteredFasta/
+
+3.1 Create Blast DB:
+$makeblastdb -in filteredFasta/goodProteins.fasta  -dbtype prot
+$mkdir blastdb
+$mv filteredFasta/goodProteins.fasta.* blastdb/
+
+3.2 Split the inputfile:
+$mkdir blastquery
+$porthomclSplitFasta.py -i filteredFasta/goodProteins.fasta  -o blastquery
+
+
+3.3 Run Blast:
+    Split the ids and generate several bash files to run blast on cluster
+    Example bash line:
+    blastp -query blastquery/<id>.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/<id>.tab
+'''
+
 #get all ids in a single list and split it for blast run
-db_ids = get_taxon_list(os.path.join(p.parents[0], 'files', 'taxon_list'))
-splitted_ids = split_files(db_ids)
+# db_ids = get_taxon_list(os.path.join(p.parents[0], 'files', 'taxon_list'))
+# splitted_ids = split_files(db_ids)
 
-
-# #make bash files to run blast
 # for i, l_ids in enumerate(splitted_ids):
 #     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'))
 
+#Blastrun takes longer than my internship period, therefore, the streptococcus genmoes will be randomized
 # for i in range(1, 16):
 #     randomizer(os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'), os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '210120_blastrun'+str(i)+'.sh'))
 
+#%% runcell 3
+'''
+4. Parse Blast results:
+$mkdir splitSimSeq
 
-#make bash files that can be updated according to already blasted files:
+Make bash files that can be updated according to already blasted files
+Example bash line:
+porthomclBlastParser blastres/<id>.tab compliantFasta >> splitSimSeq/<id>.ss.tsv
+'''
 
 #get the date to keep track of the scripts (added to scriptname)
 today = date.today().strftime("%d/%m/%Y")
 today = today.split('/')
 today = ''.join(today)
 
+#Get ids_ of all genomes that are already blasted (located in blastres/)
 dbs_done = []
 for file in list(os.listdir('/home/meiker/orthomcl/blastres')):    
     id_ = file.strip().split('.')[0]
     dbs_done.append(id_)
 
 blast_Parser_bash(dbs_done,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
-finding_best_hits(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl',today+ '_find_best_hits.sh'))
-find_orthologs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_orthologs.sh'))
-find_paralogs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl',today+ '_paralogs.sh'))
 
+#%% runcell 4
+'''
+5. Finding best hits:
+$mkdir paralogTemp
+$mkdir besthit
 
+Make bash script to finf best hits (-x <number>, index of taxon to work on)
+Example bash line:
+porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
+'''
 
+finding_best_hits(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_find_best_hits.sh'))
 
+#%% runcell 5
+'''
+6. Find orthologs
+$mkdir orthologs
 
+Example bash line (again -x <number> = taxon):
+porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x <1>
+
+7. Find paralogos
+$mkdir ogenes
+$awk -F'[|\t]' '{print $4 >> ("ogenes/"$3".og.tsv")}' orthologs/*.ort.tsv
+$awk -F'[|\t]' '{print $2 >> ("ogenes/"$1".og.tsv")}' orthologs/*.ort.tsv
+
+Example bash line (again -x <number> = taxon):
+porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x <1>
+'''
+
+find_orthologs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_orthologs.sh'))
+
+find_paralogs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_paralogs.sh'))
+
+'''
+8. Run MCL
+$cat orthologs/*.tsv >> all.ort.tsv
+$mcl all.ort.tsv  --abc -I 1.5 -t 4 -o .all.ort.group
+
+$cat paralogs/*.tsv >> all.par.tsv
+$mcl all.par.tsv  --abc -I 1.5 -t 4 -o all.par.group
+'''
 
 # test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
 # ids_split = split_files(test_ids)
