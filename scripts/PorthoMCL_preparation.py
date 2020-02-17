@@ -17,6 +17,7 @@ Split funciton not ready!
 from random import shuffle
 import os
 from pathlib import Path
+from datetime import date
 
 def get_ids(file):
     '''
@@ -133,34 +134,49 @@ p = Path(path)
 #blast_Parser_bash(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_blastparser.sh'))
 #finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20200114_floricoccus_find_best_hits.sh'))
 
-#get ids
-strepto_ids = get_ids(os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_with_database_id.tsv'))
-flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
-lacto_ids = get_ids(os.path.join(p.parents[0], 'files', 'lactococcus_patric_id_with_database_id.tsv'))
+# #get ids
+# strepto_ids = get_ids(os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_with_database_id.tsv'))
+# flori_ids = get_ids(os.path.join(p.parents[0], 'files', 'floricoccus_patric_id_with_database_id.tsv'))
+# lacto_ids = get_ids(os.path.join(p.parents[0], 'files', 'lactococcus_patric_id_with_database_id.tsv'))
 
-#adjust fasta files
-porthoMCL_prep(strepto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_streptococcus_porthomcl_prep.sh'))
-porthoMCL_prep(flori_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_floricoccus_porthomcl_prep.sh'))
-porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_lactococcus_porthomcl_prep.sh'))
+# #adjust fasta files
+# porthoMCL_prep(strepto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_streptococcus_porthomcl_prep.sh'))
+# porthoMCL_prep(flori_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_floricoccus_porthomcl_prep.sh'))
+# porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_lactococcus_porthomcl_prep.sh'))
 
 #get all ids in a single list and split it for blast run
 db_ids = get_taxon_list(os.path.join(p.parents[0], 'files', 'taxon_list'))
 splitted_ids = split_files(db_ids)
 
 
+# #make bash files to run blast
+# for i, l_ids in enumerate(splitted_ids):
+#     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'))
 
-for i, l_ids in enumerate(splitted_ids):
-    blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'))
-
-for i in range(1, 16):
-    randomizer(os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'), os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '210120_blastrun'+str(i)+'.sh'))
+# for i in range(1, 16):
+#     randomizer(os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'), os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '210120_blastrun'+str(i)+'.sh'))
 
 
+#make bash files that can be updated according to already blasted files:
 
-blast_Parser_bash(db_ids,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_blastparser.sh'))
-finding_best_hits(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_find_best_hits.sh'))
-find_orthologs(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_orthologs.sh'))
-find_paralogs(db_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '220120_paralogs.sh'))
+#get the date to keep track of the scripts (added to scriptname)
+today = date.today().strftime("%d/%m/%Y")
+today = today.split('/')
+today = ''.join(today)
+
+dbs_done = []
+for file in list(os.listdir('/home/meiker/orthomcl/blastres')):    
+    id_ = file.strip().split('.')[0]
+    dbs_done.append(id_)
+
+blast_Parser_bash(dbs_done,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
+finding_best_hits(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl',today+ '_find_best_hits.sh'))
+find_orthologs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_orthologs.sh'))
+find_paralogs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl',today+ '_paralogs.sh'))
+
+
+
+
 
 
 # test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
