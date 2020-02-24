@@ -99,12 +99,12 @@ def find_orthologs(indexes_ids, savedir):
         for i in indexes_ids:
             f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x "+ str(i + 1)+"\n")
 
-def find_paralogs(ids, savedir):
+def find_paralogs(indexes_ids, savedir):
     '''
     Bash lines for finding paralogs. Uses split lists (db_id, index).
     '''
     with open (savedir, 'w') as f:
-        for i, id_ in enumerate(ids):
+        for i in indexes_ids:
             f.write ("porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x "+str(i + 1)+"\n")
 
 def randomizer(infile, outfile):
@@ -234,7 +234,7 @@ for i, taxon in enumerate(taxon_list):
     if taxon in dbs_ready2analyze:
         indexes.append(i+1)
     
-blast_Parser_bash(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
+#blast_Parser_bash(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
 
 #%% runcell 4
 '''
