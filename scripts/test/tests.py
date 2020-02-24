@@ -131,6 +131,11 @@ dbs_done = []
 for file in list(os.listdir('/home/meike/strepto_phylogenomics/files/random_files/test_updater')):    
     id_ = file.strip().split('.')[0]
     dbs_done.append(id_)
+    
+dbs_completed = []
+for files in list(os.listdir('/home/meike/strepto_phylogenomics/files/random_files/test_updater')):
+    id_ = file.strip().split('.')[0]
+    dbs_done.append(id_)
 
 blast_Parser_bash(dbs_done,os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'tests', today+'_test_blastparser.sh'))
 

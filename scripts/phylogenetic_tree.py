@@ -158,7 +158,7 @@ Parse both output files to get a dict that maps gene name to protein sequence fo
 
 '''
 Run a multiple sequence aligner over each mfa file.
-Run "run_msa.sh"
+Run "muscle_msa.sh"
 '''
 
 # if not os.path.isdir(phylo_path+'msa'):
@@ -205,33 +205,39 @@ Concetenate all files together that can be used for distance analysis with iqtre
 a) Check each alignment file (per gene) if all genomes (ids) are present. 
 b) If not add the database_id with a gap sequence ('-') with same length as the other alignments.
 2. Write concatenated file: '>db_id' and next line all alignments "glued" to each other
-(example: gene1gene2---3gen-4----5gene6...)
+Example:
+>streptococcus_00001
+gene1gene2-----gene4...
+>streptococcus_00002
+gene1gene2gene3gene4...
+...
+
 '''
-path= phylo_path+'msa_trimmed/'
+path = phylo_path+'msa_trimmed/'
 files = os.listdir(path)
 
 #dict to store all alignments: key=filename(gene), value: dict with key: db_id and value: seq alignment of that gene
-all_alignments ={} 
+all_alignments = {} 
 
 for fl in files:
-    sequences ={} #temp dict that is asigned to all_alignments later 
+    sequences = {} #temp dict that is asigned to all_alignments later 
     aligned_ids = [] #to see which ids (genomes) had the gene
     with open(path+fl) as f:
         for line in f:
             line = line.strip()
             if line.startswith('>'):
-                seq=''
+                seq = ''
                 db_id = line[1::] #get rid of '>'
                 if db_id not in aligned_ids:
                     aligned_ids.append(db_id)
-                    sequences[db_id]=''
+                    sequences[db_id] = ''
             else:
                 seq+=line
-            sequences[db_id]=seq
+            sequences[db_id] = seq
     #Check which genomes (db_ids) miss certain gene and add gaps ('-') for this db_id
     for id_ in db_ids: 
         if id_ not in aligned_ids:
-            sequences[id_]=''
+            sequences[id_] = ''
     
     #Determine the longest alignment and add gaps to alignment if they are shorter (or miss the gene)       
     longest = len(max(sequences.values())) 
@@ -251,80 +257,28 @@ for gene in all_alignments:
             if id_ not in alignments_per_id:
                 alignments_per_id[id_] = seqD[id_]
             else:
-                alignments_per_id[id_]+=seqD[id_]
+                alignments_per_id[id_] += seqD[id_]
                 
 #write concatenated file          
-if not os.path.isdir(phylo_path+'iqtree'):
-    os.mkdir(phylo_path+'iqtree')
+if not os.path.isdir(phylo_path +'iqtree'):
+    os.mkdir(phylo_path +'iqtree')
                 
 with open(phylo_path+'/iqtree/concat_alignments', 'w') as f:
     for id_, seqs in alignments_per_id.items():
-        f.write('>'+id_+'\n'+seqs+'\n')
+        f.write('>' + id_ + '\n' + seqs + '\n')
 
 '''
-Run iqtree wtih following command line:
-iqtree -s <concat_file> -bb 1000 -alrt 1000 -nt AUTO -ntmax 50
+Before running iqtree, search for the best model with ProtTest3. Look at the script 'sampling_for_modeltesting_prottest.py'
 
-iqtree -s '/home/meiker/phylo_tree/iqtree/concat_alignments -bb 1000 -alrt 1000 -nt AUTO
+Run iqtree with following command line:
+iqtree -s <concat_file> -bb 1000 -alrt 1000 -nt AUTO -ntmax 50 -m <model>
+
+Command that was running:
+iqtree -s '/home/meiker/phylo_tree/iqtree/concat_alignments -bb 1000 -alrt 1000 -nt 7 -m WAG
+
 -alert --> specifies the number of bootstrap replicates for SH-aLRT (1000 is minimum number recommended)
 -bb --> number of bootstrap replicates (1000 is minimum number recommended)
 -ntmax 8 --> determine max cores that might be used (otherwise all will be used)
 -nt AUTO --> determines best number of cores
 '''
-#%%
-# '''
-# Write one msa file where the seqs of all genes are concatenated per genome (id).
-# '''
-# #Test if each genome has a sequence for enough genes to be considered.
-# usable_ids = [id_ for id_ in hits if len(hits[id_].values()) > 10]
-
-# for id_ in hits:
-#     len_hits = [i for i in hits[id_].values()]
-#     if len(hits[id_].values()) < 10:
-#         print(id_)
-        
-# ids_found_per_gene = {gene:[] for gene in genes}
-# for gene in genes:
-#     with open (phylo_path+'msa_trimmed/'+gene) as f:
-#         for line in f:
-#             if '>' in line:
-#                 ids_found_per_gene[gene].append(line.strip().split()[0][1:])
-
-# '''
-# Add gaps for genes that were not found.
-# '''
-
-# for gene in genes:
-#     gene_len = get_alignment_len(phylo_path+'msa_trimmed/'+gene)
-#     gap = insert_newlines('-'*gene_len)
-#     for id_ in usable_ids:
-#         if id_ not in ids_found_per_gene[gene]:
-#             with open(phylo_path+'msa_trimmed/'+gene, 'a') as f:
-#                 f.write('>'+id_+'\n')
-#                 f.write(gap+'\n')
-                
-                
-# concatenated_seqs = {id_:'' for id_ in usable_ids}
-# concatenation_len = {id_:0 for id_ in usable_ids}
-# for gene in genes:
-#     with open(phylo_path+'msa_trimmed/'+gene) as f:
-#         for line in f:
-#             if '>' in line:
-#                 id_ = line.strip().split()[0][1:]
-#             else:
-#                 if id_ in concatenated_seqs:
-#                     concatenated_seqs[id_] += line.strip()
-#                     concatenation_len[id_] += len(line.strip())
-
-# with open(phylo_path+'msa_trimmed/concatenated_msa_trimmed', 'w') as f:
-#     for id_ in concatenated_seqs:
-#         f.write('>'+id_+'\n')
-#         seq = insert_newlines(concatenated_seqs[id_]).strip()
-#         f.write(seq+'\n')
-
-# '''
-# Run iqtree on concatenated_msa_trimmed.
-# With iqtree -s concatenated_msa_trimmed -bb 1000 -alrt 1000 -nt AUTO
-# '''
-    
     

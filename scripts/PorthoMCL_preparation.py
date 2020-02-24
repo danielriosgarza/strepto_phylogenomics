@@ -7,11 +7,9 @@ Created on Mon Jan 13 12:10:37 2020
 """
 
 '''
-Run first the porthoMCL_prep for all species and follow than the steps in the PorthoPrep Steps document in the terminal,
-before running the rest.
-
+Finding orthologs and paralogs using the software Porthomcl.
 '''
-#import random
+import random
 from random import shuffle
 import os
 from pathlib import Path
@@ -71,14 +69,14 @@ def blast_Parser_bash(ids, savedir):
         for id_ in ids:
             f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_+".ss.tsv\n")
             
-def finding_best_hits(ids, savedir):
+def finding_best_hits(indexes_ids, savedir):
     '''
      paralogs are found, and an unnormalized score is assigned to them. Step 5.3 will normalize 
      this score so that it be comparable among different genomes.
     '''
     with open(savedir, 'w') as f:
-        for i, id_ in enumerate(ids):
-            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i + 1)+"\n")
+        for i in indexes_ids:
+            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i+1)+"\n")
   
 def split_files(ids):
     '''
@@ -212,14 +210,31 @@ today = date.today().strftime("%d/%m/%Y")
 today = today.split('/')
 today = ''.join(today)
 
-#Get ids_ of all genomes that are already blasted (located in blastres/)
-dbs_done = []
+#get all ids (genomes) that were already blasted and parsed
+dbs_parsed = []
+for file in list(os.listdir('/home/meiker/orthomcl/splitSimSeq/')):
+    id_ = file.strip().split('.')[0]
+    dbs_parsed.append(id_)
+
+#Get ids_ of all genomes that are already blasted (located in blastres/) and not further analysed
+dbs_ready2analyze = []
 for file in list(os.listdir('/home/meiker/orthomcl/blastres')):    
     id_ = file.strip().split('.')[0]
-    dbs_done.append(id_)
+    if id_ not in dbs_parsed:
+        dbs_ready2analyze.append(id_)
 
-print(len(dbs_done))
-blast_Parser_bash(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
+#Get the index from the taxon list of the ready2analyse ids
+taxon_list = []
+with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
+    for line in f:
+        taxon_list.append(line.strip())
+
+indexes = []        
+for i, taxon in enumerate(taxon_list):
+    if taxon in dbs_ready2analyze:
+        indexes.append(i+1)
+    
+blast_Parser_bash(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
 
 #%% runcell 4
 '''
@@ -227,12 +242,12 @@ blast_Parser_bash(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts'
 $mkdir paralogTemp
 $mkdir besthit
 
-Make bash script to finf best hits (-x <number>, index of taxon to work on)
+Make bash script to find best hits (-x <number>, index of taxon to work on)
 Example bash line:
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
 '''
 
-finding_best_hits(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_find_best_hits.sh'))
+finding_best_hits(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_find_best_hits.sh'))
 
 #%% runcell 5
 '''
@@ -251,9 +266,9 @@ Example bash line (again -x <number> = taxon):
 porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x <1>
 '''
 
-find_orthologs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_orthologs.sh'))
+find_orthologs(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_orthologs.sh'))
 
-find_paralogs(dbs_done, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_paralogs.sh'))
+find_paralogs(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_paralogs.sh'))
 
 '''
 8. Run MCL

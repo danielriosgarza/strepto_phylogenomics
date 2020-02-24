@@ -14,7 +14,6 @@ Make Plots
 import os
 from pathlib import Path
 import matplotlib.pyplot as plt
-from brokenaxes import brokenaxes
 import numpy as np
 import seaborn as sns
 import pandas as pd
@@ -101,7 +100,9 @@ def determine_topN(countD, Nitems=10):
     return fig_labels, topN
 
 def simple_barplot(data, labels, color='coolwarm'):
-    
+    '''
+    Simple barplot w/o axis labels or title. Neeeds two lists with numerical data and labels (for xticks).
+    '''
     theme = plt.get_cmap(color)
     plabels, pdata = determine_topN(pig_sources, 5)
     colors = [theme(1. * i / len(data)) for i in range(len(data))]
@@ -113,6 +114,18 @@ def simple_barplot(data, labels, color='coolwarm'):
     ax.set_xticklabels(labels, rotation=90)
     return fig, ax
 
+def simple_pie(data, labels, color='coolwarm', origin =0):
+    '''
+    '''
+    fig, ax = plt.subplots()
+    #autopct='%1.1f%%' gives percentages to pie, pctdistance changes postition of percentages
+    ax.pie(data, autopct='%1.1f%%', colors=colors, startangle=origin, radius = 1, pctdistance=1.15) 
+    
+    #loc in combi w/ bbocx --> loc tells matplotlib which part of bounding box should be placed at the arguments of bbox_to_anchor
+    ax.legend(labels, loc= "center left", bbox_to_anchor=(0.9, 0.5))
+    
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    return fig, ax
     
 #%% runcell 1
     
@@ -301,7 +314,7 @@ for k,v in host_isolations['Cow, Bos taurus'].items():
             cow_sources['Milk'] = v
         else:
             cow_sources['Milk']+=v
-    if "available" in k:
+    elif "available" in k:
         k=''
         if '' not in cow_sources:
             cow_sources[''] = v
@@ -311,16 +324,92 @@ for k,v in host_isolations['Cow, Bos taurus'].items():
         cow_sources[k] = v
 
 clabels, cdata = determine_topN(cow_sources, 5)
-fig4, ax = simple_barplot(cdata, clabels)
-
+#fig4, ax = simple_pie(cdata, clabels, origin=90)
+fig5, ax = simple_barplot(cdata, clabels)
 ax.set_xlabel("Isolation sources")
 ax.set_ylabel("Frequency")
-ax.set_title('The most common isolation sources of $Streptococcus$ in Cow', fontsize=14, y=1.05)
+ax.set_title('The most common isolation sources\n of $Streptococcus$ in Cow', fontsize=14, y=1.05)
+
+#Horse
+horse_sources ={}
+for k,v in host_isolations['Horse, Equus caballus'].items():
+    if "Nasal" in k or "Naso" in k:
+        if "Nasopharynx" not in horse_sources:
+            horse_sources['Nasopharynx'] = v
+        else:
+            horse_sources['Nasopharynx']+=v
+    elif 'bscess' in k:
+        if "Abscess" not in horse_sources:
+            horse_sources['Abscess'] = v
+        else:
+            horse_sources['Abscess']+=v
+    else:
+        horse_sources[k] = v
+
+holabels, hodata = determine_topN(horse_sources, 5)
+#fig4, ax = simple_pie(cdata, clabels, origin=90)
+fig6, ax = simple_barplot(hodata, holabels)
+ax.set_xlabel("Isolation sources")
+ax.set_ylabel("Frequency")
+ax.set_title('The most common isolation sources\n of $Streptococcus$ in Horse', fontsize=14, y=1.05)
+
+
+#Fish Oreochromis niloticus
+fish_sources ={}
+for k,v in host_isolations['Oreochromis niloticus'].items():
+    if "disease" in k or 'infect' in k:
+        if "Diseased Fish" not in fish_sources:
+            fish_sources["Diseased Fish"] = v
+        else:
+            fish_sources["Diseased Fish"] += v
+    else:
+        fish_sources[k] = v
+
+flabels, fdata = determine_topN(fish_sources, 5)
+#fig4, ax = simple_pie(cdata, clabels, origin=90)
+fig7, ax = simple_barplot(fdata, flabels)
+ax.set_xlabel("Isolation sources")
+ax.set_ylabel("Frequency")
+ax.set_title('The most common isolation sources\n of $Streptococcus$ in Fish', fontsize=14, y=1.05)
 
 
 #%% runcell 6
 
-   
+#Combine plots in a single figure
+
+figall, axs = plt.subplots(3,2, figsize= (10,8)) #2x2 grid with determined figure size
+
+#fill subplots 
+ax1 = axs[0,0]
+axs[0,1] 
+axs[1,0] 
+axs[1,1] 
+axs[2,0] 
+axs[2,1] 
+
+#Titles
+#figall.suptitle('Genome sizes', fontsize=16, y=0.95)
+# ax1.set_title('Merged')
+# ax2.set_title('Lactococcus')
+# ax3.set_title('Streptococcus')
+# ax4.set_title('Floricoccus')
+
+#Set x and y labels for all plots
+# for ax in axs.flat:
+    # ax.set(xlabel='Genome size (in Mb)', ylabel='Density')
+
+#Sublabels for the plot
+#axs[0,0].text(-0.05, 1.10, "A", ha = "left", va="top", size=12, weight = 'bold')
+# axs[0,1].text(-0.05, 1.10, "B", ha = "left", va="top", transform=axs[0,1].transAxes, weight = 'bold')
+# axs[1,0].text(-0.05, 1.10, "C", ha = "left", va="top", transform=axs[1,0].transAxes, weight = 'bold')
+# axs[1,1].text(-0.05, 1.10, "D", ha = "left", va="top", transform=axs[1,1].transAxes, weight = 'bold')
+# axs[2,0].text(-0.05, 1.10, "E", ha = "left", va="top", transform=axs[2,0].transAxes, weight = 'bold')
+# axs[2,1].text(-0.05, 1.10, "F", ha = "left", va="top", transform=axs[2,1].transAxes, weight = 'bold')
+
+#Adjust layout to preserve title
+plt.tight_layout()
+plt.subplots_adjust(top=0.88)
+#fig.savefig(os.path.join(p.parents[0], 'figures', '230120_histogram_gs.png'), dpi=300)   
   
 
            
