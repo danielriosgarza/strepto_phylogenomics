@@ -91,12 +91,12 @@ def split_files(ids):
     
     return id_i
 
-def find_orthologs(ids, savedir):
+def find_orthologs(indexes_ids, savedir):
     '''
     Output of bash line is all the ortholog genes.
     '''
     with open (savedir, 'w') as f:
-        for i, id_ in enumerate(ids):
+        for i in indexes_ids:
             f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x "+ str(i + 1)+"\n")
 
 def find_paralogs(ids, savedir):
@@ -247,7 +247,7 @@ Example bash line:
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
 '''
 
-finding_best_hits(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_find_best_hits.sh'))
+finding_best_hits(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_find_best_hits.sh'))
 
 #%% runcell 5
 '''
@@ -266,9 +266,9 @@ Example bash line (again -x <number> = taxon):
 porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x <1>
 '''
 
-find_orthologs(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_orthologs.sh'))
+find_orthologs(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_orthologs.sh'))
 
-find_paralogs(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_paralogs.sh'))
+find_paralogs(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+ '_paralogs.sh'))
 
 '''
 8. Run MCL
