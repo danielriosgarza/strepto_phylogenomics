@@ -234,7 +234,7 @@ for i, taxon in enumerate(taxon_list):
     if taxon in dbs_ready2analyze:
         indexes.append(i+1)
     
-#blast_Parser_bash(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
+blast_Parser_bash(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
 
 #%% runcell 4
 '''
