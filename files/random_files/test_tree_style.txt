@@ -1,0 +1,7 @@
+name	branch_color	leaf_dot_color	new_name
+strepto_1	#8db0fe	#d6604d	 __IROKI_BLANK__
+strepto_2	#8db0fe	#d6604d	 __IROKI_BLANK__
+strepto_3	#b40426	#d6604d	 __IROKI_BLANK__
+lacto_1	#dddddd	#2166ac	 __IROKI_BLANK__
+lacto_2	#f49a7b	#2166ac	 __IROKI_BLANK__
+flori_1	#3b4cc0	#d1e5f0	 __IROKI_BLANK__

@@ -1,0 +1,7 @@
+name	branch_color	leaf_label_color	new_name
+strepto_1	#8db0fe	#d6604d	s1
+strepto_2	#8db0fe	#d6604d	s1
+strepto_3	#b40426	#d6604d	s2
+lacto_1	#dddddd	#2166ac	l1
+lacto_2	#f49a7b	#2166ac	l2
+flori_1	#3b4cc0	#d1e5f0	f1
