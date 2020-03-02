@@ -199,6 +199,19 @@ total 12173
 
 
 
+02/03/2020
+
+Tree
+- Coloring the tree:
+- check how many species there are to assign colors
+- options: 2 trees one with background (colored by genus) and other with branches (colored by species) overlay in illustrator; use only the background color and assign red colors to Strpto, blue to Lacto, and green to Flori; use diverse colors for the species and have a color legend and based on the legend make a ring with 2 colors and a line in illustrator; use barplots in ete3; or http://eatsgraphsandleaves.blogspot.com/2015/11/graphlan-sorta-like-circos-for-python.html.
+
+
+Parsing the pan-genome
+- Binary table as soon as the results finish computing
+
+Rate:
+
 
 
 
