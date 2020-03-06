@@ -24,7 +24,7 @@ def random_pick(inputfile, outputfile, number=100):
             seqs = SeqIO.parse(f,"fasta")
             samps = ((seq.name, seq.seq) for seq in sample(list(seqs), number))
             for samp in samps:
-                f2.write(">{}\n{}".format(*samp))            
+                f2.write(">{}\n{}\n".format(*samp))            
                
 path = os.getcwd()
 p = Path(path)
@@ -39,5 +39,5 @@ random_pick(file_path,'/home/meike/tests/Files/prottest_testset_larger.fa', numb
 '''
 run following line on newly generated files to check for the best model:
     
-java -jar /home/meiker/software/prottest-3.4.2/prottest-3.4.2.jar -i /home/meiker/phylo_tree/model_testing/prottest_testset_larger.fa -o /home/meiker/phylo_tree/model_testing/prottest_prediction_larger -all -threads 8
+java -jar /home/meiker/software/prottest-3.4.2/prottest-3.4.2.jar -i /home/meiker/phylo_tree/model_testing/prottest_testset1.fa -o /home/meiker/phylo_tree/model_testing/prottest_prediction_1 -all -threads 8
 '''

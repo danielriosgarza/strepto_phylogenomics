@@ -41,7 +41,7 @@ def layout(node):
 
 
  
-t = Tree("(flori_1:1,(lacto_1:1,lacto_2:1,(strepto_1:1,strepto_2:1,strepto_3:0.5):0.5):0.5);")
+t = Tree("(flori_1:1,flori_2:1,(lacto_1:1,lacto_2:1,lacto_3:0.5,lacto_4:0.5,(strepto_1:1,strepto_2:1,strepto_3:0.5,strepto_4:0.25,strepto_5:0.75,strepto_6:0.1):0.5):0.6);")
 
 #colour per species
 species = {'s1' :  ['strepto_1', 'strepto_2'],
@@ -153,18 +153,23 @@ def layout(node):
             ete3.faces.add_face_to_node(genus, node, column = 1, position = "aligned")
 
 
+    
  
-t = Tree("(flori_1:1,(lacto_1:1,lacto_2:1,(strepto_1:1,strepto_2:1,strepto_3:0.5):0.5):0.5);")
+t = Tree("(flori_1:1,flori_2:1,(lacto_1:1,lacto_2:1,lacto_3:0.5,lacto_4:0.5,(strepto_1:1,strepto_2:1,strepto_3:0.5,strepto_4:0.25,strepto_5:0.75,strepto_6:0.1):0.5):0.6);")
 
 #colour per species
 species = {'s1' :  ['strepto_1', 'strepto_2'],#d1e5f0
        's2' : ['strepto_3'],
+       's3' : ['strepto_4'],
+       's4' : ['strepto_5', 'strepto_6'],
        'l1' : ['lacto_1'],
        'l2' : ['lacto_2'],
-       'f1' : ['flori_1']}     
+       'l3' : ['lacto_3', 'lacto_4'],
+       'f1' : ['flori_1'],
+       'f2' : ['flori_2']}     
 
 #leaf_colours --> k = id_ and v = colour and the same species needs the same colour theme
-#2166ac'
+
 leaf_colours = {}
 
 streptos = []
@@ -181,11 +186,13 @@ for k,v  in species.items():
         floris.append(k)
 
 
-###problem: returned colours are tupules and not Hex number
+#get as many colors (hex codes) as there are species
 strep_colour = get_colors(streptos)
 lacto_colour = get_colors(lactos, color= 'Blues')
 flori_colour = get_colors(floris, color = 'Greys')
 
+
+#make dict with leafcolors per species
 for i, spec in enumerate(streptos):
     for _id in species[spec]:
         leaf_colours[_id] = strep_colour[i]   
@@ -198,13 +205,46 @@ for i, spec in enumerate(floris):
     for _id in species[spec]:
         leaf_colours[_id] = flori_colour[i]  
 
+
+check = 0
+species_check = []
+for node in t.traverse():
+    children_nodes = node.children
+    species_check = []
+    
+    #iterate over nodes and check the leaves is the same species is present
+    for c in children_nodes:
+        if c.is_leaf():
+            for k,v in species.items():
+                if c in v:
+                    species_check.append((c, k))
+    #sorted(species_check, key = itemgetter(1)) #sort according to species, so all ids/nodes from one species are in a row
+    
+    #go through list and store all nodes/leaves where species is already seen in a list
+    nodes2detach = []
+    seen = set()
+    for ele in species_check:
+        if ele[1] not in seen:
+            seen.add(ele[1])
+        else:
+            nodes2detach.append(ele[0])
+    
+    #if list of nodes to detach is not empty go through list and remove the nodes (duplicates on same branch)
+    if len(nodes2detach) > 0:
+        for item in nodes2detach:
+            item.detach()
+            check += 1
+                
+
+
 for node in t.traverse():
     node.img_style["size"] = 0 #removes dots at nodes  
     if node.is_leaf():
         color = leaf_colours.get(node.name, None)
         if color:
-            strain = ete3.RectFace(width = 10, height = 10, fgcolor = color, bgcolor = color) 
-            node.add_face(strain, column = 0, position="branch-right")
+            node.img_style["bgcolor"] = color
+            # strain = ete3.RectFace(width = 10, height = 10, fgcolor = color, bgcolor = color) 
+            # node.add_face(strain, column = 0, position="branch-right")
 
     
     
@@ -228,7 +268,7 @@ for node in t.traverse():
 ts = TreeStyle()
 ts.mode = 'c'
 
-ts.show_leaf_name = False
+#ts.show_leaf_name = False
 
 # ts.legend.add_face(ete3.CircleFace(5, '#d6604d'), column=0)
 # ts.legend.add_face(ete3.TextFace("Streptococcus"), column = 1)
@@ -242,6 +282,6 @@ ts.show_leaf_name = False
 # ts.legend_position = 1
 # ts.title.add_face(ete3.TextFace("Genus"), column = 1)
 
-ts.layout_fn = layout
+#ts.layout_fn = layout
 
 t.show(tree_style=ts)

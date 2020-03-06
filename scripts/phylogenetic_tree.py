@@ -266,19 +266,46 @@ if not os.path.isdir(phylo_path +'iqtree'):
 with open(phylo_path+'/iqtree/concat_alignments', 'w') as f:
     for id_, seqs in alignments_per_id.items():
         f.write('>' + id_ + '\n' + seqs + '\n')
-
+#%% runcell 7
+        
 '''
 Before running iqtree, search for the best model with ProtTest3. Look at the script 'sampling_for_modeltesting_prottest.py'
 
 Run iqtree with following command line:
-iqtree -s <concat_file> -bb 1000 -alrt 1000 -nt AUTO -ntmax 50 -m <model>
+iqtree -s <concat_file> -bb 1000 -alrt 1000 -nt AUTO -ntmax 50 -m <model> -g outgroups
 
 Command that was running:
-iqtree -s '/home/meiker/phylo_tree/iqtree/concat_alignments -bb 1000 -alrt 1000 -nt 7 -m WAG
+iqtree -s /home/meiker/phylo_tree/iqtree/rooted_alignments/concat_alignments -bb 1000 -alrt 1000 -nt 7 -m WAG -g /home/meiker/phylo_tree/iqtree/rooted_alignments/outgroups.txt
 
 -alert --> specifies the number of bootstrap replicates for SH-aLRT (1000 is minimum number recommended)
 -bb --> number of bootstrap replicates (1000 is minimum number recommended)
 -ntmax 8 --> determine max cores that might be used (otherwise all will be used)
 -nt AUTO --> determines best number of cores
+-g --> constrained tree search, specify outgroup for rooting of the tree
 '''
-    
+
+#specify the outgroup and save it in the file 'outgroups'
+outgroup = []
+strepto_ids = []
+for id_ in db_ids:
+    if 'strepto' in id_:
+        strepto_ids.append(id_)
+    else:
+        outgroup.append(id_)
+        
+#file structure: ((streptococcus_00001,streptococcus_00002,...), floricoccus_00001,...);            
+with open(os.path.join(p.parents[0], 'files', 'phylogenetic_tree', 'outgroups.txt'), 'w') as f:
+    f.write('((')
+    for id_ in strepto_ids:
+        if id_ == strepto_ids[-1]:
+            f.write(id_)
+        else:
+            f.write(id_ + ',')
+    f.write('),')
+    for _id in outgroup:
+        if _id == outgroup[-1]:
+            f.write(_id)
+        else:
+            f.write(_id + ',')
+    f.write((');'))
+#place file in the iqtree folder    

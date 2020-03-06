@@ -20,7 +20,7 @@ all the selected genomes for the project. The parameters for selection:
 selection is done by the script: genome_quality_check.py. Further, some genomes were included to assure we had at least one per species (in the same script).
 
 
-- strepto_genome_database.tsv
+- 03032020_strepto_genome_database_final.tsv
 
 database identifier, mapping to all information that we have about the strain.
 

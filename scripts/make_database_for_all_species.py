@@ -13,9 +13,8 @@ import dateparser
 import re
 import os
 from pathlib import Path
+from datetime import date
 
-path = os.getcwd()
-p = Path(path)
 
 def compare(str2Match, strOptions, score_t):
     '''Give query string that is compared to other strings in a list. Returns list with all strings that had
@@ -290,25 +289,45 @@ def spelling(inputfile, outputfile, fc):
                         f2.write(name)
                     f2.write('\t') #seperate each column with tab
                 f2.write('\n') #after each line
-                    
+
+path = os.getcwd()
+p = Path(path)
+
+#get the date to keep track of the scripts (added to scriptname)
+today = date.today().strftime("%d/%m/%Y")
+today = today.split('/')
+today = ''.join(today)                    
 
 #get typos out of the fields   
-lacto_synonyms = get_synonyms(os.path.join(p.parents[0], 'files', '06012020_lactococcus_genomes_quality.tsv'))
-lacto_fields2change = get_typo_dicts(lacto_synonyms)
-lacto_input = os.path.join(p.parents[0], 'files', '06012020_lactococcus_genomes_quality.tsv')
-lacto_output = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
-spelling(lacto_input,lacto_output, lacto_fields2change)
+# lacto_synonyms = get_synonyms(os.path.join(p.parents[0], 'files', '06012020_lactococcus_genomes_quality.tsv'))
+# lacto_fields2change = get_typo_dicts(lacto_synonyms)
+# lacto_input = os.path.join(p.parents[0], 'files', '06012020_lactococcus_genomes_quality.tsv')
+# lacto_output = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
+# spelling(lacto_input,lacto_output, lacto_fields2change)
 
 
-flori_syn = get_synonyms(os.path.join(p.parents[0], 'files', '06012020_floricoccus_genomes_quality.tsv'))
-flori_fields2change = get_typo_dicts(flori_syn)
-flori_input = os.path.join(p.parents[0], 'files', '06012020_floricoccus_genomes_quality.tsv')
-flori_output = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
-spelling(flori_input, flori_output, flori_fields2change)
+# flori_syn = get_synonyms(os.path.join(p.parents[0], 'files', '06012020_floricoccus_genomes_quality.tsv'))
+# flori_fields2change = get_typo_dicts(flori_syn)
+# flori_input = os.path.join(p.parents[0], 'files', '06012020_floricoccus_genomes_quality.tsv')
+# flori_output = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
+# spelling(flori_input, flori_output, flori_fields2change)
 
 strepto_syn = get_synonyms(os.path.join(p.parents[0], 'files', 'streptococcus_genomes_quality.tsv'))
 strepto_fields2change = get_typo_dicts(strepto_syn)
-strepto_input = os.path.join(p.parents[0], 'files', '06012020_streptococcus_genomes_quality.tsv')
-strepto_output = os.path.join(p.parents[0], 'files', '06012020_streptococcus_database.tsv')
+strepto_input = os.path.join(p.parents[0], 'files', 'streptococcus_genomes_quality.tsv')
+strepto_output = os.path.join(p.parents[0], 'files', today + '_streptococcus_database(2_genome_ids).tsv')
 spelling(strepto_input, strepto_output, strepto_fields2change)
+
+#remove first "genome_id" (patric_id column, repeated later in the file)
+with open (os.path.join(p.parents[0], 'files', '03032020_streptococcus_database(2_genome_ids).tsv')) as f:
+    with open (os.path.join(p.parents[0], 'files', today + '_streptococcus_database.tsv'), 'w') as f2:
+        all_headers = f.readline().strip().split('\t')
+        new_headers = [all_headers[0]] + all_headers[2::]
+        f2.write('\t'.join(new_headers) + '\n')
+        for line in f:
+            a = line.strip().split('\t')
+            new_line = [a[0]] + a[2::]
+            f2.write('\t'.join(new_line) + '\n')
+
+
 
