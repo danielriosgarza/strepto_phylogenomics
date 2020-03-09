@@ -25,3 +25,56 @@ hist(gs,100, density=1, alpha=0.5, color='b')
 sns.distplot(gs, kde=1, rug=1)
 
 #for colorscheme check http://colorbrewer2.org/#type=diverging&scheme=PRGn&n=6
+
+
+#########remove redundant sequences #################3
+
+import scipy.spatial as sps
+
+
+def replace_letter_for_number(replace_d, d_arrays):
+    for k in d_arrays:
+        d_arrays[k] = np.array([replace_d[d_arrays[k][i]] for i in range(len(d_arrays[k]))])
+    
+
+
+def compare(idx, list_idx, v_dict, threshold=0.5):
+    v1 = [v_dict[idx]]
+    v2 =np.array([v_dict[i] for i in list_idx])
+    distance = sps.distance.cdist(v1,v2, metric='hamming')[0]
+    
+    return [list_idx[i[0]] for i in enumerate(distance) if i[1]<threshold]
+
+
+
+replace = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':6, 'g':7, 'h':8, 'i':9, 'j':10}
+
+
+d = {'a':'abcd', 'b':'ebcd', 'c':'fghi', 'd':'jghi'}
+
+
+
+d = {i:np.array(list(d[i])) for i in d}
+
+replace_letter_for_number(replace, d)
+    
+    
+
+k1 = list(d.keys())
+
+k2 = k1[:]
+
+
+survived=[]
+
+for i in k2:
+    
+    if i in k1:
+        
+        survived.append(i)
+        k1.remove(i)
+        if len(k1)==0:
+            break
+        equal = compare(i, k1, d)
+        for i in equal:
+            k1.remove(i)
