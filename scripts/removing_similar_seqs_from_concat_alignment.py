@@ -83,9 +83,9 @@ for i, letter in enumerate(alphabet):
     replace[letter.upper()] = i+1
 
 #put seqs in an array in order to keep number at right position (as z - 26)
-seqs = {i:np.array(list(seqs[i])) for i in seqs}
+seqs_array = {i:np.array(list(seqs[i])) for i in seqs}
 #replace letter with numbers in order to look for similarity based on hamming distance
-replace_letter_for_number(replace, seqs)
+replace_letter_for_number(replace, seqs_array)
     
 #make two lists with all ids (keys): one to iterate over and the other to update (remove already found duplicates)
 k1 = list(seqs.keys())
@@ -104,7 +104,7 @@ for i in k2:
         if len(k1)==0:
             break
         #look for similar seqs and remove them from k1
-        equal = compare(i, k1, seqs)
+        equal = compare(i, k1, seqs_array)
         for i in equal:
             k1.remove(i)
 
