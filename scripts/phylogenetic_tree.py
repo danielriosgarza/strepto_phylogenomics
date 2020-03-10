@@ -277,6 +277,9 @@ iqtree -s <concat_file> -bb 1000 -alrt 1000 -nt AUTO -ntmax 50 -m <model> -g out
 Command that was running:
 iqtree -s /home/meiker/phylo_tree/iqtree/rooted_alignments/concat_alignments -bb 1000 -alrt 1000 -nt 7 -m WAG -g /home/meiker/phylo_tree/iqtree/rooted_alignments/outgroups.txt
 
+Beforehand reduced alignment:
+iqtree -s /home/meiker/phylo_tree/iqtree/reduced_alignments/09032020_reduced_concat_alignments.fa -bb 1000 -alrt 1000 -nt 7 -m WAG 
+
 -alert --> specifies the number of bootstrap replicates for SH-aLRT (1000 is minimum number recommended)
 -bb --> number of bootstrap replicates (1000 is minimum number recommended)
 -ntmax 8 --> determine max cores that might be used (otherwise all will be used)
