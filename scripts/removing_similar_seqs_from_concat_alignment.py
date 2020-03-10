@@ -113,6 +113,39 @@ with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/' + today + '_reduc
     for k in survived:
         samp = (k, seqs[k])
         f.write(">{}\n{}\n".format(*samp))
+        
+#specify the outgroup and save it in the file 'outgroups'
+  
+included = []    
+with open('/home/meike/tests/Files/09032020_reduced_concat_alignments.fa') as f:
+    for line in f:
+        if line.startswith('>'):
+            included.append(line[1::])
+
+outgroup = []
+strepto_ids = []
+for id_ in included:
+    if 'strepto' in id_:
+        strepto_ids.append(id_)
+    else:
+        outgroup.append(id_)
+        
+#file structure: ((streptococcus_00001,streptococcus_00002,...), floricoccus_00001,...);            
+with open(os.path.join(p.parents[0], 'files', 'phylogenetic_tree', today + '_reduced_outgroups.txt'), 'w') as f:
+    f.write('((')
+    for id_ in strepto_ids:
+        if id_ == strepto_ids[-1]:
+            f.write(id_)
+        else:
+            f.write(id_ + ',')
+    f.write('),')
+    for _id in outgroup:
+        if _id == outgroup[-1]:
+            f.write(_id)
+        else:
+            f.write(_id + ',')
+    f.write((');'))
+
 
 #%% runcell 2
             
