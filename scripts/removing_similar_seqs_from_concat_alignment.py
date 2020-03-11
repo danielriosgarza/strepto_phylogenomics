@@ -92,7 +92,7 @@ k1 = list(seqs.keys())
 k2 = k1[:]
 
 #list storing all unique ids
-survived=[]
+survived = []
 
 for i in k2:
     
@@ -108,30 +108,35 @@ for i in k2:
         for i in equal:
             k1.remove(i)
 
+#add the in nijmegen sequenced genomes and Streptococcus_sp_VT_162 to the reduced file
+with open(os.path.join(p.parents[0], 'files', '03032020_streptococcus_database_final.tsv')) as f:
+    headers = f.readline().strip().split('\t')
+    species_ind = headers.index('species')
+    for line in f:
+        a = line.strip().split('\t')
+        species = a[species_ind]
+        number = int(a.split('_')[1])
+        if a[0] == 'streptococcus_01814' or number > 11961:
+            survived.append(a[0])
+        
+
 #write all unique seqs into a concatfile that can be used to build the tree
-with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/' + today + '_reduced_concat_alignments.fa', 'w') as f:
+with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_concat_alignments.fa', 'w') as f:
     for k in survived:
         samp = (k, seqs[k])
         f.write(">{}\n{}\n".format(*samp))
         
-#specify the outgroup and save it in the file 'outgroups'
-  
-included = []    
-with open('/home/meike/tests/Files/09032020_reduced_concat_alignments.fa') as f:
-    for line in f:
-        if line.startswith('>'):
-            included.append(line[1::])
-
+#specify the outgroup and save it in the file 'outgroups'  
 outgroup = []
 strepto_ids = []
-for id_ in included:
+for id_ in survived:
     if 'strepto' in id_:
         strepto_ids.append(id_)
     else:
         outgroup.append(id_)
         
 #file structure: ((streptococcus_00001,streptococcus_00002,...), floricoccus_00001,...);            
-with open(os.path.join(p.parents[0], 'files', 'phylogenetic_tree', today + '_reduced_outgroups.txt'), 'w') as f:
+with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_outgroups.txt', 'w') as f:
     f.write('((')
     for id_ in strepto_ids:
         if id_ == strepto_ids[-1]:

@@ -83,8 +83,8 @@ lactos = list(species['lactococcus'].keys())
 floris =list(species['floricoccus'].keys())
 
 strep_color = get_colors(streptos)
-lacto_color = get_colors(lactos, color= 'Blues')
-flori_color = get_colors(floris, color = 'Greys')
+lacto_color = get_colors(lactos, color = 'Blues')
+flori_color = get_colors(floris, color = 'Greens')
 
 for i, spec in enumerate(streptos):
     for _id in species['streptococcus'][spec]:
@@ -100,7 +100,8 @@ for i, spec in enumerate(floris):
 
 
 #Set style to tree
-t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree')        
+#t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree')
+t = Tree('/home/meike/tests/Files/09032020_reduced_concat_alignments.fa.contree')        
         
 for node in t.traverse():
     node.img_style["size"] = 0 #removes dots at nodes  
@@ -115,9 +116,11 @@ ts.mode = 'c'
 
 t.show(tree_style=ts)
 
+ids2species = get_ids2species(species)
+
 #%%
 
-t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree') 
+#t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree') 
 
 ids2species = get_ids2species(species)
 
@@ -147,6 +150,7 @@ for node in t.traverse():
     node.img_style["size"] = 0 #removes dots at nodes  
     if node.is_leaf():
         color = leaf_colours.get(node.name, None)
+        node.name = ids2species[node.name]
         if color:
             node.img_style['bgcolor'] = color
             
@@ -161,45 +165,46 @@ t.show(tree_style = ts)
 #%%
 #Set outgroups to root the tree
 
-t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree')       
+#t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree')       
 
 # #determine the two lactococcus nodes with greatest distance to search for the root node
-# lactoleaves = []
-# florileaves = []
-# for leaf in t.iter_leaves():
-#     if 'lacto' in leaf.name:
-#         lactoleaves.append(leaf)
-#     if 'flori' in leaf.name:
-#         florileaves.append(leaf)
+lactoleaves = []
+florileaves = []
+for leaf in t.iter_leaves():
+    if 'lacto' in leaf.name:
+        lactoleaves.append(leaf)
+    if 'flori' in leaf.name:
+        florileaves.append(leaf)
 
 # #look for all distances (takes some time (total 17578 combinations))
-# distances = []
-# order = []
-# for a, b in itertools.combinations(lactoleaves, 2):
-#     distances.append(a.get_distance(b))
-#     order.append((a,b))
+distances = []
+order = []
+for a, b in itertools.combinations(lactoleaves, 2):
+    distances.append(a.get_distance(b))
+    order.append((a,b))
 
 # #get the pair (two nodes) that have greatest distance
-# greatest_dist = max(distances)
-# index = distances.index(greatest_dist)
-# pair_for_outgroup = order[index] 
-# print(pair_for_outgroup) # 'lactococcus_00009', 'lactococcus_00081'
+greatest_dist = max(distances)
+index = distances.index(greatest_dist)
+pair_for_outgroup = order[index] 
+print(pair_for_outgroup) # 'lactococcus_00009', 'lactococcus_00081'
 
 # #search for common ancestor of lactococcus and floricoccus
 # florinodes = [florileaves[0].name, florileaves[1].name]
 # lactonodes = [pair_for_outgroup[0].name, pair_for_outgroup[1].name]
 
-root_node = t.get_common_ancestor('floricoccus_00001', 'floricoccus_00002', 'lactococcus_00009', 'lactococcus_00081')
-#outgroup2 = t.get_common_ancestor('lactococcus_00009', 'lactococcus_00081')
-#root_node = t.get_common_ancestor(outgroup1.name, outgroup2.name)
+#root_node = t.get_common_ancestor('floricoccus_00001', 'floricoccus_00002', 'lactococcus_00009', 'lactococcus_00081')
+
+root_node = t.get_common_ancestor('floricoccus_00001', 'lactococcus_00009', 'lactococcus_00173')
 
 t.set_outgroup(root_node)
 
 for node in t.traverse():
     node.img_style["size"] = 0 #removes dots at nodes  
     if node.is_leaf():
-        node.img_style['draw_descendants'] = False
+        #node.img_style['draw_descendants'] = False
         color = leaf_colours.get(node.name, None)
+        node.name = ids2species[node.name]
         if color:
             node.img_style['bgcolor'] = color
         # if 'flori' in node.name:
@@ -212,6 +217,16 @@ for node in t.traverse():
         #     node.img_style['size'] = 50
         #     node.img_style['hz_line_width'] = 30
         #     node.img_style['bgcolor'] = 'MediumBlue'
+
+species_counter = {}
+
+for i in t.iter_leaf_names():
+    if i not in species_counter:
+        species_counter[i] = 1
+    else:
+        species_counter[i] += 1
+
+t.write(format = 1, outfile = '/home/meike/tests/Files/rooted_tree.nwk')
             
 ts = TreeStyle()
 ts.mode = 'c'
@@ -223,42 +238,16 @@ t.show(tree_style=ts)
 #%%
 
 
-t = Tree(files_dir + '/phylogenetic_tree/concat_alignments.contree') 
+t = Tree('/home/meike/tests/Files/09032020_reduced_concat_alignments.fa.contree') 
 
-before = 0
-for node in t.iter_leaves():
-    before += 1
+nodeId = 0
 
-ids2species = get_ids2species(species)
-check = []
-for node in t.traverse():
-    children_nodes = node.children
-    species_check = []
-    if all(c.is_leaf() for c in children_nodes):
-        species_check.append(ids2species[child.name])
-    if len(set(species_check)) == 1:
-        for i in range(1, len(children_nodes)):
-            check.append(node.children[i])
-            node.children[i].detach()
+for n in t.traverse('levelorder'):
+    n.add_features(ND = nodeId)
+    nodeId += 1
+    print(n.name, )
 
-after = 0
-for node in t.iter_leaves():
-    after += 1    
-print(before, after, len(check))    
-    
-    # for child in children_nodes:
-    #     if child.is_leaf():
-    #         species_check.append(ids2species[child.name])
-    #         collapsed_nodes.append(child)        
-    # for spec in species_check:
         
-    
-    
-    # if any(c.is_leaf() for c in children_nodes):
-    #     for child in children_nodes:
-    #         species_check.append(ids2species[child.name])
-    #     if len(set(species))
-    
     
 
 for node in t.traverse():
@@ -293,13 +282,15 @@ check = 0
 
 
 for node in t.traverse():
+    t2 = Tree(t.write())
+    
     children_nodes = node.children
     species_check = []
     
     #iterate over nodes and check the leaves is the same species is present
     for c in children_nodes:
         if c.is_leaf():
-            species_check.append((c, ids2species[child.name]))
+            species_check.append((c, ids2species[c.name]))
     #sorted(species_check, key = itemgetter(1)) #sort according to species, so all ids/nodes from one species are in a row
     
     #go through list and store all nodes/leaves where species is already seen in a list
@@ -314,7 +305,7 @@ for node in t.traverse():
     #if list of nodes to detach is not empty go through list and remove the nodes (duplicates on same branch)
     if len(nodes2detach) > 0:
         for item in nodes2detach:
-            item.detach()
+            t2.item.detach()
             check += 1
                 
 #counter to keep track how many leaves the tree still has
