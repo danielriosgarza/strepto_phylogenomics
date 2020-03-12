@@ -15,6 +15,19 @@ import matplotlib
 import matplotlib.pyplot as plt
 import itertools
 
+def get_colors(data_list, color='Reds'):
+    '''
+    Needs a dat_list to determine how many different colours are needed. Cmap colour schemes can be provided, default are Reds.
+    '''
+    colors = []
+    cmap = plt.get_cmap(color, len(data_list))
+    
+    for i in range(cmap.N):
+        rgb = cmap(i)[:3] # will return rgba, we take only first 3 so we get rgb
+        colors.append(matplotlib.colors.rgb2hex(rgb))
+    return colors
+        
+        
 
 path = os.getcwd()
 p = Path(path)
@@ -32,6 +45,11 @@ for file in files:
             a = line.strip().split('\t')
             species = a[species_ind]
             ids2species[a[0]] = species
+
+species2ids = {}
+for k, v in ids2species.items():
+    for i in v:
+        species2ids[i] = k
 
 
 path = os.getcwd()
@@ -70,7 +88,14 @@ for leaf in leaves:
         genera["Lactococcus"] += [leaf.name]
     if 'flori' in leaf.name:
         genera["Floricoccus"] += [leaf.name]
-        
+
+
+
+strep_color = get_colors(streptos)
+lacto_color = get_colors(lactos, color = 'Blues')
+flori_color = get_colors(floris, color = 'Greens')
+
+#maually check which ids are located in the middle of all species        
 with open('/home/meike/tests/Files/iTol/dataset_text.txt', 'w') as f:
     #headers of the file
     f.write('DATASET_TEXT\nSEPARATOR COMMA\n')
@@ -79,26 +104,17 @@ with open('/home/meike/tests/Files/iTol/dataset_text.txt', 'w') as f:
     f.write('DATASET_LABEL,Lactococcus\nCOLOR,#2166ac\nALIGN_TO_TREE,1\n')
     f.write('DATASET_LABEL,Floricoccus\nCOLOR,#525252\nALIGN_TO_TREE,1\n')
     f.write('DATA\n')
-    for k, v in genera.items():
-        for item in v:
-            if k == "Streptococcus":
-                if item != v[-1]:
-                    f.write(item + '|')
-                else:
-                    f.write(item + ',Streptococcus,-1,#b2182b,bold-italic,2,0\n')
-            if k == "Lactococcus":
-                if item != v[-1]:
-                    f.write(item + '|')
-                else:
-                    f.write(item + ',Lactococcus,-1,#2166ac,bold-italic,2,0\n')
-            if k == "Floricoccus":
-                if item != v[-1]:
-                    f.write(item + '|')
-                else:
-                    f.write(item + ',Floricoccus,-1,#525252,bold-italic,2,0\n')
+    f.write('streptococcus_11956,Streptococcus,-1,#b2182b,bold-italic,3,0\n')
+    f.write('lactococcus_00017,Lactococcus,-1,#2166ac,bold-italic,3,0\n')
+    f.write('floricoccus_00001,Floricoccus,-1,#525252,bold-italic,3,0\n')
+    
 
 #look at tree and search for ids from each genus that are furthest apart
-                    
+all_species = []
+for leaf in leaves:
+    spec = ids2species[leaf]
+
+                   
 with open('/home/meike/tests/Files/iTol/tree_colors.txt', 'w') as f:
     f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
     #colored ranges inclusive labels
