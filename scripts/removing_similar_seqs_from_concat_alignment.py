@@ -121,7 +121,7 @@ with open(os.path.join(p.parents[0], 'files', '03032020_streptococcus_database_f
             survived.append(a[0])
 
 #write all unique seqs into a concatfile that can be used to build the tree
-with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_concat_alignments.fa') as f:
+with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_concat_alignments.fa', 'w') as f:
     for k in survived:
         samp = (k, seqs[k])
         f.write(">{}\n{}\n".format(*samp))

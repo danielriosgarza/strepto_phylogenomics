@@ -63,6 +63,27 @@ for script in plinc_paths:
                     
                 if passed_last_id:
                    f2.write(line)
-    
-                
+
+
+script_folder = os.path.join(p, 'bash_scripts', 'porthomcl', 'narrativum2') 
+s_scripts = os.listdir(script_folder) 
+
+surprise_paths = []
+for scriptname in s_scripts:
+    surprise_paths.append(script_folder + '/' + scriptname)
+
+i = 0    
+for script in surprise_paths:
+    last_id = check_last_blasted_id(script, already_done)
+    i += 1
+    with open(script) as f:
+        with open(script_folder + '/' + today + '_blastrun_' + str(i) + '.sh', 'w') as f2:
+            passed_last_id = False
+            for line in f:
+                a = line.strip().split('/')
+                if a[-1] == last_id:
+                    passed_last_id = True
+                    
+                if passed_last_id:
+                   f2.write(line)          
 
