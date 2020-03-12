@@ -108,6 +108,7 @@ for i in k2:
         for i in equal:
             k1.remove(i)
 
+
 #add the in nijmegen sequenced genomes and Streptococcus_sp_VT_162 to the reduced file
 with open(os.path.join(p.parents[0], 'files', '03032020_streptococcus_database_final.tsv')) as f:
     headers = f.readline().strip().split('\t')
@@ -115,16 +116,16 @@ with open(os.path.join(p.parents[0], 'files', '03032020_streptococcus_database_f
     for line in f:
         a = line.strip().split('\t')
         species = a[species_ind]
-        number = int(a.split('_')[1])
+        number = int(a[0].split('_')[1])
         if a[0] == 'streptococcus_01814' or number > 11961:
             survived.append(a[0])
-        
 
 #write all unique seqs into a concatfile that can be used to build the tree
-with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_concat_alignments.fa', 'w') as f:
+with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_concat_alignments.fa') as f:
     for k in survived:
         samp = (k, seqs[k])
         f.write(">{}\n{}\n".format(*samp))
+        
         
 #specify the outgroup and save it in the file 'outgroups'  
 outgroup = []
