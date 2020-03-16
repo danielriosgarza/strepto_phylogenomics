@@ -1,0 +1,206 @@
+LABELS
+SEPARATOR COMMA
+DATA
+lactococcus_00137,Lactococcus garvieae
+lactococcus_00055,Lactococcus sp. UBA7220
+lactococcus_00127,Lactococcus sp. UBA7065
+lactococcus_00180,Lactococcus termiticola
+lactococcus_00005,Lactococcus reticulitermitis
+lactococcus_00178,Lactococcus sp.
+lactococcus_00001,Lactococcus piscium
+lactococcus_00009,Lactococcus plantarum
+streptococcus_09919,Streptococcus entericus
+streptococcus_11902,Streptococcus sp. sy018
+streptococcus_11956,Streptococcus sp. sy004
+streptococcus_11955,Streptococcus sp. sy010
+streptococcus_11903,Streptococcus pharyngis
+streptococcus_11942,Streptococcus sp. 28462
+streptococcus_00012,Streptococcus porci
+streptococcus_00016,Streptococcus plurextorum
+streptococcus_11844,Streptococcus thoraltensis
+streptococcus_11845,Streptococcus halotolerans
+streptococcus_11838,Streptococcus hyovaginalis
+streptococcus_11883,Streptococcus criceti
+streptococcus_00014,Streptococcus sobrinus
+streptococcus_00022,Streptococcus sobrinus
+streptococcus_00018,Streptococcus sobrinus
+streptococcus_03931,Streptococcus sobrinus
+streptococcus_03956,Streptococcus sobrinus
+streptococcus_03957,Streptococcus sobrinus
+streptococcus_00023,Streptococcus sobrinus
+streptococcus_07834,Streptococcus sobrinus
+streptococcus_07831,Streptococcus sobrinus
+streptococcus_00015,Streptococcus sobrinus
+streptococcus_03955,Streptococcus sobrinus
+streptococcus_07817,Streptococcus sobrinus
+streptococcus_07832,Streptococcus sobrinus
+streptococcus_07824,Streptococcus sobrinus
+streptococcus_03954,Streptococcus sobrinus
+streptococcus_00001,Streptococcus sobrinus
+streptococcus_00021,Streptococcus sobrinus
+streptococcus_03953,Streptococcus sobrinus
+streptococcus_03942,Streptococcus sobrinus
+streptococcus_03976,Streptococcus sp. C150
+streptococcus_11886,Streptococcus sp. HSISS2
+streptococcus_11919,Streptococcus sp. CCH8-H5
+streptococcus_11869,uncultured Streptococcus sp.
+streptococcus_11862,Streptococcus thermophilus CAG
+streptococcus_11868,Streptococcus hyointestinalis
+streptococcus_11840,Streptococcus sp. Z15
+streptococcus_11884,Streptococcus pantholopis
+streptococcus_00102,Streptococcus macedonicus
+streptococcus_11965,RB-04-S-macedonicus-CIP105685T
+streptococcus_11967,RB-06-S-macedonicus-ACA-DC-205
+streptococcus_11970,RB-09-S-macedonicus-8SP---S-bovis
+streptococcus_11963,RB-02-S-gallolyticus-NTB12
+streptococcus_11973,RB-12-S-gallolyticus-UCN50
+streptococcus_11980,RB-19-S-gallolyticus-NTB11
+streptococcus_11964,RB-03-S-bovis-1293
+streptococcus_11979,RB-18-S-bovis-1212
+streptococcus_11966,RB-05-S-bovis-1459
+streptococcus_11981,RB-20-S-bovis-1417
+streptococcus_11975,RB-14-S-bovis-1445
+streptococcus_11968,RB-07-S-gallolyticus-NTB1
+streptococcus_11971,RB-10-S-bovis-1361
+streptococcus_11977,RB-16-S-bovis-1365
+streptococcus_11974,RB-13-S-bovis-1294
+streptococcus_11976,RB-15-S-gallolyticus-9L-1503-1121-L
+streptococcus_11982,RB-21-S-gallolyticus-NTB4
+streptococcus_11984,RB-23-S-bovis-NTB7
+streptococcus_11985,RB-24-S-bovis-992
+streptococcus_11983,RB-22-S-bovis-207
+streptococcus_11972,RB-11-S-bovis-1364
+streptococcus_11978,RB-17-S-gallolyticus-subsp-macedonicus-NTB3-
+streptococcus_11854,Streptococcus sp. UBA4344
+streptococcus_11908,Streptococcus sp. KCJ4950
+streptococcus_11932,uncultured Streptococcus sp.
+streptococcus_11935,Streptococcus sp. HSISB1
+streptococcus_11962,RB-01-S-bovis-NTB2-39468
+streptococcus_11969,RB-08-S-bovis-1067
+streptococcus_11892,Streptococcus sp. UBA3373
+streptococcus_11893,Streptococcus sp. UBA632
+streptococcus_00175,Streptococcus caballi
+streptococcus_11864,Streptococcus henryi
+streptococcus_05696,Streptococcus orisratti
+streptococcus_11836,Streptococcus urinalis
+streptococcus_00070,Streptococcus parauberis
+streptococcus_07971,Streptococcus didelphis
+streptococcus_00026,Streptococcus iniae
+streptococcus_00029,Streptococcus pseudoporcinus
+streptococcus_09936,Streptococcus bovimastitidis
+streptococcus_10375,Streptococcus uberis
+streptococcus_11831,Streptococcus ictaluri
+streptococcus_01727,Streptococcus dysgalactiae
+streptococcus_04401,Streptococcus pyogenes
+streptococcus_04403,Streptococcus pyogenes
+streptococcus_01671,Streptococcus pyogenes
+streptococcus_07986,Streptococcus castoreus
+streptococcus_11929,Streptococcus equi subsp. ruminatorum
+streptococcus_00105,Streptococcus phocae
+streptococcus_00195,Streptococcus agalactiae
+streptococcus_00944,Streptococcus agalactiae
+streptococcus_02064,Streptococcus agalactiae
+streptococcus_02063,Streptococcus agalactiae
+streptococcus_05950,Streptococcus agalactiae
+streptococcus_09930,Streptococcus agalactiae
+streptococcus_04286,Streptococcus agalactiae
+streptococcus_04015,Streptococcus agalactiae
+streptococcus_09918,Streptococcus agalactiae
+streptococcus_02159,Streptococcus agalactiae
+streptococcus_05954,Streptococcus agalactiae
+streptococcus_00186,Streptococcus agalactiae
+streptococcus_01723,Streptococcus agalactiae
+streptococcus_04284,Streptococcus agalactiae
+streptococcus_04390,Streptococcus agalactiae
+streptococcus_04418,Streptococcus agalactiae
+streptococcus_08003,Streptococcus agalactiae
+streptococcus_01804,Streptococcus agalactiae
+streptococcus_01809,Streptococcus agalactiae
+streptococcus_02071,Streptococcus agalactiae
+streptococcus_09948,Streptococcus agalactiae
+streptococcus_00084,Streptococcus marimammalium
+streptococcus_07829,Streptococcus sp. DD12
+streptococcus_02605,Streptococcus mutans
+streptococcus_01815,Streptococcus mutans
+streptococcus_00331,Streptococcus mutans
+streptococcus_11933,Streptococcus troglodytae
+streptococcus_00053,Streptococcus ratti
+streptococcus_11927,Streptococcus devriesei
+streptococcus_07823,Streptococcus macacae
+streptococcus_06022,Streptococcus ferus
+streptococcus_00011,Streptococcus merionis
+streptococcus_11875,Streptococcus sp. DD10
+streptococcus_04111,Streptococcus sp. HMSC34B10
+streptococcus_11946,uncultured Streptococcus sp.
+streptococcus_00192,Streptococcus pseudopneumoniae
+streptococcus_10696,Streptococcus pneumoniae
+streptococcus_00550,Streptococcus pneumoniae
+streptococcus_00551,Streptococcus pneumoniae
+streptococcus_06203,Streptococcus pneumoniae
+streptococcus_06223,Streptococcus pneumoniae
+streptococcus_09004,Streptococcus pneumoniae
+streptococcus_08877,Streptococcus pneumoniae
+streptococcus_01936,Streptococcus pneumoniae
+streptococcus_08288,Streptococcus pneumoniae
+streptococcus_02356,Streptococcus pneumoniae
+streptococcus_05798,Streptococcus pneumoniae
+streptococcus_06464,Streptococcus pneumoniae
+streptococcus_00081,Streptococcus pneumoniae
+streptococcus_06722,Streptococcus sp. NM
+streptococcus_07820,Streptococcus mitis
+streptococcus_03934,Streptococcus sp. GMD5S
+streptococcus_11876,Streptococcus sp. GMD6S
+streptococcus_11871,Streptococcus sp. GMD4S
+streptococcus_11899,uncultured Streptococcus sp.
+streptococcus_11870,uncultured Streptococcus sp.
+streptococcus_11863,uncultured Streptococcus sp.
+streptococcus_11904,uncultured Streptococcus sp.
+streptococcus_04012,Streptococcus oralis
+streptococcus_01814,Streptococcus sp. VT 162
+streptococcus_11945,uncultured Streptococcus sp.
+streptococcus_03979,Streptococcus mitis
+streptococcus_11948,uncultured Streptococcus sp.
+streptococcus_11897,uncultured Streptococcus sp.
+streptococcus_11947,uncultured Streptococcus sp.
+streptococcus_11934,Streptococcus sp. HSISM1
+streptococcus_07830,Streptococcus parasanguinis
+streptococcus_00085,Streptococcus sp. F0442
+streptococcus_11849,Streptococcus sp. JS71
+streptococcus_11898,uncultured Streptococcus sp.
+streptococcus_00091,Streptococcus massiliensis
+streptococcus_07872,Streptococcus intermedius
+streptococcus_07904,Streptococcus anginosus
+streptococcus_09913,Streptococcus anginosus
+streptococcus_11944,Streptococcus sp. DD11
+streptococcus_07954,Streptococcus sanguinis
+streptococcus_11907,uncultured Streptococcus sp.
+streptococcus_11855,Streptococcus sp. Marseille-P644
+streptococcus_04001,Streptococcus cristatus
+streptococcus_00063,Streptococcus gordonii
+streptococcus_00088,Streptococcus himalayensis
+streptococcus_11900,Streptococcus sp. WM07
+streptococcus_00073,Streptococcus ovis
+streptococcus_00167,Streptococcus minor
+streptococcus_00010,Streptococcus varani
+streptococcus_11872,Streptococcus sp. X13SY08
+streptococcus_00563,Streptococcus suis
+streptococcus_04630,Streptococcus suis
+streptococcus_06016,Streptococcus suis
+streptococcus_07833,Streptococcus suis
+streptococcus_11960,Streptococcus parasuis
+streptococcus_02148,Streptococcus azizii
+streptococcus_11865,Streptococcus sp. LYSM12
+streptococcus_11918,Streptococcus marmotae
+streptococcus_11832,Streptococcus sp. DD13
+floricoccus_00001,Floricoccus penangensis
+lactococcus_00181,Lactococcus sp. dk322
+lactococcus_00187,Lactococcus fujiensis
+lactococcus_00188,Lactococcus hircilactis
+lactococcus_00186,Lactococcus sp. S-13
+lactococcus_00092,Lactococcus lactis subsp. cremoris
+lactococcus_00020,Lactococcus lactis subsp. lactis
+lactococcus_00059,Lactococcus lactis subsp. lactis
+lactococcus_00173,Lactococcus lactis
+lactococcus_00017,Lactococcus lactis subsp. cremoris
+lactococcus_00184,Lactococcus sp. KACC 19320
+lactococcus_00183,Lactococcus sp. 1JSPR-7
