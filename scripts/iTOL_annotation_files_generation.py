@@ -31,6 +31,7 @@ ids2species = {}
 species2ids = {}
 ids2gs = {}
 ids2icountry = {}
+ids2isolationsource = {}
 
 files = [files_dir+'/03032020_streptococcus_database_final.tsv', files_dir+'/06012020_lactococcus_database.tsv', files_dir+'/06012020_floricoccus_database.tsv']
 
@@ -41,12 +42,14 @@ for file in files:
         species_ind = headers.index('species')
         gs_ind = headers.index('genome_length')
         icountry_ind = headers.index('isolation_country')
+        isolation_ind = headers.index('isolation_source')
         for line in f:
             a = line.strip().split('\t')
             species = a[species_ind]
             ids2species[a[0]] = species
             ids2gs[a[0]] = a[gs_ind]
             ids2icountry[a[0]] = a[icountry_ind]
+            ids2isolationsource[a[0]] = a[isolation_ind]
             if species not in species2ids:
                 species2ids[species] = [a[0]]
             else:
@@ -150,11 +153,11 @@ for l in leaves:
     ic = ids2icountry[l.name]
     countries.append(ic)
     
-ndifferent_shapes = len(set(countries)) #25
+ndifferent_shapes = len(set(countries)) #25 minus empty spaces = 24
 
-#25 different legend symbols --> 5 shapes x 5 different colors
+#24 different legend symbols --> 4 shapes x 6 different colors
 
-colors_shapes = ['#b2182b', '#ef8a62', '#fddbc7', '#d1e5f0', '#67a9cf', '#2166ac']
+colors_shapes = ['#b2182b', '#92c5de', '#d6604d', '#2166ac', '#f4a582', '#4393c3']
 labels = list(set(countries))
 labels.remove('')
 
@@ -182,5 +185,108 @@ with open(annotation_files_dir + '/isolation_countries.txt' , 'w') as f:
     f.write('DATA\n')
     for l in leaves:
         c = ids2icountry[l.name]
-        f.write(l.name + ',' + country2shape[c] + '\n')
-    
+        if c != '':
+            f.write(l.name + ',' + country2shape[c] + '\n')
+
+#Binary dataset for isolation sources. Only display top 5 and rest in category 'others'
+            
+sources = []
+for l in leaves:
+    sources.append(ids2isolationsource[l.name])
+
+adaptedsources = {}
+sources_counter = {}
+
+for s in sources:
+    if 'oral' in s or 'Oral' in s:
+        adaptedsources[s] = 'Oral'
+        if 'Oral' not in sources_counter:
+            sources_counter['Oral'] = 1
+        else:
+            sources_counter['Oral'] += 1
+    elif 'airy' in s or 'ilk' in s:
+        adaptedsources[s] = 'Dairy'
+        if 'Dairy' not in sources_counter:
+            sources_counter['Dairy'] = 1
+        else:
+            sources_counter['Dairy'] += 1
+    elif 'lood' in s:
+        adaptedsources[s] = 'Blood'
+        if 'Blood' not in sources_counter:
+            sources_counter['Blood'] = 1
+        else:
+            sources_counter['Blood'] += 1
+    elif 'gut' in s or 'Gut' in s or 'ntestine' in s:
+        adaptedsources[s] = 'Intestine'
+        if 'Intestine' not in sources_counter:
+            sources_counter['Intestine'] = 1
+        else:
+            sources_counter['Intestine'] += 1
+    elif 'feces' in s or 'fecal' in s or 'stool' in s:
+        adaptedsources[s] = 'Feces'
+        if 'Feces' not in sources_counter:
+            sources_counter['Feces'] = 1
+        else:
+            sources_counter['Feces'] += 1
+    else:
+        adaptedsources[s] = s.capitalize()
+        if s.capitalize() not in sources_counter:
+            sources_counter[s.capitalize()] = 1
+        else:
+            sources_counter[s.capitalize()] += 1
+
+del sources_counter['']
+
+keys = []
+values = []
+
+for k,v in sources_counter.items():
+    keys.append(k)
+    values.append(v)
+
+#Determine topN
+topN = []
+indexes = []
+for i, count in enumerate(values):
+    #fill topN with N source counts
+    if len(topN) < 5:
+        topN.append(count)
+        indexes.append(i)
+    #replace the minimum with the new count if its bigger
+    else:
+        min_count = min(topN)
+        ind_min = topN.index(min_count)
+        if count > min_count:
+            topN[ind_min] = count
+            indexes[ind_min] = i
+
+#Add the top 5 sources to a list
+top5 = []
+for i in indexes:
+    top5.append(keys[i])
+
+source2shape = {}
+for i in range(len(top5)):
+    line = [str(0)]*6
+    line[i] = str(1)
+    source2shape[top5[i]] = ','.join(line)
+source2shape['Other'] = ','.join([str(0)]*5) + ',1'
+#Isolation source annotation file, only top 5 the rest is category 'others'
+#6 symbols --> 6 shapes
+  
+labels = list(source2shape.keys())  
+with open(annotation_files_dir + '/isolation_sources.txt' , 'w') as f:
+    f.write('DATASET_BINARY\nSEPARATOR COMMA\nDATASET_LABEL,Isolation Sources\nCOLOR,#01665e\nFIELD_SHAPES,1,2,3,4,5,2\nFIELD_COLORS,#3182bd,#3182bd,#3182bd,#3182bd,#3182bd,#bd0026\nFIELD_LABELS,')
+    for item in labels:
+        if item == labels[-1]:
+            f.write(item + '\nDATA\n')
+        else:
+            f.write(item + ',')
+    for l in leaves:
+        original_source = ids2isolationsource[l.name]
+        source = adaptedsources[original_source]
+        if source in top5:
+            f.write(l.name + ',' + source2shape[source] + '\n')
+        else:
+            f.write(l.name + ',' + source2shape['Other'] + '\n')
+        
