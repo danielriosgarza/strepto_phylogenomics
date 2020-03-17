@@ -43,10 +43,10 @@ with open(original_obash) as f:
             line = line.strip().split(' ')
             indexes.append(line[-1])
 
-size = round(len(indexes)/5)
+size = round(len(indexes)/10)
 
 line = 'porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x '
-for i in range(1, 6):
+for i in range(1, 11):
     with open(o_bash_dir + '/orthologs/' + today + '_orthologs' + str(i) + '.sh', 'w') as f:  
         print(i)
         if i == 1:
@@ -66,8 +66,29 @@ for i in range(1, 6):
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 5:
-            numbers = indexes[size*4::]
+            numbers = indexes[size*4:size*5]
             for n in numbers:
-                f.write(line + n + '\n')        
+                f.write(line + n + '\n')
+        if i == 6:
+            numbers = indexes[size*5:size*6]
+            for n in numbers:
+                f.write(line + n + '\n')
+        if i == 7:
+            numbers = indexes[size*6:size*7]
+            for n in numbers:
+                f.write(line + n + '\n')   
+        if i == 8:
+            numbers = indexes[size*7:size*8]
+            for n in numbers:
+                f.write(line + n + '\n')   
+        if i == 9:
+            numbers = indexes[size*8:size*9]
+            for n in numbers:
+                f.write(line + n + '\n')   
+        if i == 10:
+            numbers = indexes[size*9::]
+            for n in numbers:
+                f.write(line + n + '\n')   
+         
      
         
