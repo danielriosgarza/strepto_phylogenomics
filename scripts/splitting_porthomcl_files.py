@@ -37,28 +37,32 @@ with open(original_obash) as f:
     i = 1
     for line in f:
         i += 1
-        if i == 93: #change number to amount of files in orthology dir
+        if i == 314: #change number to amount of files in orthology dir
             last = True
         if last:
             line = line.strip().split(' ')
             indexes.append(line[-1])
 
-size = len(indexes)/3
+size = round(len(indexes)/4)
 
 line = 'porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x '
-for i in range(1, 4):
-    with open(o_bash_dir + '/' + today + '_orthologs' + str(i) + '.sh', 'w') as f:  
+for i in range(1, 5):
+    with open(o_bash_dir + '/orthologs/' + today + '_orthologs' + str(i) + '.sh', 'w') as f:  
         print(i)
         if i == 1:
-            numbers = indexes[:352]
+            numbers = indexes[:size]
             for n in numbers:
                 f.write(line + n + '\n')        
         if i == 2:
-            numbers = indexes[352:704]
+            numbers = indexes[size:size*2]
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 3:
-            numbers = indexes[704:]
+            numbers = indexes[size*2:size*3]
+            for n in numbers:
+                f.write(line + n + '\n')
+        if i == 4:
+            numbers = indexes[size*3::]
             for n in numbers:
                 f.write(line + n + '\n')
         
