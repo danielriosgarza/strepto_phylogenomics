@@ -33,11 +33,11 @@ gs = {}
 for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
     _id = str(folder).split("'")[1]
     if _id in seq_ids:
-        with open(folder.path + '/' + _id + '.log') as f:
+        with open(folder.path + '/' + _id + '.txt') as f:
             for line in f:
-                if line.startswith('Contigs'):
+                if line.startswith('bases'):
                     a = line.strip().split(' ')
-                    gs[_id] = a[2]
+                    gs[_id] = a[-1]
                     
 with open(os.path.join(p.parents[0], 'files', '23032020_sequenced_genomes_database.tsv'), 'w') as f:
     f.write('database_id\tgenome_length\n')
