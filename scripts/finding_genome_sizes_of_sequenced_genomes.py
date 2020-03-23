@@ -50,7 +50,6 @@ all_ids = []
 gs = {}
 CDS = {}
 rRNA = {}
-repeat_region = {}
 tRNA = {}
 for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
     _id = str(folder).split("'")[1]
@@ -64,14 +63,11 @@ for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
                 CDS[_id] = a[-1]
             elif line.startswith('rRNA'):
                 rRNA[_id] = a[-1]
-            elif line.startswith('repeat_region'):
-                repeat_region[_id] = a[-1]
             elif line.startswith('tRNA'):
                 tRNA[_id] = a[-1]
 
-print(all_ids) 
 
 with open(os.path.join(p.parents[0], 'files', '23032020_prokka_genome_data.tsv'), 'w') as f:
     f.write('database_id\tgenome_size\tCDS\trRNA\trepeat_region\ttRNA\n')
     for i in all_ids:
-        f.write(i + '\t' + gs[i] + '\t' + CDS[i] + '\t' + rRNA[i] + '\t' + repeat_region[i] + '\t' + tRNA[i] + '\n')
+        f.write(i + '\t' + gs[i] + '\t' + CDS[i] + '\t' + rRNA[i] + '\t' + tRNA[i] + '\n')
