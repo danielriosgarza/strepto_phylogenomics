@@ -70,4 +70,21 @@ for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
 with open(os.path.join(p.parents[0], 'files', '23032020_prokka_genome_data.tsv'), 'w') as f:
     f.write('database_id\tgenome_size\tCDS\trRNA\trepeat_region\ttRNA\n')
     for i in all_ids:
-        f.write(i + '\t' + gs[i] + '\t' + CDS[i] + '\t' + rRNA[i] + '\t' + tRNA[i] + '\n')
+        f.write(i)
+        if i in gs:
+            f.write('\t' + gs[i])
+        else:
+            f.write('\t' + '\t')
+        if i in CDS:
+            f.write('\t' + CDS[i])
+        else:
+            f.write('\t' + '\t')
+        if i in rRNA:
+            f.write('\t' + rRNA[i])
+        else:
+            f.write('\t' + '\t')
+        if i in tRNA:
+            f.write('\t' + tRNA[i])
+        else:
+            f.write('\t' + '\t')
+        f.write('\n')
