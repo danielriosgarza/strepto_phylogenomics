@@ -5,7 +5,17 @@ Created on Wed Mar 11 08:12:20 2020
 
 @author: meike
 """
-
+'''
+Generation of different annotation files that can be used in iTOL to visualize the phylogenetic tree.
+Included: 
+     >Color Range: Species colors (per genus same colour palette)
+     >Outer ring marking the genus + genus labels
+     >Labels: changes node names (ids) to species names
+     >Bars marking genome sizes
+     >Binary table showing the isolation country
+     >Binary table showing the isolation source (only top 5, rest is category others)
+     >Binary table of hosts
+'''
 from ete3 import Tree
 import os
 from pathlib import Path
@@ -32,6 +42,7 @@ species2ids = {}
 ids2gs = {}
 ids2icountry = {}
 ids2isolationsource = {}
+ids2host = {}
 
 files = [files_dir+'/03032020_streptococcus_database_final.tsv', files_dir+'/06012020_lactococcus_database.tsv', files_dir+'/06012020_floricoccus_database.tsv']
 
@@ -43,6 +54,7 @@ for file in files:
         gs_ind = headers.index('genome_length')
         icountry_ind = headers.index('isolation_country')
         isolation_ind = headers.index('isolation_source')
+        host_ind = headers.index('host_name')
         for line in f:
             a = line.strip().split('\t')
             species = a[species_ind]
@@ -50,6 +62,7 @@ for file in files:
             ids2gs[a[0]] = a[gs_ind]
             ids2icountry[a[0]] = a[icountry_ind]
             ids2isolationsource[a[0]] = a[isolation_ind]
+            ids2host[a[0]] = a[host_ind]
             if species not in species2ids:
                 species2ids[species] = [a[0]]
             else:
@@ -188,6 +201,7 @@ with open(annotation_files_dir + '/isolation_countries.txt' , 'w') as f:
         if c != '':
             f.write(l.name + ',' + country2shape[c] + '\n')
 
+
 #Binary dataset for isolation sources. Only display top 5 and rest in category 'others'
             
 sources = []
@@ -271,12 +285,12 @@ for i in range(len(top5)):
     line[i] = str(1)
     source2shape[top5[i]] = ','.join(line)
 source2shape['Other'] = ','.join([str(0)]*5) + ',1'
+
 #Isolation source annotation file, only top 5 the rest is category 'others'
-#6 symbols --> 6 shapes
-  
+#6 symbols --> 6 shapes  
 labels = list(source2shape.keys())  
 with open(annotation_files_dir + '/isolation_sources.txt' , 'w') as f:
-    f.write('DATASET_BINARY\nSEPARATOR COMMA\nDATASET_LABEL,Isolation Sources\nCOLOR,#01665e\nFIELD_SHAPES,1,2,3,4,5,2\nFIELD_COLORS,#3182bd,#3182bd,#3182bd,#3182bd,#3182bd,#bd0026\nFIELD_LABELS,')
+    f.write('DATASET_BINARY\nSEPARATOR COMMA\nDATASET_LABEL,Isolation Sources\nCOLOR,#01665e\nFIELD_SHAPES,1,2,3,4,5,2\nFIELD_COLORS,#01665e,#01665e,#01665e,#01665e,#01665e,#5ab4ac\nFIELD_LABELS,')
     for item in labels:
         if item == labels[-1]:
             f.write(item + '\nDATA\n')
@@ -289,4 +303,69 @@ with open(annotation_files_dir + '/isolation_sources.txt' , 'w') as f:
             f.write(l.name + ',' + source2shape[source] + '\n')
         else:
             f.write(l.name + ',' + source2shape['Other'] + '\n')
-        
+ 
+           
+#Binary annotation file displaying the host names
+hosts_counter = {}
+for l in leaves:
+    host = ids2host[l.name]
+    if host not in hosts_counter:
+        hosts_counter[host] = 1
+    else:
+        hosts_counter[host] += 1
+
+keys = []
+values = []
+
+for k,v in hosts_counter.items():
+    keys.append(k)
+    values.append(v)
+
+#Determine topN
+topN = []
+indexes = []
+for i, count in enumerate(values):
+    #fill topN with N source counts
+    if len(topN) < 4:
+        topN.append(count)
+        indexes.append(i)
+    #replace the minimum with the new count if its bigger
+    else:
+        min_count = min(topN)
+        ind_min = topN.index(min_count)
+        if count > min_count:
+            topN[ind_min] = count
+            indexes[ind_min] = i
+
+#Add the top 5 sources to a list
+top4 = []
+for i in indexes:
+    top4.append(keys[i])
+
+#5 symbols: top 4 and category 'Other'
+host2shape = {}
+for i in range(len(top4)):
+    line = [str(0)]*5
+    line[i] = str(1)
+    host2shape[top4[i]] = '\t'.join(line)
+host2shape['Other'] = '\t'.join([str(0)]*4) + '\t1'
+
+labels = []
+for k in list(host2shape.keys()):
+    if k == '': 
+        k = 'Unknown'
+    labels.append(k)
+    
+with open(annotation_files_dir + '/hosts.txt' , 'w') as f:
+    f.write('DATASET_BINARY\nSEPARATOR TAB\nDATASET_LABEL\tHost names\nCOLOR\t#4d9221\nFIELD_SHAPES\t1\t2\t3\t4\t5\t\nFIELD_COLORS\t#4d9221\t#4d9221\t#4d9221\t#4d9221\t#a1d76a\nFIELD_LABELS\t')
+    for item in labels:
+        if item == labels[-1]:
+            f.write(item + '\nDATA\n')
+        else:
+            f.write(item + '\t')
+    for l in leaves:
+        host = ids2host[l.name]
+        if host in top4:
+            f.write(l.name + '\t' + host2shape[host] + '\n')
+        else:
+            f.write(l.name + '\t' + host2shape['Other'] + '\n')

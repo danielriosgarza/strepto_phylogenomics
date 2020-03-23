@@ -3,7 +3,7 @@ SEPARATOR COMMA
 DATASET_LABEL,Isolation Sources
 COLOR,#01665e
 FIELD_SHAPES,1,2,3,4,5,2
-FIELD_COLORS,#3182bd,#3182bd,#3182bd,#3182bd,#3182bd,#bd0026
+FIELD_COLORS,#01665e,#01665e,#01665e,#01665e,#01665e,#5ab4ac
 FIELD_LABELS,Fruit residues (memencylon),Intestine,Feces,Blood,Oral,Other
 DATA
 lactococcus_00137,0,0,0,0,0,1
