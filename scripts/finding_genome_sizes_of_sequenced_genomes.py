@@ -30,7 +30,7 @@ with open (os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_
 
 #Look in the log files from prokka annotation to get genome sizes            
 gs = {}
-for folder in os.scandir('/home/meiker/git/data/prokka/annotation'):
+for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
     _id = str(folder).split("'")[1]
     if _id in seq_ids:
         with open(folder.path + '/' + _id + '.log') as f:
