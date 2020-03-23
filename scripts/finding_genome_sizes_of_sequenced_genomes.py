@@ -62,13 +62,13 @@ for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
             a = line.strip().split(' ')
             if line.startswith('bases'):
                 gs[_id] = a[-1]
-            if line.startswith('CDS'):
+            elif line.startswith('CDS'):
                 CDS[_id] = a[-1]
-            if line.startswith('rRNA'):
+            elif line.startswith('rRNA'):
                 rRNA[_id] = a[-1]
-            if line.startswith('repeat_region'):
+            elif line.startswith('repeat_region'):
                 repeat_region[_id] = a[-1]
-            if line.startswith('tRNA'):
+            elif line.startswith('tRNA'):
                 tRNA[_id] = a[-1]
   
 with open(os.path.join(p.parents[0], 'files', '23032020_prokka_genome_data.tsv'), 'w') as f:
