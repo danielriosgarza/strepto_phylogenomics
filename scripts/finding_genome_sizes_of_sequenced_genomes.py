@@ -18,7 +18,7 @@ p = Path(path)
 first_id = 'streptococcus_11962'
 
 seq_ids = []
-        
+species = []       
 with open (os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_with_database_id.tsv')) as f:
     seen = False
     for line in f:
@@ -27,13 +27,11 @@ with open (os.path.join(p.parents[0], 'files', '20012020streptococcus_patric_id_
             seen = True
         if seen:
             seq_ids.append(a[0])
+            species.append(a[2])
 
 #Look in the log files from prokka annotation to get genome sizes            
 gs = {}
-CDS = {}
-rRNA = {}
-repeat_region = {}
-tRNA = {}
+
 for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
     _id = str(folder).split("'")[1]
     if _id in seq_ids:
@@ -43,10 +41,10 @@ for folder in os.scandir('/home/meiker/git/data/prokka_annotation'):
                 if line.startswith('bases'):
                     gs[_id] = a[-1]
                 
-with open(os.path.join(p.parents[0], 'files', '23032020_sequenced_genomes_database.tsv'), 'w') as f:
-    f.write('database_id\tgenome_length\n')
+with open(os.path.join(p.parents[0], 'files', '23032020_sequenced_genomes_database2.tsv'), 'w') as f:
+    f.write('database_id\tspecies\tgenome_length\tcollection_year\thost_name\tisolation_country\tisolation_source\tsequencing_platform\n')
     for i in seq_ids:
-        f.write(i + '\t' + gs[i] + '\n')
+        f.write(i + '\t' + species[seq_ids.index(i)] + '\t' + gs[i] + '\n')
 
 all_ids = []
 gs = {}
