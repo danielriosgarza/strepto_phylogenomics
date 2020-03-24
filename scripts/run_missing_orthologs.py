@@ -55,7 +55,7 @@ size = round(len(indexes_missing)/10)
 
 line = 'porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x '
 for i in range(1,11):        
-    with open (os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', '/orthologs/' + today + '_orthologs_missing' + str(i) + '.sh'), 'w') as f:
+    with open (os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs') + '/' + today + '_orthologs_missing' + str(i) + '.sh', 'w') as f:
         if i == 1:
             numbers = indexes[:size]
             for n in numbers:
