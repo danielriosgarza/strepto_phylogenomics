@@ -57,42 +57,42 @@ line = 'porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/
 for i in range(1,11):        
     with open (os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs') + '/' + today + '_orthologs_missing' + str(i) + '.sh', 'w') as f:
         if i == 1:
-            numbers = indexes[:size]
+            numbers = indexes_missing[:size]
             for n in numbers:
                 f.write(line + n + '\n')        
         if i == 2:
-            numbers = indexes[size:size*2]
+            numbers = indexes_missing[size:size*2]
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 3:
-            numbers = indexes[size*2:size*3]
+            numbers = indexes_missing[size*2:size*3]
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 4:
-            numbers = indexes[size*3:size*4]
+            numbers = indexes_missing[size*3:size*4]
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 5:
-            numbers = indexes[size*4:size*5]
+            numbers = indexes_missing[size*4:size*5]
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 6:
-            numbers = indexes[size*5:size*6]
+            numbers = indexes_missing[size*5:size*6]
             for n in numbers:
                 f.write(line + n + '\n')
         if i == 7:
-            numbers = indexes[size*6:size*7]
+            numbers = indexes_missing[size*6:size*7]
             for n in numbers:
                 f.write(line + n + '\n')   
         if i == 8:
-            numbers = indexes[size*7:size*8]
+            numbers = indexes_missing[size*7:size*8]
             for n in numbers:
                 f.write(line + n + '\n')   
         if i == 9:
-            numbers = indexes[size*8:size*9]
+            numbers = indexes_missing[size*8:size*9]
             for n in numbers:
                 f.write(line + n + '\n')   
         if i == 10:
-            numbers = indexes[size*9::]
+            numbers = indexes_missing[size*9::]
             for n in numbers:
                 f.write(line + n + '\n') 
