@@ -35,7 +35,7 @@ with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
     i = 1
     for line in f:
         line = line.strip()
-        index2id[i] = line
+        index2id[str(i)] = line
         i += 1
 
 done = os.listdir('/home/meiker/orthomcl/orthologs')
