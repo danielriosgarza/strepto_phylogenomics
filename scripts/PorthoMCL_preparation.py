@@ -67,7 +67,7 @@ def blast_Parser_bash(ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in ids:
-            f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_+".ss.tsv\n")
+            f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_[0]+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_[0]+".ss.tsv\n")
             
 def finding_best_hits(indexes_ids, savedir):
     '''
@@ -76,7 +76,7 @@ def finding_best_hits(indexes_ids, savedir):
     '''
     with open(savedir, 'w') as f:
         for i in indexes_ids:
-            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i)+"\n")
+            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i[0])+"\n")
   
 def split_files(ids, nsplits = 16):
     '''
@@ -238,6 +238,7 @@ for i, taxon in enumerate(taxon_list):
 split_ids = split_files(dbs_ready2analyze, nsplits = 12)
 
 for i, l_ids in enumerate(split_ids):
+    i += 1
     blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser'+str(i)+'.sh'))
     
 
