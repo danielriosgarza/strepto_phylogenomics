@@ -285,43 +285,43 @@ for i in range(1, 11):
         if i == 1:
             numbers = indexes[:size]
             for n in numbers:
-                f.write(line + n + '\n')        
+                f.write(line + str(n) + '\n')        
         if i == 2:
             numbers = indexes[size:size*2]
             for n in numbers:
-                f.write(line + n + '\n')
+                f.write(line + str(n) + '\n')
         if i == 3:
             numbers = indexes[size*2:size*3]
             for n in numbers:
-                f.write(line + n + '\n')
+                f.write(line + str(n) + '\n')
         if i == 4:
             numbers = indexes[size*3:size*4]
             for n in numbers:
-                f.write(line + n + '\n')
+                f.write(line + str(n) + '\n')
         if i == 5:
             numbers = indexes[size*4:size*5]
             for n in numbers:
-                f.write(line + n + '\n')
+                f.write(line + str(n) + '\n')
         if i == 6:
             numbers = indexes[size*5:size*6]
             for n in numbers:
-                f.write(line + n + '\n')
+                f.write(line + str(n) + '\n')
         if i == 7:
             numbers = indexes[size*6:size*7]
             for n in numbers:
-                f.write(line + n + '\n')   
+                f.write(line + str(n) + '\n')   
         if i == 8:
             numbers = indexes[size*7:size*8]
             for n in numbers:
-                f.write(line + n + '\n')   
+                f.write(line + str(n) + '\n')   
         if i == 9:
             numbers = indexes[size*8:size*9]
             for n in numbers:
-                f.write(line + n + '\n')   
+                f.write(line + str(n) + '\n')   
         if i == 10:
             numbers = indexes[size*9::]
             for n in numbers:
-                f.write(line + n + '\n') 
+                f.write(line + str(n) + '\n') 
 
 
 
@@ -329,7 +329,7 @@ line = 'porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home
 
 with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs.sh'), 'w') as f:
     for i in indexes:
-                f.write(line + i + '\n')    
+                f.write(line + str(i) + '\n')    
 
 
 '''
