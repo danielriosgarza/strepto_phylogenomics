@@ -234,6 +234,9 @@ indexes = []
 for i, taxon in enumerate(taxon_list):
     if taxon in dbs_parsed:
         indexes.append(i+1)
+        
+#to give an indication how many are added
+print(len(dbs_ready2analyze))
 
 split_ids = split_files(dbs_ready2analyze, nsplits = 12)
 
