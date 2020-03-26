@@ -240,7 +240,7 @@ split_ids = split_files(dbs_ready2analyze, nsplits = 12)
 for i, l_ids in enumerate(split_ids):
     blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser'+str(i)+'.sh'))
     
-blast_Parser_bash(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
+
 
 #%% runcell 4
 '''
@@ -252,8 +252,10 @@ Make bash script to find best hits (-x <number>, index of taxon to work on)
 Example bash line:
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
 '''
+split_ids = split_files(indexes, nsplits = 12)
 
-finding_best_hits(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_find_best_hits.sh'))
+for i, l_ids in enumerate(split_ids):
+    finding_best_hits(indexes, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit' + today + '_find_best_hits' + str(i) +'.sh'))
 
 #%% runcell 5
 '''
