@@ -78,13 +78,13 @@ def finding_best_hits(indexes_ids, savedir):
         for i in indexes_ids:
             f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i)+"\n")
   
-def split_files(ids):
+def split_files(ids, nsplits = 16):
     '''
     Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
     Tuples w/ (db_id, original_index)
     '''    
-    #groupsize = int(len(db_ids)/16)
-    groupsize = 761
+    groupsize = round(int(len(ids)/nsplits))
+    
     db_index = [(id_, i + 1) for i, id_ in enumerate(ids)]
     
     id_i = [db_index[i :i + groupsize] for i in range(0, len(db_index), groupsize)]
@@ -234,6 +234,11 @@ indexes = []
 for i, taxon in enumerate(taxon_list):
     if taxon in dbs_parsed:
         indexes.append(i+1)
+
+split_ids = split_files(dbs_ready2analyze, nsplits = 12)
+
+for i, l_ids in enumerate(split_ids):
+    blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser'+str(i)+'.sh'))
     
 blast_Parser_bash(dbs_ready2analyze, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today+'_blastparser.sh'))
 
@@ -316,59 +321,12 @@ for i in range(1, 11):
                 f.write(line + n + '\n') 
 
 
-size = round(len(indexes)/12)
+
 line = 'porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x '
 
-for i in range(1, 13):
-    with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs' + str(i) + '.sh'), 'w') as f:
-        if i == 1:
-            numbers = indexes[:size]
-            for n in numbers:
-                f.write(line + n + '\n')        
-        if i == 2:
-            numbers = indexes[size:size*2]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 3:
-            numbers = indexes[size*2:size*3]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 4:
-            numbers = indexes[size*3:size*4]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 5:
-            numbers = indexes[size*4:size*5]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 6:
-            numbers = indexes[size*5:size*6]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 7:
-            numbers = indexes[size*6:size*7]
-            for n in numbers:
-                f.write(line + n + '\n')   
-        if i == 8:
-            numbers = indexes[size*7:size*8]
-            for n in numbers:
-                f.write(line + n + '\n')   
-        if i == 9:
-            numbers = indexes[size*8:size*9]
-            for n in numbers:
-                f.write(line + n + '\n')   
-        if i == 10:
-            numbers = indexes[size*9:size*10]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 11:
-            numbers = indexes[size*10:size*11]
-            for n in numbers:
-                f.write(line + n + '\n')
-        if i == 12:
-            numbers = indexes[size*11::]
-            for n in numbers:
-                f.write(line + n + '\n')
+with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs.sh'), 'w') as f:
+    for i in indexes:
+                f.write(line + i + '\n')    
 
 
 '''
