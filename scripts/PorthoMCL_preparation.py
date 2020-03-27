@@ -338,7 +338,7 @@ with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'pa
 '''
 8. Run MCL
 $cat orthologs/*.tsv >> all.ort.tsv
-$mcl all.ort.tsv  --abc -I 1.5 -t 4 -o .all.ort.group
+$mcl all.ort.tsv  --abc -I 1.5 -t 4 -o all.ort.group
 
 $cat paralogs/*.tsv >> all.par.tsv
 $mcl all.par.tsv  --abc -I 1.5 -t 4 -o all.par.group

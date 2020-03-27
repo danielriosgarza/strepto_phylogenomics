@@ -20,6 +20,7 @@ from ete3 import Tree
 import os
 from pathlib import Path
 import seaborn as sns
+import random
 
 def get_colors(data_list, color='#d6604d'):
     '''
@@ -91,6 +92,9 @@ for l in leaves:
         lactos.append(v)
     if 'flori' in l.name and v not in floris:
         floris.append(v)
+        
+#to randomly asign sequential colors
+random.shuffle(streptos)
 
 strep_color = get_colors(streptos)
 lacto_color = get_colors(lactos, color = '#92c5de')
