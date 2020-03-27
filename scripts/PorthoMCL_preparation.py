@@ -259,7 +259,7 @@ porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp 
 split_ids = split_files(indexes, nsplits = 12)
 
 for i, l_inds in enumerate(split_ids):
-    finding_best_hits(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit' + today + '_find_best_hits' + str(i) +'.sh'))
+    finding_best_hits(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', + today + '_find_best_hits' + str(i) +'.sh'))
 
 #%% runcell 5
 '''
