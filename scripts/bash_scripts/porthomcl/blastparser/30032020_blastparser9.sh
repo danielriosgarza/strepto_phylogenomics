@@ -1,0 +1,15 @@
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_10403.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_10403.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_05805.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_05805.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_06461.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_06461.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_09454.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_09454.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_03121.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_03121.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_01341.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_01341.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_10827.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_10827.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_04709.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_04709.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_06996.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_06996.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_05753.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_05753.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_06325.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_06325.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_08523.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_08523.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_07995.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_07995.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/lactococcus_00072.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/lactococcus_00072.ss.tsv
+porthomclBlastParser /home/meiker/orthomcl/blastres/streptococcus_02249.tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/streptococcus_02249.ss.tsv
