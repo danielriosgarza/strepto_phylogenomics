@@ -25,42 +25,41 @@ today = today.split('/')
 today = ''.join(today)
 
 
-#make dict containing all paralogs that they can be removed from the orthologs file
-paralogs = {}
-with open(os.path.join(p.parents[0], 'files', 'binary_table', 'all.par.group')) as f:
+taxon_list = []
+with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
     for line in f:
-        a = line.strip().split('\t')
-        for i in a:
-            _id = i.split('|')[0]
-            para = i.split('|')[1]
-            if _id not in paralogs:
-                paralogs[_id] = [para]
-            else:
-                paralogs[_id] += [para]
+        taxon_list.append(line.strip())
 
-i = 0 
-      
+        
+#make prep table: all orthologs (prot ids) in a list with all genomes with 0 and 1 following
+   
 with open (os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group')) as f:
-    with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_one1one_all.ort.group'), 'w') as f2:
-        first = f.readline()
+    with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_binary_table_prep1.tsv'), 'w') as f2:
+        f2.write('pan_genome\torthologs\t')
+        for db_id in taxon_list:
+            if db_id == taxon_list[-1]:
+                f2.write(db_id + '\n')
+            else:
+                f2.write(db_id + '\t')
         for line in f:
             a = line.strip().split('\t')
-            double = []
             ids = []
             orthos = []
-            orthogroup = ''
             for pair in a:
                 id_ = pair.split('|')[0]
+                ids.append(id_)
                 ortho = pair.split('|')[1]
-                if id_ not in ids:
-                    ids.append(id_)
-                    orthos.append(ortho)
-                else:
-                    double.append(id_)
-            for i, _id in enumerate(ids):
-                if _id not in double:
-                    orthogroup += _id + '|' + orthos[i] + '\t'
-            orthogroup += '\n'
-            f2.write(orthogroup)
+                orthos.append(ortho)
+            group = [str(0)]*len(taxon_list)    
+            if len(set(ids)) > 5:
+                f2.write('\t')    
+                #mark found ids with an 1 in the table, rest is 0
+                f2.write(','.join(orthos) + '\t')
+                for id_ in set(ids):
+                    group[taxon_list.index(id_)] = str(1)
+                f2.write('\t'.join(group) + '\n')
                 
             
+                
+            
+        

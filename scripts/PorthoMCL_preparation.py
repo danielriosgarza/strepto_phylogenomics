@@ -258,6 +258,9 @@ $mkdir besthit
 Make bash script to find best hits (-x <number>, index of taxon to work on)
 Example bash line:
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
+
+
+####Rerun this script in order to get the rigth indexes of already parsed results!!!####
 '''
 split_ids = split_files(indexes, nsplits = 12)
 
