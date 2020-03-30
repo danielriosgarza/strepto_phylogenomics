@@ -48,6 +48,6 @@ print(len(missing))
 size = round(len(indexes)/3)
 
 for i in range(1,4):
-    with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', + today + '_missing_best_hits' + str(i) + '.sh'), 'w') as f:
+    with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_missing_best_hits' + str(i) + '.sh'), 'w') as f:
         for j in indexes:
             f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(j)+"\n")
