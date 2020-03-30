@@ -213,6 +213,9 @@ today = ''.join(today)
 
 #get all ids (genomes) that were already blasted and parsed
 dbs_parsed = []
+path = os.getcwd()
+p = Path(path)
+
 for file in list(os.listdir('/home/meiker/orthomcl/splitSimSeq/')):
     id_ = file.strip().split('.')[0]
     dbs_parsed.append(id_)
@@ -259,6 +262,7 @@ porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp 
 split_ids = split_files(indexes, nsplits = 12)
 
 for i, l_inds in enumerate(split_ids):
+    i += 1
     finding_best_hits(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', + today + '_find_best_hits' + str(i) +'.sh'))
 
 #%% runcell 5

@@ -111,18 +111,18 @@ for i, spec in enumerate(floris):
     leaf_colours[spec] = flori_color[i] 
 
 #write annotation file for iTOL: colors background of the leaves according to its species
-with open(annotation_files_dir +'/tree_colors_per_species.txt', 'w') as f:
-    f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
-    #colored ranges inclusive labels
-    for l in leaves:
-        spe = ids2species[l.name]
-        color = leaf_colours[spe]
-        if 'strepto' in l.name:
-            f.write(l.name + ',range,' + color + ',Streptococcus\n')
-        if 'lacto' in l.name:
-            f.write(l.name + ',range,' + color + ',Lactococcus\n')
-        if 'flori' in l.name:
-            f.write(l.name + ',range,' + color + ',Floriococcus\n')
+# with open(annotation_files_dir +'/tree_colors_per_species.txt', 'w') as f:
+#     f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
+#     #colored ranges inclusive labels
+#     for l in leaves:
+#         spe = ids2species[l.name]
+#         color = leaf_colours[spe]
+#         if 'strepto' in l.name:
+#             f.write(l.name + ',range,' + color + ',Streptococcus\n')
+#         if 'lacto' in l.name:
+#             f.write(l.name + ',range,' + color + ',Lactococcus\n')
+#         if 'flori' in l.name:
+#             f.write(l.name + ',range,' + color + ',Floriococcus\n')
             
 
 #Label annotation file iTOL: manually check where the label should be located and choose id (leaf) that should be labled        
