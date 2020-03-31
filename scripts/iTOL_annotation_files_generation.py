@@ -132,9 +132,10 @@ with open(annotation_files_dir + '/dataset_text.txt', 'w') as f:
     #set dataset labels
     f.write('DATASET_LABEL,Genus labels\nCOLOR,#b2182b\nALIGN_TO_TREE,1\n')
     f.write('DATA\n')
-    f.write('streptococcus_11897,Streptococcus,-1,#c23b22,bold-italic,3,0\n')
-    f.write('lactococcus_00183,Lactococcus,-1,#2166ac,bold-italic,3,0\n')
-    f.write('floricoccus_00001,Floricoccus,-1,#969696,bold-italic,3,0\n')
+    f.write('streptococcus_11897,Streptococcus,-1,#c23b22,bold-italic,4,0\n')
+    f.write('lactococcus_00183,Lactococcus,-1,#2166ac,bold-italic,4,0\n')
+    f.write('floricoccus_00001,Floricoccus,-1,#969696,bold-italic,4,0\n')
+    f.write('streptococcus_11980,Sequenced in Nijmegen,-1,#016A87,bold,4,0')
     
 
 
@@ -152,12 +153,25 @@ with open(annotation_files_dir + '/dataset_colorstrip.txt', 'w') as f:
     f.write('DATASET_LABEL,Species Colors\nCOLOR,#f9665e\n')
     f.write('COLOR_BRANCHES,1\nDATA\n')
     for l in leaves:
-        if 'strepto' in l.name:
+        n = int(l.name.split('_')[1])
+        if n >= 11962:
+            f.write(l.name + ',#016A87,Sequenced in Nijmegen\n')
+        elif 'strepto' in l.name:
             f.write(l.name + ',#c23b22,Streptococcus\n')
-        if 'lacto' in l.name:
+        elif 'lacto' in l.name:
             f.write(l.name + ',#2166ac,Lactococcus\n')
-        if 'flori' in l.name:
+        elif 'flori' in l.name:
             f.write(l.name + ',#969696,Floriococcus\n')
+
+with open(annotation_files_dir + '/nijmegen_sequences_colorstrip.txt', 'w') as f:
+    f.write('DATASET_COLORSTRIP\nSEPARATOR COMMA\n')
+    f.write('DATASET_LABEL,Sequenced in Nijmegen\nCOLOR,#016A87\nDATA\n')
+    for l in leaves:
+        n = int(l.name.split('_')[1])
+        if n >= 11962:
+            f.write(l.name + ',#016A87,Sequenced in Nijmegen\n')
+                   
+            
 #CDS	rRNA	repeat_region	tRNA
 ids2gs = {}
 ids2CDS = {}
@@ -177,28 +191,22 @@ with open (files_dir + '/23032020_prokka_genome_data.tsv') as f:
             ids2tRNA[a[0]] = a[3]
 
 with open(annotation_files_dir + '/genomedata_RNAS_RR.txt' , 'w') as f:
-    f.write('DATASET_MULTIBAR\nSEPARATOR COMMA\nDATASET_LABEL,Genome data RNAs and RR\nCOLOR,#CCE2DD\nFIELD_COLORS,#d8b365,#c7eae5,#5ab4ac,\nFIELD_LABELS,rRNA,Repeat Region,tRNA\nDATASET_SCALE,10-10-#8e9594-1-0-8,20-20-#8e9594-1-0-8,30-30-#8e9594-1-0-8,40-40-#8e9594-1-0-8,50-50-#8e9594-1-0-8,60-60-#8e9594-1-0-8,70-70-#8e9594-1-0-8,80-80-#8e9594-1-0-8,90-90-#8e9594-1-0-8,100-100-#8e9594-1-0-8\nDATA\n')
+    f.write('DATASET_MULTIBAR\nSEPARATOR COMMA\nDATASET_LABEL,Genome data RNAs and RR\nCOLOR,#CCE2DD\nFIELD_COLORS,#de8f05,#0173b2,#029e73\nFIELD_LABELS,rRNA,Repeat Region,tRNA\nDATASET_SCALE,10-10-#8e9594-1-0-8,20-20-#8e9594-1-0-8,30-30-#8e9594-1-0-8,40-40-#8e9594-1-0-8,50-50-#8e9594-1-0-8,60-60-#8e9594-1-0-8,70-70-#8e9594-1-0-8,80-80-#8e9594-1-0-8,90-90-#8e9594-1-0-8,100-100-#8e9594-1-0-8\nDATA\n')
     for l in leaves:
         if l.name in ids2rRNA:
             rRNA = ids2rRNA[l.name]
             repeat_region = ids2repeat_region[l.name]
-            tRNA = ''
+            tRNA = 0
         else:
             tRNA = ids2tRNA[l.name]
-            rRNA = ''
-            repeat_region = ''
-        if rRNA == '':
-            rRNA = 0 
-        if tRNA == '':
-            tRNA = 0
-        if repeat_region == '':
+            rRNA = 0
             repeat_region = 0
         f.write(l.name + ',' + str(rRNA) + ',' + str(repeat_region) + ',' + str(tRNA) + '\n')
 
 #Add simple bars that indicate the genome sizes at the outside of the circle
 #min 927400, max 2808579
 with open(annotation_files_dir + '/genomesize.txt' , 'w') as f:
-    f.write('DATASET_SIMPLEBAR\nSEPARATOR COMMA\nDATASET_LABEL,Genomesizes\nCOLOR,#CCE2DD\nDATASET_SCALE,500000-500000-#8e9594-1-0-8,1000000-1000000-#8e9594-1-0-8,1500000-1500000-#8e9594-1-0-8,2000000-2000000-#8e9594-1-0-8,2500000-2500000-#8e9594-1-0-8,3000000-3000000-#8e9594-1-0-8\nDATA\n')
+    f.write('DATASET_SIMPLEBAR\nSEPARATOR COMMA\nDATASET_LABEL,Genomesizes\nCOLOR,#0173b2\nDATASET_SCALE,500000-500000-#8e9594-1-0-8,1000000-1000000-#8e9594-1-0-8,1500000-1500000-#8e9594-1-0-8,2000000-2000000-#8e9594-1-0-8,2500000-2500000-#8e9594-1-0-8,3000000-3000000-#8e9594-1-0-8\nDATA\n')
     for l in leaves:
         gs = ids2gs[l.name]
         if gs == '':
@@ -244,6 +252,9 @@ with open(annotation_files_dir + '/isolation_countries.txt' , 'w') as f:
     f.write('DATA\n')
     for l in leaves:
         c = ids2icountry[l.name]
+        n = int(l.name.split('_')[1])
+        if n >= 11962:
+            c = 'Netherlands'
         if c != '':
             f.write(l.name + ',' + country2shape[c] + '\n')
 

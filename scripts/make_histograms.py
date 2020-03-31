@@ -38,16 +38,16 @@ def get_info(file, field):
 path = os.getcwd()
 p = Path(path)
 #Get the gs sizes in Mb from all species
-lactofile = os.path.join(p.parents[1], 'files', '06012020_lactococcus_database.tsv')
+lactofile = os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')
 lac_gs = get_info(lactofile, 'genome_length')
 lac_gs = [round(elem/1000000, 2) for elem in lac_gs]
 
-streptofile = os.path.join(p.parents[1], 'files', '20012020_streptococcus_database.tsv')
+streptofile = os.path.join(p.parents[0], 'files', '20012020_streptococcus_database.tsv')
 strepto_gs = get_info(streptofile, 'genome_length')
 strepto_gs = [round(elem/1000000, 2) for elem in strepto_gs]
 
 
-florifile = os.path.join(p.parents[1], 'files', '06012020_floricoccus_database.tsv')
+florifile = os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv')
 flori_gs = get_info(florifile, 'genome_length')
 flori_gs = [round(elem/1000000, 2) for elem in flori_gs]
 
@@ -55,9 +55,9 @@ flori_gs = [round(elem/1000000, 2) for elem in flori_gs]
 
 #Figure with all genome sizes combined (Floricoccus only rug plot)
 fig = plt.figure(figsize=(8,6))
-fig = sns.distplot(lac_gs, color = '#91cf60', label = '$Lactococcus$', hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
-fig = sns.distplot(strepto_gs, color = '#3288bd', label = '$Streptococcus$', hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
-fig = sns.distplot(flori_gs, color = '#b2182b', label = '$Floricoccus$', hist=0, kde=0, rug =1, rug_kws={'linewidth' :2})
+fig = sns.distplot(lac_gs, color = '#2166ac', label = '$Lactococcus$', hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+fig = sns.distplot(strepto_gs, color = '#c23b22', label = '$Streptococcus$', hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+fig = sns.distplot(flori_gs, color = '#202020', label = '$Floricoccus$', hist=0, kde=0, rug =1, rug_kws={'linewidth' :2})
 
 fig.legend(loc='upper right', frameon=0)
 fig.set_title('Genome size distribution of the three analyzed genera', fontsize=14)
@@ -67,7 +67,7 @@ sns.set_style('whitegrid')
 # sns.set(style="whitegrid")
 # fig.grid(False)
 plt.tight_layout()
-#fig.figure.savefig(os.path.join(p.parents[0], 'figures', '270120_histogram_gs.png'), dpi=300, bbox_inches='tight')
+fig.figure.savefig(os.path.join(p.parents[0], 'figures', '300320_histogram_gs.png'), dpi=300, bbox_inches='tight')
 
 
 #%%
@@ -77,12 +77,12 @@ plt.tight_layout()
 fig, axs = plt.subplots(2,2, figsize= (10,8)) #2x2 grid with determined figure size
 
 #fill subplots with histograms
-ax1 = sns.distplot(lac_gs, color = '#91cf60', label = 'Lactococcus', ax=axs[0,0], hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
-ax1 = sns.distplot(strepto_gs, color = '#3288bd', label = 'Streptococcus', ax=axs[0,0], hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
-ax1 = sns.distplot(flori_gs, color = '#b2182b', label = 'Floricoccus', ax=axs[0,0], hist=0, kde=0, rug =1, rug_kws={'linewidth' :2})
-ax2 = sns.distplot(lac_gs, color = '#91cf60', label = 'Lactococcus', ax=axs[0,1], rug=1)
-ax3 = sns.distplot(strepto_gs, color = '#3288bd', label = 'Streptococcus', ax=axs[1,0], rug=1)
-ax4 = sns.countplot(flori_gs, color = '#b2182b', alpha= 0.5, label = 'Floricoccus', ax=axs[1,1])
+ax1 = sns.distplot(lac_gs, color = '#2166ac', label = 'Lactococcus', ax=axs[0,0], hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+ax1 = sns.distplot(strepto_gs, color = '#c23b22', label = 'Streptococcus', ax=axs[0,0], hist=0, kde=1, kde_kws = {'shade' : 1, 'linewidth' : 2})
+ax1 = sns.distplot(flori_gs, color = '#202020', label = 'Floricoccus', ax=axs[0,0], hist=0, kde=0, rug =1, rug_kws={'linewidth' :2})
+ax2 = sns.distplot(lac_gs, color = '#2166ac', label = 'Lactococcus', ax=axs[0,1], rug=1)
+ax3 = sns.distplot(strepto_gs, color = '#c23b22', label = 'Streptococcus', ax=axs[1,0], rug=1)
+ax4 = sns.countplot(flori_gs, color = '#202020', alpha= 0.5, label = 'Floricoccus', ax=axs[1,1])
 #ax4 = sns.distplot(flori_gs,bins=20, color = '#b2182b', label = 'Floricoccus', ax=axs[1,1], kde=0, norm_hist=0, rug=1)
 ax1.legend(loc='upper right')
 
@@ -111,7 +111,7 @@ ax4.text(-0.05, 1.10, "D", ha = "left", va="top", transform=ax4.transAxes, weigh
 #Adjust layout to preserve title
 plt.tight_layout()
 plt.subplots_adjust(top=0.88)
-fig.savefig(os.path.join(p.parents[0], 'figures', '230120_histogram_gs.png'), dpi=300)
+fig.savefig(os.path.join(p.parents[0], 'figures', '300320_histogram_gs_subplots.png'), dpi=300)
 
 
 
