@@ -28,7 +28,8 @@ today = ''.join(today)
 taxon_list = []
 with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
     for line in f:
-        taxon_list.append(line.strip())
+        if 'strepto' in line:
+            taxon_list.append(line.strip())
 
         
 #make binary table: all orthologs (product info) in a list with all genomes with 0 and 1 following
@@ -54,11 +55,12 @@ with open (os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group'))
             #go through all ids and get product info of the orthologue from the prokka annotation file    
             for pair in a:
                 id_ = pair.split('|')[0]
-                ids.append(id_)
-                ortho = pair.split('|')[1]
-                orthos.append(ortho)
+                if 'strepto' in id_:
+                    ids.append(id_)
+                    ortho = pair.split('|')[1]
+                    orthos.append(ortho)
             
-            #reduce the amount of unique and cloud genes (present in less than 0.05%)
+            #reduce the amount of unique and cloud genes (present in less than 0.5%)
             if len(set(ids)) > 60:
                 #make dict with all ids mapping to all orthologues/paralogues to get protein information
                 ids2orthos = {}
