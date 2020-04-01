@@ -32,15 +32,17 @@ today = date.today().strftime("%d/%m/%Y")
 today = today.split('/')
 today = ''.join(today)
 
+bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '01042020_binary_table_prep.tsv')
+
 #determine number of cols and save the lines
-with open(os.path.join(p.parents[1], 'tests', 'Files', 'test_binary.tsv')) as f:
+with open(bin_file) as f:
     lines = [line for line in f]
 
 ncols = len(lines[0].split('\t'))
     
 
 #set the binary part into numpy array
-data = np.loadtxt(os.path.join(p.parents[1], 'tests', 'Files', 'test_binary.tsv'), delimiter = '\t', skiprows = 1, usecols = range(3, ncols))
+data = np.loadtxt(bin_file, delimiter = '\t', skiprows = 1, usecols = range(3, ncols))
     
 #determine the number of ones per line (appearence of gene in the genomes)
 scores = np.count_nonzero(data, axis=1)
@@ -52,7 +54,7 @@ pscores = scores/(ncols - 1)
 sorted_scores = np.argsort(pscores)[::-1]
 
     
-with open(os.path.join(p.parents[1], 'tests', 'Files', 'test_binary_sorted.tsv'), 'w') as f:
+with open(os.path.join(p.parents[1], 'files', 'binary_table', today + '_binary_table_sorted.tsv'), 'w') as f:
     f.write('Pan-genome\tAppearance (in %)\t' + lines[0])
     for i in sorted_scores:
         perc = round(pscores[i]*100,2)
