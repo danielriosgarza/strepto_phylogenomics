@@ -57,17 +57,16 @@ sorted_scores = np.argsort(pscores)[::-1]
 with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_binary_table_sorted.tsv'), 'w') as f:
     f.write('Pan-genome\tAppearance (in %)\t' + lines[0])
     for i in sorted_scores:
-        #because the header is missing index of line is +1
-        i += 1 
+        #because the header is missing index of line is +1 
         perc = round(pscores[i]*100,2)
         if pscores[i] == 1:
-            f.write('Core\t' + str(perc) + '\t' + lines[i])
+            f.write('Core\t' + str(perc) + '\t' + lines[i+1])
         elif pscores[i] >= 0.9:
-            f.write('Extended Core\t' + str(perc) + '\t' + lines[i])
+            f.write('Extended Core\t' + str(perc) + '\t' + lines[i+1])
         elif 0.9 > pscores[i] >= 0.15:
-            f.write('Shell\t' + str(perc) + '\t' + lines[i])
+            f.write('Shell\t' + str(perc) + '\t' + lines[i+1])
         elif 0.15 > pscores[i]:
-            f.write('Cloud\t' + str(perc) + '\t' + lines[i])
+            f.write('Cloud\t' + str(perc) + '\t' + lines[i+1])
             
 
   
