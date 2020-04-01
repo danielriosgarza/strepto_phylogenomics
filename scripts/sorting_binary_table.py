@@ -54,7 +54,7 @@ pscores = scores/(ncols - 1)
 sorted_scores = np.argsort(pscores)[::-1]
 
     
-with open(os.path.join(p.parents[1], 'files', 'binary_table', today + '_binary_table_sorted.tsv'), 'w') as f:
+with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_binary_table_sorted.tsv'), 'w') as f:
     f.write('Pan-genome\tAppearance (in %)\t' + lines[0])
     for i in sorted_scores:
         perc = round(pscores[i]*100,2)
