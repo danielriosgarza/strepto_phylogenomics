@@ -9,15 +9,19 @@ Created on Fri Mar 27 11:55:25 2020
 
 '''
 Binary table of Pan-genome. Product information of all orthologues found within a group are stated in the first 3 columns (gene, lengths (min-max), Product). The information is obtained from the prokka annotation (<id>.tsv) Other columns are genome ids displaying if certain protein is present (1) or absent (0). 
+
+Updatable: change the input file
+Output: <date>_binary_table_prep.tsv
 '''
 import os
 from pathlib import Path
 from datetime import date
-
-
     
 path = os.getcwd()
 p = Path(path)
+
+inputfile = os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group')
+
 
 #get the date to keep track of the scripts (added to scriptname)
 today = date.today().strftime("%d/%m/%Y")
@@ -25,16 +29,23 @@ today = today.split('/')
 today = ''.join(today)
 
 
+#Get the list of all strepto ids that were included in the analysis
 taxon_list = []
-with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
+
+with open (inputfile) as f:
     for line in f:
-        if 'strepto' in line:
-            taxon_list.append(line.strip())
+            a = line.strip().split('\t')   
+            for pair in a:
+                id_ = pair.split('|')[0]
+                if 'strepto' in id_ and id_ not in taxon_list:
+                    taxon_list.append(id_)
+    
+taxon_list = sorted(taxon_list)
 
         
 #make binary table: all orthologs (product info) in a list with all genomes with 0 and 1 following
    
-with open (os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group')) as f:
+with open (inputfile) as f:
     with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_binary_table_prep.tsv'), 'w') as f2:
         
         #header: write orthologue and infos followed by all genome ids for the binary table
@@ -60,7 +71,7 @@ with open (os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group'))
                     ortho = pair.split('|')[1]
                     orthos.append(ortho)
             
-            #reduce the amount of unique and cloud genes (present in less than 1%)
+            #reduce the amount of unique and cloud genes (ignores genes that are present in less than 1%)
             if len(set(ids)) >= 120:
                 #make dict with all ids mapping to all orthologues/paralogues to get protein information
                 ids2orthos = {}
@@ -73,7 +84,7 @@ with open (os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group'))
                 #get product information from the prokka .tsv file
                 genes = []
                 lengths = []
-                products = []        
+                products = []
                 for k, v in ids2orthos.items():        
                     with open('/home/meiker/git/data/prokka_annotation/' + k + '/' + k + '.tsv') as f3:
                         f3.readline()

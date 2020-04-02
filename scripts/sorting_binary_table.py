@@ -17,6 +17,8 @@ Core : 100%
 Extended core : 90-100%
 Shell : 15-90%
 Cloud : <15%
+
+Updateable: change bin_file
 '''
 
 import os
@@ -32,7 +34,7 @@ today = date.today().strftime("%d/%m/%Y")
 today = today.split('/')
 today = ''.join(today)
 
-bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '01042020_binary_table_prep.tsv')
+bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '02042020_binary_table_prep.tsv')
 
 #determine number of cols and save the lines
 with open(bin_file) as f:
