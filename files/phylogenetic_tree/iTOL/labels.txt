@@ -49,34 +49,34 @@ streptococcus_11868,Streptococcus hyointestinalis
 streptococcus_11840,Streptococcus sp. Z15
 streptococcus_11884,Streptococcus pantholopis
 streptococcus_00102,Streptococcus macedonicus
-streptococcus_11965,RB-Streptococcus macedonicus
-streptococcus_11967,RB-Streptococcus macedonicus
-streptococcus_11970,RB-Streptococcus macedonicus
-streptococcus_11963,RB-Streptococcus gallolyticus
-streptococcus_11973,RB-Streptococcus gallolyticus
-streptococcus_11980,RB-Streptococcus gallolyticus
-streptococcus_11964,RB-Streptococcus bovis
-streptococcus_11979,RB-Streptococcus bovis
-streptococcus_11966,RB-Streptococcus bovis
-streptococcus_11981,RB-Streptococcus bovis
-streptococcus_11975,RB-Streptococcus bovis
-streptococcus_11968,RB-Streptococcus gallolyticus
-streptococcus_11971,RB-Streptococcus bovis
-streptococcus_11977,RB-Streptococcus bovis
-streptococcus_11974,RB-Streptococcus bovis
-streptococcus_11976,RB-Streptococcus gallolyticus
-streptococcus_11982,RB-Streptococcus gallolyticus
-streptococcus_11984,RB-Streptococcus bovis
-streptococcus_11985,RB-Streptococcus bovis
-streptococcus_11983,RB-Streptococcus bovis
-streptococcus_11972,RB-Streptococcus bovis
-streptococcus_11978,RB-Streptococcus gallolyticus
+streptococcus_11965,Streptococcus macedonicus
+streptococcus_11967,Streptococcus macedonicus
+streptococcus_11970,Streptococcus macedonicus
+streptococcus_11963,Streptococcus gallolyticus
+streptococcus_11973,Streptococcus gallolyticus
+streptococcus_11980,Streptococcus gallolyticus
+streptococcus_11964,Streptococcus bovis
+streptococcus_11979,Streptococcus bovis
+streptococcus_11966,Streptococcus bovis
+streptococcus_11981,Streptococcus bovis
+streptococcus_11975,Streptococcus bovis
+streptococcus_11968,Streptococcus gallolyticus
+streptococcus_11971,Streptococcus bovis
+streptococcus_11977,Streptococcus bovis
+streptococcus_11974,Streptococcus bovis
+streptococcus_11976,Streptococcus gallolyticus
+streptococcus_11982,Streptococcus gallolyticus
+streptococcus_11984,Streptococcus bovis
+streptococcus_11985,Streptococcus bovis
+streptococcus_11983,Streptococcus bovis
+streptococcus_11972,Streptococcus bovis
+streptococcus_11978,Streptococcus gallolyticus
 streptococcus_11854,Streptococcus sp. UBA4344
 streptococcus_11908,Streptococcus sp. KCJ4950
 streptococcus_11932,uncultured Streptococcus sp.
 streptococcus_11935,Streptococcus sp. HSISB1
-streptococcus_11962,RB-Streptococcus bovis
-streptococcus_11969,RB-Streptococcus bovis
+streptococcus_11962,Streptococcus bovis
+streptococcus_11969,Streptococcus bovis
 streptococcus_11892,Streptococcus sp. UBA3373
 streptococcus_11893,Streptococcus sp. UBA632
 streptococcus_00175,Streptococcus caballi

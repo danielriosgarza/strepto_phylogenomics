@@ -153,7 +153,7 @@ $mkdir compliantFasta/
 # porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_lactococcus_porthomcl_prep.sh'))
 
 '''
-Get taxon list run following lines in the terminal (putput dir): 
+Get taxon list run following lines in the terminal (output dir): 
 $ls -1 compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
 
 #place taxon list in git dir to get all ids in a single list

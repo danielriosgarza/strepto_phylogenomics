@@ -71,7 +71,7 @@ for k, v in ids2species.items():
     id_n = int(k.split('_')[1])
     if id_n >= 11962:
         temp = v.split('-')
-        species_name = 'RB-Streptococcus ' + temp[3]
+        species_name = 'Streptococcus ' + temp[3]
         ids2species[k] = species_name
 
 #open the tree file and get information over included ids (leaves)
@@ -95,6 +95,7 @@ for l in leaves:
         
 #to randomly asign sequential colors
 random.shuffle(streptos)
+random.shuffle(lactos)
 
 strep_color = get_colors(streptos)
 lacto_color = get_colors(lactos, color = '#92c5de')
@@ -111,18 +112,18 @@ for i, spec in enumerate(floris):
     leaf_colours[spec] = flori_color[i] 
 
 #write annotation file for iTOL: colors background of the leaves according to its species
-# with open(annotation_files_dir +'/tree_colors_per_species.txt', 'w') as f:
-#     f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
-#     #colored ranges inclusive labels
-#     for l in leaves:
-#         spe = ids2species[l.name]
-#         color = leaf_colours[spe]
-#         if 'strepto' in l.name:
-#             f.write(l.name + ',range,' + color + ',Streptococcus\n')
-#         if 'lacto' in l.name:
-#             f.write(l.name + ',range,' + color + ',Lactococcus\n')
-#         if 'flori' in l.name:
-#             f.write(l.name + ',range,' + color + ',Floriococcus\n')
+with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
+    f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
+    #colored ranges inclusive labels
+    for l in leaves:
+        spe = ids2species[l.name]
+        color = leaf_colours[spe]
+        if 'strepto' in l.name:
+            f.write(l.name + ',range,' + color + ',Streptococcus\n')
+        if 'lacto' in l.name:
+            f.write(l.name + ',range,' + color + ',Lactococcus\n')
+        if 'flori' in l.name:
+            f.write(l.name + ',range,' + color + ',Floriococcus\n')
             
 
 #Label annotation file iTOL: manually check where the label should be located and choose id (leaf) that should be labled        
