@@ -67,6 +67,18 @@ for file in files:
             else:
                 species2ids[species] += [a[0]]
 
+#Add infos from the genomes obtained from radboudumc/pathology department
+with open(files_dir + '/radboudumc_genomes_infos.tsv') as f:
+    f.readline()
+    for line in f:
+        a = line.strip().split('\t')
+        if a[4] == 'human':
+            ids2host[a[0]] = 'Homo sapiens'
+        ids2icountry[a[0]] = a[5]
+        if a[6] != '?':
+            ids2isolationsource[a[0]] = a[6]
+
+
 for k, v in ids2species.items():
     id_n = int(k.split('_')[1])
     if id_n >= 11962:
@@ -78,7 +90,10 @@ for k, v in ids2species.items():
 t = Tree(files_dir + '/phylogenetic_tree/12032020_reduced_concat_alignments.fa.contree')
 
 leaves = t.get_leaves()
-    
+ 
+#%% runcell 1
+#Annotation file colored range: species colors
+   
 #Get colors of from same palette for each genus
 streptos = []
 lactos = []
@@ -112,19 +127,21 @@ for i, spec in enumerate(floris):
     leaf_colours[spec] = flori_color[i] 
 
 #write annotation file for iTOL: colors background of the leaves according to its species
-with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
-    f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
-    #colored ranges inclusive labels
-    for l in leaves:
-        spe = ids2species[l.name]
-        color = leaf_colours[spe]
-        if 'strepto' in l.name:
-            f.write(l.name + ',range,' + color + ',Streptococcus\n')
-        if 'lacto' in l.name:
-            f.write(l.name + ',range,' + color + ',Lactococcus\n')
-        if 'flori' in l.name:
-            f.write(l.name + ',range,' + color + ',Floriococcus\n')
-            
+# with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
+#     f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
+#     #colored ranges inclusive labels
+#     for l in leaves:
+#         spe = ids2species[l.name]
+#         color = leaf_colours[spe]
+#         if 'strepto' in l.name:
+#             f.write(l.name + ',range,' + color + ',Streptococcus\n')
+#         if 'lacto' in l.name:
+#             f.write(l.name + ',range,' + color + ',Lactococcus\n')
+#         if 'flori' in l.name:
+#             f.write(l.name + ',range,' + color + ',Floriococcus\n')
+ 
+#%% runcell 2
+#Annotation file datset_text: Genus labels outside the circle           
 
 #Label annotation file iTOL: manually check where the label should be located and choose id (leaf) that should be labled        
 with open(annotation_files_dir + '/dataset_text.txt', 'w') as f:
@@ -136,9 +153,11 @@ with open(annotation_files_dir + '/dataset_text.txt', 'w') as f:
     f.write('streptococcus_11897,Streptococcus,-1,#c23b22,bold-italic,4,0\n')
     f.write('lactococcus_00183,Lactococcus,-1,#2166ac,bold-italic,4,0\n')
     f.write('floricoccus_00001,Floricoccus,-1,#969696,bold-italic,4,0\n')
-    f.write('streptococcus_11980,Sequenced in Nijmegen,-1,#016A87,bold,4,0')
+    f.write('streptococcus_11980,Provided from Radboudumc,-1,#016A87,bold,4,0')
     
 
+#%% runcell 3
+#annotation file labels: Changes the labels displayed at the leaves (ids --> species name)
 
 #label annotation file: changes the labels at leaf_nodes   
 with open(annotation_files_dir + '/labels.txt', 'w') as f:
@@ -148,6 +167,9 @@ with open(annotation_files_dir + '/labels.txt', 'w') as f:
         f.write(l.name + ',' + species + '\n')
 
 
+#%% runcell 4
+#annotation file colorstrip: colostrips marking the genera and the genomes provided from pathology department        
+
 #Colorstrip (outer ring) annotation file: strip at the outside is colored according to the genus a node belongs to                
 with open(annotation_files_dir + '/dataset_colorstrip.txt', 'w') as f:
     f.write('DATASET_COLORSTRIP\nSEPARATOR COMMA\n')
@@ -156,7 +178,7 @@ with open(annotation_files_dir + '/dataset_colorstrip.txt', 'w') as f:
     for l in leaves:
         n = int(l.name.split('_')[1])
         if n >= 11962:
-            f.write(l.name + ',#016A87,Sequenced in Nijmegen\n')
+            f.write(l.name + ',#016A87,from Nijmegen\n')
         elif 'strepto' in l.name:
             f.write(l.name + ',#c23b22,Streptococcus\n')
         elif 'lacto' in l.name:
@@ -170,8 +192,10 @@ with open(annotation_files_dir + '/nijmegen_sequences_colorstrip.txt', 'w') as f
     for l in leaves:
         n = int(l.name.split('_')[1])
         if n >= 11962:
-            f.write(l.name + ',#016A87,Sequenced in Nijmegen\n')
+            f.write(l.name + ',#016A87,from Nijmegen\n')
                    
+#%% runcell 5
+#annotation files Mulitbar and simplebar: bars displaying genome data at the outside of the circle
             
 #CDS	rRNA	repeat_region	tRNA
 ids2gs = {}
@@ -213,34 +237,38 @@ with open(annotation_files_dir + '/genomesize.txt' , 'w') as f:
         if gs == '':
             gs = 0 
         f.write(l.name + ',' + str(gs) + '\n')
-        
+
+
+#%% runcell 6
+#annotation files: binary. Binary datasets displaying isolation countries        
+
 #Binary dataset for isolation country
 countries = []        
 for l in leaves:
     ic = ids2icountry[l.name]
     countries.append(ic)
     
-ndifferent_shapes = len(set(countries)) #25 minus empty spaces = 24
+ndifferent_shapes = len(set(countries)) #26 minus empty spaces = 25
 
-#24 different legend symbols --> 4 shapes x 6 different colors
+#25 different legend symbols --> 5 shapes x 5 different colors
 
-col = sns.color_palette('colorblind', n_colors = 6)
+col = sns.color_palette('colorblind', n_colors = 5)
 colors_shapes = col.as_hex() 
-labels = list(set(countries))
+labels = sorted(list(set(countries)))
 labels.remove('')
+
 
 country2shape = {}
 for i in range(len(labels)):
-    line = [str(0)]*24
+    line = [str(0)]*25
     line[i] = str(1)
     country2shape[labels[i]] = ','.join(line)
-country2shape[''] = ','.join([str(0)]*24)
       
 with open(annotation_files_dir + '/isolation_countries.txt' , 'w') as f:
-    f.write('DATASET_BINARY\nSEPARATOR COMMA\nDATASET_LABEL,Isolation Countries\nCOLOR,#B05F3C\nFIELD_SHAPES,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4\nFIELD_COLORS,')
-    for i in range(6):
-        for j in range(6):
-            if i == 5 and j == 5:
+    f.write('DATASET_BINARY\nSEPARATOR COMMA\nDATASET_LABEL,Isolation Countries\nCOLOR,#B05F3C\nFIELD_SHAPES,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5\nFIELD_COLORS,')
+    for i in range(5):
+        for j in range(5):
+            if i == 4 and j == 4:
                 f.write(colors_shapes[j] + '\n')
             else:
                 f.write(colors_shapes[j] + ',')
@@ -253,12 +281,11 @@ with open(annotation_files_dir + '/isolation_countries.txt' , 'w') as f:
     f.write('DATA\n')
     for l in leaves:
         c = ids2icountry[l.name]
-        n = int(l.name.split('_')[1])
-        if n >= 11962:
-            c = 'Netherlands'
         if c != '':
             f.write(l.name + ',' + country2shape[c] + '\n')
 
+#%% runcell 7
+#annotation files: binary. Binary datasets displaying isolation source
 
 #Binary dataset for isolation sources. Only display top 5 and rest in category 'others'
             
@@ -276,7 +303,7 @@ for s in sources:
             sources_counter['Oral'] = 1
         else:
             sources_counter['Oral'] += 1
-    elif 'airy' in s or 'ilk' in s:
+    elif 'airy' in s or 'ilk' in s or 'eese' in s:
         adaptedsources[s] = 'Dairy'
         if 'Dairy' not in sources_counter:
             sources_counter['Dairy'] = 1
@@ -337,6 +364,7 @@ for i, count in enumerate(values):
 top9 = []
 for i in indexes:
     top9.append(keys[i])
+top9 = sorted(top9)
 
 source2shape = {}
 for i in range(len(top9)):
@@ -345,10 +373,9 @@ for i in range(len(top9)):
     source2shape[top9[i]] = ','.join(line)
 source2shape['Other'] = ','.join([str(0)]*9) + ',1'
 
-#Isolation source annotation file, only top 12 the rest is category 'others'
+#Isolation source annotation file, only top 9 the rest is category 'others'
 #9 symbols --> 1 shapes, 9 colors
-slabels = list(source2shape.keys())  
-
+slabels = top9 + ['Other']
 
 col = sns.color_palette('colorblind', n_colors = len(slabels))
 colors = col.as_hex() 
@@ -374,7 +401,9 @@ with open(annotation_files_dir + '/isolation_sources.txt' , 'w') as f:
             pass
         else:
             f.write(l.name + ',' + source2shape['Other'] + '\n')
- 
+
+#%% runcell 8
+#annotation files: binary. Binary datasets displaying hosts
            
 #Binary annotation file displaying the host names
 hosts_counter = {}
@@ -388,7 +417,6 @@ for l in leaves:
         hosts_counter[host] = 1
     else:
         hosts_counter[host] += 1
-
 keys = []
 values = []
 
@@ -412,12 +440,14 @@ for i, count in enumerate(values):
             topN[ind_min] = count
             indexes[ind_min] = i
 
-#Add the top 5 hosts to a list
+#Add the top 9 hosts to a list
 top9 = []
 for i in indexes:
     top9.append(keys[i])
 
-#5 symbols: top 4 and category 'Other'
+top9 = sorted(top9)
+
+#10 symbols: top 9 and category 'Other'
 host2shape = {}
 for i in range(len(top9)):
     line = [str(0)]*10
@@ -425,20 +455,15 @@ for i in range(len(top9)):
     host2shape[top9[i]] = '\t'.join(line)
 host2shape['Other'] = '\t'.join([str(0)]*9) + '\t1'
 
-labels = []
-for k in list(host2shape.keys()):
-    if k == '': 
-        k = 'Unknown'
-    labels.append(k)
 
-
+labels = top9 + ['Other']
 
 
 col = sns.color_palette('colorblind', n_colors = len(labels))
 colors = col.as_hex() 
 
 with open(annotation_files_dir + '/hosts.txt' , 'w') as f:
-    f.write('DATASET_BINARY\nSEPARATOR TAB\nDATASET_LABEL\tHost names\nCOLOR\t#4d9221\nLEGEND_TITLE\tHost names\nFIELD_SHAPES\t1\t2\t3\t4\t5\t1\t2\t3\t4\t5\nFIELD_COLORS\t')
+    f.write('DATASET_BINARY\nSEPARATOR TAB\nDATASET_LABEL\tHost names\nCOLOR\t#4d9221\nLEGEND_TITLE\tHost names\nFIELD_SHAPES\t1\t1\t1\t1\t1\t1\t1\t1\t1\t1\nFIELD_COLORS\t')
     for c in colors:
         if c == colors[-1]:
             f.write(c + '\nFIELD_LABELS\t')
@@ -451,6 +476,8 @@ with open(annotation_files_dir + '/hosts.txt' , 'w') as f:
             f.write(item + '\t')
     for l in leaves:
         host = ids2host[l.name]
+        if ',' in host:
+            host = host.split(',')[1].strip()
         if host in top9:
             f.write(l.name + '\t' + host2shape[host] + '\n')
         elif host == '':

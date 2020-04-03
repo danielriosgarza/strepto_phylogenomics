@@ -52,34 +52,34 @@ streptococcus_11868,#c23b22,Streptococcus
 streptococcus_11840,#c23b22,Streptococcus
 streptococcus_11884,#c23b22,Streptococcus
 streptococcus_00102,#c23b22,Streptococcus
-streptococcus_11965,#016A87,Sequenced in Nijmegen
-streptococcus_11967,#016A87,Sequenced in Nijmegen
-streptococcus_11970,#016A87,Sequenced in Nijmegen
-streptococcus_11963,#016A87,Sequenced in Nijmegen
-streptococcus_11973,#016A87,Sequenced in Nijmegen
-streptococcus_11980,#016A87,Sequenced in Nijmegen
-streptococcus_11964,#016A87,Sequenced in Nijmegen
-streptococcus_11979,#016A87,Sequenced in Nijmegen
-streptococcus_11966,#016A87,Sequenced in Nijmegen
-streptococcus_11981,#016A87,Sequenced in Nijmegen
-streptococcus_11975,#016A87,Sequenced in Nijmegen
-streptococcus_11968,#016A87,Sequenced in Nijmegen
-streptococcus_11971,#016A87,Sequenced in Nijmegen
-streptococcus_11977,#016A87,Sequenced in Nijmegen
-streptococcus_11974,#016A87,Sequenced in Nijmegen
-streptococcus_11976,#016A87,Sequenced in Nijmegen
-streptococcus_11982,#016A87,Sequenced in Nijmegen
-streptococcus_11984,#016A87,Sequenced in Nijmegen
-streptococcus_11985,#016A87,Sequenced in Nijmegen
-streptococcus_11983,#016A87,Sequenced in Nijmegen
-streptococcus_11972,#016A87,Sequenced in Nijmegen
-streptococcus_11978,#016A87,Sequenced in Nijmegen
+streptococcus_11965,#016A87,from Nijmegen
+streptococcus_11967,#016A87,from Nijmegen
+streptococcus_11970,#016A87,from Nijmegen
+streptococcus_11963,#016A87,from Nijmegen
+streptococcus_11973,#016A87,from Nijmegen
+streptococcus_11980,#016A87,from Nijmegen
+streptococcus_11964,#016A87,from Nijmegen
+streptococcus_11979,#016A87,from Nijmegen
+streptococcus_11966,#016A87,from Nijmegen
+streptococcus_11981,#016A87,from Nijmegen
+streptococcus_11975,#016A87,from Nijmegen
+streptococcus_11968,#016A87,from Nijmegen
+streptococcus_11971,#016A87,from Nijmegen
+streptococcus_11977,#016A87,from Nijmegen
+streptococcus_11974,#016A87,from Nijmegen
+streptococcus_11976,#016A87,from Nijmegen
+streptococcus_11982,#016A87,from Nijmegen
+streptococcus_11984,#016A87,from Nijmegen
+streptococcus_11985,#016A87,from Nijmegen
+streptococcus_11983,#016A87,from Nijmegen
+streptococcus_11972,#016A87,from Nijmegen
+streptococcus_11978,#016A87,from Nijmegen
 streptococcus_11854,#c23b22,Streptococcus
 streptococcus_11908,#c23b22,Streptococcus
 streptococcus_11932,#c23b22,Streptococcus
 streptococcus_11935,#c23b22,Streptococcus
-streptococcus_11962,#016A87,Sequenced in Nijmegen
-streptococcus_11969,#016A87,Sequenced in Nijmegen
+streptococcus_11962,#016A87,from Nijmegen
+streptococcus_11969,#016A87,from Nijmegen
 streptococcus_11892,#c23b22,Streptococcus
 streptococcus_11893,#c23b22,Streptococcus
 streptococcus_00175,#c23b22,Streptococcus

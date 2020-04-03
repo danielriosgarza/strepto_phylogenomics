@@ -1,0 +1,25 @@
+database_id	species	genome_length	collection_year	host_name	isolation_country	isolation_source	sequencing_platform
+streptococcus_11962	RB-01-S-bovis-NTB2-39468	1900497		human	Netherlands	blood	Illumina Next Seq
+streptococcus_11963	RB-02-S-gallolyticus-NTB12	2400102	2012	human	Netherlands	blood	Illumina Next Seq
+streptococcus_11964	RB-03-S-bovis-1293	2242337	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11965	RB-04-S-macedonicus-CIP105685T	2140244		human	France	?	Illumina Next Seq
+streptococcus_11966	RB-05-S-bovis-1459	2373245	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11967	RB-06-S-macedonicus-ACA-DC-205	2165226		human	Greece	Greek Kasseri cheese	Illumina Next Seq
+streptococcus_11968	RB-07-S-gallolyticus-NTB1	2237550		human	Netherlands	blood	Illumina Next Seq
+streptococcus_11969	RB-08-S-bovis-1067	1847205	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11970	RB-09-S-macedonicus-8SP---S-bovis	2013266		human	Italy	Spressa cheese	Illumina Next Seq
+streptococcus_11971	RB-10-S-bovis-1361	2344082	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11972	RB-11-S-bovis-1364	2238679	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11973	RB-12-S-gallolyticus-UCN50	2294311		human	France	?	Illumina Next Seq
+streptococcus_11974	RB-13-S-bovis-1294	2271320	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11975	RB-14-S-bovis-1445	2449980	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11976	RB-15-S-gallolyticus-9L-1503-1121-L	2376573		human	Netherlands	blood	Illumina Next Seq
+streptococcus_11977	RB-16-S-bovis-1365	2344564	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11978	RB-17-S-gallolyticus-subsp-macedonicus-NTB3-	2007450	2010	human	Netherlands	blood	Illumina Next Seq
+streptococcus_11979	RB-18-S-bovis-1212	2244452	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11980	RB-19-S-gallolyticus-NTB11	2283298	2011	human	Netherlands	blood	Illumina Next Seq
+streptococcus_11981	RB-20-S-bovis-1417	2447338	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11982	RB-21-S-gallolyticus-NTB4	2347095	2010	human	Netherlands	blood	Illumina Next Seq
+streptococcus_11983	RB-22-S-bovis-207	2141642	2000	human	Italy	blood	Illumina Next Seq
+streptococcus_11984	RB-23-S-bovis-NTB7	2186078	2010	human	Netherlands	blood	Illumina Next Seq
+streptococcus_11985	RB-24-S-bovis-992	2247426	2000	human	Italy	blood	Illumina Next Seq
