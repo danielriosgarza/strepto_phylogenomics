@@ -8,6 +8,12 @@ Created on Mon Jan 13 12:10:37 2020
 
 '''
 Finding orthologs and paralogs using the software Porthomcl.
+
+First get orthomcl: https://orthomcl.org/common/downloads/software/v2.0/UserGuide.txt
+Get porthoMCL git clone and place it in orthomcSoftware/bin folder
+$cp -a ~/PorthoMCL/. ~/orthomclSoftware-v2.0.9/bin/ --> to run porthomcl py scripts
+
+Lines starting with '$' in this script were running in the terminal in the output dir of the porthomcl analysis.
 '''
 import random
 from random import shuffle
@@ -127,12 +133,6 @@ p = Path(path)
 
 #%% runcell 1
 '''
-First get orthomcl: https://orthomcl.org/common/downloads/software/v2.0/UserGuide.txt
-Get porthoMCL git clone and place it in orthomcSoftware/bin folder
-$cp -a ~/PorthoMCL/. ~/orthomclSoftware-v2.0.9/bin/ --> to run porthomcl py scripts
-
-in the following lines '$' terminal commands were running in the output dir of porthomcl analysis
-
 Before adjusting fasta run:
 $mkdir compliantFasta/   
     
