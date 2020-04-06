@@ -20,7 +20,7 @@ def finding_best_hits(indexes_ids, savedir):
     '''
     with open(savedir, 'w') as f:
         for i in indexes_ids:
-            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list2 -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit2 -q /home/meiker/orthomcl/paralogTemp2 -x "+str(i)+" -l /home/meiker/orthomcl/logs\n")
+            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list2 -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit2 -q /home/meiker/orthomcl/paralogTemp2 -x "+str(i)+" -l\n")
 
 def split_files(i_list, nsplits = 4):
     '''
