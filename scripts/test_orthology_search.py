@@ -57,7 +57,7 @@ with open ('/home/meiker/orthomcl/taxon_list2' , 'w') as f:
         
 inds_l = split_files(indexes)
 
-for i, inds in inds_l:
+for i, inds in enumerate(inds_l):
     finding_best_hits(inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_test_find_best_hits' + str(i) + '.sh'))       
 
 
