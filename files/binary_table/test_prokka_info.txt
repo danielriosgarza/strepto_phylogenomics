@@ -1,0 +1,63 @@
+locus_tag       ftype   length_bp       gene    EC_number       COG     product
+HNHBCBPK_00001  CDS     666                             hypothetical protein
+HNHBCBPK_00002  CDS     1539                            hypothetical protein
+HNHBCBPK_00003  CDS     951     btuD_1  7.6.2.8         Vitamin B12 import ATP-binding protein BtuD
+HNHBCBPK_00004  CDS     723                             hypothetical protein
+HNHBCBPK_00005  CDS     1131                            hypothetical protein
+HNHBCBPK_00006  CDS     867     btuD_2  7.6.2.8         Vitamin B12 import ATP-binding protein BtuD
+HNHBCBPK_00007  CDS     1710                            hypothetical protein
+HNHBCBPK_00008  CDS     1029    vanT    5.1.1.- COG0787 Serine/alanine racemase
+HNHBCBPK_00009  CDS     786                             hypothetical protein
+HNHBCBPK_00010  CDS     789                             hypothetical protein
+HNHBCBPK_00011  CDS     1620    btuD_3  7.6.2.8         Vitamin B12 import ATP-binding protein BtuD
+HNHBCBPK_00012  tRNA    74                              tRNA-Ile(gat)
+HNHBCBPK_00013  tRNA    73                              tRNA-Gly(tcc)
+HNHBCBPK_00014  tRNA    75                              tRNA-Phe(gaa)
+HNHBCBPK_00015  tRNA    76                              tRNA-Met(cat)
+HNHBCBPK_00016  tRNA    90                              tRNA-Ser(tga)
+HNHBCBPK_00017  tRNA    74                              tRNA-Glu(ttc)
+HNHBCBPK_00018  tRNA    74                              tRNA-Asn(gtt)
+HNHBCBPK_00019  rRNA    105                             5S ribosomal RNA
+HNHBCBPK_00020  tRNA    74                              tRNA-Ile(gat)
+HNHBCBPK_00021  tRNA    73                              tRNA-Gly(tcc)
+HNHBCBPK_00022  tRNA    75                              tRNA-Phe(gaa)
+HNHBCBPK_00023  tRNA    76                              tRNA-Met(cat)
+HNHBCBPK_00024  tRNA    90                              tRNA-Ser(tga)
+HNHBCBPK_00025  tRNA    74                              tRNA-Glu(ttc)
+HNHBCBPK_00026  CDS     1167                            hypothetical protein
+HNHBCBPK_00027  CDS     1482    guaB    1.1.1.205       COG0516 Inosine-5'-monophosphate dehydrogenase
+HNHBCBPK_00028  CDS     666                             hypothetical protein
+HNHBCBPK_00029  CDS     480     rlmH    2.1.1.177       COG1576 Ribosomal RNA large subunit methyltransferase H
+HNHBCBPK_00030  CDS     1272    htrA    3.4.21.107      COG0265 Serine protease Do-like HtrA
+HNHBCBPK_00031  CDS     798     spo0J           COG1475 Stage 0 sporulation protein J
+HNHBCBPK_00032  CDS     1374    dnaA            COG0593 Chromosomal replication initiator protein DnaA
+HNHBCBPK_00033  CDS     1143    dnaN            COG0592 Beta sliding clamp
+HNHBCBPK_00034  CDS     3324    rexB    3.1.-.- COG3857 ATP-dependent helicase/deoxyribonuclease subunit B
+HNHBCBPK_00035  CDS     3660    addA    3.1.-.- COG1074 ATP-dependent helicase/nuclease subunit A
+HNHBCBPK_00036  CDS     198                             hypothetical protein
+HNHBCBPK_00037  CDS     1119    ychF            COG0012 Ribosome-binding ATPase YchF
+HNHBCBPK_00038  CDS     573     pth     3.1.1.29                Peptidyl-tRNA hydrolase
+HNHBCBPK_00039  CDS     3558    mfd     3.6.4.-         Transcription-repair-coupling factor
+HNHBCBPK_00040  CDS     1473                            hypothetical protein
+HNHBCBPK_00041  CDS     531                             hypothetical protein
+HNHBCBPK_00042  CDS     228                             hypothetical protein
+HNHBCBPK_00043  CDS     2340                            hypothetical protein
+HNHBCBPK_00044  CDS     600     oppA            COG4166 Oligopeptide-binding protein OppA
+HNHBCBPK_00045  CDS     648     oppF_1          COG4608 Oligopeptide transport ATP-binding protein OppF
+HNHBCBPK_00046  CDS     285                             hypothetical protein
+HNHBCBPK_00047  CDS     396                             hypothetical protein
+HNHBCBPK_00048  CDS     294                             hypothetical protein
+HNHBCBPK_00049  CDS     1260    tilS    6.3.4.19                tRNA(Ile)-lysidine synthase
+HNHBCBPK_00050  CDS     540     hpt     2.4.2.8         Hypoxanthine-guanine phosphoribosyltransferase
+HNHBCBPK_00051  CDS     2028    ftsH    3.4.24.-        COG0465 ATP-dependent zinc metalloprotease FtsH
+HNHBCBPK_00052  CDS     1383    yhdG            COG0531 putative amino acid permease YhdG
+HNHBCBPK_00053  CDS     891                             hypothetical protein
+HNHBCBPK_00054  CDS     897                             hypothetical protein
+HNHBCBPK_00055  CDS     1755    aspS_1  6.1.1.12                Aspartate--tRNA ligase
+HNHBCBPK_00056  CDS     1290    hisS    6.1.1.21                Histidine--tRNA ligase
+HNHBCBPK_00057  CDS     282                             Potassium channel
+HNHBCBPK_00058  CDS     171     rpmF            COG0333 50S ribosomal protein L32
+HNHBCBPK_00059  CDS     150     rpmGA_1                 50S ribosomal protein L33 1
+HNHBCBPK_00060  CDS     444                             hypothetical protein
+HNHBCBPK_00061  CDS     726                             hypothetical protein
+HNHBCBPK_00062  CDS     606     hchA    3.1.2.- COG0693 Protein/nucleic acid deglycase 1

@@ -72,7 +72,7 @@ with open (inputfile) as f:
                     orthos.append(ortho)
             
             #reduce the amount of unique and cloud genes (ignores genes that are present in less than 1%)
-            if len(set(ids)) >= 120:
+            if len(set(ids)) >= round(len(taxon_list)/100):
                 #make dict with all ids mapping to all orthologues/paralogues to get protein information
                 ids2orthos = {}
                 for i, num in enumerate(ids):
