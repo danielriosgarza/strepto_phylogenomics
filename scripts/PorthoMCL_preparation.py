@@ -82,7 +82,7 @@ def finding_best_hits(indexes_ids, savedir):
     '''
     with open(savedir, 'w') as f:
         for i in indexes_ids:
-            f.write("porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x "+str(i[0])+"\n")
+            f.write('porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x ' + str(i[0]) + '-l /home/meiker/orthomcl/logs/' + today + '_logfile_besthits.txt --evalueExponentCutoff -2\n')
   
 def split_files(ids, nsplits = 16):
     '''
@@ -103,7 +103,7 @@ def find_orthologs(indexes_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for i in indexes_ids:
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x "+ str(i)+"\n")
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i) + "-l /home/meiker/orthomcl/logs/" + today + "_logfile_besthits.txt\n")
 
 def find_paralogs(indexes_ids, savedir):
     '''
