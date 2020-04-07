@@ -60,5 +60,14 @@ inds_l = split_files(indexes)
 for i, inds in enumerate(inds_l):
     finding_best_hits(inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_test_find_best_hits' + str(i) + '.sh'))       
 
+#index 69 first streptococcus id (00577)
+line_orthosearch = 'porthomclPairsOrthologs.py -l /home -t /home/meiker/orthomcl/taxon_list2 -b /home/meiker/orthomcl/besthit2 -o /home/meiker/orthomcl/orthologs2 -x 69'
 
-line_orthosearch = 'porthomclPairsOrthologs.py -l -t /home/meiker/orthomcl/taxon_list2 -b /home/meiker/orthomcl/besthit2 -o /home/meiker/orthomcl/orthologs2 -x '
+with open (os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
+    i = 0
+    for line in f:
+        i += 1
+        if i < 800:
+            print(line)
+        if '00577' in line:
+            print(i)

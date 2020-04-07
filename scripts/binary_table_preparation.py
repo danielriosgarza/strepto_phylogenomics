@@ -20,7 +20,7 @@ from datetime import date
 path = os.getcwd()
 p = Path(path)
 
-inputfile = os.path.join(p.parents[0], 'files', 'binary_table', 'all.ort.group')
+inputfile = os.path.join(p.parents[0], 'files', 'binary_table', 'test.ort.group')
 
 
 #get the date to keep track of the scripts (added to scriptname)
