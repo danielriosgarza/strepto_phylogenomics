@@ -25,6 +25,7 @@ p = Path(path)
 #inputfile = os.path.join(p.parents[0], 'files', 'binary_table', 'test.ort.group')
 
 inputfile = sys.argv[1]
+taxons = '/home/meiker/orthomcl/taxon_list2'
 
 #get the date to keep track of the scripts (added to scriptname)
 today = date.today().strftime("%d/%m/%Y")
@@ -35,13 +36,11 @@ today = ''.join(today)
 #Get the list of all strepto ids that were included in the analysis
 taxon_list = []
 
-with open (inputfile) as f:
+with open (taxons) as f:
     for line in f:
-            a = line.strip().split('\t')   
-            for pair in a:
-                id_ = pair.split('|')[0]
-                if 'strepto' in id_ and id_ not in taxon_list:
-                    taxon_list.append(id_)
+            a = line.strip() 
+            if 'strepto' in a :
+                taxon_list.append(a)
     
 taxon_list = sorted(taxon_list)
 
