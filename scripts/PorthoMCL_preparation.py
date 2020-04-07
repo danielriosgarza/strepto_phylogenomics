@@ -103,7 +103,7 @@ def find_orthologs(indexes_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for i in indexes_ids:
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i) + "-l /home/meiker/orthomcl/logs/" + today + "_logfile_besthits.txt\n")
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/orthomcl/logs/" + today + "_logfile_besthits.txt\n")
 
 def find_paralogs(indexes_ids, savedir):
     '''
