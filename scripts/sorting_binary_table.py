@@ -18,19 +18,20 @@ Extended core : 90-100%
 Shell : 15-90%
 Cloud : <15%
 
-Updateable: change bin_file
+Updateable: give bin_file as argv in terminal line
 '''
 
 import os
 from pathlib import Path
 from datetime import date
 import numpy as np
-    
+import sys
+
 path = os.getcwd()
 p = Path(path)
 
-bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '02042020_binary_table_prep.tsv')
-
+#bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '02042020_binary_table_prep.tsv')
+bin_file = sys.argv[1]
 
 #get the date to keep track of the scripts (added to scriptname)
 today = date.today().strftime("%d/%m/%Y")
