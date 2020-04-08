@@ -103,7 +103,7 @@ def find_orthologs(indexes_ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for i in indexes_ids:
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/orthomcl/logs/" + today + "_logfile_besthits.txt\n")
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
 
 def find_paralogs(indexes_ids, savedir):
     '''
@@ -284,54 +284,10 @@ $awk -F'[|\t]' '{print $2 >> ("ogenes/"$1".og.tsv")}' orthologs/*.ort.tsv
 Example bash line (again -x <number> = taxon):
 porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x <1>
 '''
-#Split the indexes into 10 sections (orthology search takes otherwise really long)
 
-size = round(len(indexes)/10)
-
-line = 'porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x '
-
-for i in range(1, 11):
-    with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs', today + '_orthologs' + str(i) + '.sh'), 'w') as f:
-        if i == 1:
-            numbers = indexes[:size]
-            for n in numbers:
-                f.write(line + str(n) + '\n')        
-        if i == 2:
-            numbers = indexes[size:size*2]
-            for n in numbers:
-                f.write(line + str(n) + '\n')
-        if i == 3:
-            numbers = indexes[size*2:size*3]
-            for n in numbers:
-                f.write(line + str(n) + '\n')
-        if i == 4:
-            numbers = indexes[size*3:size*4]
-            for n in numbers:
-                f.write(line + str(n) + '\n')
-        if i == 5:
-            numbers = indexes[size*4:size*5]
-            for n in numbers:
-                f.write(line + str(n) + '\n')
-        if i == 6:
-            numbers = indexes[size*5:size*6]
-            for n in numbers:
-                f.write(line + str(n) + '\n')
-        if i == 7:
-            numbers = indexes[size*6:size*7]
-            for n in numbers:
-                f.write(line + str(n) + '\n')   
-        if i == 8:
-            numbers = indexes[size*7:size*8]
-            for n in numbers:
-                f.write(line + str(n) + '\n')   
-        if i == 9:
-            numbers = indexes[size*8:size*9]
-            for n in numbers:
-                f.write(line + str(n) + '\n')   
-        if i == 10:
-            numbers = indexes[size*9::]
-            for n in numbers:
-                f.write(line + str(n) + '\n') 
+for i, l_inds in enumerate(split_ids):
+    i += 1
+    find_orthologs(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs', today + '_orthologs' + str(i) +'.sh'))
 
 
 
