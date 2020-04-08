@@ -1,0 +1,4 @@
+porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x 12170 -l /home/meiker/orthomcl/logs/08042020_logfile_orthologs.txt
+porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x 12171 -l /home/meiker/orthomcl/logs/08042020_logfile_orthologs.txt
+porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x 12172 -l /home/meiker/orthomcl/logs/08042020_logfile_orthologs.txt
+porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x 12173 -l /home/meiker/orthomcl/logs/08042020_logfile_orthologs.txt
