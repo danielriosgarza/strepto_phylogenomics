@@ -76,14 +76,14 @@ def blast_Parser_bash(ids, savedir):
         for id_ in ids:
             f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_[0]+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_[0]+".ss.tsv\n")
             
-def finding_best_hits(indexes_ids, savedir):
+def finding_best_hits(taxons, savedir):
     '''
      paralogs are found, and an unnormalized score is assigned to them. Step 5.3 will normalize 
      this score so that it be comparable among different genomes.
     '''
     with open(savedir, 'w') as f:
-        for i in indexes_ids:
-            f.write('porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x ' + str(i[0]) + ' -l /home/meiker/orthomcl/logs/' + today + '_logfile_besthits.txt --evalueExponentCutoff -2\n')
+        for i in taxons:
+            f.write('porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x ' + str(i[1]) + ' -l /home/meiker/orthomcl/logs/' + today + '_logfile_besthits.txt --evalueExponentCutoff -2\n')
   
 def split_files(ids, nsplits = 16):
     '''
@@ -98,21 +98,21 @@ def split_files(ids, nsplits = 16):
     
     return id_i
 
-def find_orthologs(indexes_ids, savedir):
+def find_orthologs(taxons, savedir):
     '''
     Output of bash line is all the ortholog genes.
     '''
     with open (savedir, 'w') as f:
-        for i in indexes_ids:
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i[0]) + " -l /home/meiker/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
+        for i in taxons:
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i[1]) + " -l /home/meiker/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
 
-def find_paralogs(indexes_ids, savedir):
+def find_paralogs(taxons, savedir):
     '''
     Bash lines for finding paralogs. Uses split lists (db_id, index).
     '''
     with open (savedir, 'w') as f:
-        for i in indexes_ids:
-            f.write ("porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x "+str(i)+"\n")
+        for i in taxons:
+            f.write ("porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x "+str(i[1])+"\n")
 
 def randomizer(infile, outfile):
     '''
@@ -132,6 +132,11 @@ def randomizer(infile, outfile):
 path = os.getcwd()
 p = Path(path)
 
+#get the date to keep track of the scripts (added to scriptname)
+today = date.today().strftime("%d/%m/%Y")
+today = today.split('/')
+today = ''.join(today)
+
 #%% runcell 1
 '''
 Before adjusting fasta run:
@@ -146,18 +151,13 @@ Command creates output in the same folder it's ran
 '''
 
 #get ids that were used for the tree (203 genomes)
-taxons = []
 tree = Tree(os.path.join(p.parents[0], 'files', 'phylogenetic_tree', '12032020_reduced_concat_alignments.fa.contree'))
             
-for leaf in tree.iter_leaf_names():
-    taxons.append(leaf)
+taxons = sorted(tree.get_leaf_names())
 
+#adjust fasta files
+porthoMCL_prep(taxons, os.path.join(p.parents[0], 'scripts', 'bash_scripts', today + '_porthomcl_prep.sh'))
 
-
-# #adjust fasta files
-# porthoMCL_prep(strepto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_streptococcus_porthomcl_prep.sh'))
-# porthoMCL_prep(flori_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_floricoccus_porthomcl_prep.sh'))
-# porthoMCL_prep(lacto_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', '20012020_lactococcus_porthomcl_prep.sh'))
 
 '''
 Get taxon list run following lines in the terminal (output dir): 
@@ -192,68 +192,30 @@ $mkdir blastres
     blastp -query blastquery/<id>.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/<id>.tab
 '''
 
-#get all ids in a single list and split it for blast run
-# db_ids = get_taxon_list(os.path.join(p.parents[0], 'files', 'taxon_list'))
-# splitted_ids = split_files(db_ids)
+#split ids for parallel running of individual steps
+splitted_ids = split_files(taxons)
 
-# for i, l_ids in enumerate(splitted_ids):
-#     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'))
+for i, l_ids in enumerate(splitted_ids):
+    blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', today + '_blastrun' + str(i) + '.sh'))
 
-#Blastrun takes longer than my internship period, therefore, the streptococcus genmoes will be randomized
-# for i in range(1, 16):
-#     randomizer(os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '200120_blastrun'+str(i)+'.sh'), os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', '210120_blastrun'+str(i)+'.sh'))
+
 
 #%% runcell 3
 '''
 4. Parse Blast results:
 $mkdir splitSimSeq
 
-Make bash files that can be updated according to already blasted files
+
 Example bash line:
 porthomclBlastParser blastres/<id>.tab compliantFasta >> splitSimSeq/<id>.ss.tsv
 '''
-#For the Updater: Blast parser only parses results that are added to blastres folder (finished blasted), the rest of the orthologue search and MCL uses all indexes of the parsed blast results. If it gets updated, it needs to run the scripts also on the earlier files!(because of the newly generated tsv files that migth contain additional orthologues etc.)
 
-#get the date to keep track of the scripts (added to scriptname)
-today = date.today().strftime("%d/%m/%Y")
-today = today.split('/')
-today = ''.join(today)
 
-#get all ids (genomes) that were already blasted and parsed
-dbs_parsed = []
-path = os.getcwd()
-p = Path(path)
-
-for file in list(os.listdir('/home/meiker/orthomcl/splitSimSeq/')):
-    id_ = file.strip().split('.')[0]
-    dbs_parsed.append(id_)
-
-#Get ids_ of all genomes that are already blasted (located in blastres/) and not further analysed
-dbs_ready2analyze = []
-for file in list(os.listdir('/home/meiker/orthomcl/blastres')):    
-    id_ = file.strip().split('.')[0]
-    if id_ not in dbs_parsed:
-        dbs_ready2analyze.append(id_)
-
-#Get the index from the taxon list of the ready2analyse ids
-taxon_list = []
-with open(os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
-    for line in f:
-        taxon_list.append(line.strip())
-
-indexes = []        
-for i, taxon in enumerate(taxon_list):
-    if taxon in dbs_parsed:
-        indexes.append(i+1)
         
-#to give an indication how many are added
-print(len(dbs_ready2analyze))
 
-split_ids = split_files(dbs_ready2analyze, nsplits = 12)
-
-for i, l_ids in enumerate(split_ids):
+for i, l_ids in enumerate(splitted_ids):
     i += 1
-    blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser'+str(i)+'.sh'))
+    blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser' + str(i) + '.sh'))
     
 
 
@@ -266,15 +228,11 @@ $mkdir besthit
 Make bash script to find best hits (-x <number>, index of taxon to work on)
 Example bash line:
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
-
-
-####Rerun this script in order to get the rigth indexes of already parsed results!!!####
 '''
-split_ids = split_files(indexes, nsplits = 12)
 
-for i, l_inds in enumerate(split_ids):
+for i, l_ids in enumerate(splitted_ids):
     i += 1
-    finding_best_hits(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_find_best_hits' + str(i) +'.sh'))
+    finding_best_hits(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_find_best_hits' + str(i) +'.sh'))
 
 #%% runcell 5
 '''
