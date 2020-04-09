@@ -51,7 +51,7 @@ def find_orthologs(taxons, savedir):
     '''
     with open (savedir, 'w') as f:
         for i, id_ in enumerate(taxons):
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/tests/orthomcl/taxon_list -b /home/meiker/orthomcl/tests/besthit -o /home/meiker/tests/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/tests/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/tests/orthomcl/taxon_list -b /home/meiker/tests/orthomcl/besthit -o /home/meiker/tests/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/tests/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
 
 def porthoMCL_prep(ids, savedir):
     '''
