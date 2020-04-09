@@ -45,7 +45,7 @@ with open(bin_file) as f:
 ncols = len(lines[0].split('\t'))
     
 #set the binary part into numpy array
-data = np.loadtxt(bin_file, delimiter = '\t', skiprows = 1, usecols = range(3, ncols + 1))
+data = np.loadtxt(bin_file, delimiter = '\t', skiprows = 1, usecols = range(3, ncols))
     
 #determine the number of ones per line (appearence of gene in the genomes)
 scores = np.count_nonzero(data, axis = 1)

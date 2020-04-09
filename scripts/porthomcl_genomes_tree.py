@@ -15,25 +15,12 @@ $cp -a ~/PorthoMCL/. ~/orthomclSoftware-v2.0.9/bin/ --> to run porthomcl py scri
 
 Lines starting with '$' in this script were running in the terminal in the output dir of the porthomcl analysis.
 '''
-import random
-from random import shuffle
+
 import os
 from pathlib import Path
 from datetime import date
 from ete3 import Tree
 
-def get_ids(file):
-    '''
-    Gets ids from database-patric_id file and returns a list with all ids
-    '''
-    with open (file) as f:
-        db_ids = []
-        for line in f:
-            a = line.strip().split('\t')
-            if a[0] != 'database_id':
-                db_ids.append(a[0])
-        db_ids.sort()
-    return db_ids
 
 def porthoMCL_prep(ids, savedir):
     '''
@@ -42,19 +29,7 @@ def porthoMCL_prep(ids, savedir):
     with open (savedir, 'w') as f:
         for id_ in ids:
             f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/'+id_+'/'+id_+'.faa 1\n')
-        f.write('mv *.fasta /home/meiker/orthomcl/compliantFasta')
-
-def get_taxon_list(taxon_list):
-    '''
-    After creation of taxon_list in terminal, run function to get all ids.
-    '''
-    db_ids = []
-    with open(taxon_list) as f:
-        for line in f:
-            line = line.strip()
-            db_ids.append(line)
-    return db_ids
-
+        f.write('mv *.fasta /home/meiker/phylo_tree/orthomcl/compliantFasta')
 
 def blast_run_bash(ids, savedir):
     '''
@@ -62,7 +37,7 @@ def blast_run_bash(ids, savedir):
     blastp -query blastquery/DB_ID.fasta  -db blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  
     -evalue 1e-5  -outfmt 6 -num_threads 8 -out blastres/DB_ID.tab
     '''
-    homepath = '/home/meiker/orthomcl/'
+    homepath = '/home/meiker/phylo_tree/orthomcl/'
     with open (savedir, 'w') as f:
         for id_ in ids:
             f.write("blastp -query " + homepath + "blastquery/"+id_[0]+".fasta  -db " + homepath + "blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out " + homepath + "blastres/"+id_[0]+".tab\n")
@@ -74,7 +49,7 @@ def blast_Parser_bash(ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in ids:
-            f.write("porthomclBlastParser /home/meiker/orthomcl/blastres/"+id_[0]+".tab /home/meiker/orthomcl/compliantFasta >> /home/meiker/orthomcl/splitSimSeq/"+id_[0]+".ss.tsv\n")
+            f.write("porthomclBlastParser /home/meiker/phylo_tree/orthomcl/blastres/"+id_[0]+".tab /home/meiker/phylo_tree/orthomcl/compliantFasta >> /home/meiker/phylo_tree/orthomcl/splitSimSeq/"+id_[0]+".ss.tsv\n")
             
 def finding_best_hits(taxons, savedir):
     '''
@@ -83,7 +58,7 @@ def finding_best_hits(taxons, savedir):
     '''
     with open(savedir, 'w') as f:
         for i in taxons:
-            f.write('porthomclPairsBestHit.py -t /home/meiker/orthomcl/taxon_list -s /home/meiker/orthomcl/splitSimSeq -b /home/meiker/orthomcl/besthit -q /home/meiker/orthomcl/paralogTemp -x ' + str(i[1]) + ' -l /home/meiker/orthomcl/logs/' + today + '_logfile_besthits.txt --evalueExponentCutoff -2\n')
+            f.write('porthomclPairsBestHit.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -s /home/meiker/phylo_tree/orthomcl/splitSimSeq -b /home/meiker/phylo_tree/orthomcl/besthit -q /home/meiker/phylo_tree/orthomcl/paralogTemp -x ' + str(i[1]) + ' -l /home/meiker/phylo_tree/orthomcl/logs/' + today + '_logfile_besthits.txt\n')
   
 def split_files(ids, nsplits = 16):
     '''
@@ -104,7 +79,7 @@ def find_orthologs(taxons, savedir):
     '''
     with open (savedir, 'w') as f:
         for i in taxons:
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/orthomcl/taxon_list -b /home/meiker/orthomcl/besthit -o /home/meiker/orthomcl/orthologs -x " + str(i[1]) + " -l /home/meiker/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -b /home/meiker/phylo_tree/orthomcl/besthit -o /home/meiker/phylo_tree/orthomcl/orthologs -x " + str(i[1]) + " -l /home/meiker/phylo_tree/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
 
 def find_paralogs(taxons, savedir):
     '''
@@ -112,21 +87,8 @@ def find_paralogs(taxons, savedir):
     '''
     with open (savedir, 'w') as f:
         for i in taxons:
-            f.write ("porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x "+str(i[1])+"\n")
+            f.write ("porthomclPairsInParalogs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -q /home/meiker/phylo_tree/orthomcl/paralogTemp -o /home/meiker/phylo_tree/orthomcl/ogenes -p /home/meiker/phylo_tree/orthomcl/paralogs -x " + str(i[1]) +"\n")
 
-def randomizer(infile, outfile):
-    '''
-    Randomizes order of bash lines
-    '''
-    lines = []
-    with open(infile) as f:
-        for line in f:
-            lines.append(line.strip())
-    shuffle(lines)
-    with open(outfile, 'w') as f2:
-        for line in lines:
-            f2.write(line + '\n')
-    
     
     
 path = os.getcwd()
@@ -209,10 +171,6 @@ $mkdir splitSimSeq
 Example bash line:
 porthomclBlastParser blastres/<id>.tab compliantFasta >> splitSimSeq/<id>.ss.tsv
 '''
-
-
-        
-
 for i, l_ids in enumerate(splitted_ids):
     i += 1
     blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser' + str(i) + '.sh'))
@@ -224,10 +182,11 @@ for i, l_ids in enumerate(splitted_ids):
 5. Finding best hits:
 $mkdir paralogTemp
 $mkdir besthit
+$mkdir logs #to save logfiles
 
 Make bash script to find best hits (-x <number>, index of taxon to work on)
 Example bash line:
-porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b besthit -q paralogTemp -x <1>
+porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b /besthit -q /paralogTemp -x <1> -l /logs/besthit_logfile.txt
 '''
 
 for i, l_ids in enumerate(splitted_ids):
@@ -251,17 +210,12 @@ Example bash line (again -x <number> = taxon):
 porthomclPairsInParalogs.py -t taxon_list -q paralogTemp -o ogenes -p paralogs -x <1>
 '''
 
-for i, l_inds in enumerate(split_ids):
+for i, l_ids_i in enumerate(splitted_ids):
     i += 1
-    find_orthologs(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs', today + '_orthologs' + str(i) +'.sh'))
+    find_orthologs(l_ids_i, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs', today + '_orthologs' + str(i) +'.sh'))
 
 
-
-line = 'porthomclPairsInParalogs.py -t /home/meiker/orthomcl/taxon_list -q /home/meiker/orthomcl/paralogTemp -o /home/meiker/orthomcl/ogenes -p /home/meiker/orthomcl/paralogs -x '
-
-with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs.sh'), 'w') as f:
-    for i in indexes:
-                f.write(line + str(i) + '\n')    
+find_paralogs(l_ids_i, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs.sh') )
 
 
 '''
@@ -271,15 +225,6 @@ $mcl all.ort.tsv  --abc -I 1.5 -t 4 -o all.ort.group
 
 $cat paralogs/*.tsv >> all.par.tsv
 $mcl all.par.tsv  --abc -I 1.5 -t 4 -o all.par.group
+
+To convert MCL files to a binary table read the scripts 'binary_table_preparation.py' and 'sorting_binary_table.py'
 '''
-
-# test_ids = get_taxon_list(os.path.join(p.parents[0], "files", 'porthomcl', 'taxon_list'))
-# ids_split = split_files(test_ids)
-
-# for i, l_ids in enumerate(ids_split):
-#     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'testset_blastrun'+str(i)+'.sh'))
-
-# blast_Parser_bash(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_blastparser.sh'))
-# finding_best_hits(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl','testset_besthits.sh'))
-# find_orthologs(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_orthologs.sh'))
-# find_paralogs(test_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'testset_paralogs.sh'))    
