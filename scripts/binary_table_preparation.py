@@ -103,7 +103,8 @@ with open (inputfile) as f:
                                     
                 #list first all gene information (gene, length min-max and product info)
                 len_minmax = str(min(lengths)) + '-' + str(max(lengths)) 
-                  
+                if len(genes) == 0:
+                    genes.append('')
                 f2.write(','.join(sorted(genes)) + '\t' + len_minmax + '\t' + ','.join(sorted(products)) + '\t')
                 
                 #mark found ids with an 1 in the table, rest is 0 

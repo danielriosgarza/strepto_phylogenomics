@@ -30,7 +30,7 @@ import sys
 path = os.getcwd()
 p = Path(path)
 
-#bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '02042020_binary_table_prep.tsv')
+#bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '09042020_binary_table_prep.tsv')
 bin_file = sys.argv[1]
 
 #get the date to keep track of the scripts (added to scriptname)
@@ -45,10 +45,10 @@ with open(bin_file) as f:
 ncols = len(lines[0].split('\t'))
     
 #set the binary part into numpy array
-data = np.loadtxt(bin_file, delimiter = '\t', skiprows = 1, usecols = range(3, ncols))
+data = np.loadtxt(bin_file, delimiter = '\t', skiprows = 1, usecols = range(3, ncols + 1))
     
 #determine the number of ones per line (appearence of gene in the genomes)
-scores = np.count_nonzero(data, axis=1)
+scores = np.count_nonzero(data, axis = 1)
 
 #determine the percentage of the gene presence
 pscores = scores/(ncols - 1)
