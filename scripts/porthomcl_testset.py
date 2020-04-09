@@ -41,17 +41,16 @@ def finding_best_hits(taxons, savedir):
      this score so that it be comparable among different genomes.
     '''
     with open(savedir, 'w') as f:
-        for i, id_ in enumerate(taxons):
-            i += 1
-            f.write('porthomclPairsBestHit.py -t /home/meiker/tests/orthomcl/taxon_list -s /home/meiker/tests/orthomcl/splitSimSeq -b /home/meiker/tests/orthomcl/besthit -q /home/meiker/tests/orthomcl/paralogTemp -x ' + str(i) + ' -l /home/meiker/tests/orthomcl/logs/' + today + '_logfile_besthits.txt\n')
+        for id_ in enumerate(taxons):
+            f.write('porthomclPairsBestHit.py -t /home/meiker/tests/orthomcl/taxon_list -s /home/meiker/tests/orthomcl/splitSimSeq -b /home/meiker/tests/orthomcl/besthit -q /home/meiker/tests/orthomcl/paralogTemp -x ' + str(id_[1]) + ' -l /home/meiker/tests/orthomcl/logs/' + today + '_logfile_besthits.txt\n')
             
 def find_orthologs(taxons, savedir):
     '''
     Output of bash line is all the ortholog genes.
     '''
     with open (savedir, 'w') as f:
-        for i, id_ in enumerate(taxons):
-            f.write("porthomclPairsOrthologs.py -t /home/meiker/tests/orthomcl/taxon_list -b /home/meiker/tests/orthomcl/besthit -o /home/meiker/tests/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/tests/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
+        for id_ in taxons:
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/tests/orthomcl/taxon_list -b /home/meiker/tests/orthomcl/besthit -o /home/meiker/tests/orthomcl/orthologs -x " + str(id_[1]) + " -l /home/meiker/tests/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
 
 def porthoMCL_prep(ids, savedir):
     '''
@@ -101,9 +100,13 @@ today = ''.join(today)
 #     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', today + 'testset_blastrun' + str(i)+ '.sh'))
 
 taxons = []
+indexes = []
 with open('/home/meiker/tests/orthomcl/taxon_list') as f:
+    i = 0
     for line in f:
+        i += 1
         taxons.append(line.strip())
+        indexes.append(i)
 
 splitted_ids = split_files(taxons)
     
