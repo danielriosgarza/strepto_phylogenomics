@@ -34,6 +34,24 @@ def blast_run_bash(ids, savedir):
     with open (savedir, 'w') as f:
         for id_ in ids:
             f.write("blastp -query " + homepath + "blastquery/" + id_[0] + ".fasta  -db " + homepath + "blastdb/goodProteins.fasta  -seg yes  -dbsize 100000000  -evalue 1e-5  -outfmt 6 -num_threads 8 -out " + homepath + "blastres/" + id_[0] + ".tab\n")
+            
+def finding_best_hits(taxons, savedir):
+    '''
+     paralogs are found, and an unnormalized score is assigned to them. Step 5.3 will normalize 
+     this score so that it be comparable among different genomes.
+    '''
+    with open(savedir, 'w') as f:
+        for i, id_ in enumerate(taxons):
+            i += 1
+            f.write('porthomclPairsBestHit.py -t /home/meiker/tests/orthomcl/taxon_list -s /home/meiker/tests/orthomcl/splitSimSeq -b /home/meiker/tests/orthomcl/besthit -q /home/meiker/tests/orthomcl/paralogTemp -x ' + str(i) + ' -l /home/meiker/tests/orthomcl/logs/' + today + '_logfile_besthits.txt\n')
+            
+def find_orthologs(taxons, savedir):
+    '''
+    Output of bash line is all the ortholog genes.
+    '''
+    with open (savedir, 'w') as f:
+        for i, id_ in enumerate(taxons):
+            f.write("porthomclPairsOrthologs.py -t /home/meiker/tests/orthomcl/taxon_list -b /home/meiker/orthomcl/tests/besthit -o /home/meiker/tests/orthomcl/orthologs -x " + str(i) + " -l /home/meiker/tests/orthomcl/logs/" + today + "_logfile_orthologs.txt\n")
 
 def porthoMCL_prep(ids, savedir):
     '''
@@ -44,7 +62,7 @@ def porthoMCL_prep(ids, savedir):
             f.write('orthomclAdjustFasta '+id_+' /home/meiker/git/data/prokka_annotation/' + id_ + '/' + id_ + '.faa 1\n')
         f.write('mv *.fasta /home/meiker/tests/orthomcl/compliantFasta')          
         
-def split_files(ids, nsplits = 4):
+def split_files(ids, nsplits = 5):
     '''
     Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
     Tuples w/ (db_id, original_index)
@@ -93,3 +111,12 @@ for i, l_ids in enumerate(splitted_ids):
     i += 1
     blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser' + str(i) + '.sh'))
     
+
+for i, l_inds in enumerate(splitted_ids):
+    i += 1
+    finding_best_hits(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_find_best_hits' + str(i) +'.sh'))
+    
+for i, l_inds in enumerate(splitted_ids):
+    i += 1
+    find_orthologs(l_inds, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs', today + '_orthologs' + str(i) +'.sh'))
+
