@@ -10,7 +10,7 @@ Created on Fri Mar 27 11:55:25 2020
 '''
 Binary table of Pan-genome. Product information of all orthologues found within a group are stated in the first 3 columns (gene, lengths (min-max), Product). The information is obtained from the prokka annotation (<id>.tsv) Other columns are genome ids displaying if certain protein is present (1) or absent (0). 
 
-Updatable: give the inputfile as first argv in terminal line
+Updatable: give the inputfile as first argv and taxon_list as second argv in terminal line
 Output: <date>_binary_table_prep.tsv
 '''
 import os
@@ -25,7 +25,7 @@ p = Path(path)
 #inputfile = os.path.join(p.parents[0], 'files', 'binary_table', 'test.ort.group')
 
 inputfile = sys.argv[1]
-taxons = '/home/meiker/orthomcl/taxon_list2'
+taxons = sys.argv[2]
 
 #get the date to keep track of the scripts (added to scriptname)
 today = date.today().strftime("%d/%m/%Y")

@@ -178,6 +178,7 @@ $mv filteredFasta/goodProteins.fasta.* blastdb/
 3.2 Split the inputfile:
 $mkdir blastquery
 $porthomclSplitFasta.py -i filteredFasta/goodProteins.fasta  -o blastquery
+$mkdir blastres
 
 
 3.3 Run Blast:
