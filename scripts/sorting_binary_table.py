@@ -30,8 +30,8 @@ import sys
 path = os.getcwd()
 p = Path(path)
 
-bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '09042020_binary_table_prep.tsv')
-#bin_file = sys.argv[1]
+#bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '09042020_binary_table_prep.tsv')
+bin_file = sys.argv[1]
 
 #get the date to keep track of the scripts (added to scriptname)
 today = date.today().strftime("%d/%m/%Y")
@@ -51,26 +51,26 @@ data = np.loadtxt(bin_file, delimiter = '\t', skiprows = 1, usecols = range(3, n
 scores = np.count_nonzero(data, axis = 1)
 
 #determine the percentage of the gene presence
-pscores = scores/(ncols - 1)
+pscores = scores/len(data[0])
 
 #sort the scores in descending order (gives indexes of the scores)
 sorted_scores = np.argsort(pscores)[::-1]
 
     
-# with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_binary_table_sorted.tsv'), 'w') as f:
-#     f.write('Pan-genome\tAppearance (in %)\t' + lines[0])
-#     for i in sorted_scores:
+with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_binary_table_sorted.tsv'), 'w') as f:
+    f.write('Pan-genome\tAppearance (in %)\t' + lines[0])
+    for i in sorted_scores:
         
-#         #because the header is missing index of line is +1 
-#         perc = round(pscores[i]*100,2)
-#         if pscores[i] == 1:
-#             f.write('Core\t' + str(perc) + '\t' + lines[i+1])
-#         elif pscores[i] >= 0.9:
-#             f.write('Extended Core\t' + str(perc) + '\t' + lines[i+1])
-#         elif 0.9 > pscores[i] >= 0.15:
-#             f.write('Shell\t' + str(perc) + '\t' + lines[i+1])
-#         elif 0.15 > pscores[i]:
-#             f.write('Cloud\t' + str(perc) + '\t' + lines[i+1])
+        #because the header is missing index of line is +1 
+        perc = round(pscores[i]*100,2)
+        if pscores[i] == 1:
+            f.write('Core\t' + str(perc) + '\t' + lines[i+1])
+        elif pscores[i] >= 0.9:
+            f.write('Extended Core\t' + str(perc) + '\t' + lines[i+1])
+        elif 0.9 > pscores[i] >= 0.15:
+            f.write('Shell\t' + str(perc) + '\t' + lines[i+1])
+        elif 0.15 > pscores[i]:
+            f.write('Cloud\t' + str(perc) + '\t' + lines[i+1])
             
 
   
