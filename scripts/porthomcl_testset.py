@@ -41,7 +41,7 @@ def finding_best_hits(taxons, savedir):
      this score so that it be comparable among different genomes.
     '''
     with open(savedir, 'w') as f:
-        for id_ in enumerate(taxons):
+        for id_ in taxons:
             f.write('porthomclPairsBestHit.py -t /home/meiker/tests/orthomcl/taxon_list -s /home/meiker/tests/orthomcl/splitSimSeq -b /home/meiker/tests/orthomcl/besthit -q /home/meiker/tests/orthomcl/paralogTemp -x ' + str(id_[1]) + ' -l /home/meiker/tests/orthomcl/logs/' + today + '_logfile_besthits.txt\n')
             
 def find_orthologs(taxons, savedir):
