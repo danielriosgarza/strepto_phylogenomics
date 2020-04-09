@@ -22,7 +22,7 @@ def blast_Parser_bash(ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in ids:
-            f.write("porthomclBlastParser /home/meiker/tets/orthomcl/blastres/" + id_[0] + ".tab /home/meiker/tests/orthomcl/compliantFasta >> /home/meiker/tests/orthomcl/splitSimSeq/" + id_[0] + ".ss.tsv\n")
+            f.write("porthomclBlastParser /home/meiker/tests/orthomcl/blastres/" + id_[0] + ".tab /home/meiker/tests/orthomcl/compliantFasta >> /home/meiker/tests/orthomcl/splitSimSeq/" + id_[0] + ".ss.tsv\n")
             
 def blast_run_bash(ids, savedir):
     '''
@@ -66,21 +66,28 @@ today = today.split('/')
 today = ''.join(today)
 
 
+# taxons = []
+# #look in the taxon list for random ids that are used for the porthomcl
+# with open (os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
+#     for line in f:
+#         taxons.append(line.strip())
+        
+# test_set = sample(taxons, 50)
+
+
+# porthoMCL_prep(test_set, os.path.join(p.parents[0], 'scripts', 'bash_scripts', today + 'testset_porthomcl_prep.sh'))
+
+# splitted_ids = split_files(test_set)
+
+# for i, l_ids in enumerate(splitted_ids):
+#     blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', today + 'testset_blastrun' + str(i)+ '.sh'))
+
 taxons = []
-#look in the taxon list for random ids that are used for the porthomcl
-with open (os.path.join(p.parents[0], 'files', 'taxon_list')) as f:
+with open('/home/meiker/tests/orthomcl/taxon_list') as f:
     for line in f:
         taxons.append(line.strip())
-        
-test_set = sample(taxons, 50)
 
-
-porthoMCL_prep(test_set, os.path.join(p.parents[0], 'scripts', 'bash_scripts', today + 'testset_porthomcl_prep.sh'))
-
-splitted_ids = split_files(test_set)
-
-for i, l_ids in enumerate(splitted_ids):
-    blast_run_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', today + 'testset_blastrun' + str(i)+ '.sh'))
+splitted_ids = split_files(taxons)
     
 for i, l_ids in enumerate(splitted_ids):
     i += 1

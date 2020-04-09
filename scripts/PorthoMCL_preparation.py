@@ -140,6 +140,8 @@ $mkdir compliantFasta/
     Get all db_ids and make bash scripts to adjust the fasta files
     Example bash line:
     orthomclAdjustFasta <id> /home/meiker/git/data/prokka_annotation/<id>/<id>.faa 1
+    
+Command creates output in the same folder it's ran
 '''
 
 # #get ids
