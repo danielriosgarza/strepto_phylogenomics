@@ -49,7 +49,7 @@ def blast_Parser_bash(ids, savedir):
     '''
     with open (savedir, 'w') as f:
         for id_ in ids:
-            f.write("porthomclBlastParser /home/meiker/phylo_tree/orthomcl/blastres/"+id_[0]+".tab /home/meiker/phylo_tree/orthomcl/compliantFasta >> /home/meiker/phylo_tree/orthomcl/splitSimSeq/"+id_[0]+".ss.tsv\n")
+            f.write("porthomclBlastParser /home/meiker/phylo_tree/orthomcl/blastres/" + id_[0] + ".tab /home/meiker/phylo_tree/orthomcl/compliantFasta >> /home/meiker/phylo_tree/orthomcl/splitSimSeq/" + id_[0] + ".ss.tsv\n")
             
 def finding_best_hits(taxons, savedir):
     '''
@@ -60,7 +60,7 @@ def finding_best_hits(taxons, savedir):
         for i in taxons:
             f.write('porthomclPairsBestHit.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -s /home/meiker/phylo_tree/orthomcl/splitSimSeq -b /home/meiker/phylo_tree/orthomcl/besthit -q /home/meiker/phylo_tree/orthomcl/paralogTemp -x ' + str(i[1]) + ' -l /home/meiker/phylo_tree/orthomcl/logs/' + today + '_logfile_besthits.txt\n')
   
-def split_files(ids, nsplits = 16):
+def split_files(ids, nsplits = 10):
     '''
     Splits db_list depending on length and makes lists with savdir that can be used for bash file generation.
     Tuples w/ (db_id, original_index)
@@ -118,7 +118,7 @@ tree = Tree(os.path.join(p.parents[0], 'files', 'phylogenetic_tree', '12032020_r
 taxons = sorted(tree.get_leaf_names())
 
 #adjust fasta files
-porthoMCL_prep(taxons, os.path.join(p.parents[0], 'scripts', 'bash_scripts', today + '_porthomcl_prep.sh'))
+porthoMCL_prep(taxons, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', today + '_porthomcl_prep.sh'))
 
 
 '''
@@ -171,7 +171,10 @@ $mkdir splitSimSeq
 Example bash line:
 porthomclBlastParser blastres/<id>.tab compliantFasta >> splitSimSeq/<id>.ss.tsv
 '''
-for i, l_ids in enumerate(splitted_ids):
+
+splitted_ids_4 = split_files(taxons, nsplits = 4)
+
+for i, l_ids in enumerate(splitted_ids_4):
     i += 1
     blast_Parser_bash(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts' , 'porthomcl', 'blastparser', today + '_blastparser' + str(i) + '.sh'))
     
@@ -189,7 +192,7 @@ Example bash line:
 porthomclPairsBestHit.py -t taxon_list -s splitSimSeq -b /besthit -q /paralogTemp -x <1> -l /logs/besthit_logfile.txt
 '''
 
-for i, l_ids in enumerate(splitted_ids):
+for i, l_ids in enumerate(splitted_ids_4):
     i += 1
     finding_best_hits(l_ids, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'besthit', today + '_find_best_hits' + str(i) +'.sh'))
 
