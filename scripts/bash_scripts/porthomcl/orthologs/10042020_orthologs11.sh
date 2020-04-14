@@ -1,0 +1,3 @@
+porthomclPairsOrthologs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -b /home/meiker/phylo_tree/orthomcl/besthit -o /home/meiker/phylo_tree/orthomcl/orthologs -x 201 -l /home/meiker/phylo_tree/orthomcl/logs/10042020_logfile_orthologs.txt
+porthomclPairsOrthologs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -b /home/meiker/phylo_tree/orthomcl/besthit -o /home/meiker/phylo_tree/orthomcl/orthologs -x 202 -l /home/meiker/phylo_tree/orthomcl/logs/10042020_logfile_orthologs.txt
+porthomclPairsOrthologs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -b /home/meiker/phylo_tree/orthomcl/besthit -o /home/meiker/phylo_tree/orthomcl/orthologs -x 203 -l /home/meiker/phylo_tree/orthomcl/logs/10042020_logfile_orthologs.txt

@@ -1,0 +1,3 @@
+porthomclBlastParser /home/meiker/phylo_tree/orthomcl/blastres/streptococcus_11983.tab /home/meiker/phylo_tree/orthomcl/compliantFasta >> /home/meiker/phylo_tree/orthomcl/splitSimSeq/streptococcus_11983.ss.tsv
+porthomclBlastParser /home/meiker/phylo_tree/orthomcl/blastres/streptococcus_11984.tab /home/meiker/phylo_tree/orthomcl/compliantFasta >> /home/meiker/phylo_tree/orthomcl/splitSimSeq/streptococcus_11984.ss.tsv
+porthomclBlastParser /home/meiker/phylo_tree/orthomcl/blastres/streptococcus_11985.tab /home/meiker/phylo_tree/orthomcl/compliantFasta >> /home/meiker/phylo_tree/orthomcl/splitSimSeq/streptococcus_11985.ss.tsv

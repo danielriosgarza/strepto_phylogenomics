@@ -1,0 +1,3 @@
+porthomclPairsInParalogs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -q /home/meiker/phylo_tree/orthomcl/paralogTemp -o /home/meiker/phylo_tree/orthomcl/ogenes -p /home/meiker/phylo_tree/orthomcl/paralogs -x 201
+porthomclPairsInParalogs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -q /home/meiker/phylo_tree/orthomcl/paralogTemp -o /home/meiker/phylo_tree/orthomcl/ogenes -p /home/meiker/phylo_tree/orthomcl/paralogs -x 202
+porthomclPairsInParalogs.py -t /home/meiker/phylo_tree/orthomcl/taxon_list -q /home/meiker/phylo_tree/orthomcl/paralogTemp -o /home/meiker/phylo_tree/orthomcl/ogenes -p /home/meiker/phylo_tree/orthomcl/paralogs -x 203
