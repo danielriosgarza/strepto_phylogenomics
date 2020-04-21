@@ -7,7 +7,7 @@ Created on Thu Apr  9 12:16:40 2020
 """
 
 '''
-Finding orthologs and paralogs using the software Porthomcl.
+Finding orthologs and paralogs using the software Porthomcl. (Requires also MCL)
 
 First get orthomcl: https://orthomcl.org/common/downloads/software/v2.0/UserGuide.txt
 Get porthoMCL git clone and place it in orthomcSoftware/bin folder
@@ -124,9 +124,6 @@ porthoMCL_prep(taxons, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'po
 '''
 Get taxon list run following lines in the terminal (output dir): 
 $ls -1 compliantFasta/ | sed -e 's/\..*$//'  > taxon_list
-
-#place taxon list in git dir to get all ids in a single list
-$cp -a ~/orthomcl/taxon_list ~/git/strepto_phylogenomics/files/
 '''
 
 #%% runcell 2
@@ -204,7 +201,7 @@ $mkdir orthologs
 Example bash line (again -x <number> = taxon):
 porthomclPairsOrthologs.py -t taxon_list -b besthit -o orthologs -x <1>
 
-7. Find paralogos
+7. Find paralogos (Not done in this study)
 $mkdir ogenes
 $awk -F'[|\t]' '{print $4 >> ("ogenes/"$3".og.tsv")}' orthologs/*.ort.tsv
 $awk -F'[|\t]' '{print $2 >> ("ogenes/"$1".og.tsv")}' orthologs/*.ort.tsv
@@ -218,7 +215,7 @@ for i, l_ids_i in enumerate(splitted_ids):
     find_orthologs(l_ids_i, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'orthologs', today + '_orthologs' + str(i) +'.sh'))
 
 
-find_paralogs(l_ids_i, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs.sh') )
+#find_paralogs(l_ids_i, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'porthomcl', 'paralogs', today + '_paralogs.sh') )
 
 
 '''
@@ -226,8 +223,8 @@ find_paralogs(l_ids_i, os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'po
 $cat orthologs/*.tsv >> all.ort.tsv
 $mcl all.ort.tsv  --abc -I 1.5 -t 4 -o all.ort.group
 
-$cat paralogs/*.tsv >> all.par.tsv
-$mcl all.par.tsv  --abc -I 1.5 -t 4 -o all.par.group
+#$cat paralogs/*.tsv >> all.par.tsv
+#$mcl all.par.tsv  --abc -I 1.5 -t 4 -o all.par.group
 
 To convert MCL files to a binary table read the scripts 'binary_table_preparation.py' and 'sorting_binary_table.py'
 '''

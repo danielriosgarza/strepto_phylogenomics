@@ -40,7 +40,8 @@ genes = np.arange(5)
 pv_dict={}
 
 for i,gr in enumerate(groups):
-    pv_dict[gr]={}
+    if gr not in pv_dict:
+        pv_dict[gr]={}
     for idx_ge, g in enumerate(genes):
         gene_pab = genes_and_strains[idx_ge]
         gene_strain = gene_pab[groups==gr]
