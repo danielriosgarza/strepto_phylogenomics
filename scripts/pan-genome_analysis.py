@@ -222,7 +222,7 @@ ax2.set_xticklabels(l_xlab)
 ax2.set_title('Genes with less presence in certain group\n(-log10(p-value))')
 
 fig1.tight_layout()
-fig1.figure.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_greater_genes.png'), dpi=300, bbox_inches='tight')
+fig1.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_greater_genes.png'), dpi=300, bbox_inches='tight')
 
 fig2.tight_layout()
-fig2.figure.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_less_genes.png'), dpi=300, bbox_inches='tight')
+fig2.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_less_genes.png'), dpi=300, bbox_inches='tight')
