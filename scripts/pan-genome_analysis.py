@@ -148,7 +148,7 @@ with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_pvalues_
         line = 'gene_' + str(ge) + '\t'
         for gr in group_order:
             
-                line += '%.5f' % pv_dict[gr][ge][1] + '\t'
+                line += '%.5f' % pv_dict[gr][ge][0] + '\t'
         f.write(line + '\n')
         
 with open(os.path.join(p.parents[0], 'files', 'binary_table', today + '_pvalues_genes_less.tsv'), 'w') as f:

@@ -209,24 +209,16 @@ with open (files_dir + '/23032020_prokka_genome_data.tsv') as f:
         a = line.strip().split()
         ids2gs[a[0]] = a[1]
         ids2CDS[a[0]] = a[2]
-        if len(a) == 5:
-            ids2rRNA[a[0]] = a[3]
-            ids2repeat_region[a[0]] = a[4]
-        else:
-            ids2tRNA[a[0]] = a[3]
+        if len(a) == 5 and a[3] != '':
+            ids2rRNA[a[0]] = int(a[3])/int(a[4])*100
+
 
 with open(annotation_files_dir + '/genomedata_RNAS_RR.txt' , 'w') as f:
-    f.write('DATASET_MULTIBAR\nSEPARATOR COMMA\nDATASET_LABEL,Genome data RNAs and RR\nCOLOR,#CCE2DD\nFIELD_COLORS,#de8f05,#0173b2,#029e73\nFIELD_LABELS,rRNA,Repeat Region,tRNA\nDATASET_SCALE,10-10-#8e9594-1-0-8,20-20-#8e9594-1-0-8,30-30-#8e9594-1-0-8,40-40-#8e9594-1-0-8,50-50-#8e9594-1-0-8,60-60-#8e9594-1-0-8,70-70-#8e9594-1-0-8,80-80-#8e9594-1-0-8,90-90-#8e9594-1-0-8,100-100-#8e9594-1-0-8\nDATA\n')
+    f.write('DATASET_SIMPLEBAR\nSEPARATOR COMMA\nDATASET_LABEL,Genome data rRNA content\nCOLOR,#0173b2\nFIELD_COLORS,#0173b2\nFIELD_LABELS,rRNA\nDATASET_SCALE,10-0.1-#8e9594-1-0-8,20-0.2-#8e9594-1-0-8,30-0.3-#8e9594-1-0-8,40-0.4-#8e9594-1-0-8,50-0.5-#8e9594-1-0-8\nDATA\n')
     for l in leaves:
         if l.name in ids2rRNA:
             rRNA = ids2rRNA[l.name]
-            repeat_region = ids2repeat_region[l.name]
-            tRNA = 0
-        else:
-            tRNA = ids2tRNA[l.name]
-            rRNA = 0
-            repeat_region = 0
-        f.write(l.name + ',' + str(rRNA) + ',' + str(repeat_region) + ',' + str(tRNA) + '\n')
+            f.write(l.name + ',' + str(rRNA) + '\n')
 
 #Add simple bars that indicate the genome sizes at the outside of the circle
 #min 927400, max 2808579
