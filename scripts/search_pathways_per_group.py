@@ -24,9 +24,9 @@ today = date.today().strftime("%d/%m/%Y")
 today = today.split('/')
 today = ''.join(today)
 
-bin_greater = os.path.join(p.parents[0], 'files', 'binary_table', '22042020_pvalues_genes_greater.tsv')
+bin_greater = os.path.join(p.parents[0], 'files', 'binary_table', '24042020_pvalues_genes_greater.tsv')
 
-bin_less = os.path.join(p.parents[0], 'files', 'binary_table', '22042020_pvalues_genes_less.tsv')
+bin_less = os.path.join(p.parents[0], 'files', 'binary_table', '24042020_pvalues_genes_less.tsv')
 
 group2grless2genes = {i : { 'greater': [], 'less' : []} for i in range(8)}
 
@@ -49,10 +49,10 @@ with open(bin_less) as f:
             if float(value) <= 0.05:
                 group2grless2genes[ind]['less'].append(gene_num)
                 
-with open('/home/meike/tests/Files/interesting_genes.tsv', 'w') as f:
-    f.write ('greater\tless\n')
-    for i, v in enumerate(group2grless2genes[0]['greater']):
-        f.write(v + '\t' + group2grless2genes[0]['less'][i] + '\n')
+# with open('/home/meike/tests/Files/interesting_genes.tsv', 'w') as f:
+#     f.write ('greater\tless\n')
+#     for i, v in enumerate(group2grless2genes[0]['greater']):
+#         f.write(v + '\t' + group2grless2genes[0]['less'][i] + '\n')
             
 
 

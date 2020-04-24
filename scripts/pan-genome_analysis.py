@@ -233,5 +233,5 @@ plt.show()
 # fig1.tight_layout()
 # fig1.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_greater_genes.png'), dpi=300, bbox_inches='tight')
 
-fig2.tight_layout()
-fig2.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_less_genes.png'), dpi=300, bbox_inches='tight')
+# fig2.tight_layout()
+# fig2.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_less_genes.png'), dpi=300, bbox_inches='tight')
