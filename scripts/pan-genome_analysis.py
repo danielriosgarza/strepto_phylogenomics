@@ -199,15 +199,52 @@ l_sort_rows = l_sort_rows[::-1]
 l_sort_cols = np.argsort(l_sum_cols)
 l_sort_cols = l_sort_cols[::-1]
 
-greater = plt.pcolormesh(data_vis_greater[sort_cols].T[sort_rows], cmap = 'coolwarm')
-plt.colorbar()
+
+#Heatmap of genes with greater present
+fig1, ax1 = plt.subplots()
+greater = ax1.pcolormesh(data_vis_greater[sort_cols].T[sort_rows], cmap = 'coolwarm')
+
+labels = [i for i in range(1,9)]
+sort_labels = []
+
+for i in sort_cols:
+    sort_labels.append(labels[i])
+    
+ticks =[]
+for j in range(8):
+    j = j+0.5
+    ticks.append(j)
+ax1.set_xticks(ticks)
+ax1.set_xticklabels(sort_labels)    
+    
+fig1.colorbar(greater, ax=ax1)
 plt.show()
 
-less = plt.pcolormesh(data_vis_less[l_sort_cols].T[l_sort_rows], cmap = 'coolwarm')
-plt.colorbar()
+
+#Heatmap of genes less present
+fig2, ax2 = plt.subplots()
+
+less = ax2.pcolormesh(data_vis_less[l_sort_cols].T[l_sort_rows], cmap = 'coolwarm')
+
+l_labels = []
+for i in l_sort_cols:
+    l_labels.append(labels[i])
+
+ax2.set_xticks(ticks)
+ax2.set_xticklabels(l_labels) 
+fig2.colorbar(less, ax=ax2) 
 plt.show()
 
 
+
+t = np.random.rand(5,5)
+labels =['a', 'b','c','d','e']
+ticks = [0.5,1.5,2.5,3.5,4.5]
+fig, ax = plt.subplots()
+
+hp = ax.pcolormesh(t, cmap = 'coolwarm')
+ax.set_xticks(ticks)
+ax.set_xticklabels(labels)
 #Heatmap of genes more present in certain group
 # fig1, ax1 = plt.subplots(1, figsize= (10,10))
 
