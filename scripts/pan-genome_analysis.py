@@ -38,7 +38,7 @@ def subsample_fisher_exact(gene_strain, gene_out_strain, n_samples):
     for i in range(n_samples):
         rchoice= np.random.choice(np.arange(len(gene_out_strain)), size=samp_size)
         samp = gene_out_strain[rchoice]
-        pvalues_greater[i] = min(1,sts.fisher_exact([[sum(gene_strain), len(gene_strain)-sum(gene_strain)], [sum(samp), len(samp)-sum(samp)]], alternative='greater')[1]*2)
+        pvalues_greater[i] = min(1,sts.fisher_exact([[sum(gene_strain), len(gene_strain)-sum(gene_strain)], [sum(samp), len(samp)-sum(samp)]], alternative='greater')[1]*2,1)
         pvalues_less[i] = min(sts.fisher_exact([[sum(gene_strain), len(gene_strain)-sum(gene_strain)], [sum(samp), len(samp)-sum(samp)]], alternative = 'less')[1]*2,1)
     
     
@@ -199,30 +199,39 @@ l_sort_rows = l_sort_rows[::-1]
 l_sort_cols = np.argsort(l_sum_cols)
 l_sort_cols = l_sort_cols[::-1]
 
+greater = plt.pcolormesh(data_vis_greater[sort_cols].T[sort_rows], cmap = 'coolwarm')
+plt.colorbar()
+plt.show()
+
+less = plt.pcolormesh(data_vis_less[l_sort_cols].T[l_sort_rows], cmap = 'coolwarm')
+plt.colorbar()
+plt.show()
+
+
 #Heatmap of genes more present in certain group
-fig1, ax1 = plt.subplots(1, figsize= (10,10))
+# fig1, ax1 = plt.subplots(1, figsize= (10,10))
 
-ax1 = sns.heatmap(data_vis_greater[sort_cols].T[sort_rows], cmap = 'coolwarm', linewidths=0.1, linecolor='w')
+# ax1 = sns.heatmap(data_vis_greater[sort_cols].T[sort_rows], cmap = 'coolwarm', linewidths=0.1, linecolor='w')
 
-xlab = list(np.array([0,1,2,3,4,5,6,7])[sort_cols])
-ax1.set_xticks([0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5], xlab)
-ax1.set_xticklabels(xlab)
+# xlab = list(np.array([0,1,2,3,4,5,6,7])[sort_cols])
+# ax1.set_xticks([0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5], xlab)
+# ax1.set_xticklabels(xlab)
 
-ax1.set_title('Genes with greater presence in certain group\n(-log10(p-value))')
+# ax1.set_title('Genes with greater presence in certain group\n(-log10(p-value))')
 
 
-#heatmap of genes less present compared to other groups
-fig2, ax2 = plt.subplots(1, figsize= (10,10))
-ax2 = sns.heatmap(data_vis_less[l_sort_cols].T[l_sort_rows], cmap = 'coolwarm', linewidths=0.1, linecolor='w')
+# #heatmap of genes less present compared to other groups
+# fig2, ax2 = plt.subplots(1, figsize= (10,10))
+# ax2 = sns.heatmap(data_vis_less[l_sort_cols].T[l_sort_rows], cmap = 'coolwarm', linewidths=0.1, linecolor='w')
 
-l_xlab = list(np.array([0,1,2,3,4,5,6,7])[l_sort_cols])
-ax2.set_xticks([0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5], l_xlab)
-ax2.set_xticklabels(l_xlab)
+# l_xlab = list(np.array([0,1,2,3,4,5,6,7])[l_sort_cols])
+# ax2.set_xticks([0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5], l_xlab)
+# ax2.set_xticklabels(l_xlab)
 
-ax2.set_title('Genes with less presence in certain group\n(-log10(p-value))')
+# ax2.set_title('Genes with less presence in certain group\n(-log10(p-value))')
 
-fig1.tight_layout()
-fig1.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_greater_genes.png'), dpi=300, bbox_inches='tight')
+# fig1.tight_layout()
+# fig1.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_greater_genes.png'), dpi=300, bbox_inches='tight')
 
 fig2.tight_layout()
 fig2.savefig(os.path.join(p.parents[0], 'figures', today + '_heatmap_less_genes.png'), dpi=300, bbox_inches='tight')
