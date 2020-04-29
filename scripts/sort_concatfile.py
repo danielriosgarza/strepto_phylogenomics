@@ -60,7 +60,7 @@ with open(os.path.join(p.parents[0], 'files', '06012020_floricoccus_database.tsv
         id_ = a[0]
         id2species[id_] = species
 
-with open(os.path.join(p.parents[0], 'files', '        06012020_lactococcus_database.tsv')) as f:
+with open(os.path.join(p.parents[0], 'files', '06012020_lactococcus_database.tsv')) as f:
     headers = f.readline().strip().split('\t')
     species_ind = headers.index('species')
     for line in f:
