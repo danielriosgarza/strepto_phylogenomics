@@ -25,4 +25,4 @@ with open('/home/meiker/phylo_tree/roary/29042020_reduced_concat_alignments.fa')
 
 with open(os.path.join(p.parents[0], 'scripts', 'bash_scripts', 'copy_gffs.sh'), 'w') as f:
     for i in ids:
-        f.write('cp /home/meiker/git/data/prokka_annotation/' + i + '/' + i + '.gff /home/meiker/roary/gff_files\n')
+        f.write('cp /home/meiker/git/data/prokka_annotation/' + i + '/' + i + '.gff /home/meiker/phylo_tree/roary/gff_files\n')
