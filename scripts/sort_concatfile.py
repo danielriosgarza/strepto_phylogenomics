@@ -81,7 +81,7 @@ for id_ in ids:
 for num in unknown:
     sorted_ids.append(num)
     
-with open('/home/meiker/phylo_tree/roary/' + today + '_sorted_concat_alignments.fa') as f:
+with open('/home/meiker/phylo_tree/roary/' + today + '_sorted_concat_alignments.fa', 'w') as f:
     for i in sorted_ids:
         f.write('>' + i + '\n')
         f.write(seqs[i] + '\n')
