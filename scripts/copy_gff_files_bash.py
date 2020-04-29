@@ -17,7 +17,7 @@ path = os.getcwd()
 p = Path(path)
 
 ids = []
-with open('/home/meiker/phylo_tree/roary/29042020_reduced_concat_alignment.fa') as f:
+with open('/home/meiker/phylo_tree/roary/29042020_reduced_concat_alignments.fa') as f:
     for line in f:
         if line.startswith('>'):
             id_ = line.strip()[1::]
