@@ -218,7 +218,8 @@ for j in range(8):
     j = j+0.5
     ticks.append(j)
 ax1.set_xticks(ticks)
-ax1.set_xticklabels(sort_labels)    
+ax1.set_xticklabels(sort_labels)   
+ax1.set_title('Genes with greater presence') 
     
 fig1.colorbar(greater, ax=ax1)
 plt.show()
@@ -235,6 +236,8 @@ for i in l_sort_cols:
 
 ax2.set_xticks(ticks)
 ax2.set_xticklabels(l_labels) 
+ax2.set_title('Genes with less presence') 
+
 fig2.colorbar(less, ax=ax2) 
 plt.show()
 

@@ -58,7 +58,7 @@ today = date.today().strftime("%d/%m/%Y")
 today = today.split('/')
 today = ''.join(today)
 
-concatfile = '/home/meiker/phylo_tree/iqtree/concat_alignments'
+concatfile = '/home/meiker/phylo_tree/roary/29042020_sorted_concat_alignments.fa'
 #concat_file = '/home/meike/tests/Files/concat_alignments'
 #testfile = '/home/meike/tests/Files/prottest_testset1.fa'
 #testfile = '/home/meike/tests/Files/prottest_testset_larger.fa'
@@ -121,36 +121,36 @@ with open(os.path.join(p.parents[0], 'files', '03032020_streptococcus_database_f
             survived.append(a[0])
 
 #write all unique seqs into a concatfile that can be used to build the tree
-with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_concat_alignments.fa', 'w') as f:
+with open('/home/meiker/phylo_tree/roary/' + today + '_reduced_concat_alignments.fa', 'w') as f:
     for k in survived:
         samp = (k, seqs[k])
         f.write(">{}\n{}\n".format(*samp))
         
         
-#specify the outgroup and save it in the file 'outgroups'  
-outgroup = []
-strepto_ids = []
-for id_ in survived:
-    if 'strepto' in id_:
-        strepto_ids.append(id_)
-    else:
-        outgroup.append(id_)
+# #specify the outgroup and save it in the file 'outgroups'  
+# outgroup = []
+# strepto_ids = []
+# for id_ in survived:
+#     if 'strepto' in id_:
+#         strepto_ids.append(id_)
+#     else:
+#         outgroup.append(id_)
         
-#file structure: ((streptococcus_00001,streptococcus_00002,...), floricoccus_00001,...);            
-with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_outgroups.txt', 'w') as f:
-    f.write('((')
-    for id_ in strepto_ids:
-        if id_ == strepto_ids[-1]:
-            f.write(id_)
-        else:
-            f.write(id_ + ',')
-    f.write('),')
-    for _id in outgroup:
-        if _id == outgroup[-1]:
-            f.write(_id)
-        else:
-            f.write(_id + ',')
-    f.write((');'))
+# #file structure: ((streptococcus_00001,streptococcus_00002,...), floricoccus_00001,...);            
+# with open('/home/meiker/phylo_tree/iqtree/reduced_alignments/rooted/' + today + '_reduced_outgroups.txt', 'w') as f:
+#     f.write('((')
+#     for id_ in strepto_ids:
+#         if id_ == strepto_ids[-1]:
+#             f.write(id_)
+#         else:
+#             f.write(id_ + ',')
+#     f.write('),')
+#     for _id in outgroup:
+#         if _id == outgroup[-1]:
+#             f.write(_id)
+#         else:
+#             f.write(_id + ',')
+#     f.write((');'))
 
 
 #%% runcell 2

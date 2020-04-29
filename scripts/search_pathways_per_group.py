@@ -6,6 +6,9 @@ Created on Thu Apr 23 11:19:54 2020
 @author: meike
 """
 
+'''
+Look for pathways with more or less genes present per group. Looks for genes with p-value <0.05 and sets names of genes in a list. These can be used on the website Enrichr to look for affected pathways.
+'''
 
 import os
 from pathlib import Path
@@ -15,10 +18,6 @@ import numpy as np
 from pylab import *
 import scipy.stats as sts
 import seaborn as sns
-
-
-
-        
 
 
 path = os.getcwd()
