@@ -5,8 +5,7 @@ Created on Wed Apr 29 10:54:46 2020
 
 @author: meike
 """
-
-a = '/home/meiker/phylo_tree/roary/29042020_concat_alignments.fa'
+a = '/home/meiker/phylo_tree/roary/29042020_reduced_concat_alignments.fa'
 b = '/home/meiker/phylo_tree/iqtree/reduced_alignments/09032020_reduced_concat_alignments.fa'
 
 l = []
