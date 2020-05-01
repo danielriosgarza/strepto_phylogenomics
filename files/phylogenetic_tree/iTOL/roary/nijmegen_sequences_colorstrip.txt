@@ -1,0 +1,29 @@
+DATASET_COLORSTRIP
+SEPARATOR COMMA
+DATASET_LABEL,Sequenced in Nijmegen
+COLOR,#016A87
+DATA
+streptococcus_11985,#016A87,from Nijmegen
+streptococcus_11984,#016A87,from Nijmegen
+streptococcus_11982,#016A87,from Nijmegen
+streptococcus_11983,#016A87,from Nijmegen
+streptococcus_11978,#016A87,from Nijmegen
+streptococcus_11972,#016A87,from Nijmegen
+streptococcus_11973,#016A87,from Nijmegen
+streptococcus_11963,#016A87,from Nijmegen
+streptococcus_11971,#016A87,from Nijmegen
+streptococcus_11977,#016A87,from Nijmegen
+streptococcus_11964,#016A87,from Nijmegen
+streptococcus_11979,#016A87,from Nijmegen
+streptococcus_11968,#016A87,from Nijmegen
+streptococcus_11966,#016A87,from Nijmegen
+streptococcus_11975,#016A87,from Nijmegen
+streptococcus_11981,#016A87,from Nijmegen
+streptococcus_11974,#016A87,from Nijmegen
+streptococcus_11976,#016A87,from Nijmegen
+streptococcus_11980,#016A87,from Nijmegen
+streptococcus_11965,#016A87,from Nijmegen
+streptococcus_11967,#016A87,from Nijmegen
+streptococcus_11970,#016A87,from Nijmegen
+streptococcus_11962,#016A87,from Nijmegen
+streptococcus_11969,#016A87,from Nijmegen

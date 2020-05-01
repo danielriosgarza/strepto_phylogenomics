@@ -1,0 +1,10 @@
+DATASET_TEXT
+SEPARATOR COMMA
+DATASET_LABEL,Genus labels
+COLOR,#b2182b
+ALIGN_TO_TREE,1
+DATA
+streptococcus_11897,Streptococcus,-1,#c23b22,bold-italic,4,0
+lactococcus_00183,Lactococcus,-1,#2166ac,bold-italic,4,0
+floricoccus_00001,Floricoccus,-1,#969696,bold-italic,4,0
+streptococcus_11980,Provided from Radboudumc,-1,#016A87,bold,4,0

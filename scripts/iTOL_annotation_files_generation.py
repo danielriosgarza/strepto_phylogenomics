@@ -8,7 +8,7 @@ Created on Wed Mar 11 08:12:20 2020
 '''
 Generation of different annotation files that can be used in iTOL to visualize the phylogenetic tree.
 Included: 
-     >Color Range: Species colors (per genus same colour palette)
+     >Color Range: Species colors (per genus same colour palette, differnt shades)
      >Outer ring marking the genus + genus labels
      >Labels: changes node names (ids) to species names
      >Bars marking genome sizes
@@ -35,7 +35,7 @@ sns.set()
 path = os.getcwd()
 p = Path(path)
 files_dir = os.path.join(p.parents[0], 'files')
-annotation_files_dir = os.path.join(p.parents[0], 'files', 'phylogenetic_tree', 'iTOL')
+annotation_files_dir = os.path.join(p.parents[0], 'files', 'phylogenetic_tree', 'iTOL', 'roary')
 
 #Make Dict with all ids mapping to the species of the genome, and a Dict where species are mapping to ids
 ids2species = {}
@@ -58,6 +58,8 @@ for file in files:
         for line in f:
             a = line.strip().split('\t')
             species = a[species_ind]
+            if any(s.isdigit() for s in species) or 'uncultured' in species:
+                species = 'unclassified'
             ids2species[a[0]] = species
             ids2icountry[a[0]] = a[icountry_ind]
             ids2isolationsource[a[0]] = a[isolation_ind]
@@ -87,7 +89,8 @@ for k, v in ids2species.items():
         ids2species[k] = species_name
 
 #open the tree file and get information over included ids (leaves)
-t = Tree(files_dir + '/phylogenetic_tree/12032020_reduced_concat_alignments.fa.contree')
+#t = Tree(files_dir + '/phylogenetic_tree/12032020_reduced_concat_alignments.fa.contree')
+t = Tree(files_dir + '/phylogenetic_tree/accessory_binary_genes.fa.newick')
 
 leaves = t.get_leaves()
  
@@ -127,18 +130,18 @@ for i, spec in enumerate(floris):
     leaf_colours[spec] = flori_color[i] 
 
 #write annotation file for iTOL: colors background of the leaves according to its species
-# with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
-#     f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
-#     #colored ranges inclusive labels
-#     for l in leaves:
-#         spe = ids2species[l.name]
-#         color = leaf_colours[spe]
-#         if 'strepto' in l.name:
-#             f.write(l.name + ',range,' + color + ',Streptococcus\n')
-#         if 'lacto' in l.name:
-#             f.write(l.name + ',range,' + color + ',Lactococcus\n')
-#         if 'flori' in l.name:
-#             f.write(l.name + ',range,' + color + ',Floriococcus\n')
+with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
+    f.write('TREE_COLORS\nSEPARATOR COMMA\nDATA\n')
+    #colored ranges inclusive labels
+    for l in leaves:
+        spe = ids2species[l.name]
+        color = leaf_colours[spe]
+        if 'strepto' in l.name:
+            f.write(l.name + ',range,' + color + ',Streptococcus\n')
+        if 'lacto' in l.name:
+            f.write(l.name + ',range,' + color + ',Lactococcus\n')
+        if 'flori' in l.name:
+            f.write(l.name + ',range,' + color + ',Floriococcus\n')
  
 #%% runcell 2
 #Annotation file datset_text: Genus labels outside the circle           
