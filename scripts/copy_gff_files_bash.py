@@ -27,6 +27,7 @@ with open('/home/meiker/phylo_tree/roary/29042020_reduced_concat_alignments.fa')
 ids2gs = {}
 
 with open (os.path.join(p.parents[0], 'files', '23032020_prokka_genome_data.tsv')) as f:
+    f.readline()
     for line in f:
         a = line.strip().split()
         ids2gs[a[0]] = int(a[1])
