@@ -43,7 +43,7 @@ streptococcus_03942,Streptococcus sobrinus
 streptococcus_03976,Streptococcus sp. C150
 streptococcus_11886,Streptococcus sp. HSISS2
 streptococcus_11919,Streptococcus sp. CCH8-H5
-streptococcus_11869,uncultured Streptococcus sp.
+streptococcus_11869,Unclassified Streptococcus
 streptococcus_11862,Streptococcus thermophilus CAG
 streptococcus_11868,Streptococcus hyointestinalis
 streptococcus_11840,Streptococcus sp. Z15
@@ -73,7 +73,7 @@ streptococcus_11972,Streptococcus bovis
 streptococcus_11978,Streptococcus gallolyticus
 streptococcus_11854,Streptococcus sp. UBA4344
 streptococcus_11908,Streptococcus sp. KCJ4950
-streptococcus_11932,uncultured Streptococcus sp.
+streptococcus_11932,Unclassified Streptococcus
 streptococcus_11935,Streptococcus sp. HSISB1
 streptococcus_11962,Streptococcus bovis
 streptococcus_11969,Streptococcus bovis
@@ -131,7 +131,7 @@ streptococcus_06022,Streptococcus ferus
 streptococcus_00011,Streptococcus merionis
 streptococcus_11875,Streptococcus sp. DD10
 streptococcus_04111,Streptococcus sp. HMSC34B10
-streptococcus_11946,uncultured Streptococcus sp.
+streptococcus_11946,Unclassified Streptococcus
 streptococcus_00192,Streptococcus pseudopneumoniae
 streptococcus_10696,Streptococcus pneumoniae
 streptococcus_00550,Streptococcus pneumoniae
@@ -151,29 +151,29 @@ streptococcus_07820,Streptococcus mitis
 streptococcus_03934,Streptococcus sp. GMD5S
 streptococcus_11876,Streptococcus sp. GMD6S
 streptococcus_11871,Streptococcus sp. GMD4S
-streptococcus_11899,uncultured Streptococcus sp.
-streptococcus_11870,uncultured Streptococcus sp.
-streptococcus_11863,uncultured Streptococcus sp.
-streptococcus_11904,uncultured Streptococcus sp.
+streptococcus_11899,Unclassified Streptococcus
+streptococcus_11870,Unclassified Streptococcus
+streptococcus_11863,Unclassified Streptococcus
+streptococcus_11904,Unclassified Streptococcus
 streptococcus_04012,Streptococcus oralis
 streptococcus_01814,Streptococcus sp. VT 162
-streptococcus_11945,uncultured Streptococcus sp.
+streptococcus_11945,Unclassified Streptococcus
 streptococcus_03979,Streptococcus mitis
-streptococcus_11948,uncultured Streptococcus sp.
-streptococcus_11897,uncultured Streptococcus sp.
-streptococcus_11947,uncultured Streptococcus sp.
+streptococcus_11948,Unclassified Streptococcus
+streptococcus_11897,Unclassified Streptococcus
+streptococcus_11947,Unclassified Streptococcus
 streptococcus_11934,Streptococcus sp. HSISM1
 streptococcus_07830,Streptococcus parasanguinis
 streptococcus_00085,Streptococcus sp. F0442
 streptococcus_11849,Streptococcus sp. JS71
-streptococcus_11898,uncultured Streptococcus sp.
+streptococcus_11898,Unclassified Streptococcus
 streptococcus_00091,Streptococcus massiliensis
 streptococcus_07872,Streptococcus intermedius
 streptococcus_07904,Streptococcus anginosus
 streptococcus_09913,Streptococcus anginosus
 streptococcus_11944,Streptococcus sp. DD11
 streptococcus_07954,Streptococcus sanguinis
-streptococcus_11907,uncultured Streptococcus sp.
+streptococcus_11907,Unclassified Streptococcus
 streptococcus_11855,Streptococcus sp. Marseille-P644
 streptococcus_04001,Streptococcus cristatus
 streptococcus_00063,Streptococcus gordonii

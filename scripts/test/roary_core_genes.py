@@ -23,7 +23,7 @@ with open(file) as csv_file:
         else:
             gene2ids[line[0]] = []
             binary = np.zeros(len(ids))
-            for i, pres in enumerate(line[15::]):
+            for i, pres in enumerate(line[14::]):
                 if pres != '':
                     binary[i] = 1
                     gene2ids[line[0]].append(ids[i])
@@ -39,7 +39,7 @@ for k in genes2bin:
 
 missing = {}
 for g in core:
-    if len(gene2ids[g]) != 204:
+    if len(gene2ids[g]) != 203:
         for item in ids:
             if item not in gene2ids[g]:
                 if item not in missing:

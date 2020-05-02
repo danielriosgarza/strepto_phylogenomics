@@ -95,6 +95,7 @@ with open(os.path.join(p.parents[0], 'files', 'binary_table', today + 'strepto_g
 
 bin_file = os.path.join(p.parents[0], 'files', 'binary_table', '14042020_binary_table_sorted.tsv')
 
+
 #determine smallest group 
 counts = {}
 for k, v in groups.items():

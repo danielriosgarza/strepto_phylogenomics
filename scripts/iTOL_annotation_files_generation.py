@@ -35,7 +35,7 @@ sns.set()
 path = os.getcwd()
 p = Path(path)
 files_dir = os.path.join(p.parents[0], 'files')
-annotation_files_dir = os.path.join(p.parents[0], 'files', 'phylogenetic_tree', 'iTOL', 'roary')
+annotation_files_dir = os.path.join(p.parents[0], 'files', 'phylogenetic_tree', 'iTOL')
 
 #Make Dict with all ids mapping to the species of the genome, and a Dict where species are mapping to ids
 ids2species = {}
@@ -58,8 +58,6 @@ for file in files:
         for line in f:
             a = line.strip().split('\t')
             species = a[species_ind]
-            if any(s.isdigit() for s in species) or 'uncultured' in species:
-                species = 'unclassified'
             ids2species[a[0]] = species
             ids2icountry[a[0]] = a[icountry_ind]
             ids2isolationsource[a[0]] = a[isolation_ind]
@@ -83,14 +81,17 @@ with open(files_dir + '/radboudumc_genomes_infos.tsv') as f:
 
 for k, v in ids2species.items():
     id_n = int(k.split('_')[1])
+    if  'uncultured' in v:
+        ids2species[k] = 'Unclassified Streptococcus'
+                
     if id_n >= 11962:
         temp = v.split('-')
         species_name = 'Streptococcus ' + temp[3]
         ids2species[k] = species_name
 
 #open the tree file and get information over included ids (leaves)
-#t = Tree(files_dir + '/phylogenetic_tree/12032020_reduced_concat_alignments.fa.contree')
-t = Tree(files_dir + '/phylogenetic_tree/accessory_binary_genes.fa.newick')
+t = Tree(files_dir + '/phylogenetic_tree/12032020_reduced_concat_alignments.fa.contree')
+#t = Tree(files_dir + '/phylogenetic_tree/accessory_binary_genes.fa.newick')
 
 leaves = t.get_leaves()
  
@@ -101,14 +102,18 @@ leaves = t.get_leaves()
 streptos = []
 lactos = []
 floris = []
+unclassified = []
 
 for l in leaves:
     v = ids2species[l.name]
-    if 'strepto' in l.name and v not in streptos:
+    id_n = int(l.name.split('_')[1])
+    if any(s.isdigit() for s in v) and id_n <= 11962 or 'Unclassified' in v:
+        unclassified.append(v)
+    elif 'strepto' in l.name and v not in streptos:
         streptos.append(v)
-    if 'lacto' in l.name and v not in lactos:
+    elif 'lacto' in l.name and v not in lactos:
         lactos.append(v)
-    if 'flori' in l.name and v not in floris:
+    elif 'flori' in l.name and v not in floris:
         floris.append(v)
         
 #to randomly asign sequential colors
@@ -121,13 +126,18 @@ flori_color = get_colors(floris, color = '#969696')
 
 leaf_colours = {}
 for i, spec in enumerate(streptos):
-    leaf_colours[spec] = strep_color[i]   
-
+    leaf_colours[spec] = strep_color[i]
+        
 for i, spec in enumerate(lactos):
-    leaf_colours[spec] = lacto_color[i]  
+    leaf_colours[spec] = lacto_color[i]
      
 for i, spec in enumerate(floris):
-    leaf_colours[spec] = flori_color[i] 
+    leaf_colours[spec] = '#fa9fb5'
+
+for s in unclassified:
+    leaf_colours[s] = '#BEBEBE'
+    
+
 
 #write annotation file for iTOL: colors background of the leaves according to its species
 with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
@@ -136,12 +146,16 @@ with open(annotation_files_dir +'/tree_colors_per_species_new.txt', 'w') as f:
     for l in leaves:
         spe = ids2species[l.name]
         color = leaf_colours[spe]
-        if 'strepto' in l.name:
+        id_n = int(l.name.split('_')[1])
+        if any(s.isdigit() for s in spe) and id_n <= 11962 or 'Unclassified' in spe:
+            f.write(l.name + ',range,' + color + ',Unclassified\n')  
+        elif 'strepto' in l.name:
             f.write(l.name + ',range,' + color + ',Streptococcus\n')
-        if 'lacto' in l.name:
+        elif 'lacto' in l.name:
             f.write(l.name + ',range,' + color + ',Lactococcus\n')
-        if 'flori' in l.name:
+        elif 'flori' in l.name:
             f.write(l.name + ',range,' + color + ',Floriococcus\n')
+       
  
 #%% runcell 2
 #Annotation file datset_text: Genus labels outside the circle           
@@ -155,7 +169,7 @@ with open(annotation_files_dir + '/dataset_text.txt', 'w') as f:
     f.write('DATA\n')
     f.write('streptococcus_11897,Streptococcus,-1,#c23b22,bold-italic,4,0\n')
     f.write('lactococcus_00183,Lactococcus,-1,#2166ac,bold-italic,4,0\n')
-    f.write('floricoccus_00001,Floricoccus,-1,#969696,bold-italic,4,0\n')
+    f.write('floricoccus_00001,Floricoccus,-1,#fa9fb5,bold-italic,4,0\n')
     f.write('streptococcus_11980,Provided from Radboudumc,-1,#016A87,bold,4,0')
     
 
@@ -187,7 +201,7 @@ with open(annotation_files_dir + '/dataset_colorstrip.txt', 'w') as f:
         elif 'lacto' in l.name:
             f.write(l.name + ',#2166ac,Lactococcus\n')
         elif 'flori' in l.name:
-            f.write(l.name + ',#969696,Floriococcus\n')
+            f.write(l.name + ',#fa9fb5,Floriococcus\n')
 
 with open(annotation_files_dir + '/nijmegen_sequences_colorstrip.txt', 'w') as f:
     f.write('DATASET_COLORSTRIP\nSEPARATOR COMMA\n')
@@ -479,4 +493,45 @@ with open(annotation_files_dir + '/hosts.txt' , 'w') as f:
             pass
         else:
             f.write(l.name + '\t' + host2shape['Other'] + '\n')
-            
+ 
+#%%            
+hosts = {}
+for l in leaves:
+    host = ids2host[l.name]
+    if ',' in host:
+        host = host.split(',')[1].strip()
+        hosts[l.name] = host
+    if 'Homo sapiens' in host:
+        hosts[l.name] = host
+    elif host == '':
+        hosts[l.name] = 'Not identified'
+    else:
+        hosts[l.name] = 'Animal'
+        
+labels = ['Homo sapiens', 'Animal', 'Not identified']        
+col = sns.color_palette('colorblind', n_colors = 3)
+colors = col.as_hex() 
+
+host2shape = {}
+for i in range(len(labels)):
+    line = [str(0)]*3
+    line[i] = str(1)
+    host2shape[labels[i]] = '\t'.join(line)
+
+
+
+with open(annotation_files_dir + '/hosts.txt' , 'w') as f:
+    f.write('DATASET_BINARY\nSEPARATOR TAB\nDATASET_LABEL\tHost names\nCOLOR\t#4d9221\nLEGEND_TITLE\tHost names\nFIELD_SHAPES\t1\t1\t1\nFIELD_COLORS\t')
+    for c in colors:
+        if c == colors[-1]:
+            f.write(c + '\nFIELD_LABELS\t')
+        else:
+            f.write(c + '\t')
+    for item in labels:
+        if item == labels[-1]:
+            f.write(item + '\nDATA\n')
+        else:
+            f.write(item + '\t')
+    for l in leaves:
+        host = hosts[l.name]
+        f.write(l.name + '\t' + host2shape[host] + '\n')

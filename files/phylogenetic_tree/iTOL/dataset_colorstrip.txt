@@ -195,7 +195,7 @@ streptococcus_02148,#c23b22,Streptococcus
 streptococcus_11865,#c23b22,Streptococcus
 streptococcus_11918,#c23b22,Streptococcus
 streptococcus_11832,#c23b22,Streptococcus
-floricoccus_00001,#969696,Floriococcus
+floricoccus_00001,#fa9fb5,Floriococcus
 lactococcus_00181,#2166ac,Lactococcus
 lactococcus_00187,#2166ac,Lactococcus
 lactococcus_00188,#2166ac,Lactococcus
