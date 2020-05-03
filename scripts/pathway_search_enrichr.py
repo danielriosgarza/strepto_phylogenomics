@@ -191,7 +191,7 @@ for gr in group2grless2genes:
             if 'N/A' not in name:
                 groups_genes[gr][Dir] += name
  
- #make folders to save the enrichr results in               
+#make folders to save the enrichr results in               
 for i_gr, gr in enumerate(groups_genes):
     folder = os.path.join(p.parents[0], 'files', 'pathway_search','group' + str(i_gr + 1))
     if not os.path.isdir(folder):
