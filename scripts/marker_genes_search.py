@@ -172,7 +172,7 @@ for gr in lgroup2grgenes:
 
 #%% runcell 2
 
-#Save lists of unique genes in file
+#Save lists of unique genes per group in a file
 
 with open(os.path.join(p.parents[0], 'files', today + '_unique_genes_per_group.tsv'), 'w') as f:
     f.write('Group_number\tgreater_presence\tless_presence\n')
