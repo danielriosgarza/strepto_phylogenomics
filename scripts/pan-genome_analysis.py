@@ -68,7 +68,7 @@ with open(os.path.join(p.parents[0], 'files', 'binary_table', 'groups_tree_strep
         if line.startswith('>'):
             group = num_group
             code = ['0']*8
-            code[num_group] = str(num_group)
+            code[num_group] = str(num_group + 1)
             bin_table[group] = '\t'.join(code)
             num_group += 1
         else:

@@ -1,0 +1,9 @@
+Group_number	greater_presence	less_presence
+group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+group_3	N/A	N/A
+group_4	N/A	N/A
+group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
+group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
+group_7	pnuC	N/A
+group_8	COQ3,COQ5_1,COQ5_2,MENG,ykoE	N/A
