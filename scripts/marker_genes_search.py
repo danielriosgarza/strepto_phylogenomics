@@ -84,6 +84,8 @@ with open(bin_greater) as f:
         for ind, value in enumerate(a[1::]):
             groupnum = ind + 1
             genenum = int(a[0].split('_')[1])
+            
+            #used a cutoff of 5x10-5 to get list of genes that is probably specific for a group
             if float(value) <= 0.00005:
                 if groupnum not in group2grgenes:
                     group2grgenes[groupnum] = [genenum]
@@ -103,10 +105,14 @@ group2binlines = {}
 for gr in group2grgenes:
     group2binlines[gr] = []
     group2unigenes[gr] = []
+    
+    #Go through all gene indexes to get binary lines that show, which id has this gene
     for ind in group2grgenes[gr]:
-        labels = []
-        #binary for presence of gene in groups 1-8
+        
+        #make binary for presence of gene in groups 1-8
         groups = [0]*8 
+        
+        #Look through the binary of all strains if they contain the gene (lines[ind] = complete line at position of the gene)
         for i, value in enumerate(lines[ind][5::]):
             id_ = ids[i]
             gr_num = ids2group[id_]
@@ -118,6 +124,8 @@ for gr in group2grgenes:
         #look if gene is only present in the group you look at
         if groups.count(1) == 1 and ind not in group2unigenes[gr]:
             group2unigenes[gr].append(ind)
+                
+        #add binary line to Dict
         group2binlines[gr].append(groups)
         
         #add group to Dicts if it has no specific genes
@@ -125,9 +133,10 @@ for gr in group2grgenes:
             if int(n) not in group2unigenes:
                 group2unigenes[int(n)] = []
                 group2binlines[int(n)] = [0]*8
-   
+                
+    #make array out of the binary lines to plot them
     array = np.array(group2binlines[gr], dtype= 'float')
-    binplot(array, str(gr) + 'greater')
+    binplot(array, str(gr) + ' greater')
 
 
 #same things only for less present genes
@@ -153,22 +162,22 @@ for gr in lgroup2grgenes:
     lgroup2binlines[gr] = []
     lgroup2unigenes[gr] = []
     for ind in lgroup2grgenes[gr]:
-        #binary for presence of gene in groups 1-8
-        groups = [0]*8 
+        #binary for presence of gene in groups 1-8, binary other way around: should not be present in group of interest (less presence of gene)
+        groups = [1]*8 
         for i, value in enumerate(lines[ind][5::]):
             id_ = ids[i]
             gr_num = ids2group[id_]
-            if value == '1':
+            if value == '0':
                 
-                #if gene is present in strain of a certain group mark it in binary with a 1 (needs correct index: group 1 = index 0)
-                groups[int(gr_num) - 1] = 1
-        if groups.count(1) == 1 and ind not in lgroup2unigenes[gr]:
-            lgroup2unigenes[gr].append(ind)
+                #if gene is present in strain of a certain group mark it in binary with a 0 (needs correct index: group 1 = index 0)
+                groups[int(gr_num) - 1] = 0
+        if groups.count(0) == 1 and ind not in lgroup2unigenes[gr]:
+                lgroup2unigenes[gr].append(ind)
         lgroup2binlines[gr].append(groups)
 
 
     array = np.array(lgroup2binlines[gr], dtype= 'float')
-    binplot(array, str(gr) + 'less')
+    binplot(array, str(gr) + ' less')
 
 #%% runcell 2
 

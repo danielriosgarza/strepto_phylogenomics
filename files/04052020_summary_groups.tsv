@@ -1,83 +1,83 @@
 Species	Group	Genes with greater presence	Genes with less presence
 Streptococcus agalactiae	Group_8	COQ3,COQ5_1,COQ5_2,MENG,ykoE	N/A
-Streptococcus anginosus	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus anginosus	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus azizii	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
 Streptococcus bovimastitidis	Group_7	pnuC	N/A
-Streptococcus bovis	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus caballi	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
+Streptococcus bovis	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus caballi	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
 Streptococcus castoreus	Group_7	pnuC	N/A
 Streptococcus criceti	Group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
-Streptococcus cristatus	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus cristatus	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus devriesei	Group_3	N/A	N/A
 Streptococcus didelphis	Group_7	pnuC	N/A
 Streptococcus dysgalactiae	Group_7	pnuC	N/A
 Streptococcus entericus	Group_4	N/A	N/A
 Streptococcus equi subsp. ruminatorum	Group_7	pnuC	N/A
 Streptococcus ferus	Group_3	N/A	N/A
-Streptococcus gallolyticus	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus gordonii	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus gallolyticus	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus gordonii	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus halotolerans	Group_4	N/A	N/A
-Streptococcus henryi	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus himalayensis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus henryi	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus himalayensis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus hyointestinalis	Group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
 Streptococcus hyovaginalis	Group_4	N/A	N/A
 Streptococcus ictaluri	Group_7	pnuC	N/A
 Streptococcus iniae	Group_7	pnuC	N/A
-Streptococcus intermedius	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus intermedius	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus macacae	Group_3	N/A	N/A
-Streptococcus macedonicus	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
+Streptococcus macedonicus	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
 Streptococcus marimammalium	Group_3	N/A	N/A
 Streptococcus marmotae	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Streptococcus massiliensis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus merionis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus massiliensis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus merionis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus minor	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Streptococcus mitis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus mitis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus mutans	Group_3	N/A	N/A
-Streptococcus oralis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus orisratti	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
+Streptococcus oralis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus orisratti	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
 Streptococcus ovis	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Streptococcus pantholopis	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus parasanguinis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus pantholopis	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus parasanguinis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus parasuis	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
 Streptococcus parauberis	Group_7	pnuC	N/A
 Streptococcus pharyngis	Group_4	N/A	N/A
 Streptococcus phocae	Group_7	pnuC	N/A
 Streptococcus plurextorum	Group_4	N/A	N/A
-Streptococcus pneumoniae	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus pneumoniae	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus porci	Group_4	N/A	N/A
-Streptococcus pseudopneumoniae	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus pseudopneumoniae	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus pseudoporcinus	Group_7	pnuC	N/A
 Streptococcus pyogenes	Group_7	pnuC	N/A
 Streptococcus ratti	Group_3	N/A	N/A
-Streptococcus sanguinis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus sanguinis	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus sobrinus	Group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
 Streptococcus sp. 28462	Group_4	N/A	N/A
 Streptococcus sp. C150	Group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
 Streptococcus sp. CCH8-H5	Group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
-Streptococcus sp. DD10	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. DD11	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus sp. DD10	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. DD11	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus sp. DD12	Group_3	N/A	N/A
 Streptococcus sp. DD13	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Streptococcus sp. F0442	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. GMD4S	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. GMD5S	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. GMD6S	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. HMSC34B10	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. HSISB1	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus sp. HSISM1	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus sp. F0442	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. GMD4S	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. GMD5S	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. GMD6S	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. HMSC34B10	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. HSISB1	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus sp. HSISM1	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus sp. HSISS2	Group_5	slmA,gloB,gloB_2,yflN,kefB,betI_1,betI_2,betI_3,betI_4,levS,recF,recF_1,recF_2	N/A
-Streptococcus sp. JS71	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. KCJ4950	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
+Streptococcus sp. JS71	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. KCJ4950	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
 Streptococcus sp. LYSM12	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Streptococcus sp. Marseille-P644	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. NM	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. UBA3373	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus sp. UBA4344	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus sp. UBA632	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
-Streptococcus sp. VT 162	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
-Streptococcus sp. WM07	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Streptococcus sp. Marseille-P644	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. NM	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. UBA3373	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus sp. UBA4344	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus sp. UBA632	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
+Streptococcus sp. VT 162	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
+Streptococcus sp. WM07	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
 Streptococcus sp. X13SY08	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Streptococcus sp. Z15	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	protein_description: hypothetical protein
+Streptococcus sp. Z15	Group_6	slyA,slyA_1,slyA_2,slyA_3,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,yeeO_1,yeeO_2,yeeO_3,yeeO_4,mtnN_1,mtnN_2,pfs,gabR_1,gabR_2,hisC_1,ecdB,lpdC,cynR,cynR_1,cynR_2,hcaR,hdfR_1,panD,COQ5,COQ5_2,guaD,tadA_1,tadA_2,bioY_1,bioD1,hosA,cymR,iscR,metI_1,metI_2,ssp5,ssuC,strA_1,strA_2,strA_3	N/A
 Streptococcus sp. sy004	Group_4	N/A	N/A
 Streptococcus sp. sy010	Group_4	N/A	N/A
 Streptococcus sp. sy018	Group_4	N/A	N/A
@@ -88,4 +88,4 @@ Streptococcus troglodytae	Group_3	N/A	N/A
 Streptococcus uberis	Group_7	pnuC	N/A
 Streptococcus urinalis	Group_7	pnuC	N/A
 Streptococcus varani	Group_1	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
-Unclassified Streptococcus	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	slyA,slyA_1,slyA_2,slyA_3,nadB,nadB_1,nadB_2,lpdC
+Unclassified Streptococcus	Group_2	lytB,lytB_1,lytB_2,comC1,comC2,yihX,tenA_1,tenA_2,smc_1,smc_2,smc_3,smc_5,pepE	N/A
