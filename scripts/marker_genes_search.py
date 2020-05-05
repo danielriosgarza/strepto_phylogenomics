@@ -270,6 +270,7 @@ for k, v in ids2species.items():
 with open(os.path.join(p.parents[0], 'files', today + '_unique_genes_per_group.tsv')) as f:
     f.readline()
     gene_lines = [l.strip().split('\t')[1::] for l in f]
+    c = []
 
 #Make list of all species to set it later in alphabeticl order
 all_specs = []
