@@ -137,7 +137,7 @@ for gr in group2grgenes:
     #make array out of the binary lines to plot them
     array = np.array(group2binlines[gr], dtype= 'float')
     binplot(array, str(gr) + ' greater')
-
+    
 
 #same things only for less present genes
 
@@ -210,9 +210,9 @@ with open(os.path.join(p.parents[0], 'files', today + '_unique_genes_per_group.t
                     
             #Check if gene name were found
             if len(gene_descrip) >= 1:
-                f.write(','.join(gene_descrip) + '\t')
+                f.write(','.join(sorted(gene_descrip)) + '\t')
             else:
-                f.write('protein_description: ' + ','.join(prot_d) + '\t')
+                f.write('protein_description: ' + ','.join(sorted(prot_d)) + '\t')
                 
                 
         #same for less present
@@ -229,9 +229,9 @@ with open(os.path.join(p.parents[0], 'files', today + '_unique_genes_per_group.t
                 if lprot_info not in lprot_d:
                     lprot_d.append(lprot_info)
             if len(lgene_descrip) >= 1:
-                f.write(','.join(lgene_descrip) + '\n')
+                f.write(','.join(sorted(lgene_descrip)) + '\n')
             else:
-                f.write('protein_description: ' + ','.join(lprot_d) + '\n')
+                f.write('protein_description: ' + ','.join(sorted(lprot_d)) + '\n')
                 
 #%% runcell 3
 
