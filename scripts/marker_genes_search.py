@@ -285,24 +285,24 @@ for i in ids:
 all_specs = sorted(all_specs)
 
 #write summary file
-with open(os.path.join(p.parents[0], 'files', today + '_summary_groups.tsv'), 'w') as f:
+with open(os.path.join(p.parents[0], 'files', today + '_summary_group_species_order.tsv'), 'w') as f:
     f.write('Species\tGroup\tGenes with greater presence\tGenes with less presence\n')
     for sp in all_specs:
         gr_n = s2gr[sp]
         f.write(sp + '\tGroup_' + gr_n + '\t' +  gene_lines[int(gr_n)-1][0] + '\t' + gene_lines[int(gr_n)-1][1] + '\n')
         
 ##Other order of summary table:
-# with open(os.path.join(p.parents[0], 'files', today + '_summary_groups.tsv'), 'w') as f:
-#     f.write('Group\tSpecies\tGenes with greater presence\tGenes with less presence\n')
-#     for n in '12345678':
+with open(os.path.join(p.parents[0], 'files', today + '_summary_groups.tsv'), 'w') as f:
+    f.write('Group\tSpecies\tGenes with greater presence\tGenes with less presence\n')
+    for n in '12345678':
         
-#         #First get species belonging to the group in alphabetical order
-#         specs = []
-#         for id_ in group2ids[n]:
-#             spec = ids2species[id_]
-#             if spec not in specs:
-#                 specs.append(spec)
-#         specs = sorted(specs)
+        #First get species belonging to the group in alphabetical order
+        specs = []
+        for id_ in group2ids[n]:
+            spec = ids2species[id_]
+            if spec not in specs:
+                specs.append(spec)
+        specs = sorted(specs)
         
-#         #write line: group number, species, genes greater, genes less
-#         f.write('Group ' + n + '\t' + ','.join(specs) + '\t' +  gene_lines[int(n)-1][0] + '\t' + gene_lines[int(n)-1][1] + '\n')
+        #write line: group number, species, genes greater, genes less
+        f.write('Group ' + n + '\t' + ','.join(specs) + '\t' +  gene_lines[int(n)-1][0] + '\t' + gene_lines[int(n)-1][1] + '\n')
