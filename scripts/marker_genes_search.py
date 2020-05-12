@@ -306,4 +306,4 @@ with open(os.path.join(p.parents[0], 'files', today + '_summary_groups.tsv'), 'w
         specs = sorted(specs)
         
         #write line: group number, species, genes greater, genes less
-        f.write('Cluster ' + n + '\t' + ','.join(specs) + '\t' +  gene_lines[int(n)-1][0] + '\t' + gene_lines[int(n)-1][1] + '\n')
+        f.write('Cluster ' + n + '\t' + ', '.join(specs) + '\t' +  gene_lines[int(n)-1][0] + '\t' + gene_lines[int(n)-1][1] + '\n')
