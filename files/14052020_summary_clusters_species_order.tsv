@@ -1,0 +1,91 @@
+Species	Cluster	Main host	Main environment	Genes with greater presence
+S. agalactiae	Cluster_8	Human	Vaginal/Rectal	COQ3,COQ5_1,COQ5_2,MENG,ykoE	N/A
+S. anginosus	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. azizii	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. bovimastitidis	Cluster_7	Animal	N/A	pnuC	N/A
+S. bovis	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. caballi	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. castoreus	Cluster_7	Animal	N/A	pnuC	N/A
+S. criceti	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. cristatus	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. devriesei	Cluster_3	Animal	Oral	N/A	N/A
+S. didelphis	Cluster_7	Animal	N/A	pnuC	N/A
+S. dysgalactiae	Cluster_7	Animal	N/A	pnuC	N/A
+S. entericus	Cluster_4	Animal	Intestine	N/A	N/A
+S. equi subsp. ruminatorum	Cluster_7	Animal	N/A	pnuC	N/A
+S. ferus	Cluster_3	Animal	Oral	N/A	N/A
+S. gallolyticus	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. gordonii	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. halotolerans	Cluster_4	Animal	Intestine	N/A	N/A
+S. henryi	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. himalayensis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. hyointestinalis	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. hyovaginalis	Cluster_4	Animal	Intestine	N/A	N/A
+S. ictaluri	Cluster_7	Animal	N/A	pnuC	N/A
+S. iniae	Cluster_7	Animal	N/A	pnuC	N/A
+S. intermedius	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. macacae	Cluster_3	Animal	Oral	N/A	N/A
+S. macedonicus	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. marimammalium	Cluster_3	Animal	Oral	N/A	N/A
+S. marmotae	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. massiliensis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. merionis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. minor	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. mitis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. mutans	Cluster_3	Animal	Oral	N/A	N/A
+S. oralis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. orisratti	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. ovis	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. pantholopis	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. parasanguinis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. parasuis	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. parauberis	Cluster_7	Animal	N/A	pnuC	N/A
+S. pharyngis	Cluster_4	Animal	Intestine	N/A	N/A
+S. phocae	Cluster_7	Animal	N/A	pnuC	N/A
+S. plurextorum	Cluster_4	Animal	Intestine	N/A	N/A
+S. pneumoniae	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. porci	Cluster_4	Animal	Intestine	N/A	N/A
+S. pseudopneumoniae	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. pseudoporcinus	Cluster_7	Animal	N/A	pnuC	N/A
+S. pyogenes	Cluster_7	Animal	N/A	pnuC	N/A
+S. ratti	Cluster_3	Animal	Oral	N/A	N/A
+S. sanguinis	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sobrinus	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. sp. 28462	Cluster_4	Animal	Intestine	N/A	N/A
+S. sp. C150	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. sp. CCH8-H5	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. sp. DD10	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. DD11	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. DD12	Cluster_3	Animal	Oral	N/A	N/A
+S. sp. DD13	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. sp. F0442	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. GMD4S	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. GMD5S	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. GMD6S	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. HMSC34B10	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. HSISB1	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. sp. HSISM1	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. HSISS2	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. sp. JS71	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. KCJ4950	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. sp. LYSM12	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. sp. Marseille-P644	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. NM	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. UBA3373	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. sp. UBA4344	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. sp. UBA632	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. sp. VT 162	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. WM07	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A
+S. sp. X13SY08	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. sp. Z15	Cluster_6	Human	Blood	COQ5,COQ5_2,bioD1,bioY_1,cymR,iscR,cynR,cynR_1,cynR_2,hcaR,hdfR_1,ecdB,gabR_1,gabR_2,hisC_1,guaD,tadA_1,tadA_2,hosA,lpdC,metI_1,metI_2,mtnN_1,mtnN_2,pfs,nadA,nadA_1,nadA_2,nadB,nadB_1,nadB_2,panD,slyA,slyA_1,slyA_2,slyA_3,ssp5,ssuC,strA_1,strA_2,strA_3,yeeO_1,yeeO_2,yeeO_3,yeeO_4	N/A
+S. sp. sy004	Cluster_4	Animal	Intestine	N/A	N/A
+S. sp. sy010	Cluster_4	Animal	Intestine	N/A	N/A
+S. sp. sy018	Cluster_4	Animal	Intestine	N/A	N/A
+S. suis	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. thermophilus CAG	Cluster_5	Human	Intestine	betI_1,betI_2,betI_3,betI_4,gloB,gloB_2,yflN,kefB,levS,recF,recF_1,recF_2,slmA	N/A
+S. thoraltensis	Cluster_4	Animal	Intestine	N/A	N/A
+S. troglodytae	Cluster_3	Animal	Oral	N/A	N/A
+S. uberis	Cluster_7	Animal	N/A	pnuC	N/A
+S. urinalis	Cluster_7	Animal	N/A	pnuC	N/A
+S. varani	Cluster_1	Animal	Oral	protein_description: hypothetical protein,hypothetical protein,putative protein	N/A
+S. Streptococcus	Cluster_2	Human	Intestine	comC1,comC2,lytB,lytB_1,lytB_2,pepE,smc_1,smc_2,smc_3,smc_5,tenA_1,tenA_2,yihX	N/A

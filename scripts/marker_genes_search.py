@@ -284,27 +284,37 @@ for i in ids:
         all_specs.append(s)
 all_specs = sorted(all_specs)
 
+add_data = {'1' : ('Animal','Oral'),
+            '2' : ('Human','Intestine'),
+            '3' : ('Animal','Oral'),
+            '4' : ('Animal','Intestine'),
+            '5' : ('Human','Intestine'),
+            '6' : ('Human','Blood'),
+            '7' : ('Animal','N/A'),
+            '8' : ('Human','Vaginal/Rectal')
+            }
+
 #write summary file
 with open(os.path.join(p.parents[0], 'files', today + '_summary_clusters_species_order.tsv'), 'w') as f:
-    f.write('Species\tCluster\tGenes with greater presence\tGenes with less presence\n')
+    f.write('Species\tCluster\tMain host\tMain environment\tGenes with greater presence\n')
     for sp in all_specs:
-        sp = 'S. ' + ' '.join(sp.split(' ')[1::])
+        spe = 'S. ' + ' '.join(sp.split(' ')[1::])
         gr_n = s2gr[sp]
-        f.write(sp + '\tCluster_' + gr_n + '\t' +  gene_lines[int(gr_n)-1][0] + '\t' + gene_lines[int(gr_n)-1][1] + '\n')
+        f.write(spe + '\tCluster_' + gr_n + '\t' + add_data[gr_n][0] + '\t' + add_data[gr_n][1] + '\t' + gene_lines[int(gr_n)-1][0] + '\t' + gene_lines[int(gr_n)-1][1] + '\n')
         
-##Other order of summary table:
-with open(os.path.join(p.parents[0], 'files', today + '_summary_clusters.tsv'), 'w') as f:
-    f.write('Cluster\tSpecies\tGenes with greater presence\tGenes with less presence\n')
-    for n in '12345678':
+# ##Other order of summary table:
+# with open(os.path.join(p.parents[0], 'files', today + '_summary_clusters.tsv'), 'w') as f:
+#     f.write('Cluster\tSpecies\tGenes with greater presence\tGenes with less presence\n')
+#     for n in '12345678':
         
-        #First get species belonging to the group in alphabetical order
-        specs = []
-        for id_ in group2ids[n]:
-            spec = ids2species[id_]
-            spec = 'S. ' + ' '.join(spec.split(' ')[1::])
-            if spec not in specs:
-                specs.append(spec)
-        specs = sorted(specs)
+#         #First get species belonging to the group in alphabetical order
+#         specs = []
+#         for id_ in group2ids[n]:
+#             spec = ids2species[id_]
+#             spec = 'S. ' + ' '.join(spec.split(' ')[1::])
+#             if spec not in specs:
+#                 specs.append(spec)
+#         specs = sorted(specs)
         
-        #write line: group number, species, genes greater, genes less
-        f.write('Cluster ' + n + '\t' + ', '.join(specs) + '\t' +  gene_lines[int(n)-1][0] + '\t' + gene_lines[int(n)-1][1] + '\n')
+#         #write line: group number, species, genes greater, genes less
+#         f.write('Cluster ' + n + '\t' + ', '.join(specs) + '\t' +  gene_lines[int(n)-1][0] + '\t' + gene_lines[int(n)-1][1] + '\n')
